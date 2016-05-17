@@ -1,0 +1,63 @@
+
+\subsection{Intro and Test Data}
+
+False positives have historically dominated over true transients in previous
+surveys. \citep{goldstein15, kessler15}
+
+Major impediment to linking detections of moving objects
+
+Develop a conservative estimate of the FP rate in the LSST stack, using similar
+sensors and the current software.
+
+Data from Allen et al., offers a useful cadence. Not the same depth or seeing,
+but sufficient to test the software capabilities. Stack has not been optimized
+to run at production-levels yet, so this is the starting point of that effort,
+not an upper limit on LSST's performance.
+
+\subsection{Processing}
+
+Some reference to LSST software heritage and version, circa Jan 2016.
+
+Differencing two images, rather than a template vs image. Running force
+photometry. Ingest into DB.
+
+\subsection{Correlated Noise}
+
+Histogram of stack-reported diaSource SNR, alongside force photometry SNR.
+
+Because we are diffing two images, we know that the photometry of the diaSource
+must be the same as the difference of the force photometry on the direct images.
+Gives us independent check on SNR reporting.
+
+Strong ramp up of sources at SNR 5-6, but order of magnitude more than should be
+present due to Gaussian statistics.
+
+Check with force photometry shows that many of these cannot actually have the
+high SNRs reported, more like 4-sigma events. FP values consistent with Gaussian
+statistics.
+
+Issue is tracking correlated noise after PSF-matching the science image. Known
+issue, ref Paul \& Gene somehow (must be more references too).
+
+For our purposes, we will estimate SNR using force phot. Several choices of long
+term solutions; implementations are being studied now.
+
+\subsection{False-Positive Results}
+
+Using corrected SNR cut, ~1000 diaSources per square degree (only positive,
+ignoring negative). ~500 on best fields.
+
+Many of these are poorly-subtracted stars. To estimate rates of candidate moving
+objects, exclude all diaSources that had detections in both direct images (at
+the same position). These are still FPs, but they are someone else's FPs.
+Resulting levels are ~350 per sq deg. Irreducable noise level is 33/sq deg.
+
+Results from trying to make tracklets, hopefully?? On visual inspection, 25\%
+look like junk, 25\% looked like good detections, and the rest were ambiguous
+because low SNR. SNR power law exponent is $\sim -2.5$.
+
+Very few detections around bright stars; mostly well-masked by the code. Few
+large scale detected artifacts, but not a very big sample of images.
+
+How detailed of a recipe are we providing here; should it be the same level of
+detail as we sent to JPL?
