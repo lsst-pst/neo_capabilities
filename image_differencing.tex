@@ -23,24 +23,72 @@ photometry. Ingest into DB.
 
 \subsection{Correlated Noise}
 
-Histogram of stack-reported diaSource SNR, alongside force photometry SNR.
+The resulting DIA Source detections are extremely numerous, far above that
+expected from both Gaussian noise and from real transients or moving objects.
+Counting only positive detections, there are $\sim 20 000$ detections per
+square degree, while the number of expected transients is of order hundreds.
 
-Because we are diffing two images, we know that the photometry of the diaSource
-must be the same as the difference of the force photometry on the direct images.
-Gives us independent check on SNR reporting.
+\begin{figure}
+  \centering
+  \plotone{figures/snr_comparison.pdf}
+  \caption{
+  Histogram of the reported SNR of sources measured in the difference image
+  (left), with the expected SNR as estimated from force photometry on the input
+  images (right). The blue line indicates the expected SNR distribution based
+  on Gaussian noise. The difference between these two histograms illustrates the
+  misestimation of the significance of diaSource detections. Using the correct
+  SNR values, the vast majority of these detections are $<5 \sigma$ and can be
+  disregarded.
+  }
+  \label{fig:snr_comparison}
+\end{figure}
 
-Strong ramp up of sources at SNR 5-6, but order of magnitude more than should be
-present due to Gaussian statistics.
+The source of this excess of detections can be seen in
+Figure~\ref{fig:snr_comparison}. When the LSST pipeline convolves the science
+image to match the PSF of the template image, that smoothing reduces the per
+pixel variance in the image. This reduction is reflected in the variance plane
+that accompanies each exposure during processing, which is used for estimating
+the significance of detections and the uncertainties on source measurements. A
+histogram of the number of sources at a given reported SNR (flux over reported
+uncertainty) is show in the left panel of Figure~\ref{fig:snr_comparison}. The
+blue line shows the expected counts from Gaussian statistics. This distribution
+clearly ramps up at much higher reported SNR values than would be expected.
 
-Check with force photometry shows that many of these cannot actually have the
-high SNRs reported, more like 4-sigma events. FP values consistent with Gaussian
-statistics.
+Because we are only differencing two exposures, rather than an exposure against
+a coadded template, we can also estimate the significance of any given detection
+from the noise in the input images. For each difference image detection, we also
+perform force photometry (photometry with the position fixed at the original
+difference image detection) on both the ``science'' and ``template'' images. It
+is these same pixel values that go into the measurement on the difference image,
+but the force photometry is unaffected by convolution with the matching kernel.
 
-Issue is tracking correlated noise after PSF-matching the science image. Known
-issue, ref Paul \& Gene somehow (must be more references too).
+The SNR of detections computed through force photometry is shown in the right
+panel of Figure~\ref{fig:snr_comparison}. The bulk of these detections are
+clearly at much lower significance, and they largely match the increased number
+that one would expect from Gaussian statistics if our detection threshold had
+been set closer to $4\sigma$.
 
-For our purposes, we will estimate SNR using force phot. Several choices of long
-term solutions; implementations are being studied now.
+The underlying cause of this discrepancy between reported SNR values and the
+values computed through force photometry lies in the correlation of pixel values
+induced by convolution with the matching kernel. While this reduces the per
+pixel variance, because neighboring pixels are now correlated, there is an
+excess of random fluctuations on the size scale of the PSF over what would be
+expected from uncorrelated Gaussian noise. There is thus noise in the
+off-diagonal terms of the covariance matrix, which is not tracked.
+
+Tracking the covariance caused by multiple convolutions is a planned feature for
+the LSST stack, but is not currently implemented. Previous surveys such as
+Pan-STARRS have used small covariance ``pseudo-matricies'', which tracks the
+covariance between a small region of neighboring pixels, then assumes that this
+relationship between pixels is constant across an image (P. Price, priv. comm.).
+This avoids the creation of the full $N_{\rm Pixels}$ by $N_{\rm Pixels}$
+covariance matrix, which is impractically large and mostly empty.
+
+For this analysis we will use the significance estimates from the force
+photometry, as they reflect the correct measurement uncertainties even though
+they are not generated in the same way that will be used in LSST production
+runs.
+
 
 \subsection{False-Positive Results}
 
