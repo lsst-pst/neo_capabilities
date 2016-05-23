@@ -2,21 +2,41 @@
 \subsection{Intro and Test Data}
 
 False positives have historically dominated over true transients in previous
-surveys. \citep{goldstein15, kessler15}
+surveys. \citep{denneau13, goldstein15, kessler15} Major impediment to linking
+detections of moving objects.
 
-Major impediment to linking detections of moving objects
+Our goal in this section is to develop a estimate of the rate of
+false DIA source detections by the LSST stack as it exists today. This code
+largely derives from the HOTPANTS package \citep{becker15}, as was used for
+surveys such as SuperMACHO and ESSENCE (\textbf{XXX: Correct?}). This software
+is very functional as-is, but is presently undergoing significant improvement
+and refactoring in order to perform at the level required for LSST. In this work
+we conservatively assume that the pipeline used for LSST will have the the same
+performance as the current code; while we believe that the code will become
+significantly better, we can guarantee that it will become no worse.
 
-Develop a conservative estimate of the FP rate in the LSST stack, using similar
-sensors and the current software.
+\textbf{XXX: Skipping sensor comparison, since lots of the Pan-STARRS FP's look like
+optical artifacts, not electronics.}
 
-Data from Allen et al., offers a useful cadence. Not the same depth or seeing,
-but sufficient to test the software capabilities. Stack has not been optimized
-to run at production-levels yet, so this is the starting point of that effort,
-not an upper limit on LSST's performance.
+The data we use are a subset of a Decam NEO survey (PI: L. Allen) conducted in
+the first half of 2013. These consist of 60 second exposures separated by five
+minutes on each field. Due to the difference in telescope aperture, this data is
+somewhat shallower than the 30 second visits by LSST. In this work we used five
+fields each with between three and five visits, and arbitrarily selected one of
+the visits to serve as the ``template'' exposure. In LSST operations, coadded
+prior exposures will be used as templates from image differencing rather than
+single visits, which will reduce the noise in template images. Our use of single
+visits means that some moving objects or transients will appear as negative
+sources in the difference images, but we disregard these sources for this
+analysis (our goal is to mimic LSST operations rather than discover all possible
+transients from the given dataset).
 
 \subsection{Processing}
 
-Some reference to LSST software heritage and version, circa Jan 2016.
+Some reference to LSST software heritage and version, circa Jan 2016
+\citep{juric15}.
+
+\textbf{XXX: introduce term DIA source somewhere.}
 
 Differencing two images, rather than a template vs image. Running force
 photometry. Ingest into DB.
@@ -81,7 +101,7 @@ the LSST stack, but is not currently implemented. Previous surveys such as
 Pan-STARRS have used small covariance ``pseudo-matricies'', which tracks the
 covariance between a small region of neighboring pixels, then assumes that this
 relationship between pixels is constant across an image (P. Price, priv. comm.).
-This avoids the creation of the full $N_{\rm Pixels}$ by $N_{\rm Pixels}$
+This avoids the creation of the full $N_{\rm pixels}$ by $N_{\rm pixels}$
 covariance matrix, which is impractically large and mostly empty.
 
 For this analysis we will use the significance estimates from the force
@@ -89,16 +109,51 @@ photometry, as they reflect the correct measurement uncertainties even though
 they are not generated in the same way that will be used in LSST production
 runs.
 
-
 \subsection{False-Positive Results}
 
-Using corrected SNR cut, ~1000 diaSources per square degree (only positive,
-ignoring negative). ~500 on best fields.
+\begin{deluxetable}{ll}
+  \tablecolumns{2}
+  \tablecaption{DIA source detection rates. \label{table:fp_rates}}
+  \tablewidth{0pt}
+    \tablehead{
+    \colhead{Source Type}          & \colhead{All visits, counts per sq. deg} \\
+    }
+    \startdata
+    Raw Positive Sources                     & 19,475                         \\
+    Raw Negative Sources                     & 23,018                         \\
+    Dipoles (not included below)             & 1,609                          \\
+    Positive after $5\sigma$ cut             & 1,022                          \\
+    Negative after $5\sigma$ cut             & 600                            \\
+    Positive sources excluding ``variables'' & 344                            \\
+  \enddata
+\end{deluxetable}
 
-Many of these are poorly-subtracted stars. To estimate rates of candidate moving
-objects, exclude all diaSources that had detections in both direct images (at
-the same position). These are still FPs, but they are someone else's FPs.
-Resulting levels are ~350 per sq deg. Irreducable noise level is 33/sq deg.
+After removing all detections that did not have $>5\sigma$ significance, the
+average number of (positive) sources is $\sim 1000$ per square degree, with some
+particular fields having as few as $500$ per square degree. A large fraction of
+these detections are the result of stars that have been poorly-subtracted and
+left significant residuals in the difference image. It is a common problem for
+subtracted stars to exhibit ``ringing'' with both positive and negative
+excursions, and these images are no exception. Because the focus of this work
+is on detecting moving objects rather than variable stars or transients, we have
+not attempted to correct these subtraction artifacts. Instead we exclude
+difference image detections which are coincident with significant detections in
+both science and template images---that is, we exclude any DIA sources that
+overlap with a star. The area lost due to this masking is less than $1\%$ of the
+total sky. Again this is not the intended behavior of LSST during production,
+but instead a temporary expedient we can use for conservatively estimating the
+system's performance.
+
+After excluding the DIA sources associated with stationary objects, the
+remaining moving object candidate detections number on average $\sim 350$ per
+square degree. As a further estimate on the fraction of these remaining objects
+that are false, we visually classified one focal plane of detections either as
+obvious imaging artifacts, obvious PSF-like detections, or unidentifiable
+detections. Approximately 25\% of the reported detections were clearly some sort
+of uncorrected artifact (we did not pursue the cause of individual artifacts),
+25\% appeared to be acceptable PSF-like features, and the remaining 50\% were
+ambiguous or had too low of signal to noise to be able to classify.
+
 
 Results from trying to make tracklets, hopefully?? On visual inspection, 25\%
 look like junk, 25\% looked like good detections, and the rest were ambiguous
