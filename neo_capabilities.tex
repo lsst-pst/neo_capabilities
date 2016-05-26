@@ -1,42 +1,388 @@
 \documentclass[12pt,preprint]{aastex}
-
 \usepackage{lsst}
+\usepackage{xspace}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\newcommand{\Alert}{\code{Alert}\xspace}
+\newcommand{\Alerts}{\code{Alerts}\xspace}
+\newcommand{\DIASource}{\code{DIASource}\xspace}
+\newcommand{\DIASources}{\code{DIASources}\xspace}
+\newcommand{\DIAObject}{\code{DIAObject}\xspace}
+\newcommand{\DIAObjects}{\code{DIAObjects}\xspace}
+\newcommand{\DB}{{Level 1 database}\xspace}
+\newcommand{\DR}{{Level 2 database}\xspace}
+\newcommand{\Object}{\code{Object}\xspace}
+\newcommand{\Objects}{\code{Objects}\xspace}
+\newcommand{\Source}{\code{Source}\xspace}
+\newcommand{\Sources}{\code{Sources}\xspace}
+\newcommand{\ForcedSource}{\code{ForcedSource}\xspace}
+\newcommand{\ForcedSources}{\code{ForcedSources}\xspace}
+\newcommand{\CoaddSource}{\code{CoaddSource}\xspace}
+\newcommand{\CoaddSources}{\code{CoaddSources}\xspace}
+\newcommand{\SSObject}{\code{SSObject}\xspace}
+\newcommand{\SSObjects}{\code{SSObjects}\xspace}
+\newcommand{\VOEvent}{\code{VOEvent}\xspace}
+\newcommand{\VOEvents}{\code{VOEvents}\xspace}
+\newcommand{\transSNR}{5\xspace}
 
 \begin{document}
+\title{Large Synoptic Survey Telescope as a Near-Earth Object Discovery Machine}
 
-\title{LSST NEO Discovery Capabilities}
+%\author[R. L.  Jones et al.]   %% short author list %%
+\author{R. Lynne Jones$^1$, Colin Slater$^1$, Joachim Moeyens$^1$, 
+Lori Allen$^2$, Mario Juri\'{c}$^1$,  \and \v{Z}eljko Ivezi\'{c} $^1$}
 
-\author{Lynne Jones,  Colin Slater, Joachim Moeyens, Mario Juric, Zeljko Ivezic} %, Lori Allen} - ask L. Allen
-\affil{}
+\affil{
+$^1$University of Washington, \\
+$^2$National Optical Astronomy Observatory}
+
+
 
 \begin{abstract}
-
+We discuss the ability of LSST to contribute to NEO discoveries and
+the Brown mandate. 
 \end{abstract}
 
 \keywords{}
 
 \section{Introduction}
 
-We're going to evaluate moving object detection capabilities with LSST, comparing performance of our current prototype pipelines with the required performance during operations.
+We're going to evaluate moving object detection capabilities with
+LSST, comparing performance of our current prototype pipelines with 
+the required performance during operations.
 
 
-\section{Image Differencing Evaluation}
+\cite[hereafter GMS]{GMS2016} reported different NEO completeness levels than
+published by the LSST team in 2007 and 2014 . There are three main 
+reasons why the GSM results differ:
+\begin{enumerate}
+\item GMS used a different realization of the LSST baseline survey
+\item GSM used different synthetic NEO populations to evaluate completeness
+\item GMS {\it redefined} the completeness limit from the standard
+  $H<22$ criterion to an albedo-dependent value of $H$ limit (which
+  attempts to directly model the $D>140$ m size cut)
+\end{enumerate}
 
-\include{image_differencing}
+Regarding the last point, GMS found that the completeness drops by 5\%
+when $H<22$ criterion is replaced by $D>140$ m criterion. Regarding 
+the first point, GMS results can be more meaningfully compared to an LSST
+study by \cite{JJI2016}, who used the same simulated cadence. After accounting for 
+the $H<22$ vs. $D>140$ m methodological difference of 5\%, GMS obtained a 
+completeness of 67\%, while Jones et al. study obtained $\sim$72\%. This difference 
+of $\sim$5\% is attributable to the differences in simulated NEO
+populations and other modeling details. In summary, GMS find the NEO
+completeness in the range $\sim$60\% to $\sim$70\% for the LSST
+baseline cadence. The variation is due to different NEO populations,
+different NEO detection criteria, and other specifics. When accounting 
+for different choices of simulation parameters, their results are
+consistent with the results published by the LSST team. 
 
-\section{Moving Object Pipeline Software Evaluation}
+But: how much higher can the completeness be pushed with cadence
+modifications optimized for NEOs? 
 
-Zeljko and Mario.
+
+\begin{enumerate} 
+\item Control and quantify the rate of (false positive) detections
+\item Software (and computational capacity) capable of inter-night linking of detections given the expected rates
+\item Quantify the discovery yields (and their robustness) under those assumptions
+\end{enumerate} 
 
 
-\section{LSST Observing Cadence Evaluation}
+LSST will detect variability (motion and flux variability) by
+differencing each incoming image against a deep template.
+Sources will be detected at an S/N=5 threshold (see Appendix A). 
 
-Lynne
+We expect on average about 1,000 per sq. deg. astrophysical, real,
+detections (for scale, the LSST field of view is about 10 sq. deg.,
+with about 20 4kx4k CCDs per sq. deg.), including up to about 500 
+asteroids per sq. deg (about 25 per CCD, on the Ecliptic)
+
+We also expect a false-detection background (due to random
+fluctuations in the background noise) at a level of about 200 per
+sq. deg. (all at the faint end). 
+
+However, historically surveys have reported factors of 10 to 500 times
+more (depending on the survey). Those additional false positive
+detections are due to systematic effects: 
+\begin{itemize} 
+\item Camera and telescope artifacts
+\item Imperfect image subtractions
+\item Cosmic rays
+\end{itemize} 
+
+For a ``menagerie'' of artifacts (with amusing names such as 
+{\it chocolate chip cookies, frisbee, piano, arrowhead, UFO}, from
+Pan-STARRS, see Fig.~17 in \cite{denneau13}. 
+
+
+``Many of the false detections are easily explained as internal
+reflections, ghosts, or other well-understood image artifacts,...''
+
+
+Learning from PS1 Experience: PanSTARRS was a first generation
+experiment. Over the past decade, subsequent surveys (including LSST) 
+have learned tremendously from the PS1 experience. There are surveys 
+running today which have largely solved the key problems that PS1 has encountered.
+These are recent developments driven largely by extragalactic and
+transient science cases. They are not yet well known beyond those
+communities.
+ 
+Major improvements to hardware include CCDs with significantly fewer 
+artifacts (e.g. DECam; see below) and optical systems designed to
+minimize ghosting and internal reflections (e.g. LSST). 
+
+Improvements to the software include improved image differencing
+pipelines (e.g., PTFIDE for the Palomar Transient Factory and the
+Zwicky Transient Facility) and various machine learning classifiers
+for filtering of false positives (see below). 
+
+DECam: \cite{goldstein15} 
+
+The Dark Energy Survey (DES) is an optical/near-infrared survey that
+aims to probe the dynamics of the expansion of the universe and the
+growth of large scale structure by imaging 5,000 sq. deg. of the
+southern sky. It is technologically very similar to LSST with
+\begin{itemize}
+\item 520 Mpix camera, 62 mosaicked chips (deep depleted devices)
+\item 3 sq.deg. field of view, same filter bands as LSST
+\item Single-exposure depths comparable to LSST
+\item Includes a supernova search program which employs image
+differencing methods analogous to LSST’s  and detects objects at the 
+same effective signal-to-noise ratio as LSST (S/N=5)
+\end{itemize} 
+
+The false positives in DECam data are morphologically much simpler
+(compare Fig.~1 in \citep{goldstein15} to Fig.~17 in \citep{denneau13})
+than those in Pan-STARRS, and are thus much more amenable to automated 
+screening using machine learning methods. Using a Random Forest 
+classifier, \cite{goldstein15} cleaned their sample from having a 
+raw false detection rate of 13:1 to a filtered rate of 1:3. This performance
+is already within the acceptable range for LSST performance goals. 
+
+
+
+{\bf Summary:} Well behaved image differencing and detection are needed for the
+asteroid detection strategy adopted by LSST. This has historically
+been difficult to achieve. First generation surveys have encountered
+significant problems including CCD artifacts, optical system
+artifacts, and software issues. Significant progress has been made
+since. Contemporary surveys comparable to LSST (specifically, DES) are
+already achieving false positive rates below the few:1 ratio required
+for LSST MOPS (see next section). LSST image differencing will {\bf
+not} be a limiting factor in its ability to discover asteroids
+(including NEOs). DES experience has already demonstrated algorithms 
+sufficient to meet LSST MOPS requirements.
+
+{\bf Need to refer to section by Colin.} 
+
+LSST will use two methods to detect moving objects
+\begin{enumerate}
+\item Detecting trailed motion on the sky:  objects trailed by more
+  than 2 PSF widths (corresponding to motion faster than about 1
+  deg/day) will be easily detectable as trailed.  Two trailed
+  detections within 30--60 minutes in a single night will be
+  sufficient to identify an object as an NEO candidate
+\item Inter-night linking of pairs: this technique will recover
+  objects moving slow enough not to be measurably elongated in 
+  a single exposure
+\end{enumerate} 
+
+MOPS: Given the expected false-positive rates demonstrated by
+\cite{goldstein15} and in Colin's  section, LSST MOPS linking will
+be possible. This has already been shown by the PanSTARRS project 
+with simulations performed for the PS4 system\footnote{PanSTARRS 
+PS1 experience does not contradict this conclusion. In addition to 
+hardware issues, PS1 was only 1/4 of the assumed system (see 
+\citep{denneau13} for more details). }, which is in this
+respect equivalent to LSST. The robustness to unexpected false
+positives is further tested with simulations performed by LSST,
+as described below. 
+
+
+
+
+
+
+
+\section{LSST Solar System Survey} 
+
+Opening paragraph
+
+
+\subsection{Brief Overview of LSST} 
+%\include{LSSToverview} 
+
+\subsection{LSST Observing Strategy} 
+
+As deployed and funded (by NSF and DOE), LSST is primarily a science-driven mission
+Existing cadence is optimized to maximize the overall science returns
+(incl. Solar System science), rather than NEO/PHA discovery
+completeness.  As designed, the survey is not optimized for rapid
+discovery and follow-up of all types of moving objects\footnote{
+Note that LSST will enable rapid identification and follow-up of
+trailed objects (within 60 seconds of discovery). If deployed with a 
+planetary-defense optimized cadence, the NEO yields could be
+significantly improved, and approaching the 90\% completeness level
+for $H<22$.} 
+Early simulations indicate 90\% is achievable for NEO-optimized
+cadence. However, other science goals would be affected (including
+Solar System science!). 
+
+The current baseline cadence is optimized for science returns.
+It is expected to yield approximately $\sim$70\% of the extant NEO population.
+
+
+\subsection{LSST  Data Management and Image Processing} 
+
+Refer to \cite{DM2016} and Appendix A. 
+
+
+\section{Image Differencing Performance}
+%\include{image_differencing}
+
+Paper on ``Automated Transient Identification in the Dark Energy
+Survey''  is \cite{goldstein15}. 
+
+
+\section{Moving Object Processing Pipeline Evaluation}
+
+Zeljko and Mario. There is a report on MOPS... 
+
+Quoting \cite{denneau13}: ``MOPS achieves $>$99:5\% efficiency in
+producing orbits from a synthetic
+but realistic population of asteroids whose measurements were
+simulated for a Pan-STARRS4-class telescope. \dots MOPS has been
+adapted successfully to the prototype Pan-STARRS1 telescope despite
+differences in expected false detection rates, fill-factor loss, and
+relatively sparse observing cadence compared to a hypothetical
+Pan-STARRS4 telescope and survey.'' 
+
+But we did our own analysis, too...
+
+The LSST project has developed an enhanced prototype implementation of MOPS.
+We ran simulations with LSST system and cadence, and a significantly
+wider range of false positive candidate rates. 
+
+Known limitations/caveats:
+\begin{itemize}
+\item Due to computational constraints at the time when the simulation
+  was performed (2011), a $v < 0.5$ deg/day velocity limit was
+  imposed.
+\item For similar reasons, the filters were imposed on track fitting
+  were not optimized, artificially reducing the yield
+\item As we understand the algorithmic scalings, these will not change the
+final results; nevertheless they are being actively mitigated by new
+simulations which are in progress.
+\end{itemize}
+
+Simulation results: Asteroids are discoverable in the presence of significant noise.
+Get more details from Lynne \& Axelrod writeup. 
+
+
+
+\section{LSST Observing Cadence Optimization}
+
+Lynne, new OpSim runs. 
+
 
 \section{Conclusions}
 
-The summary is ...
+\begin{enumerate}
+\item LSST will employ the 2+2+2 MOPS discovery strategy, and detect fast-moving asteroids via trailing.
+\item Existing surveys demonstrate that false positive rates required
+  by LSST (approaching $\sim$1:1) are  achievable (Dark Energy Survey;  \citep{goldstein2015}).
+\item PanSTARRS PS4 simulations \citep{denneau13}) as well as LSST
+  simulations (Myers et al. 2011) demonstrate the ability of MOPS to perform the linkages under those conditions.
+\item LSST software and observing strategy are robust to perturbations
+  around assumed efficiencies; even large differences in expectation
+  cause only a few percent difference in efficiency. 
+\item Our simulations indicate that, if the cadence is optimized for
+  NEO searches, LSST likely has the capability and capacity to reach the Brown mandate.
+\end{enumerate}
+
+
+\appendix
+\section{LSST Image Processing Steps and Data Products Relevant for Asteroids} \label{sec:AppA}
+%\include{appendix1} 
+
+
+
 
 \bibliography{neo_capabilities}
-
 \end{document}
+
+
+To Do:
+
+- ask Lori Allen to be coauthor (and if there are others from her team) 
+- ask Tim Axelrod (others from old days?) 
+
+Lynne's new NEO runs: cumulative completeness for H<22 objects: 
+Run                              3p/30  |3p/15|    SNR3   SNR0   singlePair  singleDet     Modification
+astro_lsst_01_1014       76.1      72.6        79.1    94.4       88.8           92.0        12 deg Ecliptic + WFD, 60sec
+astro_lsst_01_1015       79.2      74.8        81.7    96.4       90.3           93.0        15 deg Ecliptic + WFD, 60sec
+astro_lsst_01_1016       80.0      77.5        83.1    95.6       88.9           92.1        NEO baseline
+astro_lsst_01_1017       80.8      77.8        83.3    95.3       90.1           93.1        EB + 30s, gri
+lucy_1001                      76.5      73.7        79.9    95.3       88.8           92.1        15 deg Ecliptic (ri, 60 sec), NES gz  
+
+
+
+
+astro_lsst_01_1015:
+- the best (but only about half of WFD visits due to 60 sec exposures) 
+- how about 20 deg band around the Ecliptic? Going from 12 to 15 has a
+    big impact.
+- 3 pairs in 30 days at SNR=4 should be similar in completeness to 3
+    pairs in 15 days at SNR=3, but more doable 
+
+
+Run                              3p/30  |3p/15|    SNR3   SNR0   singlePair  singleDet     Modification
+astro_lsst_01_1015       79.2      74.8        81.7    96.4       90.3           93.0        15 deg Ecliptic + WFD, 60sec
+
+- at the bright end (H<20), C for single detection and single pair
+   saturates at ~99.4%; this shows that 12-year survey is long enough
+   to get even those objects that can ``hide behind the Sun'' 
+- 3 pairs in 15 nights with SNR=0 results in C=96.4%; this shows that 
+   the impact of finite cadence on completeness for *large* objects is 
+   only 3.0%
+- 3 pairs in 15 nights with SNR=5 gives C=75%, which compared to 
+   a single detection with SNR=5 and C=93% represents a loss of 18%;
+   therefore, the impact of cadence on *small* objects is much larger 
+   than for large objects; going from a single detection to 3 pairs in
+   15 nights is equivalent to losing 2 mag of depth! 
+- 3 pairs in 15 nights with SNR=5 crosses C=90% at H~20.5; data 
+   deeper by 1.5 mag would bring H<22 completeness to 90% (or we'd
+   need to go to SNR=1.3); but to go deeper by 1.5 mag, the exposure 
+   time needs to be 16 times longer!! 
+- going from 15 nights to 30 nights boosts C by 4.4%; this is
+   equivalent to about 0.3 mag deeper data and 1.2 mag of ``missing''
+   depth; in this case, the exposure time would have to be ``only'' 9
+   times longer to reach C=90% for H<22. 
+   
+So, reaching C=90% is becoming more and more hopeless. My last 
+desperate traces of hope are: 
+- we could look at the median brightness of (say) H=22 objects vs.
+   ecliptic latitude (and perhaps solar elongation to account for
+   sweet spots) and adjust exposure time as a function of latitude 
+   (we know that the faintest H=22 detections are close to the
+   Ecliptic)
+- if the required band width is much less than 15 deg, we would 
+   perhaps have enough observing time budget to really go with 5-10
+   minutes long exposures. Of course, we'd have to keep them down
+   to 1 min or so and shift-and-coadd multiple exposures for a grid
+   of possible motions, which would be a major impact on DM 
+- we could look at H~22 objects which we missed with 3 pairs in 15
+   nights, but which we did *not* miss with ``single detection'' and
+   ask what were their SNRs when they were in the FOV but didn't 
+   have SNR>5. And where they were on the sky. This sounds like 
+   something for Joachim to look at. 
+- NASA says ``we'd be happy with even C=80%"  :) 
+
+
+- 75% of the PHAs: Ivezic & Jones, 2014 (AAS)
