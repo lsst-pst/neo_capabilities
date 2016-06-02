@@ -34,7 +34,6 @@
 \begin{document}
 \title{Large Synoptic Survey Telescope as a Near-Earth Object Discovery Machine}
 
-%\author[R. L.  Jones et al.]   %% short author list %%
 \author{R. Lynne Jones$^1$, Colin Slater$^1$, Joachim Moeyens$^1$, 
 Lori Allen$^2$, Mario Juri\'{c}$^1$,  \and \v{Z}eljko Ivezi\'{c} $^1$}
 
@@ -43,29 +42,124 @@ $^1$University of Washington, \\
 $^2$National Optical Astronomy Observatory}
 
 
-
 \begin{abstract}
-We discuss the ability of LSST to contribute to NEO discoveries and
-the Brown mandate. 
+We discuss the ability of LSST to contribute to Near-Earth Objects (NEO) discoveries and
+Congressional Brown mandate to NASA. The two main issues addressed here are robustness 
+of the LSST strategy for discovering NEOs using nightly pairs of observations, and the 
+expected cumulative completeness for potentially hazardous asteroids (PHAs) with 
+visual absolute magnitudes $H<22$.  We argue that the observing and data processing 
+strategies chosen by LSST are robust, and would yield a completeness of about 70\% with 
+the current LSST baseline survey. We describe a number of modifications of the LSST baseline 
+survey which could potentially yield the completeness of 90\% for $H<22$ PHAs. 
 \end{abstract}
 
 \keywords{}
 
 \section{Introduction}
 
+XXX This is so totally work in progress. ZI push-ed it just as a backup... XXX
+
+
+Main parts:
+\begin{itemize}
+\item NEO impacts as concern; the Brown mandate, NASA panels,
+  introduce LSST 
+\item LSST defaults and claimed performance in older publications
+\item informal concerns by the community, GMS paper
+\item study by the JPL team, technical support from LSST (assuming
+  baseline cadence)
+\item exploration of baseline cadence modifications designed to boost
+    NEO completeness 
+\item Outline of this paper
+\end{itemize} 
+
+
+The small-body populations in the Solar System, such as asteroids, trans-Neptunian objects (TNOs) 
+and comets, are remnants of its early assembly. Collisions in the main asteroid belt between Mars and 
+Jupiter still occur, and occasionally eject objects on orbits that may place them on a collision course 
+with Earth. About 20\% of this near-Earth Object (NEO) population, the so-called potentially hazardous 
+asteroids (PHAs), are in orbits that pass sufficiently close to Earth's orbit, to within 0.05 AU, that 
+perturbations with time scales of a century can lead to intersections and the possibility of collision. 
+In December 2005, the U.S. Congress directed\footnote{For details see http://neo.jpl.nasa.gov/neo/report2007.html} 
+NASA to implement a NEO survey that would catalog 90\% of NEOs with diameters larger than 140 meters 
+by 2020 (the George E. Brown, Jr. mandate). For a compendium of information about NEOs and PHAs 
+and an up-to-date summary of discovery progress, see NASA's NEO webpage\footnote{http://neo.jpl.nasa.gov/neo/}. 
+
+The completeness level set by Congressional mandate can be fulfilled with a 10-meter-class ground-based
+telescope equipped with a multi-gigapixel camera, and a sophisticated and robust data processing system. 
+The Large Synoptic Survey Telescope (LSST), currently being constructed, is such a system (for a concise
+system description, science drivers and other information, see \citep{LSSToverview}). Early simulations of 
+LSST performance presented by \cite{IvezicNEO2007} showed that the 10-year baseline cadence would 
+result in 75\% completeness for PHAs greater than 140 m (more precisely, for PHAs with $H<22$; see 
+\S~XX for further discussion). They also suggested that with additional optimization of the observing cadence, 
+LSST could achieve 90\% completeness. Such optimization was discussed by \cite{LSSToverview} who
+reported that, to reach 90\% completeness, about 15\% of observing time would have to be dedicated to NEOs
+and the survey would have to run for 12 years.  
+%% From the overview paper: 
+%% - the LSST baseline cadence provides orbits for 82% of PHAs larger than 140 meters after 10 years of operations
+%% - 84% completeness with minor changes to the cadence (5% of time for NEO-optimized observations)
+%% - 90% completeness with major changes to the cadence (15% of time for NEO-optimized observations and 12 years)
+The latest LSST simulation results, presented in \cite{JJI2016}, yielded a completeness of $\sim$72\% for
+PHAs with $H<22$ using the current 10-year baseline survey. The minor difference compared to older
+studies is attributable to the differences in simulated NEO populations and other modeling details. 
+
+
+\cite{JPLstudy} described a new study, related to this work. Their preliminary results indicate a completeness
+of $\sim$65\% for NEOs with $H<22$. The difference compared to \cite{JJI2016} result (72\%) is due 
+to XXX (true?): PHA vs. NEO, possible slope of the size distribution. 
+
+
 We're going to evaluate moving object detection capabilities with
 LSST, comparing performance of our current prototype pipelines with 
-the required performance during operations.
+the required performance during operations.  The two main goals are
+to demonstrate that i) MOPS can cope with false detection in image differences,
+and that ii) the NEO detection performance of the LSST baseline cadence can be
+further boosted by adequate modifications 
+
+
+From JPL paper -- which gives a concise summary of the main simulation aspects. 
+
+The LSST baseline survey cadence relies primarily on single night pairs of detections, 
+with roughly 30 minutes between the elements of a detection pair. These pairs form 
+what are known in MOPS parlance as tracklets, and sets of tracklets are linked across 
+multiple nights to form tracks, which can then be sent to the final step, which is orbit 
+determination. The strategy of using pairs is an aggressive and potentially fragile
+approach, but theoretically represents the most productive NEO search with the minimum 
+impact on other LSST science drivers. An alternative to visit each field three times per 
+night to form tracklets from triplets of detections may prove more robust, but likely 
+with a penalty of reduced performance. One of our study objectives is to understand the
+tradeoffs between these two approaches.
+
+The two major questions to be addressed by our study can be informally stated as 
+``Will MOPS work?'' and ``If MOPS works what fraction of NEOs will LSST discover?''. 
+
+Main problems:
+\begin{enumerate}
+\item Linking large number of detections in the presence of false positives (false detections due to problems 
+with image differencing software). 
+\item Adequacy of data, including image depth, sky coverage and cadence, to reach the required 
+completeness level. 
+\end{enumerate} 
+
+Therefore, the main analysis components to check are: 
+\begin{enumerate}
+\item The performance of image differencing, with emphasis on the rate and properties of 
+   false detections 
+\item Linking large number of detections in the presence of false positives 
+\item Observing cadence simulations coupled with NEO population models to forecast 
+        discovery rates 
+\end{enumerate} 
+
 
 
 \cite[hereafter GMS]{GMS2016} reported different NEO completeness levels than
 published by the LSST team in 2007 and 2014 . There are three main 
-reasons why the GSM results differ:
+reasons why the GMS results differ:
 \begin{enumerate}
 \item GMS used a different realization of the LSST baseline survey
-\item GSM used different synthetic NEO populations to evaluate completeness
-\item GMS {\it redefined} the completeness limit from the standard
-  $H<22$ criterion to an albedo-dependent value of $H$ limit (which
+\item GMS used different synthetic NEO populations to evaluate completeness
+\item GMS {\it redefined} the completeness limit from the commonly
+  used $H<22$ criterion to an albedo-dependent value of $H$ limit (which
   attempts to directly model the $D>140$ m size cut)
 \end{enumerate}
 
@@ -74,7 +168,9 @@ when $H<22$ criterion is replaced by $D>140$ m criterion. Regarding
 the first point, GMS results can be more meaningfully compared to an LSST
 study by \cite{JJI2016}, who used the same simulated cadence. After accounting for 
 the $H<22$ vs. $D>140$ m methodological difference of 5\%, GMS obtained a 
-completeness of 67\%, while Jones et al. study obtained $\sim$72\%. This difference 
+completeness of 67\% using 3 pairs in 12 nights (for simulated cadence {\it enigma\_1189}), while Jones et al. 
+study obtained $\sim$73\% using 3 pairs in 15 nights (for simulated cadence {\it minion\_1016}, which is 
+statistically very similar to {\it enigma\_1189}). This difference 
 of $\sim$5\% is attributable to the differences in simulated NEO
 populations and other modeling details. In summary, GMS find the NEO
 completeness in the range $\sim$60\% to $\sim$70\% for the LSST
@@ -86,6 +182,9 @@ consistent with the results published by the LSST team.
 But: how much higher can the completeness be pushed with cadence
 modifications optimized for NEOs? 
 
+In Observing Strategy white paper: fig. 3.4 gives 73.4\% for PHAs with 
+$H<22$ and {\it minion\_1016}, using 3 pairs in 15 nights. 
+
 
 \begin{enumerate} 
 \item Control and quantify the rate of (false positive) detections
@@ -94,21 +193,60 @@ modifications optimized for NEOs?
 \end{enumerate} 
 
 
+The leading systematic effects in completeness estimates are: 
+\begin{enumerate}
+\item NEO vs. PHA difference (the completeness is about $\sim$5\% higher for PHAs than for NEOs) 
+\item Different sample definitions: $H<22$ vs. $D>140$m (as shown by \citep{GMS2016}, completeness
+           increases by $\sim$5\% when $H$-based criterion is used) 
+\item Orbital parameter distribution for the simulated asteroid population (e.g. the Bottke model
+             vs. the Granvik model; varying populations contribute completeness uncertainty of a few percent) 
+\item Variations of ``discovery window'' (e.g., X visit pairs in N nights: changing N from 15 to 30 with X=3 increases
+          completeness by 3\%; changing X from 3 to 4 with N=15 decreases completeness by 6\%; 
+          additionally, if the nominal detection threshold is changed from the signal-to-noise ratio of 5 or greater  
+          to 4 or greater, the completeness is boosted by 2-3\%). 
+\item Variations of the nominal detection threshold (if the detection threshold is changed from the 
+          signal-to-noise ratio of 5 or greater to 4 or greater, the completeness is boosted by 2-3\%). 
+\item Sensitivity to details in sky coverage and cadence (e.g. nightly pairs of visits vs. quads of visits;
+          requiring quads instead of pairs of visits decreases completeness by 30\% using baseline cadence; 
+          about half of that loss can be recovered using cadence simulations that request four visits per night) 
+\item Uncertainties when predicting effective image depth (system throughput, variation of the detection efficiency
+          with the signal-to-noise ratio, treatment of trailing losses); for a survey that has a completeness above 60\%, 
+          each additional one magnitude of depth for a given survey cadence increases the completeness by another 10\%.
+\item Uncertainties when predicting apparent flux (albedo distribution, phase effects, photometric variability 
+          due to non-spherical shapes, color distributions); assuming an uncertainty of 0.2 mag in the effective 
+          limiting magnitude, the corresponding  systematic uncertainty in completeness is about 2\%.)
+\item The slope of the asteroid size distribution (current measurement uncertainty of this parameter 
+          corresponds to a systematic uncertainty in completeness of about 2\%.)
+\item The impact of known objects (assuming that 43\% objects would be discovered by the start of
+          LSST survey, \citep{GMS2016} boosted the final PHA completeness for LSST baseline survey by 11\%). 
+\end{enumerate} 
+
+Given these systematic effects, a comparison of different simulation results (both of the same system,
+and of different systems, especially those operating at different wavelengths) has to be undertaken
+with due care. It is unlikely that a meaningful quantitative comparison can be pushed beyond a level
+of a few percent (and perhaps as much as 10\%). In practice, the completeness of a given operating survey
+is best estimated using the object re-discovery rate. 
+
+
+From Mario's talk to NASA:
+
 LSST will detect variability (motion and flux variability) by
 differencing each incoming image against a deep template.
 Sources will be detected at an S/N=5 threshold (see Appendix A). 
 
 We expect on average about 1,000 per sq. deg. astrophysical, real,
-detections (for scale, the LSST field of view is about 10 sq. deg.,
-with about 20 4kx4k CCDs per sq. deg.), including up to about 500 
-asteroids per sq. deg (about 25 per CCD, on the Ecliptic)
+detections, including up to about 500 asteroids per sq. deg on the 
+Ecliptic (for scale, the LSST field of view is about 10 sq. deg., with 
+about 20 4kx4k CCDs per sq. deg.)
 
-We also expect a false-detection background (due to random
-fluctuations in the background noise) at a level of about 200 per
-sq. deg. (all at the faint end). 
+We also expect a false-positive detections due to random
+fluctuations in the background at a level of about 200 per
+sq. deg. (all at the faint end).  XXX check Colin's report 
 
 However, historically surveys have reported factors of 10 to 500 times
-more (depending on the survey). Those additional false positive
+more (depending on the survey; see \citep{denneau13};
+\citep{goldstein15} ). 
+Those additional false positive
 detections are due to systematic effects: 
 \begin{itemize} 
 \item Camera and telescope artifacts
@@ -117,7 +255,7 @@ detections are due to systematic effects:
 \end{itemize} 
 
 For a ``menagerie'' of artifacts (with amusing names such as 
-{\it chocolate chip cookies, frisbee, piano, arrowhead, UFO}, from
+{\it chocolate chip cookies, frisbee, piano, arrowhead, UFO}), from
 Pan-STARRS, see Fig.~17 in \cite{denneau13}. 
 
 
@@ -131,16 +269,17 @@ have learned tremendously from the PS1 experience. There are surveys
 running today which have largely solved the key problems that PS1 has encountered.
 These are recent developments driven largely by extragalactic and
 transient science cases. They are not yet well known beyond those
-communities.
+communities and reporting on those developments is additional
+motivation for this paper. 
  
 Major improvements to hardware include CCDs with significantly fewer 
-artifacts (e.g. DECam; see below) and optical systems designed to
+artifacts (e.g. DECam, see below; LSST) and optical systems designed to
 minimize ghosting and internal reflections (e.g. LSST). 
 
-Improvements to the software include improved image differencing
+Improvements to the software include advanced image differencing
 pipelines (e.g., PTFIDE for the Palomar Transient Factory and the
 Zwicky Transient Facility) and various machine learning classifiers
-for filtering of false positives (see below). 
+for filtering false positives (see below). 
 
 DECam: \cite{goldstein15} 
 
@@ -159,25 +298,12 @@ same effective signal-to-noise ratio as LSST (S/N=5)
 
 The false positives in DECam data are morphologically much simpler
 (compare Fig.~1 in \citep{goldstein15} to Fig.~17 in \citep{denneau13})
-than those in Pan-STARRS, and are thus much more amenable to automated 
+than those in Pan-STARRS, and thus are much more amenable to automated 
 screening using machine learning methods. Using a Random Forest 
 classifier, \cite{goldstein15} cleaned their sample from having a 
 raw false detection rate of 13:1 to a filtered rate of 1:3. This performance
 is already within the acceptable range for LSST performance goals. 
 
-
-
-{\bf Summary:} Well behaved image differencing and detection are needed for the
-asteroid detection strategy adopted by LSST. This has historically
-been difficult to achieve. First generation surveys have encountered
-significant problems including CCD artifacts, optical system
-artifacts, and software issues. Significant progress has been made
-since. Contemporary surveys comparable to LSST (specifically, DES) are
-already achieving false positive rates below the few:1 ratio required
-for LSST MOPS (see next section). LSST image differencing will {\bf
-not} be a limiting factor in its ability to discover asteroids
-(including NEOs). DES experience has already demonstrated algorithms 
-sufficient to meet LSST MOPS requirements.
 
 {\bf Need to refer to section by Colin.} 
 
@@ -187,10 +313,10 @@ LSST will use two methods to detect moving objects
   than 2 PSF widths (corresponding to motion faster than about 1
   deg/day) will be easily detectable as trailed.  Two trailed
   detections within 30--60 minutes in a single night will be
-  sufficient to identify an object as an NEO candidate
+  sufficient to identify an object as an NEO candidate,
 \item Inter-night linking of pairs: this technique will recover
-  objects moving slow enough not to be measurably elongated in 
-  a single exposure
+  objects moving too slow enough to be measurably elongated in 
+  a single exposure. 
 \end{enumerate} 
 
 MOPS: Given the expected false-positive rates demonstrated by
@@ -212,7 +338,15 @@ as described below.
 
 \section{LSST Solar System Survey} 
 
-Opening paragraph
+Opening paragraph  (lift text from overview and Lynne's IAU paper) 
+
+Possible subsections here or below:
+
+- Concepts for discovering moving objects
+
+- Outline for simulations (see Chesley) 
+
+
 
 
 \subsection{Brief Overview of LSST} 
@@ -220,19 +354,22 @@ Opening paragraph
 
 \subsection{LSST Observing Strategy} 
 
-As deployed and funded (by NSF and DOE), LSST is primarily a science-driven mission
+XXX get text from the overview paper and Science Book 
+
+As deployed and funded (by the U.S National Science Foundation and
+Department of Energy), LSST is primarily a science-driven mission. 
 Existing cadence is optimized to maximize the overall science returns
 (incl. Solar System science), rather than NEO/PHA discovery
-completeness.  As designed, the survey is not optimized for rapid
+completeness (though the two goals are highly interrelated).  As designed, the survey is not optimized for rapid
 discovery and follow-up of all types of moving objects\footnote{
-Note that LSST will enable rapid identification and follow-up of
+XXX What's the purpose of this footnote? Note that LSST will enable rapid identification and follow-up of
 trailed objects (within 60 seconds of discovery). If deployed with a 
 planetary-defense optimized cadence, the NEO yields could be
 significantly improved, and approaching the 90\% completeness level
 for $H<22$.} 
 Early simulations indicate 90\% is achievable for NEO-optimized
 cadence. However, other science goals would be affected (including
-Solar System science!). 
+Solar System science!).  XXX Refer to Jones et al.  (2016) 
 
 The current baseline cadence is optimized for science returns.
 It is expected to yield approximately $\sim$70\% of the extant NEO population.
@@ -243,16 +380,16 @@ It is expected to yield approximately $\sim$70\% of the extant NEO population.
 Refer to \cite{DM2016} and Appendix A. 
 
 
-\section{Image Differencing Performance}
-%\include{image_differencing}
+%\section{Image Differencing Performance}
+\include{image_differencing}
 
-Paper on ``Automated Transient Identification in the Dark Energy
-Survey''  is \cite{goldstein15}. 
+%Paper on ``Automated Transient Identification in the Dark Energy Survey''  is \cite{goldstein15}. 
 
 
 \section{Moving Object Processing Pipeline Evaluation}
 
-Zeljko and Mario. There is a report on MOPS... 
+Zeljko and Mario. There is a report on MOPS (LDM-156)...   XXX refer to its
+results here... 
 
 Quoting \cite{denneau13}: ``MOPS achieves $>$99:5\% efficiency in
 producing orbits from a synthetic
@@ -293,6 +430,18 @@ Lynne, new OpSim runs.
 
 \section{Conclusions}
 
+{\bf Summary:} Well behaved image differencing and detection are needed for the
+asteroid detection strategy adopted by LSST. This has historically
+been difficult to achieve. First generation surveys have encountered
+significant problems including CCD artifacts, optical system
+artifacts, and software issues. Significant progress has been made
+since. Contemporary surveys comparable to LSST (specifically, DES) are
+already achieving false positive rates below the few:1 ratio required
+for LSST MOPS (see next section). LSST image differencing will {\bf
+not} be a limiting factor in its ability to discover asteroids
+(including NEOs). DES experience has already demonstrated algorithms 
+sufficient to meet LSST MOPS requirements.
+
 \begin{enumerate}
 \item LSST will employ the 2+2+2 MOPS discovery strategy, and detect fast-moving asteroids via trailing.
 \item Existing surveys demonstrate that false positive rates required
@@ -303,13 +452,14 @@ Lynne, new OpSim runs.
   around assumed efficiencies; even large differences in expectation
   cause only a few percent difference in efficiency. 
 \item Our simulations indicate that, if the cadence is optimized for
-  NEO searches, LSST likely has the capability and capacity to reach the Brown mandate.
+          NEO searches, LSST likely has the capability and capacity to reach the Brown mandate.
 \end{enumerate}
 
+Add words about consistency with \cite{GMS2016}. 
 
 \appendix
-\section{LSST Image Processing Steps and Data Products Relevant for Asteroids} \label{sec:AppA}
-%\include{appendix1} 
+%\section{LSST Image Processing Steps and Data Products Relevant for Asteroids} \label{sec:AppA}
+\include{appendix1} 
 
 
 
@@ -321,7 +471,7 @@ Lynne, new OpSim runs.
 To Do:
 
 - ask Lori Allen to be coauthor (and if there are others from her team) 
-- ask Tim Axelrod (others from old days?) 
+- ask Tim Axelrod and Jonathan Myers (others from old days?) 
 
 Lynne's new NEO runs: cumulative completeness for H<22 objects: 
 Run                              3p/30  |3p/15|    SNR3   SNR0   singlePair  singleDet     Modification
@@ -386,3 +536,17 @@ desperate traces of hope are:
 
 
 - 75% of the PHAs: Ivezic & Jones, 2014 (AAS)
+
+
+TODO from May 29 reading: 
+- ref to Chesley & JPL, find his simulations plan
+- in Introduction, add info about counts of transients from my AAS
+time-domain talk, also refer to Ridgway paper
+- 
+
+
+
+10 km/s at 100 Lunar Distances is:
+384,000 km * ang. speed (radian/s)  = 10 km/s 
+ang. speed = 5.4 arcsec / sec  = 5.4 * 3600 * 24 arcsec / day   = 5.4*24 ~ 100 deg/day 
+5.4 arcsec/sec * 30 sec ~ 3 arcmin trail! 

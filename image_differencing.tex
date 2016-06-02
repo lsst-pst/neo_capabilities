@@ -1,5 +1,16 @@
 \section{Image Differencing Evaluation}
 
+
+\subsection{From JPL paper}
+
+Two sources of false detections: random noise and image differencing artifacts. The easiest to model are those arising from random noise in the detectors, which are randomly distributed with an areal density depending on the Signal-to- Noise Ratio (SNR) of the detection threshold.
+The other type of false detection arises from artifacts in the image differencing technique that LSST will use to detect moving objects. LSST will build up a deep-stack, fiducial image of the sky, known as a ``template sky'', by combining numerous images of the same field. Individual images are then compared to the template sky and sources that are present only in the single visit are considered potential moving objects. This process readily reveals variable but stationary objects (e.g., variable stars) and these will be effectively removed from the detection stream. The process also generates ``Difference Image Artifacts'' (DIAs) that arise from any number of quirks in the differencing process, e.g., diffraction spikes and imperfect image alignment, to name but two. These can be screened to some extent by machine- learning algorithms, but their areal density in the LSST data stream has not yet been fully characterized. It is important to note that DIAs can be correlated, both within individual images and between pairs of images, and thus their positions can shift between images in a way that can mimic the motion of real solar system objects.
+For false detections stemming from random noise we will generate our own lists with an agreed model [7] and collaborators may share or exchange lists to facilitate comparison. For DIAs, we will initially generate lists assuming a random distribution with a range of areal densities to understand the noise loading that causes the linkage engine to falter. The LSST Project is currently using real data, e.g., Dark Energy Camera images, to refine estimates of the rate of DIA creation and understand the effectiveness of DIA rejection techniques. We expect that this effort will provide a more refined model for injecting DIAs, including correlation rules. As our study progresses, we expect that LSST will provide DIA lists for a given OpSim run, which could be directly merged with synthetic and random false detection lists and fed to the linking engine.
+
+
+
+JPL paper says: 672 random false positives per focal plane, or 72 / sq. deg. 
+
 \subsection{Intro and Test Data}
 
 False positives have historically dominated over true transients in previous
