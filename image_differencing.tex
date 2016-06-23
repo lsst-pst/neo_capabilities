@@ -1,4 +1,81 @@
-\section{Image Differencing Evaluation}
+\section{Analysis of Image Differencing Performance}
+
+
+LSST will detect variability (motion and flux variability) by
+differencing each incoming image against a deep template.
+Sources will be detected at an S/N=5 threshold (see Appendix A). 
+
+We expect on average about 1,000 per sq. deg. astrophysical, real,
+detections, including up to about 500 asteroids per sq. deg on the 
+Ecliptic (for scale, the LSST field of view is about 10 sq. deg., with 
+about 20 4kx4k CCDs per sq. deg.)
+
+We also expect a false-positive detections due to random
+fluctuations in the background at a level of about 200 per
+sq. deg. (all at the faint end).  XXX check Colin's report 
+
+However, historically surveys have reported factors of 10 to 500 times
+more (depending on the survey; see \citep{denneau13};
+\citep{goldstein15} ). 
+Those additional false positive
+detections are due to systematic effects: 
+\begin{itemize} 
+\item Camera and telescope artifacts
+\item Imperfect image subtractions
+\item Cosmic rays
+\end{itemize} 
+
+For a ``menagerie'' of artifacts (with amusing names such as 
+{\it chocolate chip cookies, frisbee, piano, arrowhead, UFO}), from
+Pan-STARRS, see Fig.~17 in \cite{denneau13}. 
+
+``Many of the false detections are easily explained as internal
+reflections, ghosts, or other well-understood image artifacts,...''
+
+Learning from PS1 Experience: PanSTARRS was a first generation
+experiment. Over the past decade, subsequent surveys (including LSST) 
+have learned tremendously from the PS1 experience. There are surveys 
+running today which have largely solved the key problems that PS1 has encountered.
+These are recent developments driven largely by extragalactic and
+transient science cases. They are not yet well known beyond those
+communities and reporting on those developments is additional
+motivation for this paper. 
+ 
+Major improvements to hardware include CCDs with significantly fewer 
+artifacts (e.g. DECam, see below; LSST) and optical systems designed to
+minimize ghosting and internal reflections (e.g. LSST). 
+
+Improvements to the software include advanced image differencing
+pipelines (e.g., PTFIDE for the Palomar Transient Factory and the
+Zwicky Transient Facility) and various machine learning classifiers
+for filtering false positives (see below). 
+
+DECam: \cite{goldstein15} 
+
+The Dark Energy Survey (DES) is an optical/near-infrared survey that
+aims to probe the dynamics of the expansion of the universe and the
+growth of large scale structure by imaging 5,000 sq. deg. of the
+southern sky. It is technologically very similar to LSST with
+\begin{itemize}
+\item 520 Mpix camera, 62 mosaicked chips (deep depleted devices)
+\item 3 sq.deg. field of view, same filter bands as LSST
+\item Single-exposure depths comparable to LSST
+\item Includes a supernova search program which employs image
+differencing methods analogous to LSST’s  and detects objects at the 
+same effective signal-to-noise ratio as LSST (S/N=5)
+\end{itemize} 
+
+The false positives in DECam data are morphologically much simpler
+(compare Fig.~1 in \citep{goldstein15} to Fig.~17 in \citep{denneau13})
+than those in Pan-STARRS, and thus are much more amenable to automated 
+screening using machine learning methods. Using a Random Forest 
+classifier, \cite{goldstein15} cleaned their sample from having a 
+raw false detection rate of 13:1 to a filtered rate of 1:3. This performance
+is already within the acceptable range for LSST performance goals. 
+
+
+
+
 
 
 \subsection{From JPL paper}
@@ -8,8 +85,8 @@ The other type of false detection arises from artifacts in the image differencin
 For false detections stemming from random noise we will generate our own lists with an agreed model [7] and collaborators may share or exchange lists to facilitate comparison. For DIAs, we will initially generate lists assuming a random distribution with a range of areal densities to understand the noise loading that causes the linkage engine to falter. The LSST Project is currently using real data, e.g., Dark Energy Camera images, to refine estimates of the rate of DIA creation and understand the effectiveness of DIA rejection techniques. We expect that this effort will provide a more refined model for injecting DIAs, including correlation rules. As our study progresses, we expect that LSST will provide DIA lists for a given OpSim run, which could be directly merged with synthetic and random false detection lists and fed to the linking engine.
 
 
-
 JPL paper says: 672 random false positives per focal plane, or 72 / sq. deg. 
+
 
 \subsection{Intro and Test Data}
 

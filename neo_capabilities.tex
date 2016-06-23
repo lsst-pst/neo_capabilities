@@ -43,13 +43,14 @@ $^2$National Optical Astronomy Observatory}
 
 \begin{abstract}
 We discuss the ability of LSST to contribute to Near-Earth Objects (NEO) discoveries and
-Congressional Brown mandate to NASA. The two main issues addressed here are robustness 
-of the LSST strategy for discovering NEOs using nightly pairs of observations, and the 
-expected cumulative completeness for potentially hazardous asteroids (PHAs) with 
-visual absolute magnitudes $H<22$.  We argue that the observing and data processing 
-strategies chosen by LSST are robust, and would yield a completeness of about 70\% with 
-the current LSST baseline survey. We describe a number of modifications of the LSST baseline 
-survey which could potentially yield the completeness of 90\% for $H<22$ PHAs. 
+the Congressional George E. Brown, Jr. mandate to NASA. The two main issues addressed 
+here are the robustness of the LSST strategy for discovering NEOs using nightly pairs of 
+observations, and the expected cumulative completeness for potentially hazardous asteroids
+(PHAs) with visual absolute magnitudes $H<22$.  We argue that the observing and data 
+processing strategies chosen by LSST are robust, and would yield a completeness of about 
+70\% with the current LSST baseline survey. We describe a number of modifications of the 
+LSST baseline survey which potentially could raise the completeness for PHAs with $H<22$
+to 90\%. 
 \end{abstract}
 
 \keywords{}
@@ -67,7 +68,11 @@ survey which could potentially yield the completeness of 90\% for $H<22$ PHAs.
 \include{opsim}
 
 
-\section{Conclusions}
+\section{Discussion and Conclusions}
+
+% 6.1:  Summarize paper 
+% 6.2:  Discuss and refute critiques
+% 6.3:  Discuss implications of cadence modifications 
 
 {\bf Summary:} Well behaved image differencing and detection are needed for the
 asteroid detection strategy adopted by LSST. This has historically
@@ -94,9 +99,54 @@ sufficient to meet LSST MOPS requirements.
           NEO searches, LSST likely has the capability and capacity to reach the Brown mandate.
 \end{enumerate}
 
-Add words about consistency with \cite{GMS2016}. 
 
- 
+
+
+\subsection{The JPL-NASA Study}
+
+\cite{JPLstudy} described a new study, related to this work. Their preliminary results indicate a completeness
+of $\sim$65\% for NEOs with $H<22$. The difference compared to \cite{JJI2016} result (72\%) is due 
+to XXX (true?): PHA vs. NEO, possible slope of the size distribution. 
+
+
+
+\subsection{The Grav, Mainzer and Spahr 2016 Study \label{sec:GMS}}
+
+\cite[hereafter GMS]{GMS2016} reported different NEO completeness levels than
+published by the LSST team in 2007 and 2014 . There are three main 
+reasons why the GMS results differ:
+\begin{enumerate}
+\item GMS used a different realization of the LSST baseline survey
+\item GMS used different synthetic NEO populations to evaluate completeness
+\item GMS {\it redefined} the completeness limit from the commonly
+  used $H<22$ criterion to an albedo-dependent value of $H$ limit (which
+  attempts to directly model the $D>140$ m size cut)
+\end{enumerate}
+
+Regarding the last point, GMS found that the completeness drops by 5\%
+when $H<22$ criterion is replaced by $D>140$ m criterion. Regarding 
+the first point, GMS results can be more meaningfully compared to an LSST
+study by \cite{JJI2016}, who used the same simulated cadence. After accounting for 
+the $H<22$ vs. $D>140$ m methodological difference of 5\%, GMS obtained a 
+completeness of 67\% using 3 pairs in 12 nights (for simulated cadence {\it enigma\_1189}), while Jones et al. 
+study obtained $\sim$73\% using 3 pairs in 15 nights (for simulated cadence {\it minion\_1016}, which is 
+statistically very similar to {\it enigma\_1189}). This difference 
+of $\sim$5\% is attributable to the differences in simulated NEO
+populations and other modeling details. In summary, GMS find the NEO
+completeness in the range $\sim$60\% to $\sim$70\% for the LSST
+baseline cadence. The variation is due to different NEO populations,
+different NEO detection criteria, and other specifics. When accounting 
+for different choices of simulation parameters, their results are
+consistent with the results published by the LSST team. 
+
+But: how much higher can the completeness be pushed with cadence
+modifications optimized for NEOs? 
+
+In Observing Strategy white paper: fig. 3.4 gives 73.4\% for PHAs with 
+$H<22$ and {\it minion\_1016}, using 3 pairs in 15 nights. 
+
+
+
 \appendix
 %\section{LSST Image Processing Steps and Data Products Relevant for Asteroids} \label{sec:AppA}
 \include{appendix1} 
@@ -104,7 +154,17 @@ Add words about consistency with \cite{GMS2016}.
 \bibliography{neo_capabilities}
 \end{document}
 
-To Do:
+To Do for Lynne:
+1) authors
 - ask Lori Allen to be coauthor (and if there are others from her team) 
 - ask Tim Axelrod and Jonathan Myers (others from old days?) 
+- ask OpSim crew to be coauthors? 
+- anyone else, e.g. Scott Daniel, Yusra, Peter, etc 
 
+
+2) text for cadence optimization in Section 5 
+- need brief opsim description; can lift some text about opsim from e.g. 
+
+
+
+3) read and comment on Sections 1-4
