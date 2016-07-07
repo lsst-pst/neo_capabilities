@@ -2,7 +2,34 @@
 \section{LSST Observing Cadence Optimization to Enhance PHA Completeness}
 
 
-XXX Lynne: describe here new OpSim runs. 
+Effects of changing the LSST observing strategy, including tensions between different science drivers, can be explored using 
+
+
+XXX Lynne: describe here new OpSim runs.  
+
+- a basic description of the baseline cadence (you/I can lift that from 
+  Ch. 2 in observing strategy white paper) 
+- description of modifications for other 3 simulations 
+- a set of basic metrics for all 4 sims that describe “non-NEO” programs: 
+   fOArea, fONv, median coadded ugrizy depth for WFD, median airmass 
+   for WFD (all bands together), parallax normed for WFD; we’d use 10 yrs
+   for baseline and 12 years for other 3 
+- existing cumulative completeness plots, for baseline and the 4th cadence
+   (the one that gives 87\% above)
+        
+- a different set of cumulative completeness plots, where each plot would 
+   have 4 lines for these four cadences, and the plots would include the
+   following criteria:
+       - 3 pairs in 30 days, SNR=4, no PSF detection loss
+       - 3 pairs in 30 days, SNR=5, total trailing loss
+       - 3 pairs in 15 days, SNR=5, total trailing loss
+So total: 
+9\% by going 2 years longer, no basic changes to cadence, but lots of increased requirements for DM. 
+11\% by going 2 years longer, simply adding more visits to NES, and still lots of increased requirements for DM. 
+15\% by going all-NEO optimized, and lots of increased requirements for DM. (72% - 87%).
+
+
+
 
 
 The leading systematic effects in completeness estimates are: 
