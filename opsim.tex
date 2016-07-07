@@ -1,0 +1,69 @@
+
+\section{LSST Observing Cadence Optimization to Enhance PHA Completeness}
+
+
+Effects of changing the LSST observing strategy, including tensions between different science drivers, can be explored using 
+
+
+XXX Lynne: describe here new OpSim runs.  
+
+- a basic description of the baseline cadence (you/I can lift that from 
+  Ch. 2 in observing strategy white paper) 
+- description of modifications for other 3 simulations 
+- a set of basic metrics for all 4 sims that describe “non-NEO” programs: 
+   fOArea, fONv, median coadded ugrizy depth for WFD, median airmass 
+   for WFD (all bands together), parallax normed for WFD; we’d use 10 yrs
+   for baseline and 12 years for other 3 
+- existing cumulative completeness plots, for baseline and the 4th cadence
+   (the one that gives 87\% above)
+        
+- a different set of cumulative completeness plots, where each plot would 
+   have 4 lines for these four cadences, and the plots would include the
+   following criteria:
+       - 3 pairs in 30 days, SNR=4, no PSF detection loss
+       - 3 pairs in 30 days, SNR=5, total trailing loss
+       - 3 pairs in 15 days, SNR=5, total trailing loss
+So total: 
+9\% by going 2 years longer, no basic changes to cadence, but lots of increased requirements for DM. 
+11\% by going 2 years longer, simply adding more visits to NES, and still lots of increased requirements for DM. 
+15\% by going all-NEO optimized, and lots of increased requirements for DM. (72% - 87%).
+
+
+
+
+
+The leading systematic effects in completeness estimates are: 
+\begin{enumerate}
+\item NEO vs. PHA difference (the completeness is about $\sim$5\% higher for PHAs than for NEOs) 
+\item Different sample definitions: $H<22$ vs. $D>140$m (as shown by \citep{GMS2016}, completeness
+           increases by $\sim$5\% when $H$-based criterion is used) 
+\item Orbital parameter distribution for the simulated asteroid population (e.g. the Bottke model
+             vs. the Granvik model; varying populations contribute completeness uncertainty of a few percent) 
+\item Variations of ``discovery window'' (e.g., X visit pairs in N nights: changing N from 15 to 30 with X=3 increases
+          completeness by 3\%; changing X from 3 to 4 with N=15 decreases completeness by 6\%). 
+\item Variations of the nominal detection threshold (if the detection threshold is changed from the 
+          signal-to-noise ratio of 5 or greater to 4 or greater, the completeness is boosted by 2-3\%; 
+          the difference between the optimal detection using trailed profile and point-spread-function 
+          detection, which is negligible for LSST baseline exposure time of 30 seconds, would be worth 2\%
+          in completeness for doubled exposure time). 
+\item Sensitivity to details in sky coverage and cadence (e.g. nightly pairs of visits vs. quads of visits;
+          requiring quads instead of pairs of visits decreases completeness by 30\% using baseline cadence; 
+          about half of that loss can be recovered using cadence simulations that request four visits per night) 
+\item Uncertainties when predicting effective image depth (system throughput, variation of the detection efficiency
+          with the signal-to-noise ratio, treatment of trailing losses); for a survey that has a completeness above 60\%, 
+          each additional one magnitude of depth for a given survey cadence increases the completeness by another 10\%.
+\item Uncertainties when predicting apparent flux (albedo distribution, phase effects, photometric variability 
+          due to non-spherical shapes, color distributions); assuming an uncertainty of 0.2 mag in the effective 
+          limiting magnitude, the corresponding  systematic uncertainty in completeness is about 2\%.)
+\item The slope of the asteroid size distribution (current measurement uncertainty of this parameter 
+          corresponds to a systematic uncertainty in completeness of about 2\%.)
+\item The impact of known objects (assuming that 43\% objects would be discovered by the start of
+          LSST survey, \citep{GMS2016} boosted the final PHA completeness for LSST baseline survey by 11\%). 
+\end{enumerate} 
+
+Given these systematic effects, a comparison of different simulation results (both for the same system,
+and those of different systems, especially systems operating at different wavelengths) has to be undertaken
+with due care. It is unlikely that a meaningful quantitative comparison can be pushed beyond a level
+of a few percent (and perhaps as much as 10\%). In practice, the completeness of a given operating survey
+is best estimated using the object re-discovery rate. 
+
