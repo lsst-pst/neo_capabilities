@@ -1,11 +1,9 @@
-
 \section{LSST Strategy for Discovering Solar System Objects} 
 
-We briefly describe LSST design and observing strategy, and discuss in more
+We briefly describe the LSST system design and observing strategy, and discuss in more
 detail image processing and moving object detection. 
 
-
-\subsection{Brief Overview of LSST  Design} 
+\subsection{A Brief Overview of LSST  Design} 
 
 LSST will be a large, wide-field ground-based optical telescope system
 designed to obtain multiple images covering the sky that is visible
@@ -23,7 +21,7 @@ will be imaged multiple times in six bands, $ugrizy$, covering the
 wavelength range 320--1050 nm. The project is scheduled to  begin the 
 regular survey operations at the start of next decade. 
 
-The LSST will be operated in fully automated survey mode. About 90\% of the 
+LSST will be operated in fully automated survey mode. About 90\% of the 
 observing time will be devoted to a deep-wide-fast survey mode which will 
 uniformly observe a 18,000 deg$^2$ region about 1000 times (summed over 
 all six bands) during the anticipated 10 years of operations, and yield a coadded map 
@@ -51,31 +49,30 @@ varying sensitivity to instrumental and system parameters. These themes
 fully exercise the technical capabilities of the system, such as photometric 
 and astrometric accuracy and image quality. 
 
-Existing cadence is optimized to maximize the overall science returns, including 
+The current baseline survey strategy is planned to maximize the overall science returns, including 
 Solar System science, rather than NEO/PHA discovery completeness (though the 
 two goals are highly interrelated). Discovering and linking objects in the Solar System 
 moving with a wide range of apparent velocities (from several degrees per day for 
 NEOs to a few arc seconds per day for the most distant TNOs) places strong 
-constraints on the cadence of observations. The baseline cadence requires closely 
+constraints on the cadence of observations. The baseline strategy requires closely 
 spaced pairs of observations, two or preferably three times per lunation. The visit
 exposure time is set to 30 seconds to minimize the effects of trailing for the majority of 
 moving objects. The images are well sampled to enable accurate astrometry, with 
 anticipated absolute accuracy of at least 0.1 arcsec.
 
-LSST observations can be simulated using the Operations Simulator tool (OpSim, XXX give
-reference here). OpSim runs a survey simulation with given science-driven desirables; 
-a software model of the telescope and its control system; and models of weather and other 
+LSST observations can be simulated using the LSST Operations Simulator tool (OpSim, XXX give
+reference here). OpSim runs a survey simulation with given science-driven desirables, 
+a software model of the telescope and its control system, and models of weather and other 
 environmental variables. The output of such a simulation is an ``observation history'', which 
 is a record of times, pointings and a record of associated environmental data and telescope  
-activities throughout the simulated  survey.  This history can be examined to assess  
-whether the simulated survey would be useful for any particular purpose or 
+activities throughout the simulated survey.  This history can be examined to assess  
+the efficacy of the simulated survey for any particular science goal or 
 interest\footnote{For examples of such analysis, see http://ops2.lsst.org:8080 XXX shorten this URL!}. 
 
 
-\subsection{LSST Baseline Cadence}
+\subsection{LSST Baseline Survey Strategy}
 
-As the system understanding improves, the baseline cadence gets updated every few
-years. The current baseline cadence is known as {\it minion\_1016}. It includes 2.4
+As the system understanding improves, the baseline survey strategy and the telescope model gets updated, generally on a yearly schedule. The current reference baseline survey is known as {\it minion\_1016}. It includes 2.4
 million visits collected over 10 years, with 85\% of the observing time spent on the 
 main survey and the rest on various specialized programs. The median number of visits
 {\it per night} is 816, with 3,026 observing nights. The median airmass is 1.23 (the
