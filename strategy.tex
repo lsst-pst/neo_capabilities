@@ -158,7 +158,7 @@ as discussed below in more detail, the number of false tracks could be decreased
 order of magnitude by decreasing the mean revisit time to 10 minutes. 
 
 
-\subsection{Expected False Tracklet Rates} 
+\subsection{Expected False Tracklet Rates \label{sec:tracklets} }
 
 Given a detection in the difference image,  another difference image, obtained at a different epoch, 
 is searched for a matching detectio to form a tracklet. For orientation, the sky 
@@ -275,8 +275,11 @@ lower limit for the detectable motion of the order 0.1 deg day$^{-1}$.}.
 Given $\sim$10$^6$ tracklets per night, how many tracks can be formed in a 30-day search window? 
 Based on MOPS test runs described in \S\ref{sec:mops}, we should expect well below 10$^8$ candidate
 tracks. LSST's 1000-core system will be capable of easily handling about 10$^{10}$ IODs per day, so we 
-have a margin of about two orders of magnitude. Hence, {\it even if the false positive rate in difference images is 
-ten times higher than expected, it can still be handled without a change of baseline cadence.}
+have a margin of about two orders of magnitude. Hence, {\it even if the false positive rate in difference 
+images is ten times higher than expected, it can still be handled without a change of baseline cadence.} 
+Quantitatively, the false positive rates of up to about 4000 deg$^{-2}$ could be readily handled with 
+anticipated LSST compute power. For comparison, \cite{denneau13} reported a false positive 
+rate of 8,200 deg$^{-2}$ for Pan-STARRS1 project. 
 
 In addition, another factor of a few increase in the false positive rate can be mitigated by a simple
 shortening of the revisit time by about a factor of 3. At the same time, an order of magnitude 
@@ -284,7 +287,7 @@ larger false positive rates for LSST than measured using DECam images and protot
 are rather implausible. If the LSST camera, or other system component, would somehow
 cause such high false positive rates, the whole LSST mission would indeed be a failure. 
 
-Therefore, the LSST strategy for discovering moving Solary System objects will be successful
+Therefore, the LSST strategy for discovering moving Solar System objects will be successful
  if the following three conditions are met
 \begin{enumerate}
 \item The LSST system hardware and image differencing software performance will result in false positive 
@@ -295,7 +298,6 @@ Therefore, the LSST strategy for discovering moving Solary System objects will b
 \item IOD can be executed in 0.005 sec per trial (implying that about 10$^{10}$ candidate tracks can
           be filtered per day). 
 \end{enumerate}
-
 
 
 

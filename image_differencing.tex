@@ -1,255 +1,251 @@
 \section{Analysis of Image Differencing Performance \label{sec:imDiff}}
 
+LSST will detect motion and flux variability by differencing each incoming image 
+against a deep template (built by combining multiple images of the same region). 
+Sources in difference images, called DIASources, will be detected at a signal-to-noise 
+ratio (SNR) threshold of $\nu=5$ (for more details, please see Appendix A). Up to about 1,000 deg$^{-2}$ 
+astrophysical, real, detections (e.g. variable stars) are expected in LSST images, including 
+up to about 500 deg$^{-2}$ asteroids on the Ecliptic. In addition to real detections, there 
+are two sources of false detections, the so-called false positives: statistical background 
+fluctuations and various image differencing artifacts (mostly due to hardware and imperfect 
+image subtractions). In a typical LSST difference image, the expected density of false positives
+due to background fluctuations is about 60 deg$^{-2}$ (see below for details), that is, much 
+lower than the expected rate of astrophysical detections. 
 
-LSST will detect variability (motion and flux variability) by
-differencing each incoming image against a deep template.
-Sources will be detected at an S/N=5 threshold (see Appendix A). 
+However, historically surveys have reported detection rates for transients that are much
+higher, depending on the survey; see \cite{denneau13}; \cite{kessler15}; \cite{goldstein15}. 
+For example, Pan-STARRS1 (PS1) reported a transient detection rate as high as 8,200 deg$^{-2}$ 
+\citep{denneau13}. For a ``menagerie'' of PS1 artifacts (with memorable names such as 
+{\it chocolate chip cookies, frisbee, piano, arrowhead, UFO}), see Fig.~17 in \cite{denneau13}. 
+They reported that ``Many of the false detections are easily explained as internal reflections, 
+ghosts, or other well-understood image artifacts, ...''. As discussed in \S\ref{sec:tracklets}, 
+such a high false positive rate is at the limit of what could be handled even with the substantial
+planned LSST compute power. 
 
-We expect on average about 1,000 per sq. deg. astrophysical, real,
-detections, including up to about 500 asteroids per sq. deg on the 
-Ecliptic (for scale, the LSST field of view is about 10 sq. deg., with 
-about 20 4kx4k CCDs per sq. deg.)
+Fortunately, Pan-STARRS was only a first-generation experiment and, over the past decade, 
+subsequent surveys have learned tremendously from the PS1 experience. There are surveys 
+running today, such as Dark Energy Survey, which have largely solved the key problems that 
+PS1 has encountered. Major improvements to hardware include CCDs with significantly fewer 
+artifacts (e.g. DECam, see below; LSST) and optical systems designed to minimize ghosting 
+and internal reflections (e.g. LSST). Improvements to the software include advanced image 
+differencing pipelines (e.g., PTFIDE for the Palomar Transient Factory and the Zwicky Transient 
+Facility) and various machine learning classifiers for filtering false positives. For example,
+\cite{goldstein15} used a Random Forest classifier and cleaned their sample of transient 
+detections from having a raw false:true detection rate ratio of 13:1 to a filtered rate ratio 
+of 1:3. This significant improvement is mainly due to morphologically much simpler false 
+positives; for example, compare Fig.~1 in \cite{goldstein15} to Fig.~17 in \cite{denneau13}. 
 
-We also expect a false-positive detections due to random
-fluctuations in the background at a level of about 200 per
-sq. deg. (all at the faint end).  XXX check Colin's report 
-
-However, historically surveys have reported factors of 10 to 500 times
-more (depending on the survey; see \citep{denneau13};
-\citep{goldstein15} ). 
-Those additional false positive
-detections are due to systematic effects: 
-\begin{itemize} 
-\item Camera and telescope artifacts
-\item Imperfect image subtractions
-\item Cosmic rays
-\end{itemize} 
-
-For a ``menagerie'' of artifacts (with amusing names such as 
-{\it chocolate chip cookies, frisbee, piano, arrowhead, UFO}), from
-Pan-STARRS, see Fig.~17 in \cite{denneau13}. 
-
-``Many of the false detections are easily explained as internal
-reflections, ghosts, or other well-understood image artifacts,...''
-
-Learning from PS1 Experience: PanSTARRS was a first generation
-experiment. Over the past decade, subsequent surveys (including LSST) 
-have learned tremendously from the PS1 experience. There are surveys 
-running today which have largely solved the key problems that PS1 has encountered.
-These are recent developments driven largely by extragalactic and
-transient science cases. They are not yet well known beyond those
-communities and reporting on those developments is additional
-motivation for this paper. 
- 
-Major improvements to hardware include CCDs with significantly fewer 
-artifacts (e.g. DECam, see below; LSST) and optical systems designed to
-minimize ghosting and internal reflections (e.g. LSST). 
-
-Improvements to the software include advanced image differencing
-pipelines (e.g., PTFIDE for the Palomar Transient Factory and the
-Zwicky Transient Facility) and various machine learning classifiers
-for filtering false positives (see below). 
-
-DECam: \cite{goldstein15} 
-
-The Dark Energy Survey (DES) is an optical/near-infrared survey that
-aims to probe the dynamics of the expansion of the universe and the
-growth of large scale structure by imaging 5,000 sq. deg. of the
-southern sky. It is technologically very similar to LSST with
-\begin{itemize}
-\item 520 Mpix camera, 62 mosaicked chips (deep depleted devices)
-\item 3 sq.deg. field of view, same filter bands as LSST
-\item Single-exposure depths comparable to LSST
-\item Includes a supernova search program which employs image
-differencing methods analogous to LSST’s  and detects objects at the 
-same effective signal-to-noise ratio as LSST (S/N=5)
-\end{itemize} 
-
-The false positives in DECam data are morphologically much simpler
-(compare Fig.~1 in \citep{goldstein15} to Fig.~17 in \citep{denneau13})
-than those in Pan-STARRS, and thus are much more amenable to automated 
-screening using machine learning methods. Using a Random Forest 
-classifier, \cite{goldstein15} cleaned their sample from having a 
-raw false detection rate of 13:1 to a filtered rate of 1:3. This performance
-is already within the acceptable range for LSST performance goals. 
+Here we summarize an analysis of image differencing performance based on DECam data and 
+difference images produced and processed using prototype LSST software\footnote{An extended report is available as
+http://dmtn-006.lsst.io/en/latest/}.
+This analysis demonstrates that the false positive rate anticipated for LSST is more than sufficiently 
+low for a successful deployment of MOPS, as discussed in the next Section. 
 
 
+\subsection{Dark Energy Survey and DECam data} 
+
+The Dark Energy Survey (DES) is an optical/near-infrared survey that aims to probe the 
+dynamics of the expansion of the universe and the growth of large scale structure by
+imaging 5,000 sq. deg. of the southern sky. DECam, the imaging camera developed for
+DES is sufficiently similar to LSST camera to enable an informative study of false positive 
+rates: DECam includes 62 mosaicked deep-depletion CCDs, with a total pixel count of 
+520 Mpix over its 3 deg$^2$ field of view, and has a similar filter complement as LSST. 
+
+The data we use here are a subset of a DECam NEO survey (PI: L. Allen, NOAO) conducted 
+in the first half of 2013. The data for a given field consist of 60-second exposures separated
+by about five minutes. Due to the difference in telescope aperture, these images are 
+about 1 mag shallower than the 30 second visits by LSST. We used data for five different 
+fields, each with between three and five visits, and arbitrarily selected one of the visits to 
+serve as the ``template'' exposure. In LSST operations, coadded prior exposures will be
+used as templates from image differencing rather than single visits, which will reduce the 
+noise in template images. Our use of single visits instead of coadded templates implies
+that some moving objects or transients will appear as negative sources in the difference 
+images. We simply disregard these sources since our goal is to mimic LSST operations 
+rather than discover all possible transients in this dataset.
 
 
+\subsection{LSST Image Differencing Pipeline and Data Processing}
+
+The LSST prototype image differencing and analysis code largely derives from the 
+HOTPANTS package \citep{becker15}, and was used for surveys such as SuperMACHO 
+and ESSENCE. While this software is very functional as-is, it is expected that the 
+ultimate LSST pipeline will be better at handling observations at high airmass and 
+the effects of differential chromatic refraction due to Earth's atmosphere. 
+Nevertheless, in this work we conservatively assume that the pipeline used for LSST 
+will have the same performance as the current code. 
+
+After producing difference images, we detect sources (DIASources) and measure
+their properties. In addition, we also perform forced photometry (flux measurements 
+at the positions of detected DIASources) on individual single-epoch input images 
+using the current versions of LSST pipelines \citep{juric15}. 
+
+Before presenting the results of this analysis, we summarize the expected behavior
+of false positives due to background fluctuations. 
 
 
-\subsection{From JPL paper}
+\subsection{False Detections due to Background Fluctuations}
 
-Two sources of false detections: random noise and image differencing artifacts. The easiest to model are those arising from random noise in the detectors, which are randomly distributed with an areal density depending on the Signal-to- Noise Ratio (SNR) of the detection threshold.
-The other type of false detection arises from artifacts in the image differencing technique that LSST will use to detect moving objects. LSST will build up a deep-stack, fiducial image of the sky, known as a ``template sky'', by combining numerous images of the same field. Individual images are then compared to the template sky and sources that are present only in the single visit are considered potential moving objects. This process readily reveals variable but stationary objects (e.g., variable stars) and these will be effectively removed from the detection stream. The process also generates ``Difference Image Artifacts'' (DIAs) that arise from any number of quirks in the differencing process, e.g., diffraction spikes and imperfect image alignment, to name but two. These can be screened to some extent by machine- learning algorithms, but their areal density in the LSST data stream has not yet been fully characterized. It is important to note that DIAs can be correlated, both within individual images and between pairs of images, and thus their positions can shift between images in a way that can mimic the motion of real solar system objects.
-For false detections stemming from random noise we will generate our own lists with an agreed model [7] and collaborators may share or exchange lists to facilitate comparison. For DIAs, we will initially generate lists assuming a random distribution with a range of areal densities to understand the noise loading that causes the linkage engine to falter. The LSST Project is currently using real data, e.g., Dark Energy Camera images, to refine estimates of the rate of DIA creation and understand the effectiveness of DIA rejection techniques. We expect that this effort will provide a more refined model for injecting DIAs, including correlation rules. As our study progresses, we expect that LSST will provide DIA lists for a given OpSim run, which could be directly merged with synthetic and random false detection lists and fed to the linking engine.
+Due to background fluctuations around its mean, it is possible to get false
+detections even at a high SNR threshold. The number of 
+such detections, as a function of the threshold SNR, the number of pixels and 
+seeing, can be computed using the statistics of Gaussian random fields (e.g., 
+N. Kaiser 2004, ``The Likelihood of Point Sources in Pixellated Images'', unpublished). 
+
+For an image with Gaussian background noise, convolved with a Gaussian point 
+spread function (PSF) with width $\sigma_g$ (in pixels), the number of peaks, $N$, above a 
+given SNR threshold, $\nu$, is given by 
+\begin{equation}
+N(>\nu)  = \frac{n_{row}*n_{col}}{2^{5/2} \, \pi^{3/2} \, \sigma_g^2} \, \nu \, e^{-\nu^2 /2} 
+\label{eq-theory}
+\end{equation}
+where $n_{row}$ and $n_{col}$ are the number of pixel rows and columns in the image. 
+This expression was verified empirically by LSST data management team using 
+image simulations\footnote{See https://github.com/lsst/W13report}.
+For 4k by 4k LSST sensors the pixel size is 0.2 arcsec, and for a nominal seeing
+of 0.85 arcsec and $\nu=5$, $N(>\nu) = 59$ deg$^{-2}$. 
+
+It is generally not well appreciated just how steep is the dependence of $N(>\nu)$
+on $\nu$ due to the exponential term. Changing the threshold from 5 to 5.5
+decreases the expected rate by a factor of 12, and the rate increases by a factor
+of 9.7 when the threshold is changed from 5 to 4.5. In practice, an empirical estimate 
+of the background noise is used when computing the SNR for each detected source.
+When this estimate is incorrect, e.g. due to reasons discussed below, then the 
+implied detection threshold is wrong, too. For example, if the noise is underestimated
+by only 10\%, the computed SNR will be too large by 10\%, and the adopted 
+threshold $\nu=5$ will actually correspond to $\nu=4.5$ -- and thus the 
+sample will include 9.7 times as many false positives due to background 
+fluctuations! Hence, the noise in difference images has to be estimated with
+high precision. 
 
 
-JPL paper says: 672 random false positives per focal plane, or 72 / sq. deg. 
+\subsubsection{The Impact and Treatment of Correlated Noise} 
+
+When the LSST pipeline convolves the science image to match the PSF of the template 
+image, that smoothing reduces the per pixel variance in the image and at the same
+time introduces noise in the off-diagonal terms of the covariance matrix, which is 
+not tracked. This per pixel noise reduction is reflected in the variance plane that 
+accompanies each exposure during processing, which is used for estimating the 
+significance of detections  and the uncertainties on source measurements. 
+
+Tracking the covariance caused by multiple convolutions is a planned feature for
+the LSST stack, but is not currently implemented. Previous surveys, such as
+Pan-STARRS, have used a small covariance ``pseudo-matrix'', which tracks the
+covariance between a small region of neighboring pixels, and then assumed that 
+this relationship between pixels is constant across an image (Paul Price, priv. comm.).
+This method avoids the creation of the full $N_{\rm pixels}$ by $N_{\rm pixels}$
+covariance matrix, which is impractically large and mostly empty.
+
+In the initial version of this analysis, we have erroneously ignored the impact
+of correlated noise and thus over-estimated SNR by about 20\%: the applied 
+threshold $\nu=5$ actually corresponded to $\nu=4$. It is easy to see using
+eq.~\ref{eq-theory} that this error results in an increase in the number of false
+positives by a factor of $\sim$70!  
+
+We have mitigated this problem by utilizing forced photometry of DIASources
+on individual images (that is, before convolution to match their PSFs). The
+forced photometry algorithm also provides an error estimate, and thus SNR
+estimate, too. It is straightforward to compute the SNR for the difference of
+the two measurements and thus recognize and reject all DIAsources with 
+$\nu < 5$. This mitigation step will be unnecessary once the image covariance
+tracking is properly implemented in the LSST stack. 
 
 
-\subsection{Intro and Test Data}
+\subsection{The Transient and False Positive Rates in DECam Images} 
 
-False positives have historically dominated over true transients in previous
-surveys. \citep{denneau13, goldstein15, kessler15} Major impediment to linking
-detections of moving objects.
+A histogram of the number of sources detected in difference images, as a function
+of SNR computed using forced photometry measurements, is shown in the right panel 
+of Figure~\ref{fig:snr_comparison}. The blue line shows the expected counts given
+by eq.~\ref{eq-theory}, in good agreement with data. When incorrect under-estimated 
+SNR is used (left panel), the distribution clearly ramps up at a much higher SNR value 
+and results in numerous false positives mis-classified as $>5 \sigma$ detections.
 
-Our goal in this section is to develop a estimate of the rate of
-false DIA source detections by the LSST stack as it exists today. This code
-largely derives from the HOTPANTS package \citep{becker15}, as was used for
-surveys such as SuperMACHO and ESSENCE (\textbf{XXX: Correct?}). This software
-is very functional as-is, but is presently undergoing significant improvement
-and refactoring in order to perform at the level required for LSST. In this work
-we conservatively assume that the pipeline used for LSST will have the the same
-performance as the current code; while we believe that the code will become
-significantly better, we can guarantee that it will become no worse.
-
-\textbf{XXX: Skipping sensor comparison, since lots of the Pan-STARRS FP's look like
-optical artifacts, not electronics.}
-
-The data we use are a subset of a Decam NEO survey (PI: L. Allen) conducted in
-the first half of 2013. These consist of 60 second exposures separated by five
-minutes on each field. Due to the difference in telescope aperture, this data is
-somewhat shallower than the 30 second visits by LSST. In this work we used five
-fields each with between three and five visits, and arbitrarily selected one of
-the visits to serve as the ``template'' exposure. In LSST operations, coadded
-prior exposures will be used as templates from image differencing rather than
-single visits, which will reduce the noise in template images. Our use of single
-visits means that some moving objects or transients will appear as negative
-sources in the difference images, but we disregard these sources for this
-analysis (our goal is to mimic LSST operations rather than discover all possible
-transients from the given dataset).
-
-\subsection{Processing}
-
-Some reference to LSST software heritage and version, circa Jan 2016
-\citep{juric15}.
-
-\textbf{XXX: introduce term DIA source somewhere.}
-
-Differencing two images, rather than a template vs image. Running force
-photometry. Ingest into DB.
-
-\subsection{Correlated Noise}
-
-The resulting DIA Source detections are extremely numerous, far above that
-expected from both Gaussian noise and from real transients or moving objects.
-Counting only positive detections, there are $\sim 20 000$ detections per
-square degree, while the number of expected transients is of order hundreds.
 
 \begin{figure}
   \centering
   \plotone{figures/snr_comparison.pdf}
   \caption{
-  Histogram of the reported SNR of sources measured in the difference image
-  (left), with the expected SNR as estimated from force photometry on the input
-  images (right). The blue line indicates the expected SNR distribution based
-  on Gaussian noise. The difference between these two histograms illustrates the
-  misestimation of the significance of diaSource detections. Using the correct
-  SNR values, the vast majority of these detections are $<5 \sigma$ and can be
-  disregarded.
+  Histogram of the reported SNR of sources measured in the difference images, 
+  using two different SNR estimates: SNR estimated from forced photometry on
+  the input images (right), and SNR (incorrectly) estimated using the variance plane
+  of the difference images (left). The blue lines indicate the expected SNR distribution
+  based on Gaussian background noise. The difference between these two histograms
+  illustrates the strong impact of the SNR mis-estimation. Using the correct SNR values, 
+  the vast majority of putative $>5 \sigma$ detections become $<5 \sigma$ detections
+  and can be disregarded.
   }
   \label{fig:snr_comparison}
 \end{figure}
 
-The source of this excess of detections can be seen in
-Figure~\ref{fig:snr_comparison}. When the LSST pipeline convolves the science
-image to match the PSF of the template image, that smoothing reduces the per
-pixel variance in the image. This reduction is reflected in the variance plane
-that accompanies each exposure during processing, which is used for estimating
-the significance of detections and the uncertainties on source measurements. A
-histogram of the number of sources at a given reported SNR (flux over reported
-uncertainty) is show in the left panel of Figure~\ref{fig:snr_comparison}. The
-blue line shows the expected counts from Gaussian statistics. This distribution
-clearly ramps up at much higher reported SNR values than would be expected.
 
-Because we are only differencing two exposures, rather than an exposure against
-a coadded template, we can also estimate the significance of any given detection
-from the noise in the input images. For each difference image detection, we also
-perform force photometry (photometry with the position fixed at the original
-difference image detection) on both the ``science'' and ``template'' images. It
-is these same pixel values that go into the measurement on the difference image,
-but the force photometry is unaffected by convolution with the matching kernel.
-
-The SNR of detections computed through force photometry is shown in the right
-panel of Figure~\ref{fig:snr_comparison}. The bulk of these detections are
-clearly at much lower significance, and they largely match the increased number
-that one would expect from Gaussian statistics if our detection threshold had
-been set closer to $4\sigma$.
-
-The underlying cause of this discrepancy between reported SNR values and the
-values computed through force photometry lies in the correlation of pixel values
-induced by convolution with the matching kernel. While this reduces the per
-pixel variance, because neighboring pixels are now correlated, there is an
-excess of random fluctuations on the size scale of the PSF over what would be
-expected from uncorrelated Gaussian noise. There is thus noise in the
-off-diagonal terms of the covariance matrix, which is not tracked.
-
-Tracking the covariance caused by multiple convolutions is a planned feature for
-the LSST stack, but is not currently implemented. Previous surveys such as
-Pan-STARRS have used small covariance ``pseudo-matricies'', which tracks the
-covariance between a small region of neighboring pixels, then assumes that this
-relationship between pixels is constant across an image (P. Price, priv. comm.).
-This avoids the creation of the full $N_{\rm pixels}$ by $N_{\rm pixels}$
-covariance matrix, which is impractically large and mostly empty.
-
-For this analysis we will use the significance estimates from the force
-photometry, as they reflect the correct measurement uncertainties even though
-they are not generated in the same way that will be used in LSST production
-runs.
-
-\subsection{False-Positive Results}
-
-\begin{deluxetable}{ll}
-  \tablecolumns{2}
-  \tablecaption{DIA source detection rates. \label{table:fp_rates}}
-  \tablewidth{0pt}
-    \tablehead{
-    \colhead{Source Type}          & \colhead{All visits, counts per sq. deg} \\
-    }
-    \startdata
-    Raw Positive Sources                     & 19,475                         \\
-    Raw Negative Sources                     & 23,018                         \\
-    Dipoles (not included below)             & 1,609                          \\
-    Positive after $5\sigma$ cut             & 1,022                          \\
-    Negative after $5\sigma$ cut             & 600                            \\
-    Positive sources excluding ``variables'' & 344                            \\
-  \enddata
-\end{deluxetable}
-
-After removing all detections that did not have $>5\sigma$ significance, the
-average number of (positive) sources is $\sim 1000$ per square degree, with some
-particular fields having as few as $500$ per square degree. A large fraction of
+Using the $>5\sigma$ cut based on SNR estimated using forced photometry, 
+the average number of positive DIASources is $\sim 1000$ deg$^{-2}$,
+with some fields having as few as $500$ deg$^{-2}$. A large fraction of
 these detections are the result of stars that have been poorly-subtracted and
 left significant residuals in the difference image. It is a common problem for
 subtracted stars to exhibit ``ringing'' with both positive and negative
 excursions, and these images are no exception. Because the focus of this work
 is on detecting moving objects rather than variable stars or transients, we have
-not attempted to correct these subtraction artifacts. Instead we exclude
+not attempted to correct these subtraction artifacts. Instead, we simply exclude
 difference image detections which are coincident with significant detections in
-both science and template images---that is, we exclude any DIA sources that
-overlap with a star. The area lost due to this masking is less than $1\%$ of the
-total sky. Again this is not the intended behavior of LSST during production,
-but instead a temporary expedient we can use for conservatively estimating the
-system's performance.
+both science and template images -- that is, we exclude all DIASources that
+overlap with a static source (of course, some may be truly variable sources). 
+The area lost due to this masking is less than $1\%$ of the total sky. Again, this 
+is not the intended behavior of LSST during production, but instead a temporary 
+expedient we can use for conservatively estimating the system's performance. 
+One could view this step as a ``poor man's'' machine learning step. 
 
-After excluding the DIA sources associated with stationary objects, the
-remaining moving object candidate detections number on average $\sim 350$ per
-square degree. As a further estimate on the fraction of these remaining objects
-that are false, we visually classified one focal plane of detections either as
-obvious imaging artifacts, obvious PSF-like detections, or unidentifiable
-detections. Approximately 25\% of the reported detections were clearly some sort
-of uncorrected artifact (we did not pursue the cause of individual artifacts),
+After excluding all DIASources associated with stationary objects, the
+remaining candidate moving object detections number on average $\sim 350$ 
+deg$^{-2}$. This sample includes asteroids, false positives, and possibly some
+true astrophysical transients that are not associated with stationary objects
+(gamma-ray burst afterglows, very faint variable stars with sharp light 
+curve maxima, etc.). To improve the estimate of the fraction of these remaining
+objects that are false, we visually classified one focal plane of detections either 
+as obvious imaging artifacts, obvious PSF-like detections, or unidentifiable
+detections. Approximately 25\% of the reported detections were clearly some 
+sort of uncorrected artifact (we did not pursue the cause of individual artifacts),
 25\% appeared to be acceptable PSF-like features, and the remaining 50\% were
 ambiguous or had too low of signal to noise to be able to classify.
+Therefore, a conservative upper limit on the fraction of false positives is 75\%,
+corresponding to a rate of 263 deg$^{-2}$. Given the size of DECam pixels 
+(0.263 arcsec) and typical seeing of about 1.1 arcsec ($\sigma_g$ = 1.8 pix), 
+the expected rate due to background fluctuations is 33 deg$^{-2}$, leaving
+a rate of 230 deg$^{-2}$ as ``unexplained'' false positives. 
+
+The SNR distribution of this sample is proportional to 1/SNR$^{2.5}$, which
+is similar to distributions expected for astrophysical objects. This fact implies
+that the sample might be dominated by true astrophysical transients; nevertheless,
+we adopt the above conservative upper limit of 75\%.  
 
 
-Results from trying to make tracklets, hopefully?? On visual inspection, 25\%
-look like junk, 25\% looked like good detections, and the rest were ambiguous
-because low SNR. SNR power law exponent is $\sim -2.5$.
+\subsection{Scaling DECam Results to LSST Performance} 
 
-Very few detections around bright stars; mostly well-masked by the code. Few
-large scale detected artifacts, but not a very big sample of images.
+The LSST false positive rate due to background fluctuations is about twice
+as large as for DECam because of smaller pixels and better seeing. The scaling
+with pixel size and seeing for ``unexplained'' false positives is not obvious
+because their cause is unknown. For example, if they are a pixel-induced effect, 
+their rate should be scaled by the square of the ratio of angular pixel sizes, or
+a factor of 1.72. If they are instead dominated by true astrophysical transients,
+they should not be scaled at all. We adopt the most conservative option and 
+scale up the DECam rate for ``unexplained'' false positives to 396 deg$^{-2}$. 
+In addition, there will be 60 deg$^{-2}$ false positives due to background 
+fluctuations (referenced to the median seeing of 0.85 arcsec). 
 
-How detailed of a recipe are we providing here; should it be the same level of
-detail as we sent to JPL?
+The total false positive rate anticipated for LSST is thus comparable to the rate of 
+astrophysical transients. Again, this estimate of the false positive rate is very conservative
+and it would not be very surprising if it turns out to be several times smaller. 
+
+
+
+\subsection{Spatially Correlated Transients} 
+
+
+We also investigated whether DIAsources from different difference images are correlated 
+in focal plane coordinates. A large number of such correlated detections could result in
+a substantial increase of tracklets and tracks. We analyzed 4 visits with 60 CCDs each, 
+and found 24 DIAsources that match to within two pixels. We did not find any correlation at 
+larger radii. These 24 DIASources show tendencies for certain CCDs but the counts are too 
+low to make a robust conclusion. Visual inspection shows that many are near interpolated 
+parts of an image, though for some the cause is unclear.  The implied density of correlated 
+DIASources is about 2.3 deg$^{-2}$, rendering this effect unimportant. 
+
