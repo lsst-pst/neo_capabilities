@@ -1,5 +1,5 @@
 
-\section{Analysis of Moving Object Processing Software Performance}
+\section{Analysis of Moving Object Processing Software Performance \label{sec:mops}}
 
 
 MOPS: Given the expected false-positive rates demonstrated by
@@ -7,8 +7,8 @@ MOPS: Given the expected false-positive rates demonstrated by
 be possible. This has already been shown by the PanSTARRS project 
 with simulations performed for the PS4 system\footnote{PanSTARRS 
 PS1 experience does not contradict this conclusion. In addition to 
-hardware issues, PS1 was only 1/4 of the assumed system (see 
-\citep{denneau13} for more details). }, which is in this
+hardware issues, PS1 was only 1/4 of the assumed system; see 
+\cite{denneau13} for more details. }, which is in this
 respect equivalent to LSST. The robustness to unexpected false
 positives is further tested with simulations performed by LSST,
 as described below. 
@@ -42,7 +42,7 @@ Known limitations/caveats:
 \item Due to computational constraints at the time when the simulation
   was performed (2011), a $v < 0.5$ deg/day velocity limit was
   imposed.
-\item For similar reasons, the filters were imposed on track fitting
+\item For similar reasons, the filters that were imposed on track fitting
   were not optimized, artificially reducing the yield
 \item As we understand the algorithmic scalings, these will not change the
 final results; nevertheless they are being actively mitigated by new
@@ -51,130 +51,4 @@ simulations which are in progress.
 
 Simulation results: Asteroids are discoverable in the presence of significant noise.
 Get more details from Lynne \& Axelrod writeup. 
-
-\newpage
-
-\subsection{The Basic Strategy} 
-
-First form tracklets, and then candidate tracks. Don't worry about false positives, 
-be it detections, tracklets or tracks, because the initial orbit determination (IOD) 
-will efficiently and reliably filter out false tracks (due to high-accuracy astrometry 
-and well-understood simple Keplerian model predictions). The essential question
-is whether the resulting numbers of false tracklets and tracks can be handled with 
-available computing resources.
-
-Assuming 0.005 sec per IOD (based on an analysis by Pan-STARRS MOPS team,
-reference XXX; possibly shorter now), 1000 cores, and 12 hours of computation time 
-per day, one can filter about 10$^{10}$ candidate tracks per day. How many tracks 
-do we expect? 
-
-MOPS tests show that with of the order a million tracklets per night (similar to 
-the expected rate, as demonstrated below), a 30-day search window results in 
-about the same number of tracks as input tracklets. Assuming 2 million tracklets
-per night, a 30-day search window would result in about 60 million candidate
-tracks. This expectation is more than two orders of magnitude smaller than the 
-assumed system capacity above. As discussed below, the number of false tracks
-could be decreased by another order of magnitude by decreasing the mean revisit
-time to 10 minutes. 
-
-
-\subsection{Expected False Tracklet Rates} 
-
-
-Given a detection in the difference image, we search for a matching detection in another
-difference image to form a tracklet. For orientation, the highest sky density of asteroids 
-down to LSST faint flux limit ($r \sim 24.5$) is of the order $\rho_{ast} \sim 100$ deg$^{-2}$
-(perhaps 2-3 times larger, depending on model assumptions). The number of false positives 
-due to (gaussian) background fluctuations, assuming typical LSST seeing (0.8 arcsec) and
-SNR$>$5, is about $\rho_{bkgd} = 60$ deg$^{-2}$. However, analysis of DECam images reduced 
-using prototype LSST software shows a higher rate of detections in difference images, that 
-cannot be readily associated with moving objects. This analysis implies a conservative upper
-limit for the false positive rate of about $\rho_{FP} =  400$ detections deg$^{-2}$. This value 
-is an upper limit because the analyzed fields are close to the Ecliptic, with a significant but
-not well known contribution from real asteroids (due to very faint flux levels, $r \sim 24$). 
-Hence, it is possible that the false positive rate is actually as much as four times lower. 
-
-We will assume that the sky density of detections in difference images is given by 
-$\rho_{det} = \rho_{ast} + \rho_{FP}$. When searching for a matching detection in another
-difference image, there are two distinct types of behavior. Correct matches of detections
-of the same asteroids into tracklets follow the behavior expected for correlated samples:
-as long as the object's angular displacement between the two epochs is sufficiently larger 
-than the seeing disk, while at the same time smaller than the search radius, the number
-of matches is simply 
-\begin{equation}
-             N_{tracklet}^{true} = \rho_{ast}  \, A_{FOV},
-\end{equation}
-where $A_{FOV}$ is the field-of-view area (for LSST, $A_{FOV}=9.6$ deg$^2$). With 
-$\rho_{ast} = 100$ deg$^{-2}$, $N_{tracklet}^{true} \sim 1,000$ per a pair of visits, and with
-500 visit pairs per typical observing night, $N_{tracklet}^{true} \sim 500,000$ per night
-(the implied number of asteroid detections per night is about a million, but note that 
-the sky density of asteroids falls rapidly with the distance from the Ecliptic). We emphasize 
-that this number of true tracklets does not directly depend on the search radius, nor the 
-time elapsed between the two visits, as long as they have their plausible values (about an 
-arcminute, and a few tens of minutes, as discussed further below). 
-
-There are three other types of tracklets that follow behavior for uncorrelated (random) 
-samples: associations of different asteroids, associations of asteroids and false detections, 
-and tracklets made of two false detections. Assuming the same $\rho_{det}$ in both 
-difference images, for each of $N_{det} = \rho_{det} \, A_{FOV}$ detections in one image,
-we search for a matching detection in another image. The search radius is given by 
-$\delta_{max} = v_{max} \, \Delta t$. Here $v_{max}$ is the  cutoff velocity and $\Delta t$ 
-is the time elapsed between the two images. For LSST baseline cadence, $\Delta t$ is in 
-the range 20-60 minutes. The search area, $A_S = \pi \delta_{max}^2$, is then 
-\begin{equation}
-     A_S = 0.0055 \left( v_{max}  \over {\rm deg \, day}^{-1} \right) \, \left(\Delta t \over {\rm hour} \right) {\rm deg}^2.
-\end{equation}
-Adopting $v_{max} = 1$ deg day$^{-1}$, which ensures a high completeness level even for fast-moving 
-NEOs\footnote{Simulations imply that 95\% of NEO detections have $v<1$ deg day$^{-1}$; the completeness
-for main-belt asteroids is essentially 100\%. In addition, objects moving faster than 1 deg day$^{-1}$ will
-be resolved in LSST images and can be treated separately.}, and $\Delta t = 30$ minutes (which together 
-imply $\delta_{max} = 1.3$ arcmin), gives a search area of $A_S = 0.0014$ deg$^2$. 
-
-As long as $\rho_{det}$ is much smaller than $\rho_A = 1/A_S = 733$ deg$^{-2}$, the expected number of 
-matches within the search radius is less than unity (for a discussion of second-order effects, see Appendix B 
-in \citealt{IVLZ2005}). In this regime, the probability of forming a tracklet is 
-\begin{equation}
-                 p_{tracklet}^{false} =   { \rho_{det}  \over \rho_A}, 
-\end{equation}
-and the total expected number of {\it false} tracklets is 
-\begin{equation}
-           N_{tracklet}^{false} = N_{det} \, p_{tracklet}^{false} =  \rho^2_{FP}  \, A_S \, A_{FOV} \,
-                                \left(1 + 2 \eta + \eta^2\right),
-\end{equation}
-where $\eta = \rho_{ast}  / \rho_{FP}$. With $\rho_{ast} = 100$ deg$^{-2}$ and  $\rho_{FP} = 400$ deg$^{-2}$,
-$N_{tracklet}^{false} \sim 3,400$ per pair of visits, and $N_{tracklet}^{false} \sim 1.7$ million per observing night. 
-Note that there are false tracklets even when $\rho_{FP} = 0$ because of incorrect associations of different asteroids:
-this term contributes 0.1 million tracklets per observing night for $\rho_{ast} = 100$ deg$^{-2}$. The total
-number of tracklets is thus to the first order ($\eta \approx 0$)
-\begin{equation}
-   N_{tracklet} =  N_{tracklet}^{true} + N_{tracklet}^{false} = \rho_{ast}  \, A_{FOV} + \rho^2_{FP}  \, A_S \, A_{FOV}. 
-\end{equation}
-Therefore, there will be up to about $2\times10^6$ tracklets per observing night, for the chosen parameter 
-values. Given that these choices are rather conservative, this estimate is essentially an upper limit;
-approximately, {\it we expect of the order a million tracklets per observing night}. 
-
-
-In addition to $N_{tracklet}^{false}$ scaling with the square of $\rho_{FP}$, $N_{tracklet}^{false}$ scales with the squares of
-both $v_{max}$ and  $\Delta t$ (via the dependence on $A_S$). Therefore, if $\Delta t$ would be made
-as small as 10 minutes by modifying observing strategy, the resulting $N_{tracklet}^{false}$ would be about an 
-order of magnitude smaller (and $N_{tracklet}$ about three times smaller).  Hence, the shortening of $\Delta t$ is 
-a good mitigation strategy against high false positive detection rates in difference images\footnote{An
-extreme example of this mitigation strategy would be to obtain two consecutive 30-second visits separated 
-by 34 seconds (additional 2 seconds due to shutter motion and another 2 seconds due to readout). 
-The acceptable false positive density would be increased by about three orders of magnitude, with the
-lower limit for the detectable motion of the order 0.1 deg day$^{-1}$.}.
-
-
-\subsubsection{Can MOPS handle a million tracklets per night?} 
-
-How many tracks can we form with $\sim$10$^6$ tracklets per night, and a 30-day search window? 
-Based on MOPS test runs, we should expect well below 10$^8$ candidate tracks. LSST's 1000-core
-system will be capable of easily handling about 10$^{10}$ IODs per day, so we have a margin
-of about two orders of magnitude. Hence, {\it even if the false positive rate in difference images is 
-ten times higher than expected, it can still be handled without a change of baseline cadence.}
-And yet another factor of a few increase in the false positive rate can be mitigated by a simple
-shortening of the revisit time by about a factor of 3. At the same time, an order of magnitude 
-larger false positive rates for LSST than measured using DECam images and prototype LSST software
-are rather implausible. If the LSST camera, or other system component, would somehow
-cause such high false positive rates, the whole LSST mission would indeed be a failure. 
 
