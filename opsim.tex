@@ -107,7 +107,7 @@ The footprint of these various proposals in the baseline minion\_1016 reference 
 
 To investigate the effects of requiring triplets or quads of visits within a single night as part of the discovery criteria, instead of simply pairs, two additional simulated surveys were run where the WFD (but not the NES) requested visits in sequences of three or four, instead of just pairs. It is important to note that due to the behavior of the OpSim software, it is frequently the case that more than the requested minimum number of visits are received in a particular field on a given night. That is, even in the baseline minion\_1016 run, which requested pairs of visits in each night for the WFD and NES, it is often the case that three or four visits were obtained despite the smaller request. Thus, these additional runs provide an indication of the trade-offs in coverage and completeness that result from requesting more visits per field, per night, but the effects would be more pronounced if this behavior of the software did not exist. The simulated surveys enigma\_1281 and enigma\_1282 are the result of requesting triples and quads in the WFD proposal, respectively. 
 
-A series of additional OpSim simulated surveys were created with parameters intended to improve the efficiency of discovering PHAs and increase the cumulative PHA completeness. The first change is simply to increase the number of visits requested for the NES proposal in $griz$, so that the requested visits are equal to the number of visits requested per field in the WFD, and to extend the survey from 10 years to 12 years. Requesting more visits in the NES increases the likelihood of achieving a series of visits matching the discovery criteria for any field at any time. Extending the survey lifetime allows the discovery of more PHAs which may have had long synodic periods. Every other proposal, except the GP and SCP proposals, also requests and receives more visits due to the longer survey lifetime. Reprioritizing the NES relative to the WFD results in the WFD receiving 69\% of the total visits and the NES receiving 24\%, compared to 85\% and 6\% respectively in the baseline strategy. The resulting simulated survey is astro\_lsst\_01\_1016.  
+A series of additional OpSim simulated surveys were created with parameters intended to improve the efficiency of discovering PHAs and increase the cumulative PHA completeness. The first change is simply to increase the number of visits requested for the NES proposal in $griz$, so that the requested visits are equal to the number of visits requested per field in the WFD, and to extend the survey from 10 years to 15 years. Requesting more visits in the NES increases the likelihood of achieving a series of visits matching the discovery criteria for any field at any time. Extending the survey lifetime allows the discovery of more PHAs which may have had long synodic periods. Every other proposal, except the GP and SCP proposals, also requests and receives more visits due to the longer survey lifetime. Reprioritizing the NES relative to the WFD results in the WFD receiving 69\% of the total visits and the NES receiving 24\%, compared to 85\% and 6\% respectively in the baseline strategy. The resulting simulated survey is astro\_lsst\_01\_1016.  We consider astro\_lsst\_01\_1016 as our 'baseline PHA' run, as it makes minimal changes to the overall survey strategy while attempting to be more PHA friendly. 
 
 The next change is to introduce an Ecliptic Band (EB) proposal, requesting observations with visit timing similar to the WFD in the $griz$ filters, but with field locations surrounding the Ecliptic Plane +/- 15 degrees and extending down to the WFD where the ecliptic reaches its north-most range. It covers and extends the footprint of the NES, and thus replaces that proposal. The EB proposal requests longer 60 second visits in order to reach deeper limiting magnitudes, and requests the same number of visits per field as the WFD. Other proposals remain the same as in astro\_lsst\_01\_1016. With this reprioritization, the WFD receives 44\% of the total visits while the EB receives 53\%; the simulated survey is astro\_lsst\_01\_1015. 
 
@@ -123,26 +123,49 @@ An attempt at an aggressively NEO-optimized survey was also created, where modif
 
 \subsection{Completeness analysis results}
 
-summarize completeness changes 
+There is some interplay between discovery criteria and survey design -- as an obvious example, discovery criteria requiring triplets of visits per night instead of pairs will result in much different completeness results if the survey was designed to only request two visits per night rather than three. Likewise, some changes in survey design work best with changes to the discovery criteria (or rather, changes in requirements for data processing either in source detection or in MOPS); for example, lengthening the visit time increases the detection losses, which results in a significant improvement if these losses are pushed down to the 'trailing loss' threshold through changes in detection algorithms.  While we compare discovery criteria within a single simulated survey as much as possible, there are some changes in discovery criteria which must be compared between different surveys using different observing strategies.  
 
-first for just pairs / triplets / quads
+In the baseline reference run, minion\_1016, with the baseline discovery criteria, with pairs of visits in each night occurring within 60 minutes repeated for 3 nights within a 15 day time window, we find a cumulative completeness at $H\le22$ of 73.7\% for our PHA input population. This should be considered our baseline PHA completeness, as it uses the reference run and the baseline MOPS and data management requirements. Below, we explore the effects of changing the MOPS requirements, changing data management detection requirements, and changing the survey strategy. 
 
-then for NEO-optimized runs, using pairs
+Using only minion\_1016 and not changing the survey strategy, we can explore the effects of:
+\begin{itemize}
+\item extending the MOPS window for linking pairs of detections from the nominal 15 day window to a 30 day window: this increases completeness by about 2\%, to 76\%.
+\item then pushing source detection algorithms to mitigate detection losses to the trailing loss level: with the 30 second visits in the baseline minion\_1016, this only increases completeness by a very small amount, 0.5\%, to 76.5\%.
+\end{itemize}
 
-\begin{enumerate}
-\item baseline (minion1016) to more observations in NES
-\item adding two years to astrolsst011016
-\item extending MOPS window to 30 days, at SNR=5
-\item adding longer exposures throughout the ecliptic (astrolsst011015/astrolsst1017)
-\item making DM find objects with trailing loss, not detection losses
-\item extending SNR limit to 4 instead of 5
-\end{enumerate}
+The major gain with the baseline survey (or any survey with a maximum visit time of 30 second visits) is by increasing the MOPS window from 15 days to 30. This allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is interesting to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. It seems likely that this behavior is related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky seem likely to improve the completeness even further. 
+
+Considering also changes to the survey strategy, we can explore the effects of:
+\begin{itemize}
+\item adding more observations in the NES region. This corresponds to comparing minion\_1016 at 10 years to astro\_lsst\_01\_1016 (the 'baseline PHA run') at 10 years, a change in completeness of about 1\%, or 73.7\% to 74.8\%. 
+\item extending the survey lifetime by two years. Since minion\_1016 is a reference run, it only lasts 10 years. However, astro\_lsst\_01\_1016 was configured to run for 15 years, and can thus be evaluated at the 12 year mark. The additional two years of operations adds just over 4\% to the completeness, going from 74.8\% to 79.1\%. 
+\item using longer visit times near the ecliptic to reach fainter limiting magnitudes, as in astro\_lsst\_01\_1015. The effect of longer exposures alone is mitigated by the fact that detection losses are also increased. It is also hard to disentangle the effects of increasing the visit time near the ecliptic and the resulting lower frequency of observations (and thus fewer opportunities for sets of observations matching the basic discovery criteria). The small modifications in survey strategy used in astro\_lsst\_01\_1015 shows almost no change in completeness, {\it until} detection losses are partially compensated for by modifying source detection algorithms to the trailing loss level. Then this run provides a 1.5\% increase in completeness compared to astro\_lsst\_01\_1016. 
+\item attempting to optimize the survey for PHA discovery, by using a limited filter set, discarding other proposals, and using longer exposures along the ecliptic, as in astro\_lsst\_01\_1017. This survey shows an increase in completeness relative to astro\_lsst\_01\_1016 of about 2.4\%, after using longer MOPS windows and pushing source detection to the trailing loss level, for a final completeness of 83.9\%. If we were to also decrease the SNR limit of sources fed to MOPS (from SNR=5 to SNR=4), increasing the number of sources MOPS and data management must handle by a factor of 10 (IS THAT RIGHT?), then we could increase the completeness to 86\% with this strategy.
+\end{itemize}
+
+The gains from individual components above are generally on the order of a few percent, and after evaluating their effects across the different survey strategies where possible, we see the results in completeness from changes in discovery criteria going from 15 day MOPS windows to 30 day MOPS windows or by extending the survey lifetime by 2 years, are consistent to within 0.5\%. The largest individual gain comes from extending the survey lifetime from 10 to 12 years. 
+
+The completeness at $H\le22$ for these various discovery criteria and survey strategies are summarized in Table~\ref{tab:completeness}. 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/PHA_cumulative_completeness}
+\caption{The cumulative completeness for PHAs with $H\le22$ for various survey strategies and discovery criteria. The details of the survey strategies for each of the surveys mentioned and discovery criteria are described in the text.
+\label{tab:completeness}}
+\end{figure}
+
+
+
+Effects of pairs vs triples vs quads - minion\_1016 vs enigma\_1281 vs enigma\_1282.
+
 
 \subsection{Comparison with external completeness analysis}
 
 The leading systematic effects in completeness estimates are: 
 \begin{enumerate}
 \item NEO vs. PHA difference (the completeness is about $\sim$10\% higher for PHAs than for NEOs) 
+Repeating the analysis with the sample of 2000 NEOs, we find a cumulative completeness of 60.8\% for minion\_1016, compared to 73.4\% with the PHA population. 
+
 \item Different sample definitions: $H<22$ vs. $D>140$m (as shown by \citep{GMS2016}, completeness increases by $\sim$5\% when $H$-based criterion is used) 
 \item Variations of ``discovery window'' (e.g., X visit pairs in N nights: changing N from 15 to 30 with X=3 increases
           completeness by 3\%; changing X from 3 to 4 with N=15 decreases completeness by 6\%). 
@@ -150,6 +173,7 @@ The leading systematic effects in completeness estimates are:
           requiring quads instead of pairs of visits decreases completeness by 30\% using baseline cadence; 
           about half of that loss can be recovered using cadence simulations that request four visits per night) 
 \end{enumerate}          
+    
     
 \subsection{Remaining uncertainties in completeness estimates}
 
