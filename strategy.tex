@@ -158,6 +158,16 @@ as discussed below in more detail, the number of false tracks could be decreased
 order of magnitude by decreasing the mean revisit time to 10 minutes. 
 
 
+
+\begin{verbatim}
+We want to explain 
+1) why does the number of tracklets found by MOPS scale with the square 
+of the number of false positives, and 
+2) why is the number of tracks similar to the number of tracklets. 
+\end{verbatim}
+
+
+
 \subsection{Expected False Tracklet Rates \label{sec:tracklets} }
 
 Given a detection in the difference image,  another difference image, obtained at a different epoch, 
@@ -219,14 +229,14 @@ $\delta_{max} = v_{max} \, \Delta t$. Here $v_{max}$ is the  cutoff velocity and
 is the time elapsed between the two images. For LSST baseline cadence, $\Delta t$ is in 
 the range 20-60 minutes. The search area, $A_S = \pi \delta_{max}^2$, is then 
 \begin{equation}
-     A_S = 0.0055 \left( v_{max}  \over {\rm deg \, day}^{-1} \right) \, \left(\Delta t \over {\rm hour} \right) {\rm deg}^2.
+     A_S = 0.0055 \left( v_{max}  \over {\rm deg \, day}^{-1} \right)^2 \, \left(\Delta t \over {\rm hour} \right)^2 {\rm deg}^2.
 \end{equation}
 Adopting $v_{max} = 1$ deg day$^{-1}$, which ensures a high completeness level even for fast-moving 
 NEOs\footnote{Simulations imply that 95\% of NEO detections have $v<1$ deg day$^{-1}$; with this threshold,
 the completeness for main-belt asteroids is essentially 100\%. Objects moving faster than 1 deg day$^{-1}$ will
 be easily resolved in LSST images and can be treated separately using specialized algorithms.}, and $\Delta t = 30$
-minutes (which together 
-imply a search radius of $\delta_{max} = 1.3$ arcmin), gives a search area of $A_S = 0.0014$ deg$^2$. 
+minutes (which together  imply a search radius of $\delta_{max} = 1.3$ arcmin), gives a search area of 
+$A_S = 0.0014$ deg$^2$. 
 
 As long as $\rho_{det}$ is smaller than $\rho_A = 1/A_S = 733$ deg$^{-2}$, the expected number of 
 matches within the search radius is less than unity (for a discussion of second-order effects, see Appendix B 
@@ -241,7 +251,10 @@ and the total expected number of {\it false} tracklets is
 \end{equation}
 where $\eta = \rho_{ast}  / \rho_{FP} \sim 0.25$. With $\rho_{ast} = 100$ deg$^{-2}$ and  $\rho_{FP} = 400$ deg$^{-2}$, 
 $N_{tracklet}^{false} \sim 3,000$ per pair of visits, and $N_{tracklet}^{false} \sim 1.5$ million per observing night with 
-500 visit pairs. The first term is the largest and corresponds to tracklets made of two false detections ($\sim1.0$ million), 
+500 visit pairs. We note that the density of false tracklets (350 deg$^{-2}$) is similar to $\rho_{FP}$; this similarity
+is a consequence of choosing $\delta_{max}$ such that $\rho_{FP} A_S \sim 1$. 
+
+The first term is the largest and corresponds to tracklets made of two false detections ($\sim1.0$ million), 
 the second term corresponds to associations of asteroids and false detections, and the third and the smallest term 
 ($<0.1$ million) is due to incorrect associations of different asteroids.
 
@@ -268,6 +281,7 @@ their mid-exposure times separated
 by 34 seconds (additional 2 seconds due to shutter motion and another 2 seconds due to readout). 
 The acceptable false positive density would be increased by about three orders of magnitude, with the
 lower limit for the detectable motion of the order 0.1 deg day$^{-1}$.}. 
+
 
 
 \subsubsection{Can MOPS handle a million tracklets per night?} 
@@ -301,6 +315,149 @@ Therefore, the LSST strategy for discovering moving Solar System objects will be
 
 
 
+\newpage
+
+\subsection{Expected False Track Rates \label{sec:tracks} }
+
+
+Given the true and false tracklet rates per night,  $N_{tracklet}^{true}=5\times10^5$ and $N_{tracklet}^{false}=
+1.5\times10^6$, we seek to estimate the number of false candidate tracks. We assume that the search 
+window is $N_w= 30$ days wide, and with $N_{tracklet} = 2\times10^6$ per night, there are $6\times10^7$
+tracklets. With about 4,300 deg$^2$ (500 pairs of visits) of sky observed each night, the average density of 
+(all) tracklets is $\rho_{tracklet} = 450$ deg$^{-2}$. Assuming that on average the same field is 
+revisited every $T_{revisit}=3$ days, the active area includes about 13,000 deg$^2$ of sky. 
+
+
+\subsubsection{The Tracklet Motion Vector Accuracy} 
+ 
+In addition to its mean position at the mean epoch, each tracklet constrains the motion vector. 
+Typical astrometric errors for LSST detections will range from 50 mas at SNR=100 to 150 mas at 
+SNR=5. For simplicity, we will assume hereafter that the astrometric errors are $\sigma_a=150$ mas 
+for all detections, or $\sim 100$ mas per coordinate. With a temporal separation of two detections in 
+a tracklet of $\Delta t$, the motion vector is measured with an accuracy per coordinate of 
+\begin{equation}
+\label{eq:sigv}
+          \sigma_v = 3.6 \, \left({\rm hour} \over \Delta t\right) \,\,\, {\rm arcsec} \, {\rm day}^{-1}.
+\end{equation}
+With a typical $\Delta t = 30$ min, and assuming a linear motion in each ecliptic coordinate (longitude
+$\lambda$ and latitude $\beta$), each coordinate can be predicted at time $t$ with an accuracy of  
+\begin{equation}
+          \sigma_x = 7.2 \, \Delta k \,\,\, {\rm arcsec} \, {\rm day}^{-1}.
+\end{equation}
+where $\Delta k$, in days, is the elapsed time between the mean tracklet epoch and time $t$. 
+For example, when $\Delta k = 7$ days, $\sigma_x = 50$ arcsec, which is roughly the same 
+as the typical detection separation in a tracklet, and comparable to typical distance between
+two tracklets. 
+
+
+\subsubsection{Naive Linking of Tracklets into Candidate Tracks} 
+
+Given a $N_w= 30$ days wide search window, and the middle tracklet, out of three tracklets
+needed for a candidate track, positioned on day $k$, $k=2\dots29$, there are $(k-1)(30-k)$
+different ways to combine three observing nights. Summing over all possible values of $k$
+gives 4060 combinations (for $N_w= 15$ days, there are 455 combinations) 
+
+The expectation value for the number of matches in a search radius corresponding to $3\sigma_x$ 
+is given by
+\begin{equation}
+       N_{match}(\Delta k) = \pi \, (3 \sigma_x)^2 \, \rho_{tracklet} = 
+                     0.051 \, (\Delta k)^2 \, \left( \rho_{tracklet}  \over 450 \, {\rm deg}^{-2} \right).
+\end{equation}
+It follows that the total number of candidate tracks, per single trial tracklet, is
+\begin{equation}
+\label{eq:Ntt}
+       N_{tracklet}^{tracks} = \left( \rho_{tracklet}  \over 450 \, {\rm deg}^{-2} \right)^2 \, \left({0.051 \over T_{revisit}}\right)^2 \, 
+               \sum_{k=2}^{N_w-1} \sum_{j=1}^{k-1} \sum_{l=k+1}^{N_w} \, (k-j)^2 \, (l-k)^2. 
+\end{equation}
+The two terms in the sum reflect the multiplication of the number of matches found on a preceeding
+night with the number of matches found on a subsequent night. With $N_w= 30$ days and 
+$T_{revisit}=3$ days, $N_{tracklet}^{tracks} \sim 5,000$!  
+
+This naive matching results in a prohibitively large number of candidate tracks: with 
+$N_{tracklet} = 2\times10^6$, the number of candidate tracks per search window is 
+$N_{w}^{tracks} = 10^{10}$. Even with $N_w= 15$ days, $N_{tracklet}^{tracks} \sim 39$
+and $N_{w}^{tracks} \sim 10^{8}$, which is at least a magnitude larger than obtained in 
+MOPS experiments. 
+
+
+
+\subsubsection{Using Tracklet Motion Vector to Prune Candidate Tracks} 
+
+The naive matching described above only used the motion vector for the middle tracklet to 
+predict the positions of the two potential matching tracklets in other nights. While the 
+measured motion vectors, hereafter velocities, of the other two matching tracklets were not 
+used, they contain valuable information. False tracklets have essentially randomly distributed 
+velocities with a cutoff given by $v_{max}$ (recall that $v_{max} = 1$ deg day$^{-1}$ was adopted 
+above). The differential velocity distribution for false tracks increases linearly with the
+velocity modulus. On the contrary, the velocity of true tracklets is highly correlated with both 
+the velocities of the other two true tracklets, as well as the velocities implied by the positions 
+of tracklets and their temporal separation. If we define $v_{12}$ and $v_{23}$ to be the latter, and 
+$v_1$, $v_2$ and $v_3$ to be measured velocities for each tracklet, then all five values
+have to be consistent within some tolerance. A situation where $v_3$ is inconsistent with
+other four velocities is illustrated in Figure~\ref{fig:TrackSlide1}.  
+
+
+
+\begin{figure}[th!]
+\centering
+\vskip -2.6in
+\includegraphics[width=0.95\textwidth]{figures/TrackSlide1}
+\vskip -2.7in
+\caption{The left panel defines two different types of velocities for a hypothetical asteroid
+trajectory shown by the curved blue line. Three tracklets are shown by the black dots; the 
+two individual detections per tracklet are not shown, but are implied by the three measured
+motion vectors ($v_1$, $v_2$ and $v_3$). The other two velocities ($v_{12}$ and $v_{23}$)
+are defined by connecting the pairs of tracklets.  These five velocities are shown in 
+ecliptic coordinate system on the right. The circle signifies the cutoff velocity for forming
+tracklets. Note that the third tracklet has a velocity that is inconsistent with other four
+velocities. The consistency radii are discussed in the text.
+\label{fig:TrackSlide1}}
+\end{figure}
+
+
+
+If the orbital trajectory were a straight line, the velocities would have to align within
+their measurement errors. The tracklet velocities ($v_1$, $v_2$ and $v_3$) are measured with 
+a precision of about 0.001 deg day$^{-1}$ (see eq.~\ref{eq:sigv}), and $v_{12}$ and $v_{23}$ even 
+more precisely due to much larger temporal baselines (a few days instead of fraction of an hour). 
+It turns out that the plausible consistency tolerances are driven by orbital curvature and 
+acceleration. Analysis of simulated samples\footnote{See Figure 16 in http:/ls.st/LDM-156}
+shows that an adequate acceleration limit is 0.02 deg day$^{-2}$: essentially all main-belt
+asteroids and more than 95\% of NEOs satisfy this criterion. For a typical 7-day separation
+of two tracklets, the implied velocity tolerance is 0.14 deg day$^{-1}$. 
+
+
+Given that false tracklets have randomly distributed velocities with a cutoff of 1 deg day$^{-1}$,
+the probability that a false-tracklet velocity will be consistent with a true velocity is 
+(0.14/1.0)$^2 \sim 0.02$. In reality, this probability is a bit smaller because the false-tracklet
+velocity distribution is not uniform (it is biased towards the velocity cutoff). Finally, 
+the probability that both the first and the third tracklet will have velocities consistent with
+the middle tracklet's position and velocity is 0.02$^2$ = 0.0004. The naive matching 
+results described above have to be corrected by this factor.  With this additional requirement, 
+the expected number of false candidate tracks per single trial tracklet is $N_{tracklet}^{tracks} \sim0.5$ 
+with $N_w= 30$ days, and $N_{tracklet}^{tracks} \sim0.02$ with $N_w= 15$ days. 
+
+Although MOPS algorithms operate in a different way, these analytic probabilistic considerations 
+explain why the number of candidate tracks produced in MOPS experiments stays approximately
+the same (to within a factor of two) even when the number of input tracklets per night is increased
+by about an order of magnitude. With $N_{tracklet}^{tracks} \sim0.5$, the number of false candidate 
+tracks per search window is about $N_{w}^{tracks} = 250,000$ for $N_w= 30$ days, in good
+agreement with the results of MOPS simulations\footnote{See the top left panel 
+in Figure 21 in http:/ls.st/LDM-156}. 
+
+
+Note that for sufficiently large density of false positives,  false tracks will start to dominate: 
+with the dependence on $\rho_{tracklet}^2$ from eq.~\ref{eq:Ntt}, and another power of 
+$\rho_{tracklet}$ due to multiplication by the number of tracklets per night, $N_{w}^{tracks}$
+for false tracks scales as $\rho_{tracklet}^3$. For example, with 20 times higher rate of 
+false positives from Pan-STARRS1 than assumed here, the number of false tracks would
+be about 10$^4$ higher ($\sim$2 billion instead of 250,000), and prohibitively large. 
+
+
+
+
+
+\newpage 
 
 \subsection{Systematic effects due to varying modeling assumptions}
 
