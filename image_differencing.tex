@@ -122,10 +122,20 @@ high precision.
 
 When the LSST pipeline convolves the science image to match the PSF of the template 
 image, that smoothing reduces the per pixel variance in the image and at the same
-time introduces noise in the off-diagonal terms of the covariance matrix, which is 
-not tracked. This per pixel noise reduction is reflected in the variance plane that 
-accompanies each exposure during processing, which is used for estimating the 
-significance of detections  and the uncertainties on source measurements. 
+time introduces correlations between neighboring pixels. This violates the
+assumption made by standard image processing algorithms that each pixel is an
+independent draw from a Poisson distribution. The per-pixel noise reduction is
+reflected in the variance plane that accompanies each exposure during
+processing, but the covariance between pixels is not tracked. 
+The significance of detections and the uncertainties on source measurements is
+then estimated based on this incomplete information provided by the variance
+plane, leading to a biased detection threshold. 
+
+The magnitude of this effect is large---using only the per-pixel variance
+measurements can result in underestimating the true noise on PSF-size scales by
+20\% or more. A detection threshold of $\nu=5$ thus actually corresponds to
+$\nu=4$, and it is easy to see using eq.~\ref{eq-theory} that this error results
+in an increase in the number of false positives by a factor of $\sim$70!
 
 Tracking the covariance caused by multiple convolutions is a planned feature for
 the LSST stack, but is not currently implemented. Previous surveys, such as
@@ -135,19 +145,13 @@ this relationship between pixels is constant across an image (Paul Price, priv. 
 This method avoids the creation of the full $N_{\rm pixels}$ by $N_{\rm pixels}$
 covariance matrix, which is impractically large and mostly empty.
 
-In the initial version of this analysis, we have erroneously ignored the impact
-of correlated noise and thus over-estimated SNR by about 20\%: the applied 
-threshold $\nu=5$ actually corresponded to $\nu=4$. It is easy to see using
-eq.~\ref{eq-theory} that this error results in an increase in the number of false
-positives by a factor of $\sim$70!  
-
-We have mitigated this problem by utilizing forced photometry of DIASources
-on individual images (that is, before convolution to match their PSFs). The
-forced photometry algorithm also provides an error estimate, and thus SNR
-estimate, too. It is straightforward to compute the SNR for the difference of
-the two measurements and thus recognize and reject all DIAsources with 
-$\nu < 5$. This mitigation step will be unnecessary once the image covariance
-tracking is properly implemented in the LSST stack. 
+In the interim, we have mitigated this problem by utilizing forced photometry of DIASources
+on individual images (that is, before convolution to match their PSFs). This
+produces both flux measurements and associated uncertainties which are not
+affected by covariance, enabling us to set accurately set a SNR threshold
+that recognizes and rejects all DIAsources with $\nu < 5$. This mitigation step
+will be unnecessary once the image covariance tracking is properly implemented
+in the LSST stack. 
 
 
 \subsection{The Transient and False Positive Rates in DECam Images} 
