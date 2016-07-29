@@ -127,22 +127,22 @@ In the baseline reference run, minion\_1016, with the baseline discovery criteri
 
 Using only minion\_1016 and not changing the survey strategy, we can explore the effects of:
 \begin{itemize}
-\item extending the MOPS window for linking pairs of detections from the nominal 15 day window to a 30 day window: this increases completeness by about 2\%, although with an estimated $\sim100$ times increase in the compute requirements. 
+\item extending the MOPS window for linking pairs of detections from the nominal 15 day window to a 30 day window: this increases completeness by about 2\%, although with an estimated $\sim2000$ times increase in the compute requirements (see \ref{sec:appA}).
 \item pushing source detection algorithms to mitigate detection losses to the trailing loss level: with the 30 second visits in the baseline minion\_1016, this only increases completeness by a very small amount, 0.5\%.
-\item using sources detected down to SNR=4 instead of SNR=5: this increases completeness by about 2\%, although with an estimated $\sim10,000$ times increase in the compute requirements. 
+\item using sources detected down to SNR=4 instead of SNR=5: this increases completeness by about 2\%, although with an estimated $\sim6\time10^8$ times increase in the compute requirements (see \ref{sec:appA}). 
 \end{itemize}
 
-The major gain with the baseline survey (or any survey with a maximum visit time of 30 second visits) is by increasing the MOPS window from 15 days to 30. This allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. Pushing to SNR=4 at the same time as increasing the MOPS window to 30 days, with the current MOPS software, exceeds the expected compute resources. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. It seems likely that this behavior is related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky seem likely to improve the completeness even further. 
+The major gain possible in the baseline survey (or any survey with a maximum visit time of 30 seconds) is through increasing the MOPS linking window from 15 to 30 days. This allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. This behavior is likely related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky are likely to improve the completeness even further.  Pushing to SNR=4 exceeds the expected compute resources and is not worthwhile in comparison.
 
 Considering also changes to the survey strategy, we can explore the effects of:
 \begin{itemize}
 \item adding more observations in the NES region. This corresponds to comparing minion\_1016 at 10 years to astro\_lsst\_01\_1016 (the 'baseline PHA run') at 10 years, a change in completeness of about 1\%. This comes at a cost to other science cases, as the main survey footprint (the WFD proposal) only receives 1,715,354 visits (82\%) of the number of visits in the reference run; many science cases are roughly correlated with the number of visits. 
-\item extending the survey lifetime by two years. Since minion\_1016 is a reference run, it only lasts 10 years. However, astro\_lsst\_01\_1016 was configured to run for 15 years, and can thus be evaluated at the 12 year mark. This is our benchmark for extending the survey; the WFD achieves 2,077,342 visits, roughly equivalent to the number of WFD visits in the baseline reference run, minion\_1016.  The additional two years of operations adds just over 4\% to the completeness, going from 74.8\% at 10 years to 79.1\% at 12 years. 
+\item extending the survey lifetime by two years. Since minion\_1016 is a reference run, it only lasts 10 years. However, astro\_lsst\_01\_1016 was configured to run for 15 years, and can thus be evaluated at the 12 year mark. This is our benchmark for extending the survey; at 12 years, the WFD achieves 2,077,342 visits, roughly equivalent to the number of WFD visits in the baseline reference run, minion\_1016.  The additional two years of operations adds just over 4\% to the completeness, going from 74.8\% at 10 years to 79.1\% at 12 years. 
 \item using longer visit times near the ecliptic to reach fainter limiting magnitudes, as in astro\_lsst\_01\_1015. The effect of longer exposures alone is mitigated by the fact that detection losses are also increased. It is also hard to disentangle the effects of increasing the visit time near the ecliptic and the resulting lower frequency of observations (and thus fewer opportunities for sets of observations matching the basic discovery criteria). The small modifications in survey strategy used in astro\_lsst\_01\_1015 shows almost no change in completeness, {\it until} detection losses are partially compensated for by modifying source detection algorithms to the trailing loss level; then this run provides a 1.5\% increase in completeness compared to astro\_lsst\_01\_1016. 
-\item attempting to optimize the survey for PHA discovery, by using a limited filter set, discarding other proposals, and using longer exposures along the ecliptic, as in astro\_lsst\_01\_1017. This survey shows an increase in completeness relative to astro\_lsst\_01\_1016 of about 2.4\%, after using longer MOPS windows and pushing source detection to the trailing loss level, for a  completeness of 83.9\%. 
+\item attempting to optimize the survey for PHA discovery, by using a limited filter set, discarding other proposals, and using longer exposures along the ecliptic, as in astro\_lsst\_01\_1017. This survey shows an increase in completeness relative to astro\_lsst\_01\_1016 of about 2.4\%, after using longer MOPS windows and pushing source detection to the trailing loss level, for a  completeness of 83.9\%, but would lose significant science by not obtaining observations in the $uzy$ filters or by observing the DD and SCP fields.
 \end{itemize}
 
-The largest individual gain comes from extending the survey lifetime from 10 to 12 years. The cumulative completeness at $H\le22$ for these various discovery criteria and survey strategies are summarized in Table~\ref{tab:completeness}. 
+In altering the survey strategy, the largest individual gain comes from simply extending the survey lifetime from 10 to 12 years. The cumulative completeness at $H\le22$ for these various discovery criteria and survey strategies are summarized in Table~\ref{tab:completeness}. 
 
 \begin{figure}
 \centering
@@ -153,6 +153,8 @@ The largest individual gain comes from extending the survey lifetime from 10 to 
 ?         
 
 \subsection{Comparison with external completeness analysis}
+
+
 
 The leading systematic effects in completeness estimates are: 
 \begin{enumerate}
