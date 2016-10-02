@@ -48,113 +48,38 @@ here are the robustness of the LSST strategy for discovering NEOs using nightly 
 observations, and the expected cumulative completeness for potentially hazardous asteroids
 (PHAs) with visual absolute magnitudes $H<22$.  We argue that the observing and data 
 processing strategies chosen by LSST are robust, and would yield a completeness of about 
-70-75\% with the current LSST baseline survey. We describe a number of modifications of the 
+70-75\% with the current LSST baseline survey strategy. We describe a number of modifications of the 
 LSST baseline survey which potentially could raise the completeness for PHAs with $H<22$
 to 90\%, as well as a number of systematic effects that must be taken into account when
-comparing different simulations of the same system, as well as simulations of different
-systems. 
+comparing different simulations of the same survey, as well as simulations of different
+surveys and observing systems. 
 \end{abstract}
 
-\keywords{}
+\keywords{XXX keywords for Icarus}
+
 
 \include{intro} 
 
 \include{strategy} 
 
 \include{image_differencing}
-%Paper on ``Automated Transient Identification in the Dark Energy Survey''  is \cite{goldstein15}. 
 
 \include{mops} 
 
 \include{opsim}
 
-
-\section{Discussion and Conclusions}
-
-% 6.1:  Summarize paper 
-% 6.2:  Discuss and refute critiques
-% 6.3:  Discuss implications of cadence modifications 
-
-{\bf Summary:} Well behaved image differencing and detection are needed for the
-asteroid detection strategy adopted by LSST. This has historically
-been difficult to achieve. First generation surveys have encountered
-significant problems including CCD artifacts, optical system
-artifacts, and software issues. Significant progress has been made
-since. Contemporary surveys comparable to LSST (specifically, DES) are
-already achieving false positive rates below the few:1 ratio required
-for LSST MOPS (see next section). LSST image differencing will {\bf
-not} be a limiting factor in its ability to discover asteroids
-(including NEOs). DES experience has already demonstrated algorithms 
-sufficient to meet LSST MOPS requirements.
-
-\begin{enumerate}
-\item LSST will employ the 2+2+2 MOPS discovery strategy, and detect fast-moving asteroids via trailing.
-\item Existing surveys demonstrate that false positive rates required
-  by LSST (approaching $\sim$1:1) are  achievable (Dark Energy Survey;  \citep{goldstein2015}).
-\item PanSTARRS PS4 simulations \citep{denneau13}) as well as LSST
-  simulations (Myers et al. 2011) demonstrate the ability of MOPS to perform the linkages under those conditions.
-\item LSST software and observing strategy are robust to perturbations
-  around assumed efficiencies; even large differences in expectation
-  cause only a few percent difference in efficiency. 
-\item Our simulations indicate that, if the cadence is optimized for
-          NEO searches, LSST likely has the capability and capacity to reach the Brown mandate.
-\end{enumerate}
-
-
-
-
-\subsection{The JPL-NASA Study}
-
-\cite{JPLstudy} described a new study, related to this work. Their preliminary results indicate a completeness
-of $\sim$65\% for NEOs with $H<22$. The difference compared to \cite{JJI2016} result (72\%) is due 
-to XXX (true?): PHA vs. NEO, possible slope of the size distribution. 
-
-
-
-\subsection{The Grav, Mainzer and Spahr 2016 Study \label{sec:GMS}}
-
-\cite[hereafter GMS]{GMS2016} reported different NEO completeness levels than
-published by the LSST team in 2007 and 2014 . There are three main 
-reasons why the GMS results differ:
-\begin{enumerate}
-\item GMS used a different realization of the LSST baseline survey
-\item GMS used different synthetic NEO populations to evaluate completeness
-\item GMS {\it redefined} the completeness limit from the commonly
-  used $H<22$ criterion to an albedo-dependent value of $H$ limit (which
-  attempts to directly model the $D>140$ m size cut)
-\end{enumerate}
-
-Regarding the last point, GMS found that the completeness drops by 5\%
-when $H<22$ criterion is replaced by $D>140$ m criterion. Regarding 
-the first point, GMS results can be more meaningfully compared to an LSST
-study by \cite{JJI2016}, who used the same simulated cadence. After accounting for 
-the $H<22$ vs. $D>140$ m methodological difference of 5\%, GMS obtained a 
-completeness of 67\% using 3 pairs in 12 nights (for simulated cadence {\it enigma\_1189}), while Jones et al. 
-study obtained $\sim$73\% using 3 pairs in 15 nights (for simulated cadence {\it minion\_1016}, which is 
-statistically very similar to {\it enigma\_1189}). This difference 
-of $\sim$5\% is attributable to the differences in simulated NEO
-populations and other modeling details. In summary, GMS find the NEO
-completeness in the range $\sim$60\% to $\sim$70\% for the LSST
-baseline cadence. The variation is due to different NEO populations,
-different NEO detection criteria, and other specifics. When accounting 
-for different choices of simulation parameters, their results are
-consistent with the results published by the LSST team. 
-
-But: how much higher can the completeness be pushed with cadence
-modifications optimized for NEOs? 
-
-In Observing Strategy white paper: fig. 3.4 gives 73.4\% for PHAs with 
-$H<22$ and {\it minion\_1016}, using 3 pairs in 15 nights. 
-
-
+\include{discussion} 
 
 \appendix
-%\section{LSST Image Processing Steps and Data Products Relevant for Asteroids} \label{sec:AppA}
 \include{appendix1}
-\include{appendix_fallback_strategies}
+\include{appendixMOPS}
+% this might be interesting, but it's not completed
+% \include{appendix_fallback_strategies}
 
 \bibliography{neo_capabilities}
 \end{document}
+
+
 
 To Do for Lynne:
 1) authors
@@ -163,16 +88,19 @@ To Do for Lynne:
 - ask OpSim crew to be coauthors? 
 - anyone else, e.g. Scott Daniel, Yusra, Peter, etc 
 
-
 2) text for cadence optimization in Section 5 
 - need brief opsim description; can lift some text about opsim from e.g. 
-
-
 
 3) read and comment on Sections 1-4
 
 
 
 
-
-
+To-do from Ljubljana:
+- link to Brown doc and a reference for 20k NEOs 
+- add refs to Stokes and Shapiro 
+- add ref for DECam 
+- Gaia reference 
+- opsim ref, MAF ref. 
+- link to Kaiser's writeup
+- ref. to SDSS asteroid paper and eq. for V vs. H 

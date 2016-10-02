@@ -83,15 +83,16 @@ Before presenting the results of this analysis, we summarize the expected behavi
 of false positives due to background fluctuations. 
 
 
-\subsection{False Detections due to Background Fluctuations}
+\subsection{False Detections due to Background Fluctuations \label{sec:kaiser}}
 
 Due to background fluctuations around its mean, it is possible to get false
 detections even at a high SNR threshold. The number of 
 such detections, as a function of the threshold SNR, the number of pixels and 
 seeing, can be computed using the statistics of Gaussian random fields (e.g., 
-N. Kaiser 2004, ``The Likelihood of Point Sources in Pixellated Images'', unpublished). 
+N. Kaiser 2004, ``The Likelihood of Point Sources in Pixellated Images'', unpublished,
+give a link, XXX). 
 
-For an image with Gaussian background noise, convolved with a Gaussian point 
+For an image with a Gaussian background noise, convolved with a Gaussian point 
 spread function (PSF) with width $\sigma_g$ (in pixels), the number of peaks, $N$, above a 
 given SNR threshold, $\nu$, is given by 
 \begin{equation}
@@ -148,13 +149,11 @@ covariance matrix, which is impractically large and mostly empty.
 In the interim, we have mitigated this problem by utilizing forced photometry of DIASources
 on individual images (that is, before convolution to match their PSFs). This
 produces both flux measurements and associated uncertainties which are not
-affected by covariance, enabling us to set accurately set a SNR threshold
+affected by covariance, enabling us to accurately set a SNR threshold
 that recognizes and rejects all DIAsources with $\nu < 5$. This mitigation step
 will be unnecessary once the image covariance tracking is properly implemented
 in the LSST stack. 
 
-
-\subsection{The Transient and False Positive Rates in DECam Images} 
 
 A histogram of the number of sources detected in difference images, as a function
 of SNR computed using forced photometry measurements, is shown in the right panel 
@@ -180,6 +179,8 @@ and results in numerous false positives mis-classified as $>5 \sigma$ detections
   \label{fig:snr_comparison}
 \end{figure}
 
+
+\subsection{The Transient and False Positive Rates in DECam Images} 
 
 Using the $>5\sigma$ cut based on SNR estimated using forced photometry, 
 the average number of positive DIASources is $\sim 1000$ deg$^{-2}$,
@@ -228,18 +229,17 @@ The LSST false positive rate due to background fluctuations is about twice
 as large as for DECam because of smaller pixels and better seeing. The scaling
 with pixel size and seeing for ``unexplained'' false positives is not obvious
 because their cause is unknown. For example, if they are a pixel-induced effect, 
-their rate should be scaled by the square of the ratio of angular pixel sizes, or
+their rate should be scaled up by the square of the ratio of angular pixel sizes, or
 a factor of 1.72. If they are instead dominated by true astrophysical transients,
 they should not be scaled at all. We adopt the most conservative option and 
 scale up the DECam rate for ``unexplained'' false positives to 396 deg$^{-2}$. 
 In addition, there will be 60 deg$^{-2}$ false positives due to background 
 fluctuations (referenced to the median seeing of 0.85 arcsec). 
 
-The total false positive rate anticipated for LSST is thus comparable to the rate of 
-astrophysical transients. Again, this estimate of the false positive rate is very conservative
-and it would not be very surprising if it turns out to be several times smaller. 
-
-
+The total false positive rate of $\sim450$ deg$^{-2}$ anticipated for LSST is thus
+comparable to the rate of astrophysical transients. Again, this estimate of the false
+positive rate is very conservative and it would not be very surprising if it turns out 
+to be several times smaller. 
 
 \subsection{Spatially Correlated Transients} 
 
