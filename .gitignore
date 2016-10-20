@@ -22,3 +22,5 @@
 *.brf
 #Ipython Notebook
 .ipynb_checkpoints
+.DS_Store
+neo_capabilities.pdf
