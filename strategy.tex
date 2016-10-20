@@ -1,30 +1,30 @@
-\section{LSST Strategy for Discovering Solar System Objects} 
+\section{LSST Strategy for Discovering Solar System Objects}
 
 We briefly describe the LSST system design and observing strategy, and discuss in more
-detail image processing and moving object detection. 
+detail image processing and moving object detection.
 
-\subsection{A Brief Overview of LSST  Design} 
+\subsection{A Brief Overview of LSST  Design}
 
 LSST will be a large, wide-field ground-based optical telescope system
 designed to obtain multiple images covering the sky that is visible
 from Cerro Pach\'{o}n in Northern Chile. The current baseline design,
 with an 8.4m (6.7m effective) primary mirror, a 9.6 deg$^2$ field of
 view, and a 3.2 Gigapixel camera, will allow about 10,000 square
-degrees of sky to be covered every night, with typical 5$\sigma$ depth 
-for point sources of $r\sim24.5$ (AB). The system is designed to yield 
-high image quality (the median delivered seeing in the $r$ band of 
-about 0.8 arcsec) as well as superb astrometric  and photometric 
+degrees of sky to be covered every night, with typical 5$\sigma$ depth
+for point sources of $r\sim24.5$ (AB). The system is designed to yield
+high image quality (the median delivered seeing in the $r$ band of
+about 0.8 arcsec) as well as superb astrometric  and photometric
 accuracy\footnote{For detailed specifications, please see the LSST
 Science Requirements Document, http://ls.st/srd}. The total survey
-area will include $\sim$30,000 deg$^2$ with $\delta<+34.5^\circ$, and 
-will be imaged multiple times in six bands, $ugrizy$, covering the 
-wavelength range 320--1050 nm. The project is scheduled to  begin the 
-regular survey operations at the start of next decade. 
+area will include $\sim$30,000 deg$^2$ with $\delta<+34.5^\circ$, and
+will be imaged multiple times in six bands, $ugrizy$, covering the
+wavelength range 320--1050 nm. The project is scheduled to  begin the
+regular survey operations at the start of next decade.
 
-LSST will be operated in a fully automated survey mode. About 90\% of the 
-observing time will be devoted to a deep-wide-fast survey mode which will 
-uniformly observe a 18,000 deg$^2$ region about 1000 times (summed over 
-all six bands) during the anticipated 10 years of operations, and yield a coadded map 
+LSST will be operated in a fully automated survey mode. About 90\% of the
+observing time will be devoted to a deep-wide-fast survey mode which will
+uniformly observe a 18,000 deg$^2$ region about 1000 times (summed over
+all six bands) during the anticipated 10 years of operations, and yield a coadded map
 to $r\sim27.5$. These data will result in catalogs including about
 $40$ billion stars and galaxies, that will serve the majority of the
 primary science programs. The remaining 10\% of the observing time
@@ -33,10 +33,10 @@ time domain survey\footnote{Informally known as ``Deep Drilling Fields".}.
 
 
 
-\subsection{LSST Observing Strategy} 
+\subsection{LSST Observing Strategy}
 
 As designed and funded (by the U.S National Science Foundation and
-Department of Energy), LSST is primarily a science-driven mission. 
+Department of Energy), LSST is primarily a science-driven mission.
 The LSST is designed to achieve goals set by four main science themes:
 \begin{enumerate}
 \item Probing Dark Energy and Dark Matter;
@@ -44,122 +44,120 @@ The LSST is designed to achieve goals set by four main science themes:
 \item Exploring the Transient Optical Sky;
 \item Mapping the Milky Way.
 \end{enumerate}
-Each of these four themes itself encompasses a variety of analyses, with 
-varying sensitivity to instrumental and system parameters. These themes 
-fully exercise the technical capabilities of the system, such as photometric 
-and astrometric accuracy and image quality. 
+Each of these four themes itself encompasses a variety of analyses, with
+varying sensitivity to instrumental and system parameters. These themes
+fully exercise the technical capabilities of the system, such as photometric
+and astrometric accuracy and image quality.
 
-The current baseline survey strategy is planned to maximize the overall science returns, including 
-Solar System science, rather than $H<22$ NEO/PHA discovery completeness (though the 
-two goals are highly interrelated). Discovering and linking objects in the Solar System 
-moving with a wide range of apparent velocities (from several degrees per day for 
-NEOs to a few arc seconds per day for the most distant TNOs) places strong 
-constraints on the cadence of observations. The baseline strategy requires closely 
+The current baseline survey strategy is planned to maximize the overall science returns, including
+Solar System science, rather than $H<22$ NEO/PHA discovery completeness (though the
+two goals are highly interrelated). Discovering and linking objects in the Solar System
+moving with a wide range of apparent velocities (from several degrees per day for
+NEOs to a few arc seconds per day for the most distant TNOs) places strong
+constraints on the cadence of observations. The baseline strategy requires closely
 spaced pairs of observations, two or preferably three times per lunation. The visit
-exposure time is set to 30 seconds to minimize the effects of trailing for the majority of 
-moving objects. The images are well sampled to enable accurate astrometry, with 
+exposure time is set to 30 seconds to minimize the effects of trailing for the majority of
+moving objects. The images are well sampled to enable accurate astrometry, with
 anticipated absolute accuracy of at least 0.1 arcsec (and possibly an order of magnitude
-better when calibrated with upcoming Gaia's dataset, give ref. XXX). 
+better when calibrated with upcoming Gaia's dataset, give ref. XXX).
 
-LSST observations can be simulated using the LSST Operations Simulator tool (OpSim, XXX give
-reference here). OpSim runs a survey simulation with given science-driven desirables, 
-a software model of the telescope and its control system, and models of weather and other 
-environmental variables. The output of such a simulation is an ``observation history'', which 
-is a record of times, pointings, used filter, and associated environmental data and telescope  
-activities throughout the simulated survey.  This history can be examined using the LSST 
-Metrics Analysis Framework tool (MAF, give ref XXX) to assess  
-the efficacy of the simulated survey for any particular science goal or 
-interest\footnote{For examples of such analysis, see http://ls.st/xpr}. 
+LSST observations can be simulated using the LSST Operations Simulator tool
+\citep[OpSim,][]{delgado14}. OpSim runs a survey simulation with given
+science-driven desirables,  a software model of the telescope and its control
+system, and models of weather and other  environmental variables. The output of
+such a simulation is an ``observation history'', which  is a record of times,
+pointings, used filter, and associated environmental data and telescope
+activities throughout the simulated survey.  This history can be examined using
+the LSST  Metrics Analysis Framework tool \citep[MAF,][]{jones14} to assess the
+efficacy of the simulated survey for any particular science goal or
+interest\footnote{For examples of such analysis, see http://ls.st/xpr}.
 
 
 \subsection{LSST Baseline Survey Strategy}
 
-As the system understanding improves, the baseline survey strategy and the telescope model 
-are updated, generally on a yearly schedule (XXX add official opsim reference here). The current 
+As the system understanding improves, the baseline survey strategy and the telescope model
+are updated, generally on a yearly schedule. The current
 reference baseline survey is known as {\it minion\_1016}. It includes 2.4
-million visits collected over 10 years, with 85\% of the observing time spent on the 
+million visits collected over 10 years, with 85\% of the observing time spent on the
 main survey and the rest on various specialized programs. The median number of visits
 {\it per night} is 816, with 3,026 observing nights. The median airmass is 1.23 (the
-minimum attainable altitude for the LSST telescope is 20 deg.). In the $r$ band, the median 
-seeing (FWHM) is 0.81 arcsec, and the median $5\sigma$ depth for point sources is 24.16 
-(using the best current estimate of the fiducial depth at airmass of one, $m_5(r)$=24.39). 
+minimum attainable altitude for the LSST telescope is 20 deg.). In the $r$ band, the median
+seeing (FWHM) is 0.81 arcsec, and the median $5\sigma$ depth for point sources is 24.16
+(using the best current estimate of the fiducial depth at airmass of one, $m_5(r)$=24.39).
 
 There are a few known problems with this simulation, including twilight sky brightness
 estimates that are too bright, the moon avoidance that is not as aggressive as it could be,
 and observations that are biased towards west, away from the meridian. The implied impact
-of these shortcomings on NEO completeness estimates is a few percent (the performance 
-of this simulated cadence in NEO context is discussed in detail in \S5). An improved simulation, 
-that will presumably rectify these problems, will become available by the end of 2017. 
+of these shortcomings on NEO completeness estimates is a few percent (the performance
+of this simulated cadence in NEO context is discussed in detail in \S5). An improved simulation,
+that will presumably rectify these problems, will become available by the end of 2017.
 
 
-\subsection{Overview of LSST  Data Management and Image Processing} 
+\subsection{Overview of LSST  Data Management and Image Processing}
 
 The images acquired by the LSST Camera will be processed by LSST Data Management
 software \citep{juric15} to a) detect and characterize imaged
 astrophysical sources and b) detect and characterize temporal changes
 in the LSST-observed universe. The results of that processing will be
-reduced images, catalogs of detected objects and their measured properties, and 
-prompt alerts to ``events'' -- changes in astrophysical scenery discovered by differencing 
+reduced images, catalogs of detected objects and their measured properties, and
+prompt alerts to ``events'' -- changes in astrophysical scenery discovered by differencing
 incoming images against older, deeper, images of the sky in the same direction ({\em
 templates}). More details about the main algorithms and pipeline design are available
-in Appendix~\ref{sec:AppA}. 
+in Appendix~\ref{sec:AppA}.
 
-LSST will use two methods to detect moving objects in difference images: 
+LSST will use two methods to detect moving objects in difference images:
 \begin{enumerate}
 \item Detecting trailed motion on the sky: objects trailed by more
   than 2 PSF widths (corresponding to motion faster than about 1
   deg/day) will be easily detectable as trailed.  Two trailed
   detections within 20--60 minutes in a single night will be
   sufficient to identify an object as an NEO candidate,
-\item Inter-night linking of pairs of detections from the same night: this technique will 
-  recover objects moving too slow to be measurably elongated in a single exposure. 
-\end{enumerate} 
-
-We note that sources detected in difference images (DIASources in LSST parlance, see Appendix~\ref{sec:AppA})
-will also include false detections, colloquially known as {\it false positives}. 
-In addition to false positives due to instrumental artifacts and software glitches, 
-in this context they will also include detections of true astrophysical transients 
-(e.g. gamma-ray burst afterglow) that will not be associated with static sources
-(e.g. stars and galaxies). Estimates of expected false positive rates are discussed
-in \S\ref{sec:imDiff}. 
-
-
-
-\subsection{The Basic Strategy for Linking Detections into Orbits} 
-
-The LSST strategy for linking detections into orbits assumes the following main steps: 
-\begin{enumerate}
-\item Detections in difference images (obtained during the same night), that do not
-         have a nearby static object (e.g. variable stars) within a small exclusion radius 
-         (a fraction of an arcsec), are linked into tracklets. There will be of the order 
-         a million tracklets per observing night (see \S\ref{sec:tracklets}). 
-\item At least three tracklets obtained in a 15-30 day wide window are linked into 
-         candidate tracks, using kd-trees and pre-filtering steps based on tracklets' positions
-         and motion vectors (see \S\ref{sec:tracks}). These pre-filtering steps result in 
-         about the same number of false tracks as true tracks on the Ecliptic (of the order 
-         a million), with the completeness depending on population (e.g. main-belts 
-         asteroids vs. NEOs) and chosen tunable pre-filtering parameters (generally well above 90\%). 
-\item Candidate tracks are then filtered further (pruned from false tracks) using the initial orbit 
-         determination (IOD) and measurement uncertainties for the positions of all six 
-         detections. Given typical astrometric errors (0.15 arcsec for the faintest objects, 
-         see \S\ref{sec:astromerrors})
-         and a fiducial tracklet density of 450 deg$^{-2}$, the probability of a chance alignment 
-         of a {\it single} false detection within $5\sigma$ astrometric tolerance from a given 
-         trajectory is only about 10$^{-4}$. For a trajectory constrained by 3 detections, the 
-         probability that 3 more detections will line up by chance is thus about 10$^{-12}$. Hence, 
-         the number of false tracks which could pass IOD-based filtering is negligible, as well as 
-         the incompleteness induced by this step. Indeed, the only reason for track pre-filtering 
-         in the second step is to decrease the number of candidate tracks that are processed
-         by the more computationally expensive IOD. 
+\item Inter-night linking of pairs of detections from the same night: this technique will
+  recover objects moving too slow to be measurably elongated in a single exposure.
 \end{enumerate}
 
-False positives, be it false detections, false tracklets or false tracks, are assumed not be 
-an issue because IOD will efficiently and reliably filter out false tracks due to high-accuracy 
-astrometry and well-understood simple Keplerian model predictions. Therefore, the 
+We note that sources detected in difference images (DIASources in LSST parlance, see Appendix~\ref{sec:AppA})
+will also include false detections, colloquially known as {\it false positives}.
+In addition to false positives due to instrumental artifacts and software glitches,
+in this context they will also include detections of true astrophysical transients
+(e.g. gamma-ray burst afterglow) that will not be associated with static sources
+(e.g. stars and galaxies). Estimates of expected false positive rates are discussed
+in \S\ref{sec:imDiff}.
+
+
+
+\subsection{The Basic Strategy for Linking Detections into Orbits}
+
+The LSST strategy for linking detections into orbits assumes the following main steps:
+\begin{enumerate}
+\item Detections in difference images (obtained during the same night), that do not
+         have a nearby static object (e.g. variable stars) within a small exclusion radius
+         (a fraction of an arcsec), are linked into tracklets. There will be of the order
+         a million tracklets per observing night (see \S\ref{sec:tracklets}).
+\item At least three tracklets obtained in a 15-30 day wide window are linked into
+         candidate tracks, using kd-trees and pre-filtering steps based on tracklets' positions
+         and motion vectors (see \S\ref{sec:tracks}). These pre-filtering steps result in
+         about the same number of false tracks as true tracks on the Ecliptic (of the order
+         a million), with the completeness depending on population (e.g. main-belts
+         asteroids vs. NEOs) and chosen tunable pre-filtering parameters (generally well above 90\%).
+\item Candidate tracks are then filtered further (pruned from false tracks) using the initial orbit
+         determination (IOD) and measurement uncertainties for the positions of all six
+         detections. Given typical astrometric errors (0.15 arcsec for the faintest objects,
+         see \S\ref{sec:astromerrors})
+         and a fiducial tracklet density of 450 deg$^{-2}$, the probability of a chance alignment
+         of a {\it single} false detection within $5\sigma$ astrometric tolerance from a given
+         trajectory is only about 10$^{-4}$. For a trajectory constrained by 3 detections, the
+         probability that 3 more detections will line up by chance is thus about 10$^{-12}$. Hence,
+         the number of false tracks which could pass IOD-based filtering is negligible, as well as
+         the incompleteness induced by this step. Indeed, the only reason for track pre-filtering
+         in the second step is to decrease the number of candidate tracks that are processed
+         by the more computationally expensive IOD.
+\end{enumerate}
+
+False positives, be it false detections, false tracklets or false tracks, are assumed not be
+an issue because IOD will efficiently and reliably filter out false tracks due to high-accuracy
+astrometry and well-understood simple Keplerian model predictions. Therefore, the
 essential question is whether the resulting number of false tracks, and the corresponding
 IOD step, can be handled with available computing resources. As discussed in detail in \S\ref{sec:mops}
-and in Appendix~\ref{sec:appMOPS}, even with computing resources quite modest compared to the 
-sizing of LSST data processing system, the handling of the three steps above is not an issue. 
-
-
-
+and in Appendix~\ref{sec:appMOPS}, even with computing resources quite modest compared to the
+sizing of LSST data processing system, the handling of the three steps above is not an issue.

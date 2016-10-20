@@ -1,91 +1,89 @@
 
 \section{Introduction}
 
-The small-body populations in the Solar System, such as asteroids, trans-Neptunian objects (TNOs) 
-and comets, are remnants of its early assembly. Collisions in the main asteroid belt between Mars and 
-Jupiter still occur, and occasionally eject objects on orbits that may place them on a collision course 
-with Earth. About 20\% of this near-Earth Object (NEO) population, the so-called potentially hazardous 
-asteroids (PHAs), are in orbits that pass sufficiently close to Earth's orbit, to within 0.05 AU, that 
-perturbations with time scales of a century can lead to intersections and the possibility of collision. 
+The small-body populations in the Solar System, such as asteroids, trans-Neptunian objects (TNOs)
+and comets, are remnants of its early assembly. Collisions in the main asteroid belt between Mars and
+Jupiter still occur, and occasionally eject objects on orbits that may place them on a collision course
+with Earth. About 20\% of this near-Earth Object (NEO) population, the so-called potentially hazardous
+asteroids (PHAs), are in orbits that pass sufficiently close to Earth's orbit, to within 0.05 AU, that
+perturbations with time scales of a century can lead to intersections and the possibility of collision.
 In order to improve quantitative understanding of this hazard, in December 2005 the U.S. Congress
-directed\footnote{For details see XXX find the link to the Law.} NASA to implement a NEO survey that 
-would catalog 90\% of NEOs with diameters larger than 140 meters by 2020 (known as the George 
-E. Brown, Jr. mandate). It is estimated that there are about 20,000 such objects (XXX need reference!). 
-For a compendium of additional information about NEOs and PHAs and an up-to-date summary of 
-discovery progress, see NASA's NEO webpage\footnote{http://neo.jpl.nasa.gov/neo/}. 
+directed\footnote{National Aeronautics and Space Administration Authorization Act of 2005 (Public Law 109-155), January 4, 2005, Section 321, George E. Brown, Jr. Near-Earth Object Survey Act} NASA to implement a NEO survey that
+would catalog 90\% of NEOs with diameters larger than 140 meters by 2020 (known as the George
+E. Brown, Jr. mandate). It is estimated that there are about 20,000 such objects (XXX need reference!).
+For a compendium of additional information about NEOs and PHAs and an up-to-date summary of
+discovery progress, see NASA's NEO webpage\footnote{http://neo.jpl.nasa.gov/neo/}.
 
-The completeness level set by the Congressional mandate could be accomplished with a 10-meter-class 
-ground-based optical telescope, equipped with a multi-gigapixel camera and a sophisticated and robust data 
-processing system (see NASA-commissioned reports by Stokes et al. 2003 and Shapiro et al. 2010 
-XXX add to bib file - details in GMS2016 paper). The Large Synoptic Survey Telescope\footnote{www.lsst.org} (LSST), currently being 
-constructed, is such a system. A concise LSST system description, discussion of science drivers, and other 
-information, are available in \cite{LSSToverview}. The LSST baseline strategy for discovering Solar System 
-objects is predicated on two observations of the same field per night, spaced by a few tens of minutes, and 
+The completeness level set by the Congressional mandate could be accomplished with a 10-meter-class
+ground-based optical telescope, equipped with a multi-gigapixel camera and a sophisticated and robust data
+processing system \citep[see NASA-commissioned reports by ][]{stokes03,shapiro10}. The Large Synoptic Survey Telescope\footnote{www.lsst.org} (LSST), currently being
+constructed, is such a system. A concise LSST system description, discussion of science drivers, and other
+information, are available in \cite{LSSToverview}. The LSST baseline strategy for discovering Solar System
+objects is predicated on two observations of the same field per night, spaced by a few tens of minutes, and
 a revisit of the same field with another pair of observations within a few days. The main reason for two
-observations per night is to help association of observations of the same object from different nights, 
-as follows. Typical distance between two nearby asteroids on the Ecliptic, at the faint fluxes probed by 
+observations per night is to help association of observations of the same object from different nights,
+as follows. Typical distance between two nearby asteroids on the Ecliptic, at the faint fluxes probed by
 LSST, is a few arcminutes (counts are dominated by main-belt asteroids). Typical asteroid motion
-during several days is larger (of the order a degree or more) and thus, without additional information, 
-detections of individual objects are ``scrambled''. However, with two detections per night, the motion 
+during several days is larger (of the order a degree or more) and thus, without additional information,
+detections of individual objects are ``scrambled''. However, with two detections per night, the motion
 vector can be estimated. The motion vector makes the linking problem much easier because
 positions from one night can be approximately extrapolated to future (or past) nights. The predicted
-position's uncertainty is typically of the order of several arcminutes, rather than a degree, which effectively 
-``de-scrambles'' detections from different nights (for a detailed discussion of this algorithm, see 
-Appendix~\ref{sec:appMOPS}). 
+position's uncertainty is typically of the order of several arcminutes, rather than a degree, which effectively
+``de-scrambles'' detections from different nights (for a detailed discussion of this algorithm, see
+Appendix~\ref{sec:appMOPS}).
 
-Early simulations of LSST performance presented by \cite{IvezicNEO2007} showed that the 10-year baseline 
-cadence would result in 75\% completeness for PHAs greater than 140 m (more  precisely, for PHAs with 
-$H<22$; see \S\ref{sec:GMS} for further discussion). They also suggested that with additional optimization of the 
+Early simulations of LSST performance presented by \cite{IvezicNEO2007} showed that the 10-year baseline
+cadence would result in 75\% completeness for PHAs greater than 140 m (more  precisely, for PHAs with
+$H<22$; see \S\ref{sec:GMS} for further discussion). They also suggested that with additional optimization of the
 observing cadence, LSST could achieve 90\% completeness. An example of such an optimization was discussed
-by \cite{LSSToverview} who reported that, to reach 90\% completeness, about 15\% of observing time would 
-have to be dedicated to NEOs, and the survey would have to run for 12 years.  
-%% From the overview paper: 
+by \cite{LSSToverview} who reported that, to reach 90\% completeness, about 15\% of observing time would
+have to be dedicated to NEOs, and the survey would have to run for 12 years.
+%% From the overview paper:
 %% - the LSST baseline cadence provides orbits for 82% of PHAs larger than 140 meters after 10 years of operations
 %% - 84% completeness with minor changes to the cadence (5% of time for NEO-optimized observations)
 %% - 90% completeness with major changes to the cadence (15% of time for NEO-optimized observations and 12 years)
 The latest LSST simulation results, presented in \cite{JJI2016}, yielded a completeness of $\sim$72\% for
 PHAs with $H<22$, using the current 10-year baseline survey. The minor differences in reported completeness
-compared to older LSST studies are attributable to differences in simulated NEO populations and other modeling 
-details (such as improved hardware understanding). 
+compared to older LSST studies are attributable to differences in simulated NEO populations and other modeling
+details (such as improved hardware understanding).
 
 These completeness estimates are based on an implicit assumption that 3 pairs of observations
-obtained within a 15-30 day wide window are sufficient to recognize that these observations belong 
-to the same object, and to estimate its orbital parameters (the same criterion has been used in NASA 
-studies\footnote{See http://neo.jpl.nasa.gov/neo/report2007.html}). 
-This so-called linking of individual detections into plausible orbital tracks will be performed using a 
-special-purpose code named Moving Object Processing Software (MOPS). The MOPS software system and its 
-algorithms are significantly more advanced than anything previously fielded for this purpose. 
+obtained within a 15-30 day wide window are sufficient to recognize that these observations belong
+to the same object, and to estimate its orbital parameters (the same criterion has been used in NASA
+studies\footnote{See http://neo.jpl.nasa.gov/neo/report2007.html}).
+This so-called linking of individual detections into plausible orbital tracks will be performed using a
+special-purpose code named Moving Object Processing Software (MOPS). The MOPS software system and its
+algorithms are significantly more advanced than anything previously fielded for this purpose.
 
-The described LSST strategy for discovering moving objects has been questioned (e.g., \citealt{GMS2016}) on 
+The described LSST strategy for discovering moving objects has been questioned (e.g., \citealt{GMS2016}) on
 two grounds:
 \begin{itemize}
-\item A large number of false detections due to problems with image differencing software may 
+\item A large number of false detections due to problems with image differencing software may
 make linking problem prohibitively hard for MOPS. In particular, this objection is motivated by the experience
-from extant surveys, such as Pan-STARRS and the Catalina Sky Survey. 
+from extant surveys, such as Pan-STARRS and the Catalina Sky Survey.
 \item Modifications of LSST baseline cadence, including image depth, sky coverage and cadence,
 required to reach 90\% completeness level, have not yet been explicitly demonstrated using detailed
-operations simulations, and made available to the community. 
-\end{itemize} 
-We aim to address these critiques here: the two major questions addressed by our study can be informally 
-stated as ``Will MOPS work?'' and ``If MOPS works, what fraction of  NEOs will LSST discover?''. 
+operations simulations, and made available to the community.
+\end{itemize}
+We aim to address these critiques here: the two major questions addressed by our study can be informally
+stated as ``Will MOPS work?'' and ``If MOPS works, what fraction of  NEOs will LSST discover?''.
 
 We use a combination of sophisticated simulations and real datasets to address these questions.
-The main analysis components presented here include: 
+The main analysis components presented here include:
 \begin{enumerate}
-\item Analysis of the performance of prototype LSST image differencing software, with emphasis on the rate and 
-    properties of false detections (so-called ``false positives''), using DECam (XXX add ref.) imaging data. 
+\item Analysis of the performance of prototype LSST image differencing software, with emphasis on the rate and
+    properties of false detections (so-called ``false positives''), using DECam (XXX add ref.) imaging data.
 \item Analysis of the linking of asteroid detections in the presence of a large number of false positives, using MOPS
-         and simulated observations. 
+         and simulated observations.
 \item Analysis of a large number of modified observing cadence simulations, coupled with NEO population
-          models, to forecast discovery rates. 
-\end{enumerate} 
+          models, to forecast discovery rates.
+\end{enumerate}
 
-We demonstrate that i) MOPS can cope with anticipated false detection rates 
+We demonstrate that i) MOPS can cope with anticipated false detection rates
 in LSST difference images, and that ii) NEO discovery performance of the LSST baseline cadence
-can be appreciably boosted by adequate modifications of the observing strategy. 
-In \S2 we provide a brief overview of LSST and its strategy for discovering moving Solar 
-System objects. We discuss the performance of prototype LSST image differencing pipeline  
-in \S3, and MOPS performance in \S4. Modifications of the baseline cadence designed to 
+can be appreciably boosted by adequate modifications of the observing strategy.
+In \S2 we provide a brief overview of LSST and its strategy for discovering moving Solar
+System objects. We discuss the performance of prototype LSST image differencing pipeline
+in \S3, and MOPS performance in \S4. Modifications of the baseline cadence designed to
 boost NEO/PHA completeness are described in \S5, and our results are summarized and
-discussed in \S6. 
-
+discussed in \S6.
