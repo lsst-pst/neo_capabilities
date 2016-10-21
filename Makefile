@@ -14,7 +14,7 @@ NAME    = neo_capabilities
 DOC_OUT = ${NAME}.${SUFF}
 
 DEPENDENCIES = LSSToverview.tex appendix1.tex appendixMOPS.tex appendix_fallback_strategies.tex discussion.tex
-DEPENDENCIES := image_differencing.tex intro.tex mops.tex neo_capabilities.tex opsim.tex strategy.tex
+DEPENDENCIES += image_differencing.tex intro.tex mops.tex neo_capabilities.tex opsim.tex strategy.tex
 
 default: ${DOC_OUT}
 
