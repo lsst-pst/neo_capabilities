@@ -60,7 +60,7 @@ of times (typically every 2 hours), and then interpolated to the exact times of 
 
 \subsubsection{Survey Cadence Modeling}
 
-The LSST Operations Simulation (OpSim, XXX give reference here) is a python software package that generates a realistic pointing history, with the time, filter, location, astronomical conditions, weather conditions, and predicted point-source $5\sigma$ limiting magnitude, for each LSST visit
+The LSST Operations Simulation \citep[OpSim,][]{delgado14} is a python software package that generates a realistic pointing history, with the time, filter, location, astronomical conditions, weather conditions, and predicted point-source $5\sigma$ limiting magnitude, for each LSST visit
 for, typically, ten years. This pointing history is generated using weather data (cloudiness and seeing) from the Cerro Pachon site and a high-fidelity model of the telescope itself (including slew and settle time and dome movement, for example), combined with a parameterized set of observing proposals that determine how the scheduling algorithm attempts to gather observations. By configuring OpSim with different parameters for the observing proposals, we can generate a series of simulated surveys which prioritize different science goals. The LSST baseline survey and its modifications designed to enhance the PHA completeness are described in detail
 in \S\ref{sec:surveys} below.
 
@@ -68,7 +68,7 @@ in \S\ref{sec:surveys} below.
 \subsubsection{Asteroid Optical Flux Modeling}
 
 Given $H$ magnitude for an object, its apparent magnitude in Johnson's $V$ band can be easily computed
-given the positions of the object, the Sun and the observer (in our case Earth), see e.g. Juri\'{c} et al. 2002 XXX add ref.).
+given the positions of the object, the Sun and the observer (e.g. \citealt{juric02}).
 Magnitudes, or fluxes, in any other optical and near-IR band (in case of LSST, $u$, $g$, $r$, $i$, $z$, and $y$)
 can be computed from $V$ magnitude by specifying a spectrum or relevant colors for each object. We have
 assumed that our entire PHA population has the same colors as C-type main-belt asteroids, with resulting

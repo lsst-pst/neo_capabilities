@@ -2,7 +2,7 @@
 
 LSST will detect motion and flux variability by differencing each incoming image
 against a deep template (built by combining multiple images of the same region).
-Sources in difference images, called DIASources, will be detected at a signal-to-noise
+Sources in difference images, called \DIASources, will be detected at a signal-to-noise
 ratio (SNR) threshold of $\nu=5$ (for more details, please see Appendix A). Up to about 1,000 deg$^{-2}$
 astrophysical, real, detections (e.g. variable stars) are expected in LSST images, including
 up to about 500 asteroids per square degree on the Ecliptic. In addition to real detections,
@@ -39,7 +39,7 @@ positives; for example, compare Fig.~1 in \cite{goldstein15} to Fig.~17 in \cite
 Here we summarize an analysis of image differencing performance based on DECam
 data and difference images produced and processed using prototype LSST
 software\footnote{An extended report is available as
-http://dmtn-006.lsst.io/en/latest/}. This analysis demonstrates that the false
+\url{http://dmtn-006.lsst.io/en/latest/}}. This analysis demonstrates that the false
 positive rate anticipated for LSST is significantly below the threshold for
 successful deployment of MOPS, as will be discussed in Section~\ref{sec:mops}.
 
@@ -70,15 +70,16 @@ rather than discover all possible transients in this dataset.
 
 The LSST prototype image differencing and analysis code largely derives from the
 HOTPANTS package \citep{becker15}, and was used for surveys such as SuperMACHO
-and ESSENCE. While this software is very functional as-is, it is expected that the
-ultimate LSST pipeline will include improved methods for handling observations
-at high airmass and the effects of differential chromatic refraction due to
-Earth's atmosphere. Nevertheless, in this work we conservatively assume that the
-pipeline used for LSST will have the same performance as the current code.
+\citep{becker05} and ESSENCE \citep{miknaitis07}. While this software is very
+functional as-is, it is expected that the ultimate LSST pipeline will include
+improved methods for handling observations at high airmass and the effects of
+differential chromatic refraction due to Earth's atmosphere. Nevertheless, in
+this work we conservatively assume that the pipeline used for LSST will have the
+same performance as the current code.
 
-After producing difference images, we detect sources (DIASources) and measure
+After producing difference images, we detect sources (\DIASources) and measure
 their properties. In addition, we also perform forced photometry (flux measurements
-at the positions of detected DIASources) on individual single-epoch input images
+at the positions of detected \DIASources) on individual single-epoch input images
 using the current versions of LSST pipelines \citep{juric15}.
 
 Before presenting the results of this analysis, we summarize the expected behavior
@@ -90,10 +91,7 @@ of false positives due to background fluctuations.
 Due to background fluctuations around its mean, it is possible to get false
 detections even at a high SNR threshold. The number of
 such detections, as a function of the threshold SNR, the number of pixels and
-seeing, can be computed using the statistics of Gaussian random fields (e.g.,
-N. Kaiser 2004, ``The Likelihood of Point Sources in Pixellated Images'', unpublished,
-give a link, XXX).
-
+seeing, can be computed using the statistics of Gaussian random fields.
 For an image with a Gaussian background noise, convolved with a Gaussian point
 spread function (PSF) with width $\sigma_g$ (in pixels), the number of peaks, $N$, above a
 given SNR threshold, $\nu$, is given by
@@ -103,7 +101,7 @@ N(>\nu)  = \frac{n_{row}*n_{col}}{2^{5/2} \, \pi^{3/2} \, \sigma_g^2} \, \nu \, 
 \end{equation}
 where $n_{row}$ and $n_{col}$ are the number of pixel rows and columns in the image.
 This expression was verified empirically by LSST data management team using
-image simulations\footnote{See https://github.com/lsst/W13report}.
+image simulations\footnote{See \url{https://github.com/lsst/W13report}}.
 For 4k by 4k LSST sensors the pixel size is 0.2 arcsec, and for a nominal seeing
 of 0.85 arcsec and $\nu=5$, $N(>\nu) = 59$ deg$^{-2}$.
 
@@ -148,14 +146,14 @@ this relationship between pixels is constant across an image (Paul Price, priv. 
 This method avoids the creation of the full $N_{\rm pixels}$ by $N_{\rm pixels}$
 covariance matrix, which is impractically large and mostly empty.
 
-In the interim, we have mitigated this problem by utilizing forced photometry of DIASources
+In the interim, we have mitigated this problem by utilizing forced photometry of \DIASources
 on individual images (that is, before convolution to match their PSFs). This
 produces both flux measurements and associated uncertainties which are not
 affected by covariance, enabling us to accurately set a SNR threshold
-that recognizes and rejects all DIAsources with $\nu < 5$. This mitigation step
+that recognizes and rejects all \DIASources with $\nu < 5$. This mitigation step
 will be unnecessary once the image covariance tracking is properly implemented
 in the LSST stack. Alternative solutions such as image
-``decorrelation''\footnote{https://dmtn-021.lsst.io/} or the \citet{zackay}
+``decorrelation''\footnote{\url{https://dmtn-021.lsst.io/}} or the \citet{zackay}
 image differencing algorithm would also alleviate the covariance problem, and
 tests of these methods are ongoing.
 
@@ -186,7 +184,7 @@ mis-classified as $>5 \sigma$ detections.
 \subsection{The Transient and False Positive Rates in DECam Images}
 
 Using the $>5\sigma$ cut based on SNR estimated using forced photometry,
-the average number of positive DIASources is $\sim 1000$ deg$^{-2}$,
+the average number of positive \DIASources is $\sim 1000$ deg$^{-2}$,
 with some fields having as few as $500$ deg$^{-2}$. A large fraction of
 these detections are the result of stars that have been poorly-subtracted and
 left significant residuals in the difference image. It is a common problem for
@@ -195,14 +193,14 @@ excursions, and these images are no exception. Because the focus of this work
 is on detecting moving objects rather than variable stars or transients, we have
 not attempted to correct these subtraction artifacts. Instead, we simply exclude
 difference image detections which are coincident with significant detections in
-both science and template images -- that is, we exclude all DIASources that
+both science and template images -- that is, we exclude all \DIASources that
 overlap with a static source (of course, some may be truly variable sources).
 The area lost due to this masking is less than $1\%$ of the total sky. Again, this
 is not the intended behavior of LSST during production, but instead a temporary
 expedient we can use for conservatively estimating the system's performance.
 One could view this step as a ``poor man's'' machine learning step.
 
-After excluding all DIASources associated with stationary objects, the
+After excluding all \DIASources associated with stationary objects, the
 remaining candidate moving object detections number on average $\sim 350$
 deg$^{-2}$. This sample includes asteroids, false positives, and possibly some
 true astrophysical transients that are not associated with stationary objects
@@ -247,11 +245,11 @@ to be several times smaller.
 \subsection{Spatially Correlated Transients}
 
 
-We also investigated whether DIAsources from different difference images are correlated
+We also investigated whether \DIASources from different difference images are correlated
 in focal plane coordinates. A large number of such correlated detections could result in
 a substantial increase of tracklets and tracks. We analyzed 4 visits with 60 CCDs each,
-and found 24 DIAsources that match to within two pixels. We did not find any correlation at
-larger radii. These 24 DIASources show tendencies for certain CCDs but the counts are too
+and found 24 \DIASources that match to within two pixels. We did not find any correlation at
+larger radii. These 24 \DIASources show tendencies for certain CCDs but the counts are too
 low to make a robust conclusion. Visual inspection shows that many are near interpolated
 parts of an image, though for some the cause is unclear.  The implied density of correlated
-DIASources is about 2.3 deg$^{-2}$, rendering this effect unimportant.
+\DIASources is about 2.3 deg$^{-2}$, rendering this effect unimportant.

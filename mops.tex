@@ -9,11 +9,11 @@ and LSST, and is described in \cite{denneau13}. MOPS employs a two-step processi
 from a given night are connected into {\it tracklets}, and then at least three tracklets are associated into a
 candidate {\it track}. Realistic MOPS simulations show high linking efficiency ($>$99\%; \citealt{denneau13})
 across all classes of Solar System objects. The core algorithmic components of MOPS are {\it findTracklets} and
-{\it linkTracklets} kd-tree algorithms by Kubica (2005, XXX, ref). {\it findTracklets} links DIASources from a single
+{\it linkTracklets} kd-tree algorithms by \citet{kubica07}. {\it findTracklets} links \DIASources from a single
 night to produce {\it tracklets}, and {\it linkTracklets} links tracklets from at least three nights to produce candidate
 {\it tracks} (assuming quadratic motion in each coordinate; the LSST version also accounts for topocentric
 corrections). Candidate tracks produced by MOPS are then filtered using initial orbital determination (IOD) step,
-which is executed using a stand-alone code (e.g. OrbFit Milani XXX; OpenOrb, Granvik XXX, give references).
+which is executed using a stand-alone code (e.g. OrbFit, \citealt{milani08}; OpenOrb, \citealt{OpenOrb2009}).
 
 Given empirically estimated false positive rates expected for LSST, discussed in the preceeding section,
 in this section we show that MOPS performance is already adequate - MOPS requires significantly less
@@ -28,9 +28,9 @@ rates of false tracklets and false tracks.
 
 As a part of the Final Design Review preparations, the LSST team has developed an enhanced prototype
 implementation of MOPS and analyzed its behavior. Here we summarize the main results of that work;
-a detailed report is publicly available\footnote{See http:/ls.st/LDM-156}.
+a detailed report is publicly available\footnote{See \url{http:/ls.st/LDM-156}}.
 
-Simulated DIASources were based on a Solar System model by Grav et al (2011, PASP, XXX add reference).
+Simulated \DIASources were based on a Solar System model by \citet{Grav2011}.
 The model includes about 11 million objects; about 9 million are main-belt asteroids. Observations span
 30 days and were selected from a simulated baseline cadence (at that time, the baseline simulation was
 OpSim3.61, which in this context is statistically the same as the current baseline cadence, {\it minion\_1016}).
@@ -108,8 +108,8 @@ the number of false tracks drops well below the number of true tracks.
 Given the modest computing resources used in MOPS tests described above, the runtime and memory
 usage results bode well for LSST processing. Assuming a 1000-core machine dedicated to LSST moving
 object processing (corresponding to about 1\% of the anticipated total LSST compute power at the
-National Center for Supercomputing Applications, XXX check this with K.T.), MOPS runtime for
-producing candidate tracks should not exceed an hour.
+National Center for Supercomputing Applications), MOPS runtime for producing
+candidate tracks should not exceed an hour.
 
 The IOD step can also be handled with anticipated resources. The number of available IOD computations
 for a system a compute system with $N_{core}$ cores and allocated runtime $T_{runtime}$ can be estimated
