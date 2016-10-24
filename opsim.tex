@@ -189,25 +189,34 @@ A series of additional OpSim simulated surveys were created with parameters inte
 jeopardize other LSST science goals. We consider the latter in order to assess what would be ultimate performance of an
 LSST-like system fully dedicated to NEO surveying.
 
-The first cadence change is simply to increase the number of visits requested for the NES proposal in $griz$, to increase the likelihood of discovering objects near the northern portion of the Ecliptic plane, and to extend the survey from 10 years to 15 years, increasing the discovery rate of PHAs with long synodic periods. Other proposals remain the same as in minion\_1016. Reprioritizing the NES relative to the WFD results in the WFD receiving 69\% (2,561,334 visits over 15 years) of the total visits and the NES receiving 24\%, compared to 85\% and 6\% respectively in the baseline strategy. The resulting simulated survey is astro\_lsst\_01\_1016.  We consider astro\_lsst\_01\_1016 as our 'baseline PHA' run, as it makes minimal changes to the overall survey strategy while attempting to be more PHA friendly.
+\textbf{Extra ecliptic spur visits:} The first cadence change is simply to increase the number of visits requested for the NES proposal in $griz$, to increase the likelihood of discovering objects near the northern portion of the Ecliptic plane, and to extend the survey from 10 years to 15 years, increasing the discovery rate of PHAs with long synodic periods. Other proposals remain the same as in minion\_1016. Reprioritizing the NES relative to the WFD results in the WFD receiving 69\% (2,561,334 visits over 15 years) of the total visits and the NES receiving 24\%, compared to 85\% and 6\% respectively in the baseline strategy. The resulting simulated survey is astro\_lsst\_01\_1016.  We consider astro\_lsst\_01\_1016 as our 'baseline PHA' run, as it makes minimal changes to the overall survey strategy while attempting to be more PHA friendly.
 
-The next change is to introduce an Ecliptic Band (EB) proposal, requesting observations with visit timing similar to the WFD in the $griz$ filters, but with field locations surrounding the Ecliptic Plane $\pm15^\circ$ and extending down to the WFD where the Ecliptic reaches its northernmost  range. This proposal replaces the NES proposal, and requests longer 60 second visits in order to reach deeper limiting magnitudes. Other proposals remain the same as in astro\_lsst\_01\_1016. With this reprioritization, the WFD receives 44\% (1,159,319) of the total visits while the EB receives 53\%; the simulated survey is astro\_lsst\_01\_1015.
+\textbf{Longer ecliptic visits:} This simulation introduce an Ecliptic Band (EB) proposal, requesting observations with visit timing similar to the WFD in the $griz$ filters, but with field locations surrounding the Ecliptic Plane $\pm15^\circ$ and extending down to the WFD where the Ecliptic reaches its northernmost  range. This proposal replaces the NES proposal, and requests longer 60 second visits in order to reach deeper limiting magnitudes. Other proposals remain the same as in astro\_lsst\_01\_1016. With this reprioritization, the WFD receives 44\% (1,159,319) of the total visits while the EB receives 53\%; the simulated survey is astro\_lsst\_01\_1015.
 
-An attempt at an aggressively NEO-optimized survey was also created, where modified versions of the EB and WFD proposals are used. The visit timing in each proposal is the same as the standard WFD visit timing (a pair of visits separated by about 30 minutes), however the WFD footprint is changed to simply cover the entire area between 0$^\circ$ and $-60^\circ$ declination except for the EB footprint. The EB and WFD proposals request observations in only $gri$ filters, with 30 second visits in the WFD and 60 second visits in the EB. No other proposals are included. The resulting simulated survey is astro\_lsst\_01\_1017.
+\textbf{NEO-focused survey:} An attempt at an aggressively NEO-optimized survey was also created, where modified versions of the EB and WFD proposals are used. The visit timing in each proposal is the same as the standard WFD visit timing (a pair of visits separated by about 30 minutes), however the WFD footprint is changed to simply cover the entire area between 0$^\circ$ and $-60^\circ$ declination except for the EB footprint. The EB and WFD proposals request observations in only $gri$ filters, with 30 second visits in the WFD and 60 second visits in the EB. No other proposals are included. The resulting simulated survey is astro\_lsst\_01\_1017.
 
 \begin{figure}[t!]
 \centering
 \includegraphics[width=0.49\textwidth]{figures/astro_lsst_01_1015_proposal_footprint}
 \includegraphics[width=0.49\textwidth]{figures/astro_lsst_01_1017_proposal_footprint}
 \vskip -0.5in
-\caption{The footprints of the proposals, including the Ecliptic Band proposal, used in the NEO-optimized simulated surveys astro\_lsst\_01\_1015 (left) and astro\_lsst\_01\_1017 (right). The astro\_lsst\_01\_1017 survey only includes two proposals.
+\caption{The footprints of the proposals, including the Ecliptic Band proposal, used in the NEO-optimized simulated surveys astro\_lsst\_01\_1015 (the ``extra ecliptic visits'' survey, left) and astro\_lsst\_01\_1017 (the ``NEO-focused'' survey, right). The astro\_lsst\_01\_1017 survey only includes two proposals.
 \label{fig:neo_footprints}}
 \end{figure}
 
 
 \subsection{Completeness analysis results}
 
-There is an interplay between discovery criteria and survey design -- as an obvious example, discovery criteria requiring triplets of visits per night instead of pairs will result in much different completeness results if the survey was designed to only request two visits per night rather than three. Likewise, some changes in survey design work best with changes to the discovery criteria; for example, lengthening the visit time increases the detection losses, which means pushing source detection to the 'trailing loss' threshhold results in a significant improvement in completeness. While we compare discovery criteria within a single simulated survey as much as possible, there are some changes in discovery criteria which must be compared between different surveys using different observing strategies.
+In the baseline reference run, minion\_1016, with the baseline discovery
+criteria, with pairs of visits in each night occurring within 60 minutes
+repeated for 3 nights within a 15 day time window, we find a cumulative
+completeness at $H\le22$ of 73.7\% for our PHA input population (see
+Figure~\ref{fig:minionC1}). This should be considered our baseline PHA
+completeness, as it uses the reference run and the baseline MOPS and data
+management requirements.
+
+From this baseline, we can evaluate the effects of changing both the survey design (reallocating telescope resources) and the discovery criteria, which effectively sets the computational resources.
+There is an interplay between discovery criteria and survey design -- as an obvious example, discovery criteria requiring triplets of visits per night instead of pairs will result in much different completeness results if the survey was designed to only request two visits per night rather than three. Likewise, some changes in survey design work best with changes to the discovery criteria; for example, lengthening the visit time increases the detection losses, which means pushing source detection to the ``trailing loss'' threshold results in a significant improvement in completeness. While we compare discovery criteria within a single simulated survey as much as possible, there are some changes in discovery criteria which must be compared between different surveys using different observing strategies.
 
 All the completeness results presented below assume that no objects are known prior to LSST survey,
 and thus are biased low. For example, assuming that 43\% objects would be discovered by the start of
@@ -215,15 +224,12 @@ LSST survey, \cite{GMS2016} boosted the final PHA completeness for LSST baseline
 as 11\%.
 
 
-\subsubsection{The Performance of Baseline Survey}
-
 \begin{figure}[t!]
 \centering
 \includegraphics[width=0.99\textwidth]{figures/minion_1016_CumulativeCompleteness_NEO_and_PHA_Cumulative_Completeness}
 \vskip -0.2in
 \caption{The cumulative completeness for PHAs and NEOs, as a function of absolute magnitude $H$, for the baseline
-cadence minion\_1016.
-\label{fig:minionC1}}
+cadence minion\_1016. \label{fig:minionC1}}
 \end{figure}
 
 \begin{deluxetable}{lccccccc}
@@ -235,8 +241,8 @@ enhanced detection algorithms to reduce trailing losses (``Trail Det''), and
 pushing the individual detection threshold from SNR$=5$ to SNR$=4$. These are
 primarily computational changes, while the various rows show different survey
 cadences. These range from the current baseline, to adding additional visits or
-longer visits in the ecliptic region, to abandoning all non-ecliptic area and
-performing a NEO-only survey.}
+longer visits in the ecliptic region, to focusing the majority of the time on
+performing a NEO-focused survey. \label{tab:completeness}}
 \tablehead{
 & \multicolumn{3}{c}{10 year survey}  &  \multicolumn{4}{c}{12 year survey}  \\
 \cmidrule(r){2-4} \cmidrule(r){5-8}
@@ -248,14 +254,17 @@ Simulation  & W=15 & W=30 & W=30 & W=15 & W=30 & W=30 & W=30 \\
 LSST baseline & 73.7 & 76.0 & 76.5 & & &  \\
 Extra ecliptic visits & 74.8 & 76.8 & 77.4 & 79.1 & 80.8 & 81.5 & 83.8\\
 Longer ecliptic visits & 73.6 & 77.4 & 79.5 & 77.5 & 80.9 & 82.9 & 85.6 \\
-NEO-only cadence & 76.2 & 79.0 & 80.6 & 79.9 & 82.5 & 83.9 & 86.0 \\
+NEO-focused cadence & 76.2 & 79.0 & 80.6 & 79.9 & 82.5 & 83.9 & 86.0 \\
 \enddata
 \end{deluxetable}
 
 
-In the baseline reference run, minion\_1016, with the baseline discovery criteria, with pairs of visits in each night occurring within 60 minutes repeated for 3 nights within a 15 day time window, we find a cumulative completeness at $H\le22$ of 73.7\% for our PHA input population (see Figure~\ref{fig:minionC1}). This should be considered our baseline PHA completeness, as it uses the reference run and the baseline MOPS and data management requirements. Below, we explore the effects of changing the MOPS requirements, changing data management detection requirements, and changing the survey strategy.
+\subsubsection{Modified Discovery Criteria \& Computational Strategies}
 
-Using only minion\_1016 and not changing the survey strategy, we can explore the effects of:
+% Below, we explore the effects of changing the MOPS requirements, changing data management detection requirements, and changing the survey strategy.
+
+Using only the baseline minion\_1016 and not changing the survey strategy, we can explore the impact on PHA completeness of changing the discovery criteria. These are correspond primarily to the different columns of Table~\ref{tab:completeness}, and include:
+
 \begin{itemize}
 \item extending the MOPS window for linking pairs of detections from the nominal 15 day window to a 30 day window: this increases completeness by about 2\%, although with an estimated increase in the compute requirements by about an order of magnitude (see Appendix \ref{sec:appMOPS}).
 \item enhancing source detection algorithms to mitigate detection losses to the trailing loss level: with the 30 second visits in the baseline minion\_1016, this only increases completeness by a very small amount, 0.5\%.
@@ -273,36 +282,23 @@ brightest 10-year $V$ magnitude are shifted by about a magnitude (the mean value
 
 \subsubsection{The Performance of Modified Surveys}
 
-When also considering changes to the survey strategy, we can explore the effects of:
+The potential improvement in PHA discovery rates for modified survey cadences is
+summarized in the rows of Table~\ref{tab:completeness} and described below.
+
 \begin{itemize}
-\item {\it Adding more observations in the NES region.} This corresponds to comparing minion\_1016 at 10 years to astro\_lsst\_01\_1016 (the 'baseline PHA run') at 10 years, and corresponds to an increase in completeness of about 1\%. This improvement comes at a cost to other science cases, as the main survey footprint (the WFD proposal) only receives 1,715,354 visits (82\%) of the number of visits in the reference run; the outcome of many science programs is roughly proportional to the number of visits.
-\item  {\it Extending the survey lifetime by two years.} Since minion\_1016 is a reference run, it only lasts 10 years. However, astro\_lsst\_01\_1016 was configured to run for 15 years, and can thus be evaluated at the 12 year mark. This is our benchmark for extending the survey; at 12 years, the WFD achieves 2,077,342 visits, roughly equivalent to the number of WFD visits in the baseline reference run, minion\_1016.  The additional two years of operations adds just over 4\% to the completeness, going from 74.8\% at 10 years to 79.1\% at 12 years.
-\item  {\it Using longer visit times near the Ecliptic} to reach fainter limiting magnitudes, as in astro\_lsst\_01\_1015. The effect of longer exposures alone is minimized by the fact that detection losses are also increased. It is also hard to disentangle the effects of increasing the visit time near the Ecliptic and the resulting lower frequency of observations (and thus fewer opportunities for sets of observations matching the basic discovery criteria). The small modifications in survey strategy used in astro\_lsst\_01\_1015 shows almost no change in completeness, {\it until} detection losses are partially compensated for by modifying source detection algorithms to the trailing loss level; then this run provides a 1.5\% increase in completeness compared to astro\_lsst\_01\_1016.
-\item  {\it Attempting to optimize the survey for PHA discovery}, by using a limited filter set, discarding other proposals, and using longer exposures along the ecliptic, as in astro\_lsst\_01\_1017. This survey shows an increase in completeness (83.9\%), relative to astro\_lsst\_01\_1016 of about 2.4\%, after using longer MOPS windows and pushing source detection to the trailing loss level.
+\item \textbf{Extra ecliptic spur visits:} By adding these extra visits over the course of a 10 year survey, the increase in completeness over the LSST baseline is about 1\%. This improvement comes at a cost to other science cases, as the main survey footprint (the WFD proposal) only receives 1,715,354 visits (82\%) of the number of visits in the reference run; the outcome of many science programs is roughly proportional to the number of visits.
+\item \textbf{Extending the survey by two years:} Since minion\_1016 is a reference run, it only simulates 10 years.
+However, we can evaluate the ``extra ecliptic visits'' run at the 12 year mark, at which point the WFD proposal has received approximately the same number of visits as it would receive in the baseline 10 year survey. The additional two years of operations adds just over 4\% to the completeness, going from 74.8\% at 10 years to 79.1\% at 12 years.
+\item \textbf{Longer visits in the ecliptic:} This reaches fainter limiting magnitudes, but the effect of longer exposures alone is minimized by the fact that detection losses are also increased. It is also hard to disentangle the effects of increasing the visit time near the Ecliptic and the resulting lower frequency of observations (and thus fewer opportunities for sets of observations matching the basic discovery criteria). The small modifications made by this survey strategy show almost no change in completeness, {\it until} detection losses are partially compensated for by modifying source detection algorithms to the trailing loss level; then this run provides a 1.5\% increase in completeness compared to the ``extra ecliptic visits'' survey.
+\item \textbf{Aggressively NEO-focused survey:} This survey uses a limited filter set, discards other proposals, and uses longer exposures along the ecliptic. This survey shows an increase in completeness (83.9\%), relative to the ``extra ecliptic visits'' survey of about 2.4\%, after using longer MOPS windows and pushing source detection to the trailing loss level.
 However, many science programs would be jeopardized with this observing strategy because observations in the $uzy$ filters,
 and observations of the DD and SCP fields, would not be obtained.
 \end{itemize}
 
-The cumulative completeness at $H\le22$ for these various discovery criteria and survey strategies are listed in Table~\ref{tab:completeness}. To summarize, when altering the survey strategy the largest individual gain ($\sim$5\%)
+To summarize, when altering the survey strategy the largest individual gain ($\sim$5\%)
 comes from simply extending the survey lifetime from 10 to 12 years. For the case of PHAs and 30-day wide MOPS window,
 the completeness can be boosted from 76\% after 10 years with minion\_1016 survey to 81\% after 12 years with
-astro\_lsst\_01\_1016 survey (recall that this completeness estimates do not account for the contribution of known objects).
-
-
-\begin{figure}[t!]
-\centering
-\includegraphics[width=0.90\textwidth]{figures/PHA_cumulative_completeness}
-\caption{XXX THIS IS NOW DUPLICATED IN A LATEX TABLE.
-The cumulative completeness for PHAs with $H\le22$ for various survey strategies and discovery criteria.
-minion\_1016 is the LSST baseline survey and astro\_lsst\_01\_1016 is the ``baseline enhanced PHA'' survey.
-The main LSST survey (``deep-wide-fast'') receives as many visits after 12 years and astro\_lsst\_01\_1016 simulation
-as it does after 10 years of minion\_1016. Surveys astro\_lsst\_01\_1015 and astro\_lsst\_01\_1017 are agressively
-optimized for PHAs and would have significant shortcomings for other science programs, in comparison to baseline survey.
-Further details about the survey strategies for each of the four surveys and discovery criteria are described in the text.
-\label{tab:completeness}}
-\end{figure}
-
-
+``extra ecliptic visits'' survey (recall that this completeness estimates do not account for the contribution of known objects).
 
 \subsection{Systematic Effects due to Varying Modeling Assumptions \label{sec:syseff}}
 

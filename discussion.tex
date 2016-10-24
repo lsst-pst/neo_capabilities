@@ -3,59 +3,59 @@
 \section{Discussion and Conclusions}
 
 We have discussed here the ability of LSST to contribute to Near-Earth Objects (NEO) discoveries and
-the Congressional George E. Brown, Jr. mandate to NASA. We have quantitatively addressed 
-the robustness of the LSST strategy for discovering NEOs using nightly pairs of observations, and 
-the expected cumulative completeness for PHAs with $H<22$. 
- 
-We argued that the observing and data processing strategies chosen by LSST are robust. The
-robust determination of false positive detection rate in difference images presented here is based 
-on data obtained with DECAm and processed using prototype LSST software. Assuming the same rate,
-numerical tests with MOPS demonstrate that even a modest compute system will be adequate to 
-process LSST data. Even if the false positive detection rate in difference images is twice as high as 
-reported here, it can still be handled without a change of baseline cadence, linking criteria, or 
-increase of computing resources. Quantitatively, the false positive rates of up to about 
-1000 deg$^{-2}$ could be readily handled with anticipated 1000-core machine dedicated for 
-moving object processing. 
+the Congressional George E. Brown, Jr. mandate to NASA. We have quantitatively addressed
+the robustness of the LSST strategy for discovering NEOs using nightly pairs of observations, and
+the expected cumulative completeness for PHAs with $H<22$.
 
-There is a significant compute margin, both because LSST compute needs are driven by other more 
-demanding processing, and because there are various mitigation strategies that can decrease the 
-compute load. For example, minor modifications of cadence, such as a simple shortening 
-of the nightly revisit time by about a factor of 3, could mitigate about a factor of two increase in 
+We argued that the observing and data processing strategies chosen by LSST are robust. The
+robust determination of false positive detection rate in difference images presented here is based
+on data obtained with DECAm and processed using prototype LSST software. Assuming the same rate,
+numerical tests with MOPS demonstrate that even a modest compute system will be adequate to
+process LSST data. Even if the false positive detection rate in difference images is twice as high as
+reported here, it can still be handled without a change of baseline cadence, linking criteria, or
+increase of computing resources. Quantitatively, the false positive rates of up to about
+1000 deg$^{-2}$ could be readily handled with anticipated 1000-core machine dedicated for
+moving object processing.
+
+There is a significant compute margin, both because LSST compute needs are driven by other more
+demanding processing, and because there are various mitigation strategies that can decrease the
+compute load. For example, minor modifications of cadence, such as a simple shortening
+of the nightly revisit time by about a factor of 3, could mitigate about a factor of two increase in
 the false positive detection rate. At the same time, several times larger false positive rates for LSST
-than measured using DECam images and prototype LSST software are rather implausible. If the 
-LSST camera, or any other system component, would somehow cause such high false positive rates, 
-the whole LSST mission would be jeopardized. 
+than measured using DECam images and prototype LSST software are rather implausible. If the
+LSST camera, or any other system component, would somehow cause such high false positive rates,
+the whole LSST mission would be jeopardized.
 
 In summary, the LSST strategy for discovering moving Solar System objects will be successful
-because the following three conditions will be met: 
+because the following three conditions will be met:
 \begin{enumerate}
-\item The LSST system hardware and image differencing software performance will result in false positive 
+\item The LSST system hardware and image differencing software performance will result in false positive
           rates not significantly exceeding $\rho_{FP} =  400$ deg$^{-2}$, estimated here using DECam data
-          and prototype LSST software. 
-\item Given an anticipated 1000-core machine, MOPS will be able to easily process as many as 
-         10$^8$ tracklets per search window, and daily computations to produce up to about 10$^7$ 
-         candidate tracks will be completed in about an hour. 
-\item Assuming that IOD can be executed in about 0.1 sec per track, this final filtering step will 
-         be easily accomplished in about an hour. 
+          and prototype LSST software.
+\item Given an anticipated 1000-core machine, MOPS will be able to easily process as many as
+         10$^8$ tracklets per search window, and daily computations to produce up to about 10$^7$
+         candidate tracks will be completed in about an hour.
+\item Assuming that IOD can be executed in about 0.1 sec per track, this final filtering step will
+         be easily accomplished in about an hour.
 \end{enumerate}
 
 
-Our results show that the current LSST baseline survey strategy would yield a completeness for PHAs 
-with $H<22$ of about 70-75\%. We discuss a number of systematic effects that must be taken into 
+Our results show that the current LSST baseline survey strategy would yield a completeness for PHAs
+with $H<22$ of about 70-75\%. We discuss a number of systematic effects that must be taken into
 account when comparing different simulations of the same survey, as well as simulations of different
-surveys and observing systems. The largest effect, at the level of 10-15\%, is due to orbital differences 
+surveys and observing systems. The largest effect, at the level of 10-15\%, is due to orbital differences
 between NEO and PHA populations. We compared our results presented here, as well as our previously
-published and consistent results, to an analogous recent study by \citet[]{GMS2016}. We found that 
-purported discrepancies can be fully understood as due to various systematic effects discussed in 
-\S\ref{sec:syseff}. All these recent results are fully consistent with even the earliest forecasts of LSST 
-performance (e.g., the 10-year LSST baseline cadence would result in 75\% completeness for PHAs 
-with $H<22$, according to \citealt{IvezicNEO2007}). 
+published and consistent results, to an analogous recent study by \citet[]{GMS2016}. We found that
+purported discrepancies can be fully understood as due to various systematic effects discussed in
+\S\ref{sec:syseff}. All these recent results are fully consistent with even the earliest forecasts of LSST
+performance (e.g., the 10-year LSST baseline cadence would result in 75\% completeness for PHAs
+with $H<22$, according to \citealt{IvezicNEO2007}).
 
-We describe a number of modifications of the LSST baseline survey which potentially could raise the 
-completeness for PHAs with $H<22$ to 90\%. In particular, the ``baseline enhanced PHA'' survey,
+We describe a number of modifications of the LSST baseline survey which potentially could raise the
+completeness for PHAs with $H<22$ to 90\%. In particular, the ``extra ecliptic visits'' survey,
 astro\_lsst\_01\_1016, can boost the completeness to 81\% with a 12-year survey. With a plausible
-contribution of objects known at the beginning of LSST survey, the overall completeness is likely 
-to approach 90\%. The main LSST survey (``deep-wide-fast'') receives as many visits after 12 years 
-with astro\_lsst\_01\_1016 simulation as it does after 10 years of minion\_1016. Therefore, 
-most of other science programs would retain their performance if the ``baseline enhanced PHA'' survey
-was adopted for LSST, and resources identified to prolong the survey from 10 years to 12 years. 
+contribution of objects known at the beginning of LSST survey, the overall completeness is likely
+to approach 90\%. The main LSST survey (``deep-wide-fast'') receives as many visits after 12 years
+with astro\_lsst\_01\_1016 simulation as it does after 10 years of minion\_1016. Therefore,
+most of other science programs would retain their performance if the ``extra ecliptic visits'' survey
+was adopted for LSST, and resources identified to prolong the survey from 10 years to 12 years.
