@@ -81,27 +81,39 @@ developed analytic and semi-analytic analysis to better understand the scaling o
 tracklets and tracks with false positive detection rate and other relevant parameters. Details of this
 analysis are provided in Appendix~\ref{sec:appMOPS}. Here we briefly discuss the main results.
 
-The increase of the number of tracklets with false positive detection rate, $\rho_{FP}$, shown in left panel
-in Figure~\ref{fig:MOPStests}, is well described by eq.~\ref{eq:NttFalse}. In particular, the number of tracklets
-approximately increases proportionally to $(C_1 + C_2\rho_{FP}^2)$, where $C_1$ and $C_2$ do not
-depend on $\rho_{FP}$. The reason why the ratio of the number of tracks and the number of tracklets
-stays within a narrow 50\% margin when the latter varies by an order of magnitude (right panel
-in Figure~\ref{fig:MOPStests}) is quantitatively explained by eq.~\ref{eq:NttFinalFit}.
+The increase of the number of tracklets with false positive detection rate,
+$\rho_{FP}$, shown in left panel in Figure~\ref{fig:MOPStests}, is well
+described by eq.~\ref{eq:NttFalse}. In particular, the number of tracklets
+approximately increases proportionally to $(C_1 + C_2\rho_{FP}^2)$, where $C_1$
+and $C_2$ do not depend on $\rho_{FP}$. As both the full analytic result and the
+simulations show, false tracklets quickly outnumber true tracklets even at low
+false detection rates, resulting in the observed $\rho_{FP}^2$ behavior.
 
-The main result of our analysis is the scaling of the number of false candidate tracks per search window
-with the window width and the density of false positives in difference images (for scalings with other relevant
-parameters, see eq.~\ref{eq:falsetracks}),
+While the number of tracklets is dominated by the false positive detections, in
+baseline LSST cadence and nominal noise assumptions under which the MOPS
+simulations were run ($\rho_{FP} \leq 500\,\rm{deg} \,\rm{sq}^2$), the number of
+tracks is not dominated by spurious detections---instead it is dominated by true
+tracks and mislinkages between true objects. This is due to the fundamental
+feature of MOPS: the 4-dimensional space of tracks (two coordinates and two
+velocity vector components) is sparse at up to moderate levels of contamination,
+and at the tested noise levels false tracklets are effectively filtered. This
+behavior accounts for the slow growth in tracks in the right panel of
+Figure~\ref{fig:MOPStests}.
+
+As we evaluate the impact of different survey parameters, we can assess the
+number of tracks that would be generated (and thus require IOD processing) using
+the analytic results developed in Appendix~\ref{sec:appMOPS}. For a given window
+width and false detection density, the number of false tracks per search window
+that would arise from false detections is given by
 \begin{equation}
 \label{eq:falsetracks2}
    N^{falsetracks} = 4.5 \times 10^6 \, \left( {N_w \over 30 \, {\rm day} } \right)^{8} \left( {\rho_{FP} \over 400 \, {\rm deg}^{-2} }\right)^{3.7}.
 \end{equation}
 This expression is valid around fiducial values and assumes $\rho_{ast}=100$ deg$^{-2}$.
-The number of true tracks is of the order 10$^6$; therefore, the false positive detections
-in image differencing contribute only a factor of a few more candidate tracks for the IOD step.
-Furthermore, even this small contribution could be decreased by decreasing the search window
-width $N_w$ (at the expense of sample completeness). For example, for $N_w=21$ days,
-the number of false tracks drops well below the number of true tracks.
-
+The number of true tracks is of the order 10$^6$; therefore, with the baseline
+window $N_W=15$ the contribution of false detections is small, while in the
+enhanced NEO cadences with $N_W=30$ the contribution is only a factor of a few
+times the number of true tracks.
 
 \subsection{Required Computing Resources for MOPS and IOD Processing}
 
