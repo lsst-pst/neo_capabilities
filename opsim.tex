@@ -220,8 +220,8 @@ There is an interplay between discovery criteria and survey design -- as an obvi
 
 All the completeness results presented below assume that no objects are known prior to LSST survey,
 and thus are biased low. For example, by assuming that 43\% PHAs would be discovered by the start of
-LSST survey, \cite{GMS2016} showed that the final PHA completeness for LSST baseline survey would 
-be boosted by 11\%. We discuss our own independent estimates of this effect in \S\ref{sec:known}.  
+LSST survey, \cite{GMS2016} showed that the final PHA completeness for LSST baseline survey would
+be boosted by 11\%. We discuss our own independent estimates of this effect in \S\ref{sec:known}.
 
 \begin{figure}[t!]
 \centering
@@ -301,38 +301,40 @@ the completeness can be boosted from 76\% after 10 years with minion\_1016 surve
 
 \subsection{The Impact of Objects Known Prior to LSST Survey \label{sec:known}}
 
-The completeness results presented above assumed that no objects are known prior to LSST survey. 
-By including known objects, the completeness is boosted to higher values; the current completeness 
-for NEOs with $H<22$ is estimated to be about 25\% \citep{GMS2016}. According to the JPL NEO 
-discovery page\footnote{See http://neo.jpl.nasa.gov/stats/}, one can conservatively estimate that 
+The completeness results presented above assumed that no objects are known prior to LSST survey.
+By including known objects, the completeness is boosted to higher values; the current completeness
+for NEOs with $H<22$ is estimated to be about 25\% \citep{GMS2016}. According to the JPL NEO
+discovery page\footnote{See http://neo.jpl.nasa.gov/stats/}, one can conservatively estimate that
 discovery of 140m NEOs started in earnest in 2000.
 
-We use a simplified model to estimate the contribution of known objects: since we do not know the 
-survey pointing history for all the previous surveys, we simulate them by adopting an effective 
-Johnson $V$ magnitude threshold, $V_{max}$. We integrate orbits for our synthetic NEO model 
-population from 2000 to 2015 and consider an object discovered if its peak $V$ magnitude 
-during that period is brighter than $V_{max}$. We vary $V_{max}$ threshold until the completeness 
-for NEOs with $H<22$ in 2015 is $\sim$25\%. We obtained $V_{max}=20.0$ (this threshold 
-produces a completeness of 95\% for NEOs with $H<18$, i.e. for canonical objects larger than 1 km).   
+We use a simplified model to estimate the contribution of known objects: since we do not know the
+survey pointing history for all the previous surveys, we simulate them by adopting an effective
+Johnson $V$ magnitude threshold, $V_{max}$. We integrate orbits for our synthetic NEO model
+population from 2000 to 2015 and consider an object discovered if its peak $V$ magnitude
+during that period is brighter than $V_{max}$. We vary $V_{max}$ threshold until the completeness
+for NEOs with $H<22$ in 2015 is $\sim$25\%. We obtained $V_{max}=20.0$ (this threshold
+produces a completeness of 95\% for NEOs with $H<18$, i.e. for canonical objects larger than 1 km).
 We continue ``discovering'' objects with $V_{max}=20.0$ until the beginning of LSST survey in 2022
 (yielding 30\% completeness for NEOs with $H<22$, and 46\% for PHAs). All objects discovered prior
-to 2022 that were {\it not} re-discovered by LSST are added to post-LSST sample. 
+to 2022 that were {\it not} re-discovered by LSST are added to post-LSST sample.
 
 Our results are summarized in Figure~\ref{fig:knownObj} and Table~\ref{tab:completeness2}.
 For example, the completeness for PHAs is boosted by 7\% for baseline 10-year survey,
-a somewhat more modest effect than 11\% boost obtained by \cite{GMS2016}. For a 12-year 
+a somewhat more modest effect than 11\% boost obtained by \cite{GMS2016}. For a 12-year
 survey, we predict a completeness of 86\% for PHAs, when known objects are taken into account.
 
 
 \begin{deluxetable}{lcccc}
-\tablecaption{The cumulative completeness (in \%) for NEOs and PHAs with $H\le22$ for 
+\tablecaption{The cumulative completeness (in \%) for NEOs and PHAs with $H\le22$ for
 LSST baseline survey strategy extended to a 12-year survey (with some extra visits along the
 Ecliptic, corresponding to the second row in Table~\ref{tab:completeness}). The length of track
-linking window is set to 30 days, and the detection threshold is set to SNR$=5$. 
+linking window is set to 30 days, and the detection threshold is set to SNR$=5$.
 \label{tab:completeness2}}
 \tablehead{
 & \multicolumn{2}{c}{10 year survey}  &  \multicolumn{2}{c}{12 year survey}  \\
-Simulation  & only LSST & w/ known &  only LSST & w/ known \\}
+\cmidrule(r){2-3} \cmidrule(r){4-5}
+Population  & only LSST & w/ known &  only LSST & w/ known 
+}
 \startdata
     NEO    & 64 & 70 & 68 & 73  \\
     PHA    & 77 & 84 & 81 & 86  \\
@@ -344,9 +346,9 @@ Simulation  & only LSST & w/ known &  only LSST & w/ known \\}
 \centering
 \includegraphics[width=0.99\textwidth]{figures/astro_lsst_01_1016_completeness.pdf}
 \vskip -0.2in
-\caption{The cumulative completeness for NEOs (left) and PHAs (right) with $H\le22$, as a function of 
+\caption{The cumulative completeness for NEOs (left) and PHAs (right) with $H\le22$, as a function of
 time, when known objects (gray solid lines) are taken (black solid lines) and not taken (dotted lines)
-into  account (see also Table~\ref{tab:completeness2}). 
+into  account (see also Table~\ref{tab:completeness2}).
 \label{fig:knownObj}}
 \end{figure}
 
@@ -384,9 +386,9 @@ for minion\_1016, the cumulative completeness is 73.4\% for PHAs and  60.8\% for
           about half of that loss can be recovered using cadence simulations that request four visits per night)
 \item The slope of the asteroid size distribution (current measurement uncertainty of this parameter
           corresponds to a systematic uncertainty in completeness of about 2\%.)
-\item The impact of known objects: we estimated that 46\% of PHAs with $H<22$ would be discovered 
-          by current survey assets by the start of LSST survey in 2022 (currently $\sim$40\%), and they would 
-          boost the final PHA completeness for 10-year LSST baseline survey by 7\% (to 84\%). 
+\item The impact of known objects: we estimated that 46\% of PHAs with $H<22$ would be discovered
+          by current survey assets by the start of LSST survey in 2022 (currently $\sim$40\%), and they would
+          boost the final PHA completeness for 10-year LSST baseline survey by 7\% (to 84\%).
 \end{enumerate}
 
 We proceed with an example of a comparison of different simulations.
@@ -417,4 +419,4 @@ completeness in the range $\sim$60\% to $\sim$70\% for the LSST baseline cadence
 is due to different NEO populations, varying NEO detection criteria, and other specifics. When accounting
 for different choices of simulation parameters, the GMS results are fully consistent (within 1-2 \%) with
 the results previously published by the LSST team, and with the results discussed here (for 10-year baseline
-cadence, the estimated completeness for NEOs with $H<22$ is 61\%). 
+cadence, the estimated completeness for NEOs with $H<22$ is 61\%).

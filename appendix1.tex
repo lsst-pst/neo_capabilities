@@ -8,7 +8,7 @@ products, their designs and plans are periodically reviewed and updated and
 thus LSE-163 is a living document -- please always consult the latest version.}
 that are most relevant for discovering moving Solar System objects.
 
-LSST Data Management system will perform nightly analysis of difference images\footnote{A difference
+The LSST Data Management system will perform nightly analysis of difference images\footnote{A difference
 image is an image produced by subtracting a science image from an appropriate
 ``average'' of the previously collected similar images of the same sky area, and using the
 same filter.}, with the goal of detecting and characterizing astrophysical phenomena
@@ -31,7 +31,7 @@ real time. Notifications (``alerts'') about new \DIASources will be issued using
 community-accepted standards\footnote{For example, VOEvent, see \url{http://ls.st/4tt}} within
 60 seconds of observation.
 
-Moving Object Processing Software (\code{MOPS}) pipeline  combines all unassociated \DIASources into
+The Moving Object Processing Software (\code{MOPS}) pipeline combines all unassociated \DIASources into
 plausible \SSObjects and estimates their orbital parameters. The three main pipeline stages
 include associating new \DIASources with known \SSObjects, discovering new \SSObjects,
 and orbit refinement and management. This conceptual MOPS design is illustrated in
@@ -59,15 +59,17 @@ Level 1 data products are a result of difference image analysis (DIA).
 with $transSNR$=5.
 They represent changes in flux with respect to a deep template. Physically, a \DIASource may be an observation of new astrophysical object that was not present at that position in the template image (for example, an asteroid), or an observation of flux change in an existing source (for example, a variable star). Their flux can be negative (eg., if a source present in the template image reduced its brightness, or moved away). Their shape can be complex (eg., trailed, for a source with proper motion approaching $\sim {\rm deg}/{\rm day}$, or ``dipole-like", if an object's observed position exhibits an offset -- true or apparent -- compared to its position on the template).
 Some \DIASources will be caused by background fluctuations; with $transSNR = 5$,
-the expected false positive rate is about one per CCD (XX per sq. deg. for the median seeing,
-or of the order 200,000 per typical night).
+the expected false positive rate is about three per CCD ($\sim 60$ per sq. deg.) for the median seeing,
+or of the order 500,000 per typical night.
 The expected number of false positives due to background fluctuations is a very strong function
 of adopted $transSNR$: a change of $transSNR$ by 0.5
 results in a variation of an order of magnitude, and a change of $transSNR$ by unity changes the number of false
 positives by about two orders of magnitude.
 
-Clusters of \DIASources detected on visits taken at different times are associated with either a \DIAObject or an \SSObject, to represent the underlying astrophysical phenomenon. The association can be made in two different ways: by assuming the underlying phenomenon is an object within the Solar System moving on an orbit around the Sun\footnote{LSST pipelines will not fit for motion around other Solar System bodies; eg., identifying new satellites of Jupiter is left to the community.}, or by assuming it to be distant enough to only exhibit small parallactic and proper motion\footnote{Where 'small' is small enough to unambiguously positionally associate together individual apparitions of the object.}. The latter type of association is performed during difference image analysis right after the image has been acquired. The former is done at daytime by \code{MOPS}, unless the \DIASource is an apparition of an already known \SSObject. In that case, it will be flagged as such during difference image analysis. At the end of the difference image analysis of each visit, LSST will issue time domain event alerts for all
+Clusters of \DIASources detected on visits taken at different times are associated with either a \DIAObject or an \SSObject, to represent the underlying astrophysical phenomenon. The association can be made in two different ways: by assuming the underlying phenomenon is an object within the Solar System moving on an orbit around the Sun\footnote{LSST pipelines will not fit for motion around other Solar System bodies; eg., identifying new satellites of Jupiter is left to the community.}, or by assuming it to be distant enough to only exhibit small parallactic and proper motion\footnote{Where ``small'' is small enough to unambiguously positionally associate together individual apparitions of the object.}. The latter type of association is performed during difference image analysis right after the image has been acquired. The former is done at daytime by \code{MOPS}, unless the \DIASource is an apparition of an already known \SSObject. In that case, it will be flagged as such during difference image analysis. At the end of the difference image analysis of each visit, LSST will issue time domain event alerts for all
 newly detected \DIASources\footnote{For observations on the Ecliptic near the opposition Solar System objects will dominate the \DIASource counts and (until they're recognized as such) overwhelm the explosive transient signal. It will therefore be advantageous to quickly identify the majority of Solar System objects early in the survey.}.
+
+\subsubsection{Nightly Difference Image Processing \label{sec:ssProcessing}}
 
 The following is a high-level description of steps which will occur during regular {\em nightly}
 difference image analysis:
@@ -100,7 +102,7 @@ The initial set of criteria will be defined by the start of LSST operations.
 
 \subsubsection{Solar System Object Processing \label{sec:ssProcessing}}
 
-The following will occur during regular Solar System object processing (in daytime\footnote{Note that there {\em is no strict bound on when daytime Solar System processing must finish}, just that, averaged over some reasonable timescale (eg., a month), a night's worth of observing is processed within 24 hours. Nights rich in moving objects may take longer to process, while nights with less will finish more quickly. In other words, the system requirement is on {\em throughput}, not latency.}, after a night of observing; see Figure~\ref{fig:Pipe8}):
+The following will occur during regular Solar System object processing in daytime\footnote{Note that there {\em is no strict bound on when daytime Solar System processing must finish}, just that, averaged over some reasonable timescale (eg., a month), a night's worth of observing is processed within 24 hours. Nights rich in moving objects may take longer to process, while nights with less will finish more quickly. In other words, the system requirement is on {\em throughput}, not latency.}, after a night of observing (see Figure~\ref{fig:Pipe8}):
 \begin{enumerate}
 \item The orbits and physical properties of all \SSObjects re-observed on the previous night are recomputed. External orbit catalogs (or observations) are also used to improve orbit estimates. Updated data are entered to the \SSObjects table.
 \item All \DIASources detected on the previous night, that have {\em not} been matched at a high confidence level to a known \Object,
@@ -175,5 +177,5 @@ flags & bit[64] & bit & Various useful flags. \\ \hline
 \end{longtable}
 \end{center}
 
-The $G_1$ and $G_2$ parameters for the large majority of asteroids will not be well constrained until later in the survey. LSST may decide not to fit for it at all over the first few DRs and add it later in Operations, or provide two-parameter $G_{12}$ fits. Alternatively, they may be fit it using strong priors on slopes poorly constrained by the data. The design of the data management system is insensitive to this decision, making it possible to postpone it to Commissioning to ensure it follows the standard community practice at that time.
+The $G_1$ and $G_2$ parameters for the large majority of asteroids will not be well constrained until later in the survey. LSST may decide not to fit for it at all over the first few DRs and add it later in Operations, or provide two-parameter $G_{12}$ fits. Alternatively, they may be fitted using strong priors on slopes poorly constrained by the data. The design of the data management system is insensitive to this decision, making it possible to postpone it to Commissioning to ensure it follows the standard community practice at that time.
 The LSST database will provide functions to compute the phase (Sun-Asteroid-Earth) angle $\alpha$ for every observation, as well as the reduced, $H(\alpha)$, and absolute, $H$, asteroid magnitudes in LSST bands.
