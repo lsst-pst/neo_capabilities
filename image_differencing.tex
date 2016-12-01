@@ -38,8 +38,7 @@ positives; for example, compare Fig.~1 in \cite{goldstein15} to Fig.~17 in \cite
 
 Here we summarize an analysis of image differencing performance based on DECam
 data and difference images produced and processed using prototype LSST
-software\footnote{An extended report is available as
-\url{http://dmtn-006.lsst.io/en/latest/}}. This analysis demonstrates that the false
+software \citep{DMTN-006}. This analysis demonstrates that the false
 positive rate anticipated for LSST is significantly below the threshold for
 successful deployment of MOPS, as will be discussed in Section~\ref{sec:mops}.
 
@@ -152,10 +151,9 @@ produces both flux measurements and associated uncertainties which are not
 affected by covariance, enabling us to accurately set a SNR threshold
 that recognizes and rejects all \DIASources with $\nu < 5$. This mitigation step
 will be unnecessary once the image covariance tracking is properly implemented
-in the LSST stack. Alternative solutions such as image
-``decorrelation''\footnote{\url{https://dmtn-021.lsst.io/}} or the \citet{zackay}
-image differencing algorithm would also alleviate the covariance problem, and
-tests of these methods are ongoing.
+in the LSST stack. Alternative solutions such as image ``decorrelation''
+\citep{DMTN-021} or the \citet{zackay} image differencing algorithm would also
+alleviate the covariance problem, and tests of these methods are ongoing.
 
 A histogram of the number of sources detected in difference images, as a function
 of SNR computed using forced photometry measurements, is shown in the right panel

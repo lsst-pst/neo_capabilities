@@ -1,8 +1,8 @@
 \section{LSST Image Processing Steps and Data Products Relevant for Asteroids} \label{sec:AppA}
 
 The data products produced by the LSST Data Management system are described in
-LSST Document LSE-163\footnote{See \url{http://ls.st/LSE-163}} (LSST Data Products
-Definition Document). Here we briefly summarize parts of that
+LSST Document LSE-163 \citep[LSST Data Products
+Definition Document,][]{LSE-163}. Here we briefly summarize parts of that
 document\footnote{To ensure the continued scientific adequacy of LSST data
 products, their designs and plans are periodically reviewed and updated and
 thus LSE-163 is a living document -- please always consult the latest version.}
@@ -36,7 +36,7 @@ plausible \SSObjects and estimates their orbital parameters. The three main pipe
 include associating new \DIASources with known \SSObjects, discovering new \SSObjects,
 and orbit refinement and management. This conceptual MOPS design is illustrated in
 Figure~\ref{fig:Pipe8}. Further details about the MOPS pipeline design and implementation are available
-from the LSST Science Pipelines Design Document\footnote{See \url{http://ls.st/LDM-151}}, LDM-151.
+from the LSST Science Pipelines Design Document \citep{LDM-151}.
 The next section briefly describes the main processing steps in nightly/daily Level 1 data processing.
 
 \begin{figure}[!t]
@@ -69,7 +69,7 @@ positives by about two orders of magnitude.
 Clusters of \DIASources detected on visits taken at different times are associated with either a \DIAObject or an \SSObject, to represent the underlying astrophysical phenomenon. The association can be made in two different ways: by assuming the underlying phenomenon is an object within the Solar System moving on an orbit around the Sun\footnote{LSST pipelines will not fit for motion around other Solar System bodies; eg., identifying new satellites of Jupiter is left to the community.}, or by assuming it to be distant enough to only exhibit small parallactic and proper motion\footnote{Where ``small'' is small enough to unambiguously positionally associate together individual apparitions of the object.}. The latter type of association is performed during difference image analysis right after the image has been acquired. The former is done at daytime by \code{MOPS}, unless the \DIASource is an apparition of an already known \SSObject. In that case, it will be flagged as such during difference image analysis. At the end of the difference image analysis of each visit, LSST will issue time domain event alerts for all
 newly detected \DIASources\footnote{For observations on the Ecliptic near the opposition Solar System objects will dominate the \DIASource counts and (until they're recognized as such) overwhelm the explosive transient signal. It will therefore be advantageous to quickly identify the majority of Solar System objects early in the survey.}.
 
-\subsubsection{Nightly Difference Image Processing \label{sec:ssProcessing}}
+\subsubsection{Nightly Difference Image Processing}
 
 The following is a high-level description of steps which will occur during regular {\em nightly}
 difference image analysis:
@@ -83,8 +83,7 @@ of the intensity distribution, as well as fits to a trailed source model and a d
 \item If the \DIASource has been associated with an \SSObject (a known Solar System object), it will be flagged as such and an alert will be issued. Further processing will occur in daytime (see \S\ref{sec:ssProcessing} below).
 \item Otherwise, the associated \DIAObject measurements will be updated with new data
 collected during previous 12 months. All affected columns will be recomputed, including proper motions, centroids, light curves, etc.
-\item The \DR\footnote{\DR is a database resulting from annual data release processing.} is searched for one or more \Objects positionally close to the \DIAObject, out to some maximum radius\footnote{Eg., a few arcseconds.}. The IDs of these nearest-neighbor \Objects are recorded in the \DIAObject record and provided in the issued
-event alert.
+\item The \DR\footnote{\DR is a database resulting from annual data release processing.} is searched for \Objects positionally close to the \DIAObject, returning the three nearest stars and three nearest galaxies. The IDs of these nearest-neighbor \Objects are recorded in the \DIAObject record and provided in the issued event alert.
 \item An alert is issued that includes the \DIASource ID, the \SSObject ID or \DIAObject ID, and the associated science content (centroid, fluxes, low-order lightcurve moments, periods, etc.), including the full light curves.
 \item For all \DIAObjects overlapping the field of view, including those that have an associated
 new \DIASource from this visit, forced photometry will be performed on difference image (point source photometry only).
