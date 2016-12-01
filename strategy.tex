@@ -11,8 +11,8 @@ from Cerro Pach\'{o}n in Northern Chile. The current baseline design,
 with an 8.4m (6.7m effective) primary mirror, a 9.6 deg$^2$ field of
 view, and a 3.2 Gigapixel camera, will allow about 10,000 square
 degrees of sky to be covered every night, with typical 5$\sigma$ depth
-for point sources of $r\sim24.5$ (AB). The system is designed to yield
-high image quality (the median delivered seeing in the $r$ band of
+for point sources of $r\sim24.5$ mag (AB). The system is designed to yield
+high image quality (with a median delivered seeing in the $r$ band of
 about 0.8 arcsec) as well as superb astrometric  and photometric
 accuracy\footnote{For detailed specifications, please see the LSST
 Science Requirements Document, \url{http://ls.st/srd}}. The total survey
@@ -25,7 +25,7 @@ LSST will be operated in a fully automated survey mode. About 90\% of the
 observing time will be devoted to a deep-wide-fast survey mode which will
 uniformly observe a 18,000 deg$^2$ region about 1000 times (summed over
 all six bands) during the anticipated 10 years of operations, and yield a coadded map
-to $r\sim27.5$. These data will result in catalogs including about
+to a depth of $r\sim27.5$. These data will result in catalogs including about
 $40$ billion stars and galaxies, that will serve the majority of the
 primary science programs. The remaining 10\% of the observing time
 will be allocated to special projects such as a Very Deep and Fast
@@ -36,7 +36,7 @@ time domain survey\footnote{Informally known as ``Deep Drilling Fields".}.
 \subsection{LSST Observing Strategy}
 
 As designed and funded (by the U.S National Science Foundation and
-Department of Energy), LSST is primarily a science-driven mission.
+the Department of Energy), LSST is primarily a science-driven mission.
 The LSST is designed to achieve goals set by four main science themes:
 \begin{enumerate}
 \item Probing Dark Energy and Dark Matter;
@@ -49,8 +49,8 @@ varying sensitivity to instrumental and system parameters. These themes
 fully exercise the technical capabilities of the system, such as photometric
 and astrometric accuracy and image quality.
 
-The current baseline survey strategy is planned to maximize the overall science returns, including
-Solar System science, rather than $H<22$ NEO/PHA discovery completeness (though the
+The current baseline survey strategy is designed to maximize the overall science returns, including
+Solar System science, rather just than the completeness of NEO/PHAs brighter than $H=22$ (though the
 two goals are highly interrelated). Discovering and linking objects in the Solar System
 moving with a wide range of apparent velocities (from several degrees per day for
 NEOs to a few arc seconds per day for the most distant TNOs) places strong
@@ -132,7 +132,7 @@ The LSST strategy for linking detections into orbits assumes the following main 
 \begin{enumerate}
 \item Detections in difference images (obtained during the same night), that do not
          have a nearby static object (e.g. variable stars) within a small exclusion radius
-         (a fraction of an arcsec), are linked into tracklets. There will be of the order
+         (a fraction of an arcsecond, but possibly larger for brighter stars), are linked into tracklets. There will be of the order
          a million tracklets per observing night (see \S\ref{sec:tracklets}).
 \item At least three tracklets obtained in a 15-30 day wide window are linked into
          candidate tracks, using kd-trees and pre-filtering steps based on tracklets' positions
@@ -147,7 +147,7 @@ The LSST strategy for linking detections into orbits assumes the following main 
          and a fiducial tracklet density of 450 deg$^{-2}$, the probability of a chance alignment
          of a {\it single} false detection within $5\sigma$ astrometric tolerance from a given
          trajectory is only about 10$^{-4}$. For a trajectory constrained by 3 detections, the
-         probability that 3 more detections will line up by chance is thus about 10$^{-12}$. Hence,
+         probability that 3 more detections will line up by chance is thus about 10$^{-12}$ (compared to $\sim 10^7$ detections per night). Hence,
          the number of false tracks which could pass IOD-based filtering is negligible, as well as
          the incompleteness induced by this step. Indeed, the only reason for track pre-filtering
          in the second step is to decrease the number of candidate tracks that are processed
