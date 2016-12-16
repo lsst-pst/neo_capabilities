@@ -121,10 +121,10 @@ Given the modest computing resources used in MOPS tests described above, the run
 usage results bode well for LSST processing. Assuming a 1000-core machine dedicated to LSST moving
 object processing (corresponding to about 1\% of the anticipated total LSST compute power at the
 National Center for Supercomputing Applications), MOPS runtime for producing
-candidate tracks should not exceed an hour.
+candidate tracks should not exceed an hour, assuming sufficient parallelization can be achieved.
 
-The IOD step can also be handled with anticipated resources. The number of available IOD computations
-for a system a compute system with $N_{core}$ cores and allocated runtime $T_{runtime}$ can be estimated
+The IOD step can also be handled with anticipated resources and is trivially parallelizable. The number 
+of available IOD computations for a system a compute system with $N_{core}$ cores and allocated runtime $T_{runtime}$ can be estimated
 as
 \begin{equation}
   N_{IOD} = 3.6\times10^8 \left({ 0.1\,{\rm sec} \over T_{IOD}}\right) \,
