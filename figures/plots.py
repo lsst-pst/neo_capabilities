@@ -110,7 +110,7 @@ def make_fov_plot(calcFill=False):
     for cornerset in corners:
         cx = corners.swapaxes(0, 1)[0]
         cy = corners.swapaxes(0, 1)[1]
-        
+
     plt.plot(0, 0, 'r.')
     plt.xlabel('x Pupil (deg)', fontsize='larger')
     plt.ylabel('y Pupil (deg))', fontsize='larger')
@@ -129,11 +129,16 @@ def make_fov_plot(calcFill=False):
 
 
 
+
 if __name__ == '__main__':
     # Plot orbital elements.
-    make_orbit_plot('pha20141031.des')
+    #make_orbit_plot('pha20141031.des')
+    make_orbit_plot('phas_2k.des')
     make_orbit_plot('neos_2k.des')
-    # Make fov plot (slow).
-    make_fov_plot()
+
+    # Make fov plot.
+    #make_fov_plot()
+
+    # Make opsim footprints - use plot_footprint.py (from sims_operations/tools)
 
     plt.show()
