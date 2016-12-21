@@ -247,14 +247,14 @@ performing a NEO-focused survey. \label{tab:completeness}}
 & \multicolumn{3}{c}{10 year survey}  &  \multicolumn{4}{c}{12 year survey}  \\
 \cmidrule(r){2-4} \cmidrule(r){5-8}
 Simulation  & W=15 & W=30 & W=30 & W=15 & W=30 & W=30 & W=30 \\
-            &      &      & Trail Det&  & & Trail Det & SNR=4 \\
-%            &      &      &      &      & &           & SNR=4
+            &      &      & Trail Det&  & & Trail Det & Trail Det \\
+            &      &      &      &      & &           & SNR=4
 }
 \startdata
 LSST baseline & 65.5 & 68.4 & 69.1 & & &  \\
-Extra ecliptic visits & 66.1 & 69.8 & 70.5 & 70.5 & 73.9 & 74.8 & 77.1\\
-Longer ecliptic visits & 63.2 & 67.5 & 70.5 & 67.3 & 71.7 & 74.5 & 75.7 \\
-NEO-focused cadence & 66.5 & 70.3 & 72.3 & 70.2 & 73.8 & 75.8 & 77.2 \\
+Extra ecliptic visits & 66.1 & 69.8 & 70.5 & 70.5 & 73.9 & 74.8 & XX\\
+Longer ecliptic visits & 63.2 & 67.5 & 70.5 & 67.3 & 71.7 & 74.5 & XX \\
+NEO-focused cadence & 66.5 & 70.3 & 72.3 & 70.2 & 73.8 & 75.8 & XX \\
 \enddata
 \end{deluxetable}
 
@@ -266,7 +266,7 @@ Using only the baseline minion\_1016 and not changing the survey strategy, we ca
 \begin{itemize}
 \item extending the MOPS window for linking pairs of detections from the nominal 15 day window to a 30 day window: this increases completeness by about 3\%, although with an estimated increase in the compute requirements by about an order of magnitude (see Appendix \ref{sec:appMOPS}).
 \item enhancing source detection algorithms to mitigate detection losses to the trailing loss level: with the 30 second visits in the baseline minion\_1016, this only increases completeness by a very small amount, 0.5\%.
-\item using sources detected down to SNR=4 instead of SNR=5: this increases completeness by about 2-3\%, although with an estimated increase in the compute requirements by about two orders of magnitude (see \S\ref{sec:kaiser}).
+\item using sources detected down to SNR=4 instead of SNR=5: this increases completeness by about 3-4\%, although with an estimated increase in the compute requirements by about two orders of magnitude (see \S\ref{sec:kaiser}).
 \end{itemize}
 
 The major gain available in the baseline survey (or any survey with a maximum visit time of 30 seconds) is through increasing the MOPS linking window from 15 to 30 days. This allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. This behavior is likely related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky\footnote{A similar modification of
@@ -309,20 +309,22 @@ discovery of 140m NEOs started in earnest in 2000.
 
 We use a simplified model to estimate the contribution of known objects: since we do not know the
 survey pointing history for all the previous surveys, we simulate them by adopting an effective
-Johnson $V$ magnitude threshold, $V_{max}$. We integrate orbits for our synthetic NEO model
+Johnson $V$ magnitude threshold, $V_{max}$ and a simple solar elongation cut.
+We integrate orbits for our synthetic NEO model
 population from 2000 to 2015 and consider an object discovered if its peak $V$ magnitude
-during that period is brighter than $V_{max}$. We vary $V_{max}$ threshold until the completeness
+during that period is brighter than $V_{max}$ and the solar elongation is greater than $60\deg$. 
+We vary $V_{max}$ threshold until the completeness
 for NEOs with $H<22$ in 2015 is $\sim$25\%. We obtained $V_{max}=20.0$ (this threshold
 produces a completeness of 95\% for NEOs with $H<18$, i.e. for canonical objects larger than 1 km).
-We continue ``discovering'' objects with $V_{max}=20.0$ until the beginning of LSST survey in 2022
-(yielding 30\% completeness for NEOs with $H<22$, and 39\% for PHAs). All objects discovered prior
-to 2022 that were {\it not} re-discovered by LSST are added to post-LSST sample. 
-This likely underestimates the completeness boost added by other surveys, as it simply assumes the same discovery rate as seen over the past fifteen years, but does not include any improvements (in depth or sky coverage) in those other surveys.
+After 2015, we increase the value of $V_{max}$ to $V_{max}=22.0$, to account for the greater sensitivity
+of modern surveys, such as PanSTARRS. We continue ``discovering'' objects with $V_{max}=22.0$ and solar elongation
+greater than $60\deg$ until the beginning of the LSST survey, yielding 44\% completeness for NEOs 
+with $H<22$ and 55\% completeness for PHAs in 2022. We continue discovering objects with $V_{max}=22.0$ throughout
+the LSST survey; all objects discovered by these other suveys are added to the post-LSST sample, providing
+a boost to the final completeness of 8-11\% for NEOs and 11-15\% for PHAs.
 
 Our results are summarized in Figure~\ref{fig:knownObj} and Table~\ref{tab:completeness2}.
-For example, the completeness for PHAs is boosted by 9\% for baseline 10-year survey,
-a somewhat more modest effect than 11\% boost obtained by \cite{GMS2016}. For a 12-year
-survey, we predict a completeness of 80\% for PHAs, when known objects are taken into account.
+For a 12-year survey, we predict a completeness of 85\% for PHAs, when known objects are taken into account.
 
 
 \begin{deluxetable}{lcccc}
@@ -337,8 +339,8 @@ linking window is set to 30 days, and the detection threshold is set to SNR$=5$.
 Population  & only LSST & w/ known &  only LSST & w/ known 
 }
 \startdata
-    NEO    & 64 & 70 & 68 & 73  \\
-    PHA    & 68 & 77 & 74 & 80  \\
+    NEO    & 63.5 & 73.9 & 68.0 & 75.8  \\
+    PHA    & 68.4 & 82.8 & 73.9 & 85.4  \\
 \enddata
 \end{deluxetable}
 
