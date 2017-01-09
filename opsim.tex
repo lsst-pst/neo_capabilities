@@ -231,7 +231,8 @@ be boosted by 11\%. We discuss our own independent estimates of this effect in \
 \vskip -0.2in
 \caption{The cumulative completeness for PHAs and NEOs, as a function of absolute magnitude $H$, for the baseline
 cadence minion\_1016. The completeness is below 100\% at the bright end (large size limit) because some objects have
-synodic periods longer than the survey duration (and thus effectively ``hide'' behind the Sun). \label{fig:minionC1}}
+synodic periods longer than the survey duration (and thus effectively ``hide'' behind the Sun), and some are visible but
+ do not receive the required number of observations due to telescope scheduling. \label{fig:minionC1}}
 \end{figure}
 
 \begin{deluxetable}{lccccccc}
@@ -273,7 +274,17 @@ Using only the baseline minion\_1016 and not changing the survey strategy, we ca
 
 Increasing the MOPS linking window from 15 to 30 days achieves a substantial gain in completeness for the baseline survey 
 (or any survey with a maximum visit time of 30 seconds) without a significant computational cost. The increased window allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. This behavior is likely related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky\footnote{A similar modification of
-the baseline cadence, the so-called ``rolling cadence'', is also favored by the supernovae science programs. A release of a series of simulated surveys implementing this idea is anticipated for late 2017.} are likely to improve the completeness even further.  Pushing to SNR=4 exceeds the expected compute resources and is not worthwhile in comparison.
+the baseline cadence, the so-called ``rolling cadence'', is also favored by the supernovae science programs. A release of a series of simulated surveys implementing this idea is anticipated for late 2017.} are likely to improve the completeness even further. The possible magnitude of effectively scheduling these contiguous blocks is illustrated in Figure~\ref{fig:more_completeness}, where the losing the requirement on `windows' and only requiring a single night of pairs, increases completeness by 13\%.  Pushing to SNR=4 exceeds the expected compute resources and is not worthwhile in comparison.
+
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=0.99\textwidth]{figures/minion_1016_beo_More_Cumulative_Completeness}
+\vskip -0.2in
+\caption{The cumulative completeness for NEOs, as a function of absolute magnitude $H$, for the baseline
+cadence minion\_1016, considering a variety of detection requirements. The completeness is below 100\% at the bright end (large size limit) because some objects have
+synodic periods longer than the survey duration (and thus effectively ``hide'' behind the Sun), but also because some objects do not receive the required number of observations within the `window'. The potential gains with more optimized scheduling (observing larger contiguous chunks of sky, for example), can be seen in the difference between the single pair of detections or 6 separate detections within 60 nights, vs. 3 pairs of detections in 15 or 30 nights.   \label{fig:minionC1}}
+\end{figure}
 
 
 When an NEO population is used instead of a PHA input population, the cumulative completeness is about 5\% lower
