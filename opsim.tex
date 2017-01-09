@@ -71,10 +71,12 @@ in \S\ref{sec:surveys} below.
 Given $H$ magnitude for an object, its apparent magnitude in Johnson's $V$ band can be easily computed
 given the positions of the object, the Sun and the observer (e.g. \citealt{juric02}).
 Magnitudes, or fluxes, in any other optical and near-IR band (in case of LSST, $u$, $g$, $r$, $i$, $z$, and $y$)
-can be computed from $V$ magnitude by specifying a spectrum or relevant colors for each object. We have
-assumed that our entire PHA population has the same colors as C-type main-belt asteroids, with resulting
-transformations to  LSST bandpasses listed in Table~\ref{tab:sed_colors}. Choosing the colors of  S-type
-main-belt asteroids instead results in $<$1\% changes in completeness.
+can be computed from $V$ magnitude by specifying a spectrum for each object. We have
+assumed that our entire NEO population has the same spectral energy distribution as C-type main-belt asteroids.
+The computed color transformations for LSST bandpasses are listed in Table~\ref{tab:sed_colors}. Choosing the 
+spectral energy distribution of  S-type main-belt asteroids instead results in $<$1\% changes in completeness. 
+These simulation-based colors were verified using SDSS observations \citep{2001AJ....122.2749I} and analogous 
+computations with SDSS bandpasses. 
 
 \begin{deluxetable}{ccccccc}
 \centering
@@ -228,7 +230,8 @@ be boosted by 11\%. We discuss our own independent estimates of this effect in \
 \includegraphics[width=0.99\textwidth]{figures/minion_1016_CumulativeCompleteness_NEO_and_PHA_Cumulative_Completeness}
 \vskip -0.2in
 \caption{The cumulative completeness for PHAs and NEOs, as a function of absolute magnitude $H$, for the baseline
-cadence minion\_1016. \label{fig:minionC1}}
+cadence minion\_1016. The completeness is below 100\% at the bright end (large size limit) because some objects have
+synodic periods longer than the survey duration (and thus effectively ``hide'' behind the Sun). \label{fig:minionC1}}
 \end{figure}
 
 \begin{deluxetable}{lccccccc}
@@ -268,7 +271,8 @@ Using only the baseline minion\_1016 and not changing the survey strategy, we ca
 \item using sources detected down to SNR=4 instead of SNR=5: this increases completeness by about 3\%, although with an estimated increase in the compute requirements by about two orders of magnitude (see \S\ref{sec:kaiser}).
 \end{itemize}
 
-The major gain available in the baseline survey (or any survey with a maximum visit time of 30 seconds) is through increasing the MOPS linking window from 15 to 30 days. This allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. This behavior is likely related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky\footnote{A similar modification of
+Increasing the MOPS linking window from 15 to 30 days achieves a substantial gain in completeness for the baseline survey 
+(or any survey with a maximum visit time of 30 seconds) without a significant computational cost. The increased window allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. This behavior is likely related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky\footnote{A similar modification of
 the baseline cadence, the so-called ``rolling cadence'', is also favored by the supernovae science programs. A release of a series of simulated surveys implementing this idea is anticipated for late 2017.} are likely to improve the completeness even further.  Pushing to SNR=4 exceeds the expected compute resources and is not worthwhile in comparison.
 
 
@@ -398,7 +402,7 @@ We proceed with an example of a comparison of different simulations.
 \subsection{A Comparison with the Grav, Mainzer \& Spahr (2016) Study \label{sec:GMS}}
 
 \cite{GMS2016} (hereafter GMS)   % couldn't make it work the way it's supposed to work...
-reported different NEO completeness levels than published by the LSST team
+reported somewhat different NEO completeness levels than published by the LSST team
 in 2007 and 2014. Given the above discussion of various systematic effects, it is easy to understand
 the reported differences. There are three main reasons why the GMS results differ:
 \begin{enumerate}
@@ -409,12 +413,12 @@ the reported differences. There are three main reasons why the GMS results diffe
 \item GMS used a different realization of the PHA population.
 \end{enumerate}
 
-Redefining the completeness limit from $H<22$ to $D>140$~m leads to a drop in completeness of about 5\% according to GMS ({\it i.e.} GMS would calculate a completeness of about 5\% less for NEOs and PHAs).
-Different versions of the simulated survey include advances in our understanding of the system throughput and delivered seeing. For example, between {\it enigma\_1189} (the baseline simulated survey used in GMS) and {\it minion\_1016} (the baseline simulated survey here), the limiting magnitudes are on average a few tenths of a magnitude fainter in {\it enigma\_1189} due to changes in the system throughput and delivered seeing. These two surveys are statistically the same otherwise. These limiting magnitude changes would result in on the order of 5\% increase in completeness in GMS compared to the values calculated here.
-For the NEO population, both GMS and this work used samples from the \cite{Grav2011} model and calculate similar results for completeness (after adjusting for the other two effects). For the PHA population, we find an increase in completeness of about 5\%  over NEOs (depending on simulated survey), but GMS find a decrease of 1\%. The reasons for this difference are unclear, but potentially lie in different definitions of the population (including the redefinition of the population at the faint end involved in the completeness limit redefinition described above) combined with the differences in the simulated survey.
+The first of these effects is the dominant one.  Redefining the completeness limit from $H<22$ to $D>140$~m leads to a drop in completeness of about 5\% according to GMS ({\it i.e.} GMS would calculate a completeness of about 5\% less for NEOs and PHAs).
+Different versions of the simulated survey include advances in our understanding of the system throughput and delivered seeing. For example, between {\it enigma\_1189} (the baseline simulated survey used in GMS) and the new baseline {\it minion\_1016} used here, the limiting magnitudes are on average a few tenths of a magnitude fainter in {\it enigma\_1189} due to changes in the system throughput and delivered seeing; as a result, the completeness values are about 2\% large for {\it enigma\_1189} than for {\it minion\_1016}. 
+These two surveys are statistically the same otherwise. 
+For the NEO population, both GMS and this work used samples from the \cite{Grav2011} model and calculate similar results for completeness (after adjusting for the other two effects). 
 
-In summary, the GMS calculation of 63\% completeness for NEOs could be translated to the range of $\sim$60\% to
-$\sim$70\% for the LSST baseline cadence,  depending on the input NEO population, varying NEO detection criteria,
-and specifics of the simulation.  After accounting for different choices of simulation parameters, we conclude the
-GMS results are fully consistent (within 1-2 \%) with the results previously published by the LSST team, and with the
-results discussed here.
+In summary, the GMS calculation of 62\% completeness for PHAs (12-day window and $D>140$m) corresponds
+well to our 65.6\% completeness (see Table 2) for PHAs with $H<22$ (15-day window).  Therefore, after accounting 
+for different choices of simulation parameters, we conclude the GMS results are fully consistent (within 1-2 \%) 
+with the results previously published by the LSST team, as well as with the results discussed here.
