@@ -1,7 +1,7 @@
 \section{The Impact of False Positives on MOPS Performance \label{sec:appMOPS}}
 
 
-We seek to develop analytic understanding for the behavior of MOPS results.
+We seek to develop an analytic understanding for the behavior of the MOPS results.
 In particular, we want to be able to predict the numbers of tracklets and
 candidate tracks for a given input number of true and false detections. In addition, we seek
 to understand how these numbers scale with the search window width,
@@ -41,7 +41,7 @@ Analysis of DECam images reduced using prototype LSST software, described in \S\
 shows a higher rate of detections in difference images, and a fraction of those detections
 cannot be readily associated with true moving objects. This analysis implies a conservative
 upper limit for the false positive rate of about $\rho_{FP} =  400$ deg$^{-2}$. This value
-is an upper limit because analyzed DECam fields are close to the Ecliptic, with a significant but
+is conservative because analyzed DECam fields are close to the Ecliptic, with a significant but
 not well known contribution from real asteroids (due to very faint flux levels, $r \sim 24$),
 and it also includes true astrophysical transients that are not associated with static objects
 (stars and galaxies). It is quite possible that the false positive rate might be several
@@ -97,10 +97,10 @@ the range 20-60 minutes. The search area, $A_S = \pi \delta_{max}^2$, is then
 \label{eq:AS}
       A_S = 0.0055 \left( v_{max}  \over {\rm deg \, day}^{-1} \right)^2 \, \left(\Delta t \over {\rm hour} \right)^2 {\rm deg}^2.
 \end{equation}
-Adopting $v_{max} = 1$ deg day$^{-1}$, which ensures a high completeness level even for fast-moving
-NEOs\footnote{Simulations imply that 95\% of NEO detections have $v<1$ deg day$^{-1}$; with this threshold,
+To guide setting the cutoff velocity, simulations imply that 95\% of NEO detections have $v<1$ deg day$^{-1}$; with this threshold,
 the completeness for main-belt asteroids is essentially 100\%. Objects moving faster than 1 deg day$^{-1}$ will
-be easily resolved in LSST images and can be treated separately using specialized algorithms.}, and $\Delta t = 30$
+be easily resolved in LSST images and can be treated separately using specialized algorithms.
+Adopting $v_{max} = 1$ deg day$^{-1}$,  and $\Delta t = 30$
 minutes (which together  imply a search radius of $\delta_{max} = 1.3$ arcmin), gives a search area of
 $A_S = 0.0014$ deg$^2$.
 
@@ -181,7 +181,7 @@ vectors, as follows.
 In the first step, the motion vector of a tracklet from the first night is linearly extrapolated
 to the second night and tracklets from the second night are searched for within a radius set
 by the orbital curvature (which dominates over astrometric errors). With appropriate use of
-kd-tree and similar algorithms for fast search, only a small fraction (of the order a percent)
+kd-tree and similar algorithms for fast searches, only a small fraction (of the order a percent)
 of tracklets from the second night need to be examined in detail. The cutoff radius varies
 from $\sim$1 arcmin for the case of two consecutive nights to $\sim$1 deg. for 15-day separation
 (as discussed in detail further below). In addition, the velocity of second tracklet is required
