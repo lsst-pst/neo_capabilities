@@ -1,12 +1,12 @@
 \section{LSST Observing Cadence Optimization to Enhance PHA Completeness \label{sec:opsim}}
 
-By observing in pairs of visits -- a strategy validated in the previous sections -- rather than triplets or quads of visits in each night, we can increase sky coverage and improve the survey efficiency. However, even within this constraint, there are multiple approaches to surveying the sky. In this section we will evaluate the effects of varying the LSST observing strategy and the resulting PHA completeness.
+By observing in pairs of visits -- a strategy validated in the previous sections -- rather than triplets or quads of visits in each night, we can increase sky coverage and improve the survey efficiency. However, even within this constraint, there are multiple approaches to surveying the sky. In this section we evaluate the effects of varying the LSST observing strategy and the resulting PHA completeness.
 
-This evaluation will be carried out using a combination of the LSST Operations Simulator (OpSim) and the LSST Metrics Analysis Framework (MAF).
-OpSim was previously described in section \ref{sec:strategy}.
+This evaluation is carried out using a combination of the LSST Operations Simulator (OpSim) and the LSST Metrics 
+Analysis Framework (MAF). 
 The LSST Metrics Analysis Framework (MAF) is a user-oriented, python package for evaluating the pointing history
 from these simulated surveys in light of particular science goals or interests. The various metrics coded in the
-MAF framework can be calculated for any given simulated survey and compared as proposal parameters are changed
+MAF framework can be calculated for any given simulated survey and compared as simulation parameters are changed
 in OpSim. This permits a thorough investigation of the trades between different observing strategies, in terms of the
 effect on multiple science goals, including the PHA completeness.  We first describe the basic steps in our simulations,
 then describe the baseline and modified LSST simulated surveys, and then discuss our results.
@@ -42,7 +42,7 @@ surveys, and the corresponding PHA completeness estimates.
 
 \subsubsection{NEO Population Modeling \label{sec:MAFdetails}}
 
-We use random samples from the synthetic solar system model presented in \cite{Grav2011} in order to model completeness for NEOs and PHAs. We have chosen a sample of 2000 NEOs from the \cite{Grav2011} NEO population, which is based on the \cite{Bottke2002} model. We chose a separate sample of 2000 PHAs from the same model, by choosing NEOs with a MOID $\le 0.05$~AU. The PHA population is useful for evaluating PHA completeness directly; the NEO population is useful for comparison to other survey evaluations. A plot of the $a$, $e$, $i$ distributions for these PHAs and NEOs is shown in Figure~\ref{fig:PHA_orbits}.
+We use random samples from the synthetic solar system model (S3M) presented in \cite{Grav2011} in order to model completeness for NEOs and PHAs. We have chosen a sample of 2000 NEOs from the \cite{Grav2011} NEO population, which is based on the \cite{Bottke2002} model. We chose a separate sample of 2000 PHAs from the same model, by choosing NEOs with a MOID $\le 0.05$~AU. The PHA population is useful for evaluating PHA completeness directly; the NEO population is useful for comparison to other survey evaluations. A plot of the $a$, $e$, $i$ distributions for these PHAs and NEOs is shown in Figure~\ref{fig:PHA_orbits}.
 
 With this small set of orbits, we then assume that the $H$ magnitude distribution is independent of the orbital distribution. For most small body populations, including the PHA population larger than 140~m in diameter, this is approximately true. Assuming an independent distribution, each orbit can be ``cloned'' from the fiducial $H$ magnitude to a range of values covering the interesting sizes for analysis; this allows the analysis to use a large number of objects at each $H$ value, without requiring extensive resources to generate ephemerides for a much larger set of orbits. We use the small population of 2000 NEOs or PHAs and clone them to a range of $H$ magnitudes between $H$=11 and $H$=28 using $dN/dH = 10^{\alpha\, H}$, with $\alpha=0.3$ \citep{2017Icar..284..114S}. We have verified with a larger simulated set of NEOs that reducing the population from 10,000 to 2000 objects does not change the calculated survey completeness significantly.
 
@@ -56,7 +56,7 @@ of times (typically every 2 hours), and then interpolated to the exact times of 
 \includegraphics[width=0.49\textwidth]{figures/phas_2k_orbits}
 \includegraphics[width=0.49\textwidth]{figures/neos_2k_orbits}
 \vskip -0.2in
-\caption{The eccentricity and inclination distributions, as a function of semi-major axis, of the PHAs (left) and NEOs (right) used in this analysis. Both populations were randomly sampled from the S3M model \citep{Grav2011}, a synthetic solar system model based on the \cite{Bottke2002} NEO orbital distribution. NEOs are defined as objects with $q<1.3$~AU; PHAs are defined as having a Minimum Orbit Intersection Distance (MOID) with the Earth of less than 0.05~AU (implying $q\le1.05$~AU) and having $H\le22$.  \label{fig:PHA_orbits}}
+\caption{The eccentricity and inclination distributions, as a function of semi-major axis, of the PHAs (left) and NEOs (right) used in this analysis. Both populations were randomly sampled from the S3M model \citep{Grav2011}, a synthetic solar system model based on the \cite{Bottke2002} NEO orbital distribution. NEOs are defined as objects with $q<1.3$~AU; PHAs are defined as having a Minimum Orbit Intersection Distance (MOID) with Earth of less than 0.05~AU (implying $q\le1.05$~AU) and having $H\le22$.  \label{fig:PHA_orbits}}
 \end{figure}
 
 \subsubsection{Survey Cadence Modeling}
@@ -100,12 +100,13 @@ S & -1.82 &  -0.37 &  0.26 & 0.46 &  0.40 & 0.41  \\
 \caption{Model of the LSST camera footprint, including chipgaps and CCD + raft layout. \label{fig:camera_footprint}}
 \end{figure}
 
-If the object is within the LSST field of view, its predicted position, velocity, and apparent $V$ magnitude (calculated from the fiducial $H$ magnitude associated with the orbit) is recorded along with information about the simulated observation itself (such as the seeing, limiting magnitude, filter, and boresight RA/Dec). The full LSST camera footprint, including chipgaps, is used to determine whether
-an object is within the field of view. The LSST camera footprint is shown in Figure~\ref{fig:camera_footprint}.
+If the object is within the LSST field of view, its predicted position, velocity, and apparent $V$ magnitude (calculated from the fiducial $H$ magnitude associated with the orbit) is recorded along with information about the simulated observation itself (such as the seeing, limiting magnitude, filter, and boresight RA/Dec). The full LSST camera footprint (see Figure~\ref{fig:camera_footprint}), including chipgaps, is
+used to determine whether an object is within the field of view.
 
-MAF also calculates trailing loss estimates for each observation, which are necessary when evaluating if a particular object is visible in a given observation. Trailing losses occur whenever the movement of an object spreads its photons over a wider area than a simple stellar point spread function (PSF). There are two aspects of trailing loss to consider: SNR losses and detection algorithm losses. The first is the
+MAF also calculates signal-to-noise (SNR) loss due to trailing for each observation, which is required when evaluating whether 
+a particular object is detectable in a given observation. Trailing losses occur whenever the movement of an object spreads its photons over a wider area than a simple stellar point spread function (PSF). There are two aspects of trailing loss to consider: SNR losses and detection algorithm losses. The first is the
 irreversible degradation in SNR that occurs because the trailed object includes a larger number of background pixels in its footprint, compared to a stationary PSF. The second effect, detection loss, occurs because source detection software is optimized for detecting point sources; a stellar PSF-like matched filter is used when identifying sources that pass above the defined threshhold. This filter is non-optimal for trailed objects but losses can be mitigated with improved software ({\it e.g.} detecting to a lower PSF-based SNR threshhold and then using a variety of trailed PSF filters to detect sources). When considering whether a source would be detected at a given SNR using typical source detection software, the sum of SNR trailing and detection losses should be used. With an improved
-algorithm optimized for trailed sources (and this with additional workload on data management), the smaller SNR losses should be
+algorithm optimized for trailed sources (implying additional scope for LSST data management), the smaller SNR losses should be
 used instead.
 
 \begin{figure}[t!]
@@ -121,7 +122,7 @@ used instead.
 \label{fig:trailinglosses}}
 \end{figure}
 
-Our simulations of these effects show that both trailing losses can be fit well with the
+Our simulations of these effects show that both types of trailing losses can be fit well with the
 same functional form:
 \begin{eqnarray}
 \Delta \, m & = &-1.25 \, log_{10} \left( 1 + \frac{a \, x^2} { 1 + b\,
@@ -131,8 +132,8 @@ x & = & \frac{v \, T_{exp}} {24 \, \theta}
 where $v$ is the velocity (in deg/day), $T_{exp}$ is the exposure time (in seconds), and $\theta$ is the FWHM (in arcseconds). For trailing SNR losses, we find $a = 0.67$ and $b = 1.16$; for the cumulative loss, that includes both SNR and detection losses,
 we find $a=0.42$ and $b=0$. An illustration of the magnitude of these trailing loss effects for 0.7 arcsec seeing is given in Figure~\ref{fig:trailinglosses}.
 
-We calculate the probability of detecting a particular source given its magnitude $m$ (after accounting for trailing losses)
-and the $5\sigma$ limiting magnitude $m_5$ using a logistic function
+We calculate the probability of detecting a particular source given its magnitude $m$ 
+and the $5\sigma$ limiting magnitude $m_5$ (after accounting for trailing losses) using a logistic function
 \begin{eqnarray}
      P & = & \left[ 1 +  {\rm exp}\left(\frac {m -  m_5}{\sigma}\right) \right]^{-1}.
 \end{eqnarray}
@@ -210,15 +211,15 @@ LSST-like system fully dedicated to NEO surveying.
 \subsection{Completeness analysis results}
 
 In the baseline reference run, minion\_1016, with the baseline discovery
-criteria, with pairs of visits in each night occurring within 60 minutes
-repeated for 3 nights within a 15 day time window, we find a cumulative
+criteria (pairs of visits occurring within 60 minutes and 
+repeated for 3 nights within a 15 day time window), we find a cumulative
 completeness at $H\le22$ of 65.6\% for our PHA input population (see
 Figure~\ref{fig:minionC1}). This should be considered our initial baseline PHA
 completeness, as it uses the reference run and the baseline MOPS and data
 management requirements.
 
 From this baseline, we can evaluate the effects of changing both the survey design (reallocating telescope resources) and the discovery criteria, which effectively sets the computational resources.
-There is an interplay between discovery criteria and survey design -- as an obvious example, discovery criteria requiring triplets of visits per night instead of pairs will result in much different completeness results if the survey was designed to only request two visits per night rather than three. Likewise, some changes in survey design work best with changes to the discovery criteria; for example, lengthening the visit time increases the detection losses, which means pushing source detection to the ``trailing loss'' threshold results in a significant improvement in completeness. While we compare discovery criteria within a single simulated survey as much as possible, there are some changes in discovery criteria which must be compared between different surveys using different observing strategies.
+There is an interplay between discovery criteria and survey design -- as an obvious example, discovery criteria requiring triplets of visits per night instead of pairs will result in much different completeness results if the survey was designed to only request two visits per night rather than three. Likewise, some changes in survey design work best with changes to the discovery criteria; for example, lengthening the visit time increases the detection losses and pushing source detection to the ``trailing loss'' limit is required for a significant improvement in completeness. While we compare discovery criteria within a single simulated survey as much as possible, there are some changes in discovery criteria which must be compared between different surveys using different observing strategies.
 
 All the completeness results presented below assume that no objects are known prior to LSST survey,
 and thus are biased low. For example, by assuming that 43\% PHAs would be discovered by the start of
@@ -268,13 +269,14 @@ Using only the baseline minion\_1016 and not changing the survey strategy, we ca
 
 \begin{itemize}
 \item extending the MOPS window for linking pairs of detections from the nominal 15 day window to a 30 day window: this increases completeness by about 3\%, although with an estimated increase in the compute requirements by about an order of magnitude (see Appendix \ref{sec:appMOPS}).
-\item enhancing source detection algorithms to mitigate detection losses to the trailing loss level: with the 30 second visits in the baseline minion\_1016, this only increases completeness by a very small amount, about 0.5\%.
 \item using sources detected down to SNR=4 instead of SNR=5: this increases completeness by about 3\%, although with an estimated increase in the compute requirements by about two orders of magnitude (see \S\ref{sec:kaiser}).
+\item enhancing source detection algorithms to mitigate detection losses to the trailing loss level: with the 30 second visits in the baseline minion\_1016, this only increases completeness by a very small amount, about 0.5\%.
 \end{itemize}
 
 Increasing the MOPS linking window from 15 to 30 days achieves a substantial gain in completeness for the baseline survey 
 (or any survey with a maximum visit time of 30 seconds) without a significant computational cost. The increased window allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. This behavior is likely related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky\footnote{A similar modification of
-the baseline cadence, the so-called ``rolling cadence'', is also favored by the supernovae science programs. A release of a series of simulated surveys implementing this idea is anticipated for late 2017.} are likely to improve the completeness even further. The possible magnitude of effectively scheduling these contiguous blocks is illustrated in Figure~\ref{fig:more_completeness}, where the losing the requirement on `windows' and only requiring a single night of pairs, increases completeness by 13\%.  Pushing to SNR=4 exceeds the expected compute resources and is not worthwhile in comparison.
+the baseline cadence, the so-called ``rolling cadence'', is also favored by the supernovae science programs. A release of a series of simulated surveys implementing this idea is anticipated for late 2017.} are likely to improve the completeness even further. The possible magnitude of effectively scheduling these contiguous blocks is illustrated in Figure~\ref{fig:more_completeness}, where the losing the requirement on `windows' and only requiring a single night of pairs, increases completeness by 13\%.  Pushing to SNR=4 requires substantial 
+compute resources and is not cost effective in comparison.
 
 
 \begin{figure}[t!]
@@ -300,8 +302,9 @@ summarized in the rows of Table~\ref{tab:completeness} and described below.
 \begin{itemize}
 \item \textbf{Extra ecliptic spur visits:} By adding these extra visits over the course of a 10 year survey, the increase in completeness over the LSST baseline is only about 1\%. This improvement comes at a cost to other science cases, as the main survey footprint (the WFD proposal) only receives 1,715,354 visits (82\%) of the number of visits in the reference run; the outcome of many science programs is roughly proportional to the number of visits.
 \item \textbf{Extending the survey by two years:} Since minion\_1016 is a reference run, it only simulates 10 years.
-However, we can evaluate the ``extra ecliptic visits'' run at the 12 year mark, at which point the WFD proposal has received approximately the same number of visits as it would receive in the baseline 10 year survey. The additional two years of operations adds just over 4\% to the completeness.
-\item \textbf{Longer visits in the ecliptic:} This reaches fainter limiting magnitudes, but the effect of longer exposures alone is minimized by the fact that trailing losses are also increased. It is also hard to disentangle the effects of increasing the visit time near the Ecliptic and the resulting lower frequency of observations (and thus fewer opportunities for sets of observations matching the basic discovery criteria). The small modifications made by this survey strategy actually show a decrease in completeness, {\it until} detection losses are partially compensated for by modifying source detection algorithms to the trailing loss level; then this run provides a similar completeness level as the ``extra ecliptic visits'' survey at twelve years. Presumably this is where modifying the observing strategy to favor large contiguous chunks of sky would make a significant difference, consolidating the fewer ecliptic visits into a shorter amount of time suitable for object discovery.
+However, we can evaluate the ``extra ecliptic visits'' run at the 12 year mark, at which point the WFD proposal has received approximately the same number of visits as it would receive in the baseline 10 year survey. The additional two years of operations boost the completeness
+by about 4\%.
+\item \textbf{Longer visits in the ecliptic:} This strategy reaches fainter limiting magnitudes, but the effect of longer exposures alone is minimized by the fact that trailing losses are also increased. It is also hard to disentangle the effects of increasing the visit time near the Ecliptic and the resulting lower frequency of observations (and thus fewer opportunities for sets of observations matching the basic discovery criteria). The small modifications made by this survey strategy actually show a decrease in completeness, {\it until} detection losses are partially compensated for by modifying source detection algorithms to the trailing loss level; then this run provides a similar completeness level as the ``extra ecliptic visits'' survey at twelve years. Presumably this is where modifying the observing strategy to favor large contiguous chunks of sky would make a significant difference, consolidating the fewer ecliptic visits into a shorter amount of time suitable for object discovery.
 \item \textbf{Aggressively NEO-focused survey:} This survey uses a limited filter set, discards other proposals, and uses longer exposures along the ecliptic. This survey shows a modest increase in completeness (about 1.5\%) relative to the ``extra ecliptic visits'' survey, after using longer MOPS windows and pushing source detection to the trailing loss level.
 However, many science programs would be jeopardized with this observing strategy because observations in the $uzy$ filters,
 and observations of the DD and SCP fields, would not be obtained.
@@ -331,9 +334,9 @@ We vary $V_{max}$ threshold until the completeness
 for NEOs with $H<22$ in 2015 is $\sim$25\%. We obtained $V_{max}=20.0$ (this threshold
 produces a completeness of 95\% for NEOs with $H<18$, i.e. for canonical objects larger than 1 km).
 After 2015, we increase the value of $V_{max}$ to $V_{max}=22.0$, to account for the greater sensitivity
-of modern surveys, such as PanSTARRS. We continue ``discovering'' objects with $V_{max}=22.0$ and solar elongation
+of modern surveys, such as Pan-STARRS. We continue ``discovering'' objects with $V_{max}=22.0$ and solar elongation
 greater than $60\deg$ until the beginning of the LSST survey, yielding 44\% completeness for NEOs
-with $H<22$ and 55\% completeness for PHAs in 2022. We continue discovering objects with $V_{max}=22.0$ throughout
+and 55\% completeness for PHAs with $H<22$ in 2022. We continue discovering objects with $V_{max}=22.0$ throughout
 the LSST survey; all objects discovered by these other suveys are added to the post-LSST sample, providing
 a boost to the final completeness of 8-11\% for NEOs and 11-15\% for PHAs.
 
@@ -379,8 +382,8 @@ systems. It is unlikely that a meaningful quantitative comparison can be pushed 
 in completeness (in practice, the completeness of a given operating survey is best estimated using the object
 re-discovery rate). Based on our analysis, the leading systematic effects in simulated completeness estimates are:
 \begin{enumerate}
-\item NEO vs. PHA difference. The completeness is about $\sim$5\% higher for PHAs than for NEOs;
-for minion\_1016, the cumulative completeness is 65.6\% for PHAs and 60.7\% for NEOs with 15 day MOPS windows.
+\item NEO vs. PHA difference. The completeness is about $\sim$5\% higher for PHAs than for NEOs; for example,
+the cumulative completeness for minion\_1016 is 65.6\% for PHAs and 60.7\% for NEOs with 15 day MOPS windows.
 \item Orbital parameter distribution for the simulated asteroid population (e.g. the Bottke model
              vs. the Granvik model); varying populations contribute completeness uncertainty of about a few percent)
 \item Different sample definitions: $H<22$ vs. $D>140$m (as shown by \citealt{GMS2016}, completeness
@@ -419,13 +422,13 @@ the reported differences. There are three main reasons why the GMS results diffe
 \begin{enumerate}
 \item GMS {\it redefined} the completeness limit from the commonly
   used $H<22$ criterion to an albedo-dependent value of $H$ limit (which
-  attempts to directly model the $D>140$ m size cut).
+  attempts to directly model the $D>140$ m size limit).
 \item GMS used a different realization of the LSST baseline survey.
 \item GMS used a different realization of the PHA population.
 \end{enumerate}
 
 The first of these effects is the dominant one.  Redefining the completeness limit from $H<22$ to $D>140$~m leads to a drop in completeness of about 5\% according to GMS ({\it i.e.} GMS would calculate a completeness of about 5\% less for NEOs and PHAs).
-Different versions of the simulated survey include advances in our understanding of the system throughput and delivered seeing. For example, between {\it enigma\_1189} (the baseline simulated survey used in GMS) and the new baseline {\it minion\_1016} used here, the limiting magnitudes are on average a few tenths of a magnitude fainter in {\it enigma\_1189} due to changes in the system throughput and delivered seeing; as a result, the completeness values are about 2\% large for {\it enigma\_1189} than for {\it minion\_1016}. 
+Different versions of the simulated survey include advances in our understanding of the system throughput and delivered seeing. For example, between {\it enigma\_1189} (the baseline simulated survey used in GMS) and the new baseline {\it minion\_1016} used here, the limiting magnitudes are on average a few tenths of a magnitude fainter in {\it enigma\_1189} due to changes in the system throughput and delivered seeing; as a result, the completeness values are about 2\% larger for {\it enigma\_1189} than for {\it minion\_1016}. 
 These two surveys are statistically the same otherwise. 
 For the NEO population, both GMS and this work used samples from the \cite{Grav2011} model and calculate similar results for completeness (after adjusting for the other two effects). 
 

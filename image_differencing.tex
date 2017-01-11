@@ -119,7 +119,7 @@ up at a much higher SNR value and results in numerous false positives that are
 mis-classified as $>5 \sigma$ detections.
 
 Tracking the covariance caused by multiple convolutions is a planned feature for
-the LSST stack, but is not currently implemented. Previous surveys, such as
+the LSST software stack, but is not currently implemented. Previous surveys, such as
 Pan-STARRS1, have used a small covariance ``pseudo-matrix'', which tracks the
 covariance between a small region of neighboring pixels, and then assumed that
 this relationship between pixels is constant across an image (Paul Price, priv. comm.).
@@ -133,7 +133,7 @@ affected by covariance, enabling us to accurately set a SNR threshold
 that recognizes and rejects all \DIASources with $\nu < 5$. This mitigation step
 will be unnecessary once the image covariance tracking is properly implemented
 in the LSST stack. Alternative solutions such as image ``decorrelation''
-\citep{DMTN-021} or the \citet{zackay} image differencing algorithm would also
+\citep{DMTN-021}, or the \citet{zackay} image differencing algorithm, would also
 alleviate the covariance problem, and tests of these methods in the LSST pipeline are ongoing.
 
 

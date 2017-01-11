@@ -96,7 +96,7 @@ tracks is not dominated by spurious detections---instead it is dominated by true
 tracks and mislinkages between true objects. This is due to the fundamental
 feature of MOPS: the 4-dimensional space of tracks (two coordinates and two
 velocity vector components) is sparse at up to moderate levels of contamination,
-and at the tested noise levels false tracklets are effectively filtered. This
+and at the tested noise levels false tracklets are effectively filtered out. This
 behavior accounts for the slow growth in tracks in the right panel of
 Figure~\ref{fig:MOPStests}.
 
@@ -124,15 +124,15 @@ National Center for Supercomputing Applications), MOPS runtime for producing
 candidate tracks should not exceed an hour, assuming sufficient parallelization can be achieved.
 
 The IOD step can also be handled with anticipated resources and is trivially parallelizable. The number 
-of available IOD computations for a system a compute system with $N_{core}$ cores and allocated runtime $T_{runtime}$ can be estimated
-as
+of available IOD computations for a compute system with $N_{core}$ cores and allocated runtime $T_{runtime}$ 
+can be estimated as
 \begin{equation}
   N_{IOD} = 3.6\times10^8 \left({ 0.1\,{\rm sec} \over T_{IOD}}\right) \,
                                          \left({ T_{runtime}  \over 10\,{\rm hr} }\right) \,
                                          \left({ N_{core}  \over 1000}\right).
 \end{equation}
 where $T_{IOD}$ is the time it takes to perform one IOD computation on a single core. Estimates
-of $T_{IOD}$ are in the range of 50 mas (S. Chesley, priv. comm.), considerably below the fiducial
+of $T_{IOD}$ are of the order 50 mas (S. Chesley, priv. comm.), considerably below the fiducial
 value of 100 mas adopted here. Given that the expected number of candidate tracks to filter using
 IOD is well below $10^7$, it should be possible to accomplish the IOD step in well under an hour.
 Alternatively, it is plausible that a 100-core machine might be sufficient for LSST moving object
