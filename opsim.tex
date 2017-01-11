@@ -275,7 +275,7 @@ Using only the baseline minion\_1016 and not changing the survey strategy, we ca
 
 Increasing the MOPS linking window from 15 to 30 days achieves a substantial gain in completeness for the baseline survey 
 (or any survey with a maximum visit time of 30 seconds) without a significant computational cost. The increased window allows more opportunities to capture the PHAs in a set of observations which meet the discovery criteria. It is worthwhile to note that the current OpSim behavior does not prioritize capturing large chunks of contiguous sky, and often leaves gaps in coverage from night to night. This behavior is likely related to the increase in completeness going from 15 day windows to 30 day windows; with the large LSST field of view, after 30 days the areal coverage will be much more evenly distributed than after 15 days. Changes to the scheduling algorithm to favor covering contiguous blocks of sky\footnote{A similar modification of
-the baseline cadence, the so-called ``rolling cadence'', is also favored by the supernovae science programs. A release of a series of simulated surveys implementing this idea is anticipated for late 2017.} are likely to improve the completeness even further. The possible magnitude of effectively scheduling these contiguous blocks is illustrated in Figure~\ref{fig:more_completeness}, where the losing the requirement on `windows' and only requiring a single night of pairs, increases completeness by 13\%.  Pushing to SNR=4 requires substantial 
+the baseline cadence, the so-called ``rolling cadence'', is also favored by the supernovae science programs. A release of a series of simulated surveys implementing this idea is anticipated for late 2017.} are likely to improve the completeness even further. Completeness could potentially be increased by over 10\% by better scheduling; this is illustrated in Figure~\ref{fig:more_completeness}, where only requiring a single night of pairs or requiring 6 observations in any sequence over 60 nights increases completeness over 10\%.  Pushing to SNR=4 requires substantial 
 compute resources and is not cost effective in comparison.
 
 
@@ -285,7 +285,7 @@ compute resources and is not cost effective in comparison.
 \vskip -0.2in
 \caption{The cumulative completeness for NEOs, as a function of absolute magnitude $H$, for the baseline
 cadence minion\_1016, considering a variety of detection requirements. The completeness is below 100\% at the bright end (large size limit) because some objects have
-synodic periods longer than the survey duration (and thus effectively ``hide'' behind the Sun), but also because some objects do not receive the required number of observations within the `window'. The potential gains with more optimized scheduling (observing larger contiguous chunks of sky, for example), can be seen in the difference between the single pair of detections or 6 separate detections within 60 nights, vs. 3 pairs of detections in 15 or 30 nights.   \label{fig:minionC1}}
+synodic periods longer than the survey duration (and thus effectively ``hide'' behind the Sun), and also because some objects do not receive the required number of observations within the `window'. It is not due to the limited sensitivity of the LSST system, as can be seen by the ``3 pairs in 15 nights, $\infty$ sensitivity'' line, which shows the completeness expected when the discovery requirement is 3 nights with pairs of observations within a 15 night window but assuming an infinitely sensitive survey. The potential gains with better optimized scheduling (observing larger contiguous chunks of sky, for example), can be seen in the difference between the single pair of detections or 6 separate detections within 60 nights, vs. 3 pairs of detections in 15 or 30 nights (indicating potential gains of over 10\% in completeness for $H\le22$). \label{fig:more_completeness}}
 \end{figure}
 
 
@@ -319,24 +319,17 @@ the completeness can be boosted from 65.6\% after 10 years with minion\_1016 sur
 \subsection{The Impact of Objects Known Prior to LSST Survey \label{sec:known}}
 
 The completeness results presented above assumed that no objects are known prior to LSST survey.
-By including known objects, the completeness is boosted to higher values; the current completeness
-for NEOs with $H<22$ is estimated to be about 25\% \citep{GMS2016}. According to the JPL NEO
-discovery page\footnote{See http://neo.jpl.nasa.gov/stats/}, one can conservatively estimate that
+By including known objects, the completeness is boosted to higher values; the current (2016) 
+completeness for NEOs with $H<22$ is estimated to be about 25\% \citep{GMS2016}. According to the JPL NEO discovery page\footnote{See http://neo.jpl.nasa.gov/stats/}, one can conservatively estimate that
 discovery of 140m NEOs started in earnest in 2000.
 
 We use a simplified model to estimate the contribution of known objects: since we do not know the
-survey pointing history for all the previous surveys, we simulate them by adopting an effective
-Johnson $V$ magnitude threshold, $V_{max}$ and a simple solar elongation cut.
-We integrate orbits for our synthetic NEO model
-population from 2000 to 2015 and consider an object discovered if its peak $V$ magnitude
-during that period is brighter than $V_{max}$ and the solar elongation is greater than $60\deg$.
-We vary $V_{max}$ threshold until the completeness
-for NEOs with $H<22$ in 2015 is $\sim$25\%. We obtained $V_{max}=20.0$ (this threshold
-produces a completeness of 95\% for NEOs with $H<18$, i.e. for canonical objects larger than 1 km).
-After 2015, we increase the value of $V_{max}$ to $V_{max}=22.0$, to account for the greater sensitivity
-of modern surveys, such as Pan-STARRS. We continue ``discovering'' objects with $V_{max}=22.0$ and solar elongation
-greater than $60\deg$ until the beginning of the LSST survey, yielding 44\% completeness for NEOs
-and 55\% completeness for PHAs with $H<22$ in 2022. We continue discovering objects with $V_{max}=22.0$ throughout
+survey pointing history for all the previous surveys, we simulate them by adopting a simple solar elongation cut and a two-step Johnson $V$ magnitude threshold: $V_{max1}$ before 2015 and $V_{max2}$ after 2015, when several more sensitive surveys such as PanSTARRS started reporting NEO discoveries. We set the solar elongation cut to be $60^\circ$, roughly matching most telescope pointing capabilities, and assume $V_{max2}$ (the limiting magnitude after 2015) to be 22.0, corresponding to the limiting magnitude expected from current state of the art surveys such as PanSTARRS. We integrate orbits for our synthetic NEO model
+population from 2000 to 2032 and consider an object discovered if its peak $V$ magnitude is brighter than $V_{max1}$ (before 2015) or $V_{max2}$ (after 2015) while its solar elongation is greater than $60^\circ$.  To determine $V_{max1}$, we vary this threshold until the completeness
+for NEOs with $H<22$ in 2016 is $\sim$25\%, obtaining $V_{max1}$=20.0. This also
+produces a completeness of 95\% for NEOs with $H<18$ in 2015, i.e. for canonical objects larger than 1 km.
+With these conditions, we expect a 44\% completeness for NEOs
+and 55\% completeness for PHAs with $H<22$ in 2022 at the start of the LSST survey. To determine the total impact of other surveys on LSST completeness, we continue discovering objects with $V_{max}=22.0$ throughout
 the LSST survey; all objects discovered by these other suveys are added to the post-LSST sample, providing
 a boost to the final completeness of 8-11\% for NEOs and 11-15\% for PHAs.
 
@@ -385,29 +378,30 @@ re-discovery rate). Based on our analysis, the leading systematic effects in sim
 \item NEO vs. PHA difference. The completeness is about $\sim$5\% higher for PHAs than for NEOs; for example,
 the cumulative completeness for minion\_1016 is 65.6\% for PHAs and 60.7\% for NEOs with 15 day MOPS windows.
 \item Orbital parameter distribution for the simulated asteroid population (e.g. the Bottke model
-             vs. the Granvik model); varying populations contribute completeness uncertainty of about a few percent)
+             vs. the Granvik model); varying populations contribute completeness uncertainty of about a few percent).
 \item Different sample definitions: $H<22$ vs. $D>140$m (as shown by \citealt{GMS2016}, completeness
-           increases by $\sim$5\% when $H$-based criterion is used)
+           increases by $\sim$5\% when an $H$-based criterion is used).
 \item Variations of the ``discovery window'' (e.g., X visit pairs in $N_w$ nights: changing $N_w$ from 15 to 30 with X=3 increases
-          completeness by about 3\%; changing X from 3 to 4 with $N_w=15$ decreases completeness by 6\%).
+          completeness by about 3\%, while changing $N_w$ from 15 to 12 decreases completeness by about 1\%).
+          %changing X from 3 to 4 with $N_w=15$ decreases completeness by 6\%).
 \item Uncertainties when predicting effective image depth (system throughput, variation of the detection efficiency
           with the signal-to-noise ratio, treatment of trailing losses); for a survey that has a completeness above 60\%,
           each additional {\it 0.1 magnitude of depth for a given survey cadence increases the completeness by another 1\%}.
 \item Uncertainties when predicting asteroid's apparent flux (albedo distribution, phase effects, photometric variability
           due to non-spherical shapes, color distributions); assuming an uncertainty of 0.2 mag in the effective
-          limiting magnitude, the corresponding  systematic uncertainty in completeness is about 2\%.)
-\item Variations of the nominal detection threshold (if the detection threshold is changed from the
-          signal-to-noise ratio of 5 or greater to 4 or greater, the completeness is boosted by 2-3\%;
+          limiting magnitude, the corresponding  systematic uncertainty in completeness is about 2\%.
+\item Variations of the nominal detection threshold. If the detection threshold is changed from the
+          signal-to-noise ratio of 5 or greater to 4 or greater, the completeness is boosted by $\sim$3\%;
           the difference between the optimal detection using trailed profile and point-spread-function
-          detection, which is negligible for LSST baseline exposure time of 30 seconds, would be worth 1-2\%
-          in completeness for doubled exposure time).
-\item Sensitivity to details in sky coverage and cadence (e.g. nightly pairs of visits vs. quads of visits;
-          requiring quads instead of pairs of visits decreases completeness by 30\% using baseline cadence;
-          about half of that loss can be recovered using cadence simulations that request four visits per night)
-\item The slope of the asteroid size distribution (current measurement uncertainty of this parameter
-          corresponds to a systematic uncertainty in completeness of about 2\%.)
-\item The impact of known objects: we estimated that 55\% of PHAs with $H<22$ would be discovered
-          by current survey assets by the start of LSST survey in 2022 (currently $\sim$33\%), and they would
+          detection, which is negligible for LSST baseline exposure time of 30 seconds, would be worth $\sim$2\%
+          in completeness for visits with a doubled exposure time.
+\item Sensitivity to details in sky coverage and cadence (e.g. nightly pairs of visits vs. quads of visits).
+          Requiring quads instead of pairs of visits decreases completeness by 30\% using the baseline cadence;
+          about half of that loss can be recovered using cadence simulations that request four visits per night.
+\item The slope of the asteroid size distribution. Current measurement uncertainty of this parameter
+          corresponds to a systematic uncertainty in completeness of about 2\%.
+\item The impact of known objects. We estimated that 55\% of PHAs with $H<22$ would be discovered
+          by current survey assets by the start of LSST survey in 2022 (currently $\sim$36\%), and they would
           boost the final PHA completeness for 10-year LSST baseline survey by 14\% (to 82.8\%).
 \end{enumerate}
 
