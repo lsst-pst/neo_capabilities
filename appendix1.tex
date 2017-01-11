@@ -13,8 +13,8 @@ image is an image produced by subtracting a science image from an appropriate
 ``average'' of the previously collected similar images of the same sky area, and using the
 same filter.}, with the goal of detecting and characterizing astrophysical phenomena
 revealed by their time-dependent nature. The detection of supernovae superimposed
-on bright extended galaxies is an example of this analysis, and of course moving Solar
-System objects are another example. The processing will be done on nightly/daily
+on bright extended galaxies is an example of this analysis, and, of course, moving Solar
+System objects are another example. The processing will be done on a nightly/daily
 basis and will result in the so-called Level 1 data products. Level 1 products will include
 difference images, catalogs of sources detected in difference images (the so-called
 \DIASources), static astrophysical objects\footnote{The LSST has adopted the nomenclature by
@@ -37,7 +37,7 @@ include associating new \DIASources with known \SSObjects, discovering new \SSOb
 and orbit refinement and management. This conceptual MOPS design is illustrated in
 Figure~\ref{fig:Pipe8}. Further details about the MOPS pipeline design and implementation are available
 from the LSST Science Pipelines Design Document \citep{LDM-151}.
-The next section briefly describes the main processing steps in nightly/daily Level 1 data processing.
+The next section briefly describes the main processing steps in the nightly/daily Level 1 data processing.
 
 \begin{figure}[!t]
     \centering
@@ -57,14 +57,14 @@ The next section briefly describes the main processing steps in nightly/daily Le
 Level 1 data products are a result of difference image analysis (DIA).
 \DIASources are sources detected on difference images with the signal-to-noise ratio $S/N>transSNR$,
 with $transSNR$=5.
-They represent changes in flux with respect to a deep template. Physically, a \DIASource may be an observation of new astrophysical object that was not present at that position in the template image (for example, an asteroid), or an observation of flux change in an existing source (for example, a variable star). Their flux can be negative (eg., if a source present in the template image reduced its brightness, or moved away). Their shape can be complex (eg., trailed, for a source with proper motion approaching $\sim {\rm deg}/{\rm day}$, or ``dipole-like", if an object's observed position exhibits an offset -- true or apparent -- compared to its position on the template).
+They represent changes in flux with respect to a deep template. Physically, a \DIASource may be an observation of new astrophysical object that was not present at that position in the template image (for example, an asteroid), or an observation of flux change in an existing source (for example, a variable star). The flux can be negative (eg., if a source present in the template image reduced its brightness, or moved away). The shape can be complex (eg., trailed, for a source with proper motion approaching $\sim {\rm deg}/{\rm day}$, or ``dipole-like", if an object's observed position exhibits an offset -- true or apparent -- compared to its position on the template).
 Some \DIASources will be caused by background fluctuations; with $transSNR = 5$,
 the expected false positive rate is about three per CCD ($\sim 60$ per sq. deg.) for the median seeing,
 or of the order 500,000 per typical night.
 The expected number of false positives due to background fluctuations is a very strong function
 of adopted $transSNR$: a change of $transSNR$ by 0.5
 results in a variation of an order of magnitude, and a change of $transSNR$ by unity changes the number of false
-positives by about two orders of magnitude.
+positives by about two orders of magnitude (see Section~\ref{sec:kaiser}).
 
 Clusters of \DIASources detected on visits taken at different times are associated with either a \DIAObject or an \SSObject, to represent the underlying astrophysical phenomenon. The association can be made in two different ways: by assuming the underlying phenomenon is an object within the Solar System moving on an orbit around the Sun\footnote{LSST pipelines will not fit for motion around other Solar System bodies; eg., identifying new satellites of Jupiter is left to the community.}, or by assuming it to be distant enough to only exhibit small parallactic and proper motion\footnote{Where ``small'' is small enough to unambiguously positionally associate together individual apparitions of the object.}. The latter type of association is performed during difference image analysis right after the image has been acquired. The former is done at daytime by \code{MOPS}, unless the \DIASource is an apparition of an already known \SSObject. In that case, it will be flagged as such during difference image analysis. At the end of the difference image analysis of each visit, LSST will issue time domain event alerts for all
 newly detected \DIASources\footnote{For observations on the Ecliptic near the opposition Solar System objects will dominate the \DIASource counts and (until they're recognized as such) overwhelm the explosive transient signal. It will therefore be advantageous to quickly identify the majority of Solar System objects early in the survey.}.
