@@ -144,13 +144,13 @@ The LSST strategy for linking detections into orbits assumes the following main 
          about the same number of false tracks as true tracks on the Ecliptic (of the order
          a million), with the completeness depending on population (e.g. main-belts
          asteroids vs. NEOs) and chosen tunable pre-filtering parameters (generally well above 90\%).
-\item Candidate tracks are then filtered further (pruned from false tracks) using the initial orbit
-         determination (IOD) and measurement uncertainties for the positions of all six
-         detections. Due to small expected astrometric errors (0.15 arcsec for the faintest objects,
+\item Candidate tracks are then filtered further (pruned from false tracks) by
+        performing an initial orbit determination (IOD) to assess which tracks
+        correspond to Keplerian orbits. Due to the high astrometric accuracy of the observations (uncertainties of 0.15 arcsec for the faintest objects,
          see \S\ref{sec:astromerrors}), we assume\footnote{A detailed discussion of the IOD step, 
          including an analysis of the accuracy of fitted orbital parameters,  will be presented in 
          a future publication.} hereafter that the number of false tracks which 
-         could pass IOD-based filtering is negligible, as well as the incompleteness induced by this 
+         could pass IOD-based filtering is negligible, as is the incompleteness induced by this 
          step. Indeed, the only reason for track pre-filtering in the second step is to decrease the 
          number of candidate tracks that are processed by the more computationally expensive IOD.
 \end{enumerate}
