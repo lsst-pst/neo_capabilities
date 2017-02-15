@@ -156,9 +156,10 @@ The LSST strategy for linking detections into orbits assumes the following main 
 \end{enumerate}
 
 False positives, be it false detections, false tracklets or false tracks, are assumed not be
-an issue because IOD will efficiently and reliably filter out false tracks due to high-accuracy
+an issue when linking detections into real objects because IOD will efficiently and reliably filter out false tracks due to high-accuracy
 astrometry and well-understood simple Keplerian model predictions. Therefore, the
-essential question is whether the resulting number of false tracks, and the corresponding
-IOD step, can be handled with available computing resources. As discussed in detail in \S\ref{sec:mops}
+essential question is whether the number of detections, including false detections, can be linked into tracks, and whether the resulting
+number of tracks, including false tracks, passed to the final IOD step can be handled with available computing resources.
+As discussed in detail in \S\ref{sec:mops}
 and in Appendix~\ref{sec:appMOPS}, even with computing resources quite modest compared to the
 sizing of LSST data processing system, the handling of the three steps above is not an issue.
