@@ -30,7 +30,7 @@ PS1 has encountered. Major improvements to hardware include CCDs with significan
 artifacts (e.g. DECam, see below; LSST) and optical systems designed to minimize ghosting
 and internal reflections (e.g. LSST). Improvements to the software include advanced image
 differencing pipelines (e.g., PTFIDE for the Palomar Transient Factory and the Zwicky Transient
-Facility) and various machine learning classifiers for filtering false positives. For example,
+Facility) and various machine-learning classifiers for filtering false positives. For example,
 \cite{goldstein15} used a Random Forest classifier with the Dark Energy Survey data
 and cleaned their sample of transient detections from a raw false:true detection
 rate ratio of 13:1 to a filtered rate of 1:3. This significant improvement is
@@ -40,8 +40,11 @@ Fig.~1 in \cite{goldstein15} to Fig.~17 in \cite{denneau13}.
 Here we summarize an analysis of image differencing performance based on DECam
 data and difference images produced and processed using prototype LSST
 software \citep{DMTN-006}. This analysis demonstrates that the false
-positive rate anticipated for LSST is significantly below the threshold for
+positive rate anticipated for LSST (without using any machine-learning classifiers for
+filtering false positives) is significantly below the threshold for
 successful deployment of MOPS, as will be discussed in Section~\ref{sec:mops}.
+
+
 
 \subsection{LSST Image Differencing Pipeline and Data Processing}
 
@@ -273,3 +276,9 @@ parts of an image where a defect (such as a cosmic ray, bad column, bleed trail,
 etc) had been interpolated over, though for some the cause is unclear. The
 implied density of correlated
 \DIASources is about 2.3 deg$^{-2}$, rendering this effect relatively unimportant.
+
+We note that the number and implied sky density of sufficiently bright asteroids to produce 
+scattered light and diffraction spike artifacts which would appear to move at solar system
+rates is at least two orders of magnitude smaller than the sky density of asteroids down 
+to LSST depth on the Ecliptic. Therefore, such artifacts will be unimportant as a contributor 
+to false tracks.

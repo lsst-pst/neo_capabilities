@@ -316,14 +316,15 @@ the completeness can be boosted from 65.6\% after 10 years with minion\_1016 sur
 ``extra ecliptic visits'' survey (recall that this completeness estimates do not account for the contribution of known objects).
 
 
-\subsection{The Impact of Objects Known Prior to LSST Survey \label{sec:known}}
+\subsection{The Impact of Objects Discovered by other Surveys  \label{sec:known}}
 
 The completeness results presented above assumed that no objects are known prior to LSST survey.
 By including known objects, the completeness is boosted to higher values; the current (2016)
 completeness for NEOs with $H<22$ is estimated to be about 25\% \citep{GMS2016}. According to the JPL NEO discovery page\footnote{See http://neo.jpl.nasa.gov/stats/}, one can conservatively estimate that
 discovery of 140m NEOs started in earnest in 2000.
 
-We use a simplified model to estimate the contribution of known objects: since we do not know the
+We use a simplified model to estimate the contribution of known objects discovered both prior
+and during LSST survey. Since we do not know the
 survey pointing history for all the previous surveys, we simulate them by adopting a simple solar elongation cut and a two-step Johnson $V$ magnitude threshold: $V_{max1}$ before 2015 and $V_{max2}$ after 2015, when several more sensitive surveys such as PanSTARRS started reporting NEO discoveries. We set the solar elongation cut to be $60^\circ$, roughly matching most telescope pointing capabilities, and assume $V_{max2}$ (the limiting magnitude after 2015) to be 22.0, corresponding to the limiting magnitude expected from current state of the art surveys such as Pan-STARRS1. We integrate orbits for our synthetic NEO model
 population from 2000 to 2032 and consider an object discovered if its peak $V$ magnitude is brighter than $V_{max1}$ (before 2015) or $V_{max2}$ (after 2015) while its solar elongation is greater than $60^\circ$.  To determine $V_{max1}$, we vary this threshold until the completeness
 for NEOs with $H<22$ in 2016 is $\sim$25\%, obtaining $V_{max1}$=20.0. This also
@@ -414,9 +415,9 @@ reported somewhat different NEO completeness levels than published by the LSST t
 in 2007 and 2014. Given the above discussion of various systematic effects, it is easy to understand
 the reported differences. There are three main reasons why the GMS results differ:
 \begin{enumerate}
-\item GMS {\it redefined} the completeness limit from the commonly
-  used $H<22$ criterion to an albedo-dependent value of $H$ limit (which
-  attempts to directly model the $D>140$ m size limit).
+\item GMS used a different definition of the the completeness limit: instead of 
+          the commonly used $H<22$ criterion, they used an albedo-dependent value 
+          of $H$ limit which attempts to directly model the $D>140$ m size limit.
 \item GMS used a different realization of the LSST baseline survey.
 \item GMS used a different realization of the PHA population.
 \end{enumerate}

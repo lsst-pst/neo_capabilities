@@ -59,8 +59,12 @@ constraints on the cadence of observations. The baseline strategy requires close
 spaced pairs of observations, two or preferably three times per lunation. The visit
 exposure time is set to 30 seconds to minimize the effects of trailing for the majority of
 moving objects. The images are well sampled to enable accurate astrometry, with
-anticipated absolute accuracy of at least 0.1 arcsec (and possibly an order of magnitude
-better when calibrated with upcoming Gaia's dataset, \citealt{Gaia}).
+anticipated absolute calibration accuracy of at least 0.1 arcsec (based on an early analysis 
+of Gaia's Data Release 1, the accuracy of astrometric calibration will probably improve 
+by more than an order of magnitude when using upcoming Gaia's dataset, \citealt{Gaia}).
+Typical astrometric errors for LSST detections will range from about 50 mas or better
+at the signal-to-noise ratio SNR=100 (dominated by systematics), to 150 mas at SNR=5
+(dominated by random errors). 
 
 LSST observations can be simulated using the LSST Operations Simulator tool
 \citep[OpSim,][]{delgado14}. OpSim runs a survey simulation with given
