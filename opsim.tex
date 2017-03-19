@@ -146,10 +146,14 @@ as detected using the probability $P$. We also evaluate more optimistic discover
 
 Once we have computed the set of all visits in which a given object was within the field of view and detected, we locate subsets of these visits that match our target discovery criteria. These criteria generally consist of a given number of visits within a specified
 time span within a single night, followed by a given number of additional nights (each with the same required number
-of visits in the same time span) falling within a specified time window. The basic criteria is a pair of visits in each
+of visits in the same time span) falling within a specified time window. The basic criteria\footnote{An independent study 
+(S. Chesley and P. Vere\v{s}, priv. comm.) assessed the linking performance of these criteria and concluded that they result
+in complete and accurate linking.} is a pair of visits in each
 night occurring within 60 minutes, repeated for 3 nights within a 15 day time window. However, we also evaluate
 the effect of varying the discovery criteria to require triplets or quads of visits within a single night, and increase
 the length of the search window from 15 to 30 days.
+
+
 
 
 \subsubsection{Completeness Estimation}
