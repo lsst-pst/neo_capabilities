@@ -197,7 +197,7 @@ tracks.
 Using positions of the three tracklets, parabolic motion (for each coordinate) is fit
 in the third step. Velocities implied by this motion fit are compared to velocities for
 the first and third tracklet. This filtering step reduces the number of candidate tracks
-by a factor of about 10$^{-5}$ and brings the number of false candidate tracks to
+by a factor of about 10$^{5}$ and brings the number of false candidate tracks to
 the same range as the number of true tracks close to the Ecliptic. These three matching
 and pre-filtering steps bring the number of candidate tracks to a level that
 can be easily handled by the IOD filtering step.
@@ -241,8 +241,9 @@ a significant reduction.
 \subsubsection{The Tracklet Motion Vector Accuracy \label{sec:astromerrors}}
 
 In addition to its mean position at the mean epoch, each tracklet constrains the motion vector.
-Typical astrometric errors for LSST detections will range from about 50 mas at SNR=100 to
-150 mas at SNR=5. For simplicity, we will assume hereafter that the astrometric errors are
+Typical astrometric errors for LSST detections will range from about 50 mas at SNR=100 (dominated
+by systematics) to 150 mas at SNR=5 (dominated by random errors). For simplicity, we will assume 
+hereafter that the astrometric errors are
 $\sigma_a=150$ mas for all detections, or $\sim 100$ mas per coordinate. With a temporal
 separation of two detections in a tracklet of $\Delta t$, the motion vector is measured with an
 accuracy per coordinate of
@@ -309,7 +310,7 @@ due to orbital curvature and we analyze this effect using orbital simulations of
 samples described in \S\ref{sec:MAFdetails}.
 
 Analysis of simulated samples shows that an adequate acceleration limit\footnote{See also
-Figure 16 in \citet{LDM-156}} is $a^{max}=0.02$ deg day$^{-2}$: essentially
+Figure 16 in \citet{LDM-156}.} is $a^{max}=0.02$ deg day$^{-2}$: essentially
 all main-belt asteroids and more than 95\% of NEOs satisfy this criterion. If acceleration
 were constant during an interval of $\Delta k$ days, the maximum positional discrepancy
 would be proportional to $\Delta k^2$. Numerical analysis of simulated orbital motions
@@ -363,7 +364,7 @@ $T_{revisit}=3$ days), the total number of candidate tracklet pairs normalized b
 the number of tracklets per night ranges from 350 for $N_w=15$ days to 13,400 for $N_w=30$ days.
 Therefore, the following, more involved, selection steps need to be executed for
 no more than about $10^{10}$ tracklet pairs (for $N_w=30$ days; and only for $3\times10^{8}$
-pair when $N_w=15$ days). These numbers are significantly lower than the naive estimate of
+pairs when $N_w=15$ days). These numbers are significantly lower than the naive estimate of
 10$^{15}$ ($10^3\times10^6\times10^6$).
 
 We note that in steady-state processing, the new candidate tracklet pairs need to
@@ -503,11 +504,16 @@ powers of 3 under sum in eq.~\ref{eq:Ntt}, and the scaling of the number of thre
 combinations with $N_w^2$ from eq.~\ref{eq:N3n}. The scaling of $N^{falsetracks} = N_{tracklet}^{tracks} \, N_{tracklet}$
 with the density of false positive detections is very steep, too. Since $N_{tracklet}$ and $\rho_{tracklet}$
 are approximately proportional (in the limit $\rho_{ast}=0$) to $\rho_{FP}^2$ (see eq.~\ref{eq:NttFalse}),
-the number of false candidate tracks approximately scales with $\rho_{FP}^6$.
+the number of false candidate tracks approximately scales with $\rho_{FP}^6$. 
+$N_{tracklet}^{tracks}$ scales with $v_{max}^{-6}$ because of velocity filtering for three tracklets,
+with each of the three steps giving a $v_{max}^{-2}$ contribution). 
+Since $N^{falsetracks}$ scales with $\rho_{tracklet}^3$, and $\rho_{tracklet}$ scales with $v_{max}^2$
+(due to dependence of $A_S$ on $v_{max}$, see eq.~\ref{eq:AS}), $N^{falsetracks}$ is approximately 
+independent of $v_{max}$ (but note that the number of intermediate filtering operations does 
+depend on $v_{max}$). 
 
-Without approximations, eq.~\ref{eq:NttFalse} implies a shallower scaling of the number
-of false candidate tracks, $N^{falsetracks}$ with $\rho_{FP}$.
-
+Without the limiting $\rho_{ast}=0$  approximation, eq.~\ref{eq:NttFalse} implies a shallower scaling
+of the number of false candidate tracks, $N^{falsetracks}$ with $\rho_{FP}$.
 We have determined numerically that the scaling of the number
 of false candidate tracks per search window with the density of false positives in difference
 images, as well as other relevant parameters, is well described by
@@ -517,17 +523,17 @@ images, as well as other relevant parameters, is well described by
     \left( {\Delta t  \over 30 \, {\rm min}} \right)^{2.7}
      \left( { 1 \, {\rm deg} \, {\rm day}^{-1} \over v_{max} }  \right)^{1.3}.
 \end{equation}
-This expression is valid around fiducial values and assumes $\rho_{ast}=100$ deg$^{-2}$
-and $T_{revisit}=3$ days. With fiducial parameters, and when $\rho_{ast}=0$, the number of
-false tracklets per night is $\sim10^6$, and the number of false tracks per search window
-with $N_w=30$ days is about 550,000. For $N_w=15$ days,  the number of false tracks
-drops to $\sim2,000$.
+This numerical approximation is only valid around above {\it fiducial values} of various 
+parameters\footnote{For example, eq.~\ref{eq:falsetracks} cannot be used to conclude that
+an infinitely large $v_{max}$ cutoff would result in no false tracks.}, 
+and assumes $\rho_{ast}=100$ deg$^{-2}$ and $T_{revisit}=3$ days. With fiducial parameters, and 
+when $\rho_{ast}=0$, the number of false tracklets per night is $\sim10^6$, and the number of false 
+tracks per search window with $N_w=30$ days is about 550,000. For $N_w=15$ days,  the number 
+of false tracks drops to $\sim2,000$. 
 
-Note the shallow dependence on $v_{max}$ -- the term $v_{max}^6$
-from eq.~\ref{eq:NttFinalFit} is by and large canceled due to dependence of $A_S$ on
-$v_{max}$ (see eq.~\ref{eq:AS}). We also note that the relevant quantity that determines
-the number of false candidate tracks is not the ratio of false to real (asteroid) detections
-in difference images, but rather the overall number (and density) of false detections.
+We note that the relevant quantity that determines the number of false candidate tracks is {\it not}
+the ratio of false to real (asteroid) detections in difference images, but rather the overall number 
+(and density) of false detections.
 
 The scaling result given by eq.~\ref{eq:falsetracks} may prove useful when optimizing cadence
 and search strategy, as well as for sizing the required computational resources. For example,
