@@ -153,7 +153,9 @@ The LSST strategy for linking detections into orbits assumes the following main 
         correspond to Keplerian orbits. Due to the high astrometric accuracy of the observations (uncertainties of 0.15 arcsec for the faintest objects,
          see \S\ref{sec:astromerrors}), we assume\footnote{A detailed discussion of the IOD step, 
          including an analysis of the accuracy of fitted orbital parameters,  will be presented in 
-         a future publication.} hereafter that the number of false tracks which 
+         a future publication; however an independent JPL study by Vere\v{s} \& Chesley 
+         (2017, submitted to Astronomical Journal) confirms that orbit determination is indeed a reliable filter.} 
+         hereafter that the number of false tracks which 
          could pass IOD-based filtering is negligible, as is the incompleteness induced by this 
          step. Indeed, the only reason for track pre-filtering in the second step is to decrease the 
          number of candidate tracks that are processed by the more computationally expensive IOD.
@@ -161,7 +163,7 @@ The LSST strategy for linking detections into orbits assumes the following main 
 
 False positives, be it false detections, false tracklets or false tracks, will not be
 an issue when linking detections into real objects because IOD will efficiently and reliably filter out false tracks due to high-accuracy
-astrometry and well-understood simple Keplerian model predictions. Therefore, the
+astrometry and well-understood simple Keplerian model predictions. Herefore, the
 essential question is whether the number of detections, including false detections, can be linked into tracks, and whether the resulting
 number of tracks, including false tracks, passed to the final IOD step can be handled with available computing resources.
 As discussed in detail in \S\ref{sec:mops}
