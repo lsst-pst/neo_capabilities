@@ -265,6 +265,18 @@ to be several times smaller.
 
 \subsubsection{Spatially Correlated Transients}
 
+\begin{figure}
+  \centering
+  \plotone{figures/stacked_tracklets.pdf}
+  \caption{
+  ``Stacked'' tracklets surrounding bright stars. $\Delta$ Dec and $\Delta$ RA
+  are the tracklet coordinates relative to a nearby bright star, such that any
+  correlated features due to (e.g.) bleed trails will show a grouping of lines
+  with similar positions and orientations. We do not see any such features, and
+  the vast majority of tracklets are consistent with real moving objects.
+  }
+  \label{fig:stacked_tracklets}
+\end{figure}
 
 We also investigated whether \DIASources from different difference images are correlated
 in focal plane coordinates. A large number of such correlated detections could result in
@@ -277,8 +289,25 @@ etc) had been interpolated over, though for some the cause is unclear. The
 implied density of correlated
 \DIASources is about 2.3 deg$^{-2}$, rendering this effect relatively unimportant.
 
-We note that the number and implied sky density of sufficiently bright asteroids to produce 
-scattered light and diffraction spike artifacts which would appear to move at solar system
-rates is at least two orders of magnitude smaller than the sky density of asteroids down 
-to LSST depth on the Ecliptic. Therefore, such artifacts will be unimportant as a contributor 
+We have checked for correlations in tracklets around bright stars, which
+might arise if either optical or processing artifacts exhibited some preferred
+alignment. Such an alignment may create false tracklets at a rate greater than
+an overdensity of uncorrelated detections would. To investigate these
+correlations we generated tracklets using the current prototype version of MOPS.
+For this test tracklets are required to have four detections (out of five visits
+at each pointing) that align with velocities less than $2\deg$/day, and with
+fixed spatial tolerances of $7\arcsec$ (XXX Clarify). We then identified star
+brighter than 14th magnitude using the UCAC4 catalog, and ``stacked'' the
+tracklets surrounding each bright star onto a single plot. This can be seen in
+Figure~\ref{fig:stacked_tracklets}, where each black line corresponds to a
+single tracklet. If, for example, there was an excess of tracklets along CCD
+bleed trails from bright stars, these would appear as a set of lines along the
+$\pm\Delta \textrm{RA}$ direction. We do not see any such correlated detections after
+inspecting approximately 10,000 tracklets (the number in each plot is limited for
+legibility).
+
+We note that the number and implied sky density of asteroids bright enough to produce
+scattered light and diffraction spike artifacts, which would appear to move at solar system
+rates, is at least two orders of magnitude smaller than the sky density of asteroids down
+to LSST depth on the Ecliptic. Therefore, such artifacts will be unimportant as a contributor
 to false tracks.
