@@ -30,7 +30,8 @@ and color). This model is implemented in MAF.
 the signal-to-noise ratio is estimated and used to compute detection probability. This model is implemented
 in MAF.
 \item {\it Detection Linking Modeling.}  Instead of running MOPS, a model that emulates MOPS
-performance is used to significantly speed up the computations. This model is implemented
+performance is used to significantly speed up the computations. This is equivalent to assuming that an object is discovered 
+if a given pattern of observations for an object is achieved. This model is implemented
 in MAF.
 \item {\it Completeness Estimation.} Given a list of ``discovered objects'', and the input population,
 the completeness is estimated as a function of asteroid properties (e.g. size) and various other parameters
@@ -139,21 +140,20 @@ and the $5\sigma$ limiting magnitude $m_5$ (after accounting for trailing losses
 \end{eqnarray}
 where $\sigma$=0.12 describes the width of the completeness falloff \citep{2014ApJ...794..120A}. A source is randomly classified
 as detected using the probability $P$. We also evaluate more optimistic discovery criteria using only SNR trailing losses
-(i.e. without taking detection losses into account), as well as detections to SNR=4 instead of SNR=5.
+(i.e. without taking detection losses into account), as well as detections to SNR=4 instead of SNR=5.  This detection model assumes a flat $m_5$
+value across the focal plane; no vignetting or background variation (or masking) due to bright stars is included. These effects however are small.
 
 
 \subsubsection{Detection Linking Modeling}
 
 Once we have computed the set of all visits in which a given object was within the field of view and detected, we locate subsets of these visits that match our target discovery criteria. These criteria generally consist of a given number of visits within a specified
 time span within a single night, followed by a given number of additional nights (each with the same required number
-of visits in the same time span) falling within a specified time window. The basic criteria\footnote{An independent study 
-assessed the linking performance of these criteria and concluded that they result in complete and accurate linking
-(Vere\v{s}, P. \& Chesley, S. 2017, submitted to Astronomical Journal).} is a pair of visits in each
+of visits in the same time span) falling within a specified time window. The basic criteria is a pair of visits in each
 night occurring within 60 minutes, repeated for 3 nights within a 15 day time window. However, we also evaluate
 the effect of varying the discovery criteria to require triplets or quads of visits within a single night, and increase
-the length of the search window from 15 to 30 days.
-
-
+the length of the search window from 15 to 30 days. An independent study  assessed the linking performance of these 
+criteria and concluded that they result in complete and accurate linking, including rejection of false links using orbit determination 
+(Vere\v{s}, P. \& Chesley, S. 2017, submitted to Astronomical Journal).
 
 
 \subsubsection{Completeness Estimation}
@@ -320,7 +320,7 @@ the completeness can be boosted from 65.6\% after 10 years with minion\_1016 sur
 ``extra ecliptic visits'' survey (recall that this completeness estimates do not account for the contribution of known objects).
 
 
-\subsection{The Impact of Objects Discovered by other Surveys  \label{sec:known}}
+\subsection{LSST in context of the wider NEO Discovery System\label{sec:known}}
 
 The completeness results presented above assumed that no objects are known prior to LSST survey.
 By including known objects, the completeness is boosted to higher values; the current (2016)
