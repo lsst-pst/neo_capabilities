@@ -305,9 +305,8 @@ summarized in the rows of Table~\ref{tab:completeness} and described below.
 
 \begin{itemize}
 \item \textbf{Extra ecliptic spur visits:} By adding these extra visits over the course of a 10 year survey, the increase in completeness over the LSST baseline is only about 1\%. This improvement comes at a cost to other science cases, as the main survey footprint (the WFD proposal) only receives 1,715,354 visits (82\%) of the number of visits in the reference run; the outcome of many science programs is roughly proportional to the number of visits.
-\item \textbf{Extending the survey by two years:} Since minion\_1016 is a reference run, it only simulates 10 years.
-However, we can evaluate the ``extra ecliptic visits'' run at the 12 year mark, at which point the WFD proposal has received approximately the same number of visits as it would receive in the baseline 10 year survey. The additional two years of operations boost the completeness
-by about 4\%.
+\item \textbf{Extending the survey by two years:} Since minion\_1016 is a reference LSST simulated survey, it only simulates 10 years.
+However, we can take the same input parameters and generate a statistically equivalent repeat of this baseline survey, covering a longer time period. Evaluating this survey (astro\_lsst\_01\_1019) at the 12 year mark, we see an increase in completeness of 3.7\% over its completeness at 10 years. The ``extra ecliptic visits'' survey is also a longer run with a roughly similar design, and we can compare its completeness at 12 years with its completeness at 10 years; in this case we see an increase in completeness of 4\%.
 \item \textbf{Longer visits in the ecliptic:} This strategy reaches fainter limiting magnitudes, but the effect of longer exposures alone is minimized by the fact that trailing losses are also increased. It is also hard to disentangle the effects of increasing the visit time near the Ecliptic and the resulting lower frequency of observations (and thus fewer opportunities for sets of observations matching the basic discovery criteria). The small modifications made by this survey strategy actually show a decrease in completeness, {\it until} detection losses are partially compensated for by modifying source detection algorithms to the trailing loss level; then this run provides a similar completeness level as the ``extra ecliptic visits'' survey at twelve years. Presumably this is where modifying the observing strategy to favor large contiguous chunks of sky would make a significant difference, consolidating the fewer ecliptic visits into a shorter amount of time suitable for object discovery.
 \item \textbf{Aggressively NEO-focused survey:} This survey uses a limited filter set, discards other proposals, and uses longer exposures along the ecliptic. This survey shows a modest increase in completeness (about 1.5\%) relative to the ``extra ecliptic visits'' survey, after using longer MOPS windows and pushing source detection to the trailing loss level.
 However, many science programs would be jeopardized with this observing strategy because observations in the $uzy$ filters,
@@ -315,12 +314,9 @@ and observations of the DD and SCP fields, would not be obtained.
 \end{itemize}
 
 To summarize, when altering the survey strategy the largest individual gain ($\sim$4\%)
-comes from simply extending the survey lifetime from 10 to 12 years. For the case of PHAs and 30-day wide MOPS window,
-the completeness can be boosted from 65.6\% after 10 years with minion\_1016 survey to 73.9\% after 12 years with
-``extra ecliptic visits'' survey (recall that this completeness estimates do not account for the contribution of known objects).
+comes from simply extending the survey lifetime from 10 to 12 years. 
 
-
-\subsection{LSST in context of the wider NEO Discovery System\label{sec:known}}
+\subsection{LSST in context of the larger NEO Discovery System\label{sec:known}}
 
 The completeness results presented above assumed that no objects are known prior to LSST survey.
 By including known objects, the completeness is boosted to higher values; the current (2016)
