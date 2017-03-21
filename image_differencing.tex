@@ -269,14 +269,14 @@ to be several times smaller.
   \centering
   \plotone{figures/stacked_tracklets.pdf}
   \caption{
-  ``Stacked'' tracklets of three or more detections surrounding bright stars.
-  $\Delta$ Dec and $\Delta$ RA are the tracklet coordinates relative to a nearby
-  bright star, such that any correlated features due to (e.g.) bleed trails or
-  diffraction spikes will show a grouping of lines with similar positions and
-  orientations. We do not see any such features, and the vast majority of
-  tracklets are consistent with real moving objects. The ``hole'' in center of
-  the plot comes from the rejection of \DIASources in regions with significant
-  flux in the template image. 
+  ``Stacked'' tracklets of three or more detections surrounding bright stars are shown 
+    as lines. $\Delta$~Dec and $\Delta$~RA are the tracklet coordinates relative to a nearby
+  bright star, such that any correlated features due to, e.g., bleed trails or
+  diffraction spikes, will show a grouping of lines with similar positions and
+  orientations. No such features are seen and the vast majority of
+  tracklets are consistent with real moving objects (and on average aligned with
+  the Ecliptic). The ``hole'' in center of the plot comes from the rejection of \DIASources 
+  in regions with significant flux in the template image. 
   }
   \label{fig:stacked_tracklets}
 \end{figure}
@@ -288,10 +288,10 @@ an overdensity of uncorrelated detections would. To investigate these
 correlations we generated tracklets using the current prototype version of MOPS.
 For this test tracklets are required to have three or more detections (out of five visits
 at each pointing) that align with velocities less than $2\deg$/day, and with
-fixed spatial tolerances of $7\arcsec$ (XXX Clarify). We then identified star
-brighter than 14th magnitude using the UCAC4 catalog \citep{UCAC4}, and ``stacked'' the
-tracklets surrounding each bright star onto a single plot. This can be seen in
-Figure~\ref{fig:stacked_tracklets}, where each black line corresponds to a
+fixed spatial tolerances of $7\arcsec$ (XXX Clarify). We then identified the closest (XXX correct?) 
+star brighter than 14th magnitude using the UCAC4 catalog \citep{UCAC4}, and ``stacked'' the
+tracklets surrounding each bright star onto a single plot. The resulting tracklet distribution can 
+be seen in Figure~\ref{fig:stacked_tracklets}, where each black line corresponds to a
 single tracklet. If, for example, there was an excess of tracklets along CCD
 bleed trails from bright stars, these would appear as a set of lines along the
 $\pm\Delta \textrm{RA}$ direction. We do not see any such correlated detections after
@@ -300,7 +300,7 @@ legibility).
 
 We also investigated whether \DIASources from multiple visits are correlated
 in pixel coordinates, which might arise from uncorrected detector anomalies.
- We analyzed 4 visits with 60 CCDs each,
+We analyzed 4 visits with 60 CCDs each,
 and found 24 \DIASources that match to within two pixels. We did not find any correlation at
 larger radii. These 24 \DIASources show tendencies for certain CCDs but the counts are too
 low to make a robust conclusion. Visual inspection shows that many are near
@@ -309,7 +309,7 @@ etc) had been interpolated over, though for some the cause is unclear. The
 implied density of correlated
 \DIASources is about 2.3 deg$^{-2}$, rendering this effect relatively unimportant.
 
- We note that the number and implied sky density of asteroids bright enough to produce
+We note that the number and implied sky density of asteroids bright enough to produce
 scattered light and diffraction spike artifacts, which would appear to move at solar system
 rates, is at least two orders of magnitude smaller than the sky density of asteroids down
 to LSST depth on the Ecliptic. Therefore, such artifacts will be unimportant as a contributor
