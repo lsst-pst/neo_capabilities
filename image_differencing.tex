@@ -173,7 +173,7 @@ are about 1 mag shallower than the 30 second visits by LSST. We used data for
 five different fields, each with between three and five visits for a total of 15
 ``science'' visits plus 5 template visits. While this section will present
 statistics based on this subset of the survey's data, during the course of this
-work a much larger set of 540 visits from the same survey was also processed and
+work a much larger superset of 540 visits from the same survey was also processed and
 produced false positive rates broadly consistent with this initial data (on
 average the 540 visits have fewer false positives by about 30\% than the small
 subset.)
@@ -281,7 +281,7 @@ to be smaller.
   \centering
   \plotone{figures/stacked_tracklets.pdf}
   \caption{
-  ``Stacked'' tracklets of three or more detections surrounding bright stars are shown 
+  ``Stacked'' tracklets of three or more detections surrounding bright stars are shown
     as lines. $\Delta$~Dec and $\Delta$~RA are the tracklet coordinates relative to a nearby
   bright star, such that any correlated features due to, e.g., bleed trails or
   diffraction spikes, will show a grouping of lines with similar positions and
@@ -299,27 +299,29 @@ alignment. Such an alignment may create false tracklets at a rate greater than
 an overdensity of uncorrelated detections would. To investigate these
 correlations we generated tracklets using the current prototype version of MOPS.
 For this test tracklets are required to have three or more detections (out of five visits
-at each pointing) that align with velocities less than $2\deg$/day, and with
-fixed spatial tolerances of $7\arcsec$ (XXX Clarify). We then identified the closest (XXX correct?)
-star brighter than 14th magnitude using the UCAC4 catalog \citep{UCAC4}, and ``stacked'' the
-tracklets surrounding each bright star onto a single plot. The resulting tracklet distribution can
-be seen in Figure~\ref{fig:stacked_tracklets}, where each black line corresponds to a
-single tracklet. If, for example, there was an excess of tracklets along CCD
-bleed trails from bright stars, these would appear as a set of lines along the
-$\pm\Delta \textrm{RA}$ direction. We do not see any such correlated detections after
-inspecting approximately 5,000 tracklets (the number in each plot is limited for
-legibility).
+at each pointing) that align with velocities less than $2\deg$/day. For each
+star brighter than 14th magnitude in the UCAC4 catalog \citep{UCAC4}, we
+identified all tracklets within 4 arcminutes of the star, and ``stacked'' the
+tracklets surrounding each star onto a single plot. The resulting tracklet
+distribution can be seen in Figure~\ref{fig:stacked_tracklets}, where each black
+line corresponds to a single tracklet. If, for example, there was an excess of
+tracklets along CCD bleed trails from bright stars, these would appear as a set
+of lines along the $\pm\Delta \textrm{RA}$ direction. We do not see any such
+correlated detections after inspecting approximately 5,000 tracklets (the number
+in the plot is limited for legibility).
 
 We also investigated whether \DIASources from multiple visits are correlated
 in pixel coordinates, which might arise from uncorrected detector anomalies.
-We analyzed 4 visits with 60 CCDs each,
-and found 24 \DIASources that match to within two pixels. We did not find any correlation at
-larger radii. These 24 \DIASources show tendencies for certain CCDs but the counts are too
-low to make a robust conclusion. Visual inspection shows that many are near
-parts of an image where a defect (such as a cosmic ray, bad column, bleed trail,
-etc) had been interpolated over, though for some the cause is unclear. The
-implied density of correlated
-\DIASources is about 2.3 deg$^{-2}$, rendering this effect relatively unimportant.
+We analyzed a 4-visit subset of the 15 science visits used in the rest of this
+work, and for each \DIASource computed the distance in pixels to any neighboring
+\DIASources, even if they appeared on different visits or different fields
+(similar to the 2-point correlation function). From this we identified  24
+\DIASources that were located within two pixels of another \DIASource. We did
+not find any correlation at larger radii. Visual inspection shows that many are
+near parts of an image where a defect (such as a cosmic ray, bad column, bleed
+trail, etc) had been interpolated over, though for some the cause is unclear.
+The implied density of correlated \DIASources is about 2.3 deg$^{-2}$, rendering
+this effect relatively unimportant.
 
 We note that the number and implied sky density of asteroids bright enough to produce
 scattered light and diffraction spike artifacts, which would appear to move at solar system
