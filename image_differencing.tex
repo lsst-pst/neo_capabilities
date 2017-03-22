@@ -241,9 +241,8 @@ a rate of 230 deg$^{-2}$ as ``unexplained'' false positives.
 
 The SNR distribution of this sample is proportional to 1/SNR$^{2.5}$, which
 is similar to distributions expected for astrophysical objects. This fact implies
-that the sample might be dominated by true astrophysical transients; nevertheless,
-we adopt the above conservative upper limit of 75\%.
-
+that the sample might be dominated by true astrophysical transients and
+asteroids; nevertheless, we adopt the above conservative upper limit of 75\%.
 
 \subsubsection{Scaling DECam Results to LSST Performance}
 
@@ -252,16 +251,29 @@ as large as for DECam because of smaller pixels and better seeing. The scaling
 with pixel size and seeing for ``unexplained'' false positives is not obvious
 because their cause is unknown. For example, if they are a pixel-induced effect,
 their rate should be scaled up by the square of the ratio of angular pixel sizes, or
-a factor of 1.72. If they are instead dominated by true astrophysical transients,
-they should not be scaled at all. We adopt the most conservative option and
-scale up the DECam rate for ``unexplained'' false positives to 396 deg$^{-2}$.
-In addition, there will be 60 deg$^{-2}$ false positives due to background
-fluctuations (Equation \ref{eq-theory}, referenced to the median seeing of 0.85 arcsec).
+a factor of 1.72. If they are instead true astrophysical transients,
+then their rate should be scaled only with the increased depth of LSST
+observations. Since our observed \DIASource distribution scales approximately as
+SNR$^-2$, an additional magnitude of depth would cause a factor of $\sim 4$
+increase in their number. In reality our dataset probably contains a mixture of
+false positive from these two types of scalings, in addition to a significant
+number of true detections. The scaling of this last component is a feature
+rather than a deficiency, since increased detections of true astroids are
+obviously beneficial to the survey.
+
+Thus without a detailed accounting of the fraction of true asteroid and
+astrophysical transient detections in our set of \DIASources, we cannot give a
+more precise scaling for the false detection rate. We adopt a conservative
+option by assuming that all of our detections are false and behave like
+pixel-induced effects, which scales up the DECam rate for ``unexplained'' false
+positives to 396 deg$^{-2}$. In addition, there will be 60 deg$^{-2}$ false
+positives due to background fluctuations (Equation \ref{eq-theory}, referenced
+to the median seeing of 0.85 arcsec).
 
 The total false positive rate of $\sim450$ deg$^{-2}$ anticipated for LSST is thus
 comparable to the rate of astrophysical transients. Again, this estimate of the false
-positive rate is very conservative and it would not be very surprising if it turns out
-to be several times smaller.
+positive rate is conservative and it would not be very surprising if it turns out
+to be smaller.
 
 \subsubsection{Spatially Correlated Transients}
 
@@ -275,8 +287,8 @@ to be several times smaller.
   diffraction spikes, will show a grouping of lines with similar positions and
   orientations. No such features are seen and the vast majority of
   tracklets are consistent with real moving objects (and on average aligned with
-  the Ecliptic). The ``hole'' in center of the plot comes from the rejection of \DIASources 
-  in regions with significant flux in the template image. 
+  the Ecliptic). The ``hole'' in center of the plot comes from the rejection of \DIASources
+  in regions with significant flux in the template image.
   }
   \label{fig:stacked_tracklets}
 \end{figure}
@@ -288,9 +300,9 @@ an overdensity of uncorrelated detections would. To investigate these
 correlations we generated tracklets using the current prototype version of MOPS.
 For this test tracklets are required to have three or more detections (out of five visits
 at each pointing) that align with velocities less than $2\deg$/day, and with
-fixed spatial tolerances of $7\arcsec$ (XXX Clarify). We then identified the closest (XXX correct?) 
+fixed spatial tolerances of $7\arcsec$ (XXX Clarify). We then identified the closest (XXX correct?)
 star brighter than 14th magnitude using the UCAC4 catalog \citep{UCAC4}, and ``stacked'' the
-tracklets surrounding each bright star onto a single plot. The resulting tracklet distribution can 
+tracklets surrounding each bright star onto a single plot. The resulting tracklet distribution can
 be seen in Figure~\ref{fig:stacked_tracklets}, where each black line corresponds to a
 single tracklet. If, for example, there was an excess of tracklets along CCD
 bleed trails from bright stars, these would appear as a set of lines along the
