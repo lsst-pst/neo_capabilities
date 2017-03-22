@@ -254,21 +254,19 @@ their rate should be scaled up by the square of the ratio of angular pixel sizes
 a factor of 1.72. If they are instead true astrophysical transients,
 then their rate should be scaled only with the increased depth of LSST
 observations. Since our observed \DIASource distribution scales approximately as
-SNR$^-2$, an additional magnitude of depth would cause a factor of $\sim 4$
+SNR$^{-2.5}$, an additional magnitude of depth would cause a factor of $\sim 4$
 increase in their number. In reality our dataset probably contains a mixture of
 false positive from these two types of scalings, in addition to a significant
-number of true detections. The scaling of this last component is a feature
-rather than a deficiency, since increased detections of true astroids are
-obviously beneficial to the survey.
+number of true detections. The scaling of this last component is not a deficiency
+because increased detections of true astroids are obviously beneficial to the survey.
 
-Thus without a detailed accounting of the fraction of true asteroid and
-astrophysical transient detections in our set of \DIASources, we cannot give a
-more precise scaling for the false detection rate. We adopt a conservative
-option by assuming that all of our detections are false and behave like
-pixel-induced effects, which scales up the DECam rate for ``unexplained'' false
-positives to 396 deg$^{-2}$. In addition, there will be 60 deg$^{-2}$ false
-positives due to background fluctuations (Equation \ref{eq-theory}, referenced
-to the median seeing of 0.85 arcsec).
+Therefore, we cannot give a precise scaling for the false detection rate without a 
+detailed accounting of the fraction of true asteroid and astrophysical transient 
+detections in our set of \DIASources. We adopt a {\it conservative} option by assuming
+that {\it all of our detections are false} and behave like pixel-induced effects, which 
+scales up the DECam rate for ``unexplained'' false positives to 396 deg$^{-2}$. In addition, 
+there will be 60 deg$^{-2}$ false positives due to background fluctuations (eq.~\ref{eq-theory}, 
+referenced to the median seeing of 0.85 arcsec).
 
 The total false positive rate of $\sim450$ deg$^{-2}$ anticipated for LSST is thus
 comparable to the rate of astrophysical transients. Again, this estimate of the false
