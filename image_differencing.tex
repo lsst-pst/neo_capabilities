@@ -293,14 +293,18 @@ to be correct.
   \centering
   \plotone{figures/stacked_tracklets.pdf}
   \caption{
-  ``Stacked'' tracklets of three or more detections surrounding bright stars are shown
-    as lines. $\Delta$~Dec and $\Delta$~RA are the tracklet coordinates relative to a nearby
+   ``Stacked'' tracklets of three or more detections surrounding bright stars are shown in the left panel
+  as lines. $\Delta \textrm{Dec}$ and $\Delta \textrm{RA}$ are the tracklet coordinates relative to a nearby
   bright star, such that any correlated features due to, e.g., bleed trails or
   diffraction spikes, will show a grouping of lines with similar positions and
   orientations. No such features are seen and the vast majority of
   tracklets are consistent with real moving objects (and on average aligned with
   the Ecliptic). The ``hole'' in center of the plot comes from the rejection of \DIASources
-  in regions with significant flux in the template image.
+  in regions with significant flux in the template image. The right panel shows
+  the position angle of the tracklets (degrees East of North), while the dashed
+  vertical line indicates the angle that would be seen if the tracklets were on
+  lines of constant Ecliptic latitude. Again the vast majority appear to be
+  aligned with the Ecliptic.
   }
   \label{fig:stacked_tracklets}
 \end{figure}
@@ -318,9 +322,10 @@ tracklets surrounding each star onto a single plot. The resulting tracklet
 distribution can be seen in Figure~\ref{fig:stacked_tracklets}, where each black
 line corresponds to a single tracklet. If, for example, there was an excess of
 tracklets along CCD bleed trails from bright stars, these would appear as a set
-of lines along the $\pm\Delta \textrm{RA}$ direction. We do not see any such
-correlated detections after inspecting approximately 5,000 tracklets (the number
-in the plot is limited for legibility).
+of lines along the $\pm\Delta \textrm{RA}$ direction, or a peak at $90\deg$ or
+$270\deg$ in the histogram (right panel of Figure~\ref{fig:stacked_tracklets}).
+We do not see any such correlated detections after inspecting approximately
+5,000 tracklets (the number in the plot is limited for legibility).
 
 We also investigated whether \DIASources from multiple visits are correlated
 in pixel coordinates, which might arise from uncorrected detector anomalies.
