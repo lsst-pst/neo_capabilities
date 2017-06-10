@@ -7,14 +7,14 @@ detail image processing and moving object detection.
 \subsection{A Brief Overview of LSST  Design}
 
 LSST will be a large, wide-field ground-based optical telescope system
-designed to obtain multiple images covering the sky that is visible
-from Cerro Pach\'{o}n in Northern Chile. The current baseline design,
-with an 8.4m (6.7m effective) primary mirror, a 9.6 deg$^2$ field of
-view, and a 3.2 Gigapixel camera, will allow about 10,000 square
-degrees of sky to be covered every night, with typical 5$\sigma$ depth
-for point sources of $r\sim24.5$ mag (AB). The system is designed to yield
+designed to obtain multiple images covering the sky visible
+from Cerro Pach\'{o}n in Northern Chile. With an 8.4m (6.7m effective) 
+primary mirror, a 9.6 deg$^2$ field of view, and a 3.2 Gigapixel camera,
+LSST will be able to image about 10,000 square
+degrees of sky per night, with a fiducial dark-sky, zenith 5$\sigma$ depth
+for point sources of $m_5(r)$=24.38 (AB). The system is designed to yield
 high image quality (with a median delivered seeing in the $r$ band of
-about 0.8 arcsec) as well as superb astrometric  and photometric
+about $0.8\arcsec$) as well as superb astrometric  and photometric
 accuracy\footnote{For detailed specifications, please see the LSST
 Science Requirements Document, \url{http://ls.st/srd}}. The total survey
 area will include $\sim$30,000 deg$^2$ with $\delta<+34.5^\circ$, and
@@ -67,13 +67,13 @@ at the signal-to-noise ratio SNR=100 (dominated by systematics), to 150 mas at S
 (dominated by random errors). 
 
 LSST observations can be simulated using the LSST Operations Simulator tool
-\citep[OpSim,][]{delgado14}. OpSim runs a survey simulation with given
-science-driven desiderata,  a software model of the telescope and its control
-system, and models of weather and other  environmental variables. The output of
-such a simulation is an ``observation history'', which  is a record of times,
-pointings, used filter, and associated environmental data and telescope
+\citep[OpSim,][]{delgado14}. OpSim runs a survey simulation with user-defined
+science-driven proposals, a software model of the telescope and its control
+system, and models of weather and other environmental variables. The output of
+the simulation is an ``observation pointing history''; a record of times,
+pointings, filters, and associated environmental data and telescope
 activities throughout the simulated survey.  This history can be examined using
-the LSST  Metrics Analysis Framework tool \citep[MAF,][]{jones14} to assess the
+the LSST Metrics Analysis Framework tool \citep[MAF,][]{jones14} to assess the
 efficacy of the simulated survey for any particular science goal or
 interest\footnote{For examples of such analysis, see \url{http://ls.st/xpr}}. These
 tools -- OpSim and MAF, and the sky brightness, throughput and sensitivity modeling --
@@ -91,7 +91,7 @@ main survey and the rest on various specialized programs. The median number of v
 {\it per night} is 816, with 3,026 observing nights. The median airmass is 1.23 (the
 minimum attainable altitude for the LSST telescope is 20 deg.). In the $r$ band, the median
 seeing (FWHM) is 0.81 arcsec, and the median $5\sigma$ depth for point sources is 24.16
-(using the best current estimate of the fiducial $5\sigma$ depth at airmass of one, $m_5(r)$=24.39).
+(using the best current estimate of the fiducial $5\sigma$ depth at airmass of one, $m_5(r)$=24.38).
 
 There are a few known problems with this simulation, including twilight sky brightness
 estimates that are too bright, the moon avoidance that is not as aggressive as it could be,
@@ -117,11 +117,13 @@ LSST will use two methods to detect moving objects in difference images:
 \begin{enumerate}
 \item Detecting trailed motion on the sky: objects trailed by more
   than 2 PSF widths (corresponding to motion faster than about 1
-  deg/day) will be easily detectable as trailed.  Two trailed
-  detections within 20--60 minutes in a single night will be
+  deg/day) will be easily identifiable as trailed. LSST will detect sources in 
+  difference images using standard point-source detection techniques; the actual
+  PSFs of these sources will then be measured, including fitting a trailed source model.   
+  Two trailed detections within 20--60 minutes in a single night will be
   sufficient to identify an object as an NEO candidate,
-\item Inter-night linking of pairs of detections from the same night: this technique will
-  recover objects moving too slow to be measurably elongated in a single exposure.
+\item Inter-night linking of pairs of detections from the same night: the Moving Object 
+Processing Software (MOPS) will recover objects moving too slow to be measurably elongated in a single exposure.
 \end{enumerate}
 
 We note that sources detected in difference images (\DIASources in LSST parlance, see Appendix~\ref{sec:AppA})

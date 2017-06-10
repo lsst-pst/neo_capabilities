@@ -70,7 +70,8 @@ in \S\ref{sec:surveys} below.
 \subsubsection{Asteroid Optical Flux Modeling}
 
 Given $H$ magnitude for an object, its apparent magnitude in Johnson's $V$ band can be easily computed
-given the positions of the object, the Sun and the observer (e.g. \citealt{juric02}).
+given the positions of the object, the Sun and the observer; we have used the two-parameter H-G magnitude 
+system \citep{1989aste.conf...21B}, assuming G=0.15.
 Magnitudes, or fluxes, in any other optical and near-IR band (in case of LSST, $u$, $g$, $r$, $i$, $z$, and $y$)
 can be computed from $V$ magnitude by specifying a spectrum for each object. We have
 assumed that our entire NEO population has the same spectral energy distribution as C-type main-belt asteroids.
@@ -325,7 +326,7 @@ discovery of 140m NEOs started in earnest in 2000.
 
 We use a simplified model to estimate the contribution of known objects discovered both prior
 and during LSST survey. Since we do not know the
-survey pointing history for all the previous surveys, we simulate them by adopting a simple solar elongation cut and a two-step Johnson $V$ magnitude threshold: $V_{max1}$ before 2015 and $V_{max2}$ after 2015, when several more sensitive surveys such as PanSTARRS started reporting NEO discoveries. We set the solar elongation cut to be $60^\circ$, roughly matching most telescope pointing capabilities, and assume $V_{max2}$ (the limiting magnitude after 2015) to be 22.0, corresponding to the limiting magnitude expected from current state of the art surveys such as Pan-STARRS1. We integrate orbits for our synthetic NEO model
+survey pointing history for all the previous surveys, we simulate them by adopting a simple solar elongation cut and a two-step Johnson $V$ magnitude threshold: $V_{max1}$ before 2015 and $V_{max2}$ after 2015, when several more sensitive surveys such as Pan-STARRS1 started reporting NEO discoveries. We set the solar elongation cut to be $60^\circ$, roughly matching most telescope pointing capabilities, and assume $V_{max2}$ (the limiting magnitude after 2015) to be 22.0, corresponding to the limiting magnitude expected from current state of the art surveys such as Pan-STARRS1. We integrate orbits for our synthetic NEO model
 population from 2000 to 2032 and consider an object discovered if its peak $V$ magnitude is brighter than $V_{max1}$ (before 2015) or $V_{max2}$ (after 2015) while its solar elongation is greater than $60^\circ$.  To determine $V_{max1}$, we vary this threshold until the completeness
 for NEOs with $H<22$ in 2016 is $\sim$25\%, obtaining $V_{max1}$=20.0. This also
 produces a completeness of 95\% for NEOs with $H<18$ in 2015, i.e. for canonical objects larger than 1 km.
