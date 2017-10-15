@@ -23,8 +23,6 @@ ghosts, or other well-understood image artifacts, ...''. As discussed in \S\ref{
 such a high false detection rate is at the limit of what could be handled even
 with the substantial computing power planned for LSST.
 
-XXX - swap "false positive" to "false detection" and cut/clarify text
-
 Fortunately, Pan-STARRS1 was only a first-generation experiment and, over the past decade,
 subsequent surveys have learned tremendously from the PS1 experience. There are surveys
 running today, such as Dark Energy Survey, which have largely solved the key problems that
@@ -32,17 +30,17 @@ PS1 has encountered. Major improvements to hardware include CCDs with significan
 artifacts (e.g. DECam, see below; LSST) and optical systems designed to minimize ghosting
 and internal reflections (e.g. LSST). Improvements to the software include advanced image
 differencing pipelines (e.g., PTFIDE for the Palomar Transient Factory and the Zwicky Transient
-Facility) and various machine-learning classifiers for filtering false positives. For example,
+Facility) and various machine-learning classifiers for filtering false detections. For example,
 \cite{goldstein15} used a Random Forest classifier with the Dark Energy Survey data
 and cleaned their sample of transient detections from a raw false:true detection
-rate ratio of 13:1 to a filtered rate of 1:3. The resulting false positives are
+rate ratio of 13:1 to a filtered rate of 1:3. The resulting false detections are
 morphologically much simpler; for example, compare
 Fig.~1 in \cite{goldstein15} to Fig.~17 in \cite{denneau13}.
 
 Here we summarize an analysis of image differencing performance based on DECam
 data and difference images produced and processed using prototype LSST
 software \citep{DMTN-006}. This analysis demonstrates that the false
-positive rate anticipated for LSST (without using any machine-learning classifiers for
+detection rate anticipated for LSST (without using any machine-learning classifiers for
 filtering false positives) is significantly below the threshold for
 successful deployment of MOPS, as will be discussed in \S\ref{sec:mops}.
 
@@ -88,7 +86,7 @@ When this estimate is incorrect, e.g. due to reasons discussed below, then the
 implied detection threshold is wrong, too. For example, if the noise is underestimated
 by only 10\%, the computed SNR will be too large by 10\%, and the adopted
 threshold $\nu=5$ will actually correspond to $\nu=4.5$ -- and thus the
-sample will include 9.7 times as many false positives due to background
+sample will include 9.7 times as many false detections due to background
 fluctuations! Hence, the noise in difference images has to be estimated to
 high accuracy.
 
@@ -117,7 +115,7 @@ of SNR computed using forced photometry measurements, is shown in the right pane
 of Figure~\ref{fig:snr_comparison}. The blue line shows the expected counts given
 by eq.~\ref{eq-theory}, in good agreement with data. When the SNR is estimated
 incorrectly due to correlated noise (left panel), the distribution clearly ramps
-up at a much higher SNR value and results in numerous false positives that are
+up at a much higher SNR value and results in numerous false detections that are
 mis-classified as $>5 \sigma$ detections.
 
 Tracking the covariance caused by multiple convolutions is a planned feature for
@@ -144,9 +142,9 @@ alleviate the covariance problem, and tests of these methods in the LSST pipelin
   \plotone{figures/snr_comparison.pdf}
   \caption{
   Histogram of the reported SNR of sources measured in the difference images,
-  using two different SNR estimates: SNR estimated from forced photometry on
-  the input images (right), and SNR (incorrectly) estimated using the variance plane
-  of the difference images (left). The blue lines indicate the expected SNR distribution
+  using two different SNR estimates: SNR (incorrectly) estimated using the variance plane
+  of the difference images (left) and SNR (correctly) estimated from forced photometry on
+  the input images (right).  The blue lines indicate the expected SNR distribution
   based on Gaussian background noise. The difference between these two histograms
   illustrates the strong impact of the SNR mis-estimation. Using the correct SNR values,
   the vast majority of putative $>5 \sigma$ detections become $<5 \sigma$ detections
@@ -161,7 +159,7 @@ alleviate the covariance problem, and tests of these methods in the LSST pipelin
 The Dark Energy Survey (DES) is an optical/near-infrared survey that aims to probe the
 dynamics of the expansion of the universe and the growth of large scale structure by
 imaging 5,000 sq. deg. of the southern sky. DECam, the imaging camera developed for
-DES, is sufficiently similar to LSST camera to enable an informative study of false positive
+DES, is sufficiently similar to LSST camera to enable an informative study of false detection
 rates: DECam includes 62 mosaicked deep-depletion CCDs, with a total pixel count of
 520 Mpix over its 3 deg$^2$ field of view, and has a similar filter complement as LSST \citep{DECam}.
 
@@ -173,8 +171,8 @@ five different fields, each with between three and five visits for a total of 15
 ``science'' visits plus 5 template visits. While this section will present
 statistics based on this subset of the survey's data, during the course of this
 work a much larger superset of 540 visits from the same survey was also processed and
-produced false positive rates broadly consistent with this initial data (on
-average the 540 visits have fewer false positives by about 30\% than the small
+produced false detection rates broadly consistent with this initial data (on
+average the 540 visits have fewer false detections by about 30\% than the small
 subset.)
 
 From the NOAO archive we obtained images that had already had instrumental
@@ -232,11 +230,12 @@ detections. Approximately 25\% of the reported detections were clearly some
 sort of uncorrected artifact (we did not pursue the cause of individual artifacts),
 25\% appeared to be acceptable PSF-like features, and the remaining 50\% were
 ambiguous or had too low of signal to noise to be able to classify.
-Therefore, a conservative upper limit on the fraction of false positives is 75\%,
+Therefore, a conservative upper limit on the fraction of false detections is 75\%,
+assuming the 25\% of detections which had acceptable PSF-like features were real objects,
 corresponding to a rate of 263 deg$^{-2}$. Given the size of DECam pixels
 (0.263 arcsec) and typical seeing of about 1.1 arcsec ($\sigma_g$ = 1.8 pix),
 the expected rate due to background fluctuations is 33 deg$^{-2}$, leaving
-a rate of 230 deg$^{-2}$ as ``unexplained'' false positives.
+a rate of 230 deg$^{-2}$ as ``unexplained'' false detections.
 
 The SNR distribution of this sample is proportional to 1/SNR$^{2.5}$, which
 is similar to distributions expected for astrophysical objects. This fact implies
@@ -246,19 +245,19 @@ asteroids; nevertheless, we adopt the above conservative upper limit of 75\%.
 
 \subsubsection{Scaling DECam Results to LSST Performance}
 
-The LSST false positive rate due to background fluctuations will be about twice
+The LSST false detection rate due to background fluctuations will be about twice
 as large as for DECam because of smaller pixels and better seeing. The scaling
-with pixel size and seeing for ``unexplained'' false positives is not obvious
+with pixel size and seeing for ``unexplained'' false detections is not obvious
 because their cause is unknown. For example, if they are a pixel-induced effect,
 their rate should be scaled up by the square of the ratio of angular pixel sizes, or
 a factor of 1.72. If they are instead dominated by true astrophysical transients, 
 they should not be scaled at all. Since our dataset contains an unknown 
-mixture of false positives from these two types of scalings, in addition to a 
+mixture of false detections from these two types of scalings, in addition to a 
 significant number of true detections, we cannot derive a precise scaling for the 
 false detection rate. Instead, we adopt a {\it conservative} option by assuming
 that {\it all of our detections are false} and behave like pixel-induced effects, 
 which scales up the DECam rate for ``unexplained'' false positives to 396 deg$^{-2}$. 
-In addition, there will be 60 deg$^{-2}$ false positives due to background fluctuations 
+In addition, there will be 60 deg$^{-2}$ false detections due to background fluctuations 
 (eq.~\ref{eq-theory}, referenced to the median seeing of 0.85 arcsec).
 
 The total false positive rate of $\sim450$ deg$^{-2}$ anticipated for LSST is thus
@@ -267,24 +266,26 @@ positive rate is conservative and it would not be very surprising if it turns ou
 to be much smaller.
 
 In addition to uncertainties mentioned above, it is hard to precisely account for 
-the fact that LSST images will be about one magnitude deeper than analyzed DECam 
-images. The contribution to false positives from background fluctuations 
-(60 deg$^{-2}$) should not be changed because it depends on SNR. If all remaining
-false positives are due to pixel-induced effects, they are too dependent on SNR 
-(i.e. counts) and not on magnitude. In this scenario, it doesn’t matter that LSST
-images would be deeper. If instead all remaining false positives are astrophysical 
-in nature, the DECam rate (230 deg$^{-2}$) should {\it not} be multiplied by 1.72,
-and instead should be corrected for different image depth.  Since the observed differential
+the fact that LSST images will be about one magnitude deeper than the analyzed DECam 
+images. The contribution to false detections from background fluctuations 
+(60 deg$^{-2}$) should not be changed because it depends on SNR, not the
+specific magnitude limit. If all remaining
+false detections are due to pixel-induced effects, they are also dependent on SNR 
+(i.e. counts) and not on magnitude. In this scenario, the number of false detections
+would not vary even though LSST images would be deeper. If instead all remaining 
+false detections are astrophysical in nature, the DECam rate (230 deg$^{-2}$) should 
+{\it not} be multiplied by 1.72 for pixel-scaling, and instead should be corrected for the 
+difference in image depth. Since the observed differential
 \DIASource distribution scales approximately as SNR$^{-2.5}$, one magnitude of 
 depth increases the sample size by a factor of about 4. More precisely, we know
-that one third of ``unexplained'' false positives are likely pixel-induced effects
+that one third of the ``unexplained'' false detections are likely pixel-induced effects
+(the 25\% which were clearly some uncorrected artifact above),
 and no more than two thirds can be astrophysical, so the scaled rate expected
 for LSST would be (1/3*1.72 + 2/3*4)*230 + 60 = 805 deg$^{-2}$, or about 
 a factor of 1.8 higher than the adopted rate of $\sim450$ deg$^{-2}$. We emphasize
 that this estimate corresponds to the worst case scenario that is rather unlikely
 to be correct. 
   
-
 
 \subsubsection{Spatially Correlated Transients}
 

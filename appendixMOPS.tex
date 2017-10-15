@@ -50,7 +50,7 @@ times lower, though we will proceed with the most conservative estimate above.
 The sky density of detections in difference images, $\rho_{det}$, is given by
 the sum of contributions from true asteroids and false detections, $\rho_{det} = \rho_{ast} + \rho_{FP}
 = 500$ deg$^{-2}$. When searching for a matching detection in another difference image, there are
-two distinct types of behavior. Correct matches of detections of the same asteroids into tracklets follow the behavior
+two distinct types of behavior. Correct matches of detections of the same asteroid into tracklets follow the behavior
 expected for correlated samples: as long as the object's angular displacement between the two epochs
 is sufficiently larger than the seeing disk, while at the same time smaller than the search radius, the
 number of matches (that is, the number of true tracklets produced per LSST pointing, assuming
@@ -81,7 +81,7 @@ possibilities: matches A-A, A-FP, FP-A, FP-FP, and orphaned A and FP.
 \label{fig:TrackSlide2}}
 \end{figure}
 
-There are three other types of tracklets that follow behavior for uncorrelated (random)
+There are three other types of tracklets that follow the behavior for uncorrelated (random)
 samples: associations of different asteroids, associations of asteroids and false detections,
 and tracklets made of two false detections. Assuming the same $\rho_{det}$ in both
 difference images, for each of $N_{det} = \rho_{det} \, A_{FOV}^{eff}$ detections in one image,
@@ -136,9 +136,9 @@ To the first order ($\eta \approx 0$), the total number of tracklets per night i
 In addition to $N_{tracklet}^{false}$ scaling with the square of $\rho_{FP}$, as demonstrated using MOPS,
 $N_{tracklet}^{false}$ scales with the square of
 both $v_{max}$ and  $\Delta t$ (via the dependence on $A_S$). Therefore, if $\Delta t$ would be made
-as small as 10 minutes by modifying observing strategy, the resulting $N_{tracklet}^{false}$ would be about an
+as small as 10 minutes by modifying the observing strategy, the resulting $N_{tracklet}^{false}$ would be about an
 order of magnitude smaller (and $N_{tracklet}$ about three times smaller).  Hence, the shortening of $\Delta t$ is
-a good mitigation strategy against high false positive detection rates in difference images\footnote{An
+a good mitigation strategy against high false detection rates in difference images\footnote{An
 extreme example of this mitigation strategy would be to obtain two consecutive 30-second visits -- their
 mid-exposure times would be separated by 34 seconds (additional 2 seconds due to shutter motion and another
 2 seconds due to readout), which is sufficient to detect motion faster than about 0.1 deg day$^{-1}$.}.
@@ -162,7 +162,7 @@ tracks can be efficiently pruned using this result.
 \subsection{Expected False Track Rates \label{sec:tracks} }
 
 In this section, we present an approximate estimate of the expected number of false candidate tracks.
-Our goal is to derive the scaling of this number with relevant input parameters, such as the true and false
+Our goal is to derive the scaling of this number with the relevant input parameters, such as the true and false
 tracklet rates per night ($N_{tracklet}^{true}=5\times10^5$ and $N_{tracklet}^{false}=1.5\times10^6$, respectively).
 For a fiducial case, we assume that the search window is $N_w= 30$ days wide;  therefore, with $N_{tracklet} = 2\times10^6$
 per night, there are $6\times10^7$ tracklets in the fiducial dataset. With about 4,300 deg$^2$ (500 pairs of visits)
@@ -180,10 +180,10 @@ vectors, summarized below and following similar methods as described in \citet{d
 
 In the first step, the motion vector of a tracklet from the first night is linearly extrapolated
 to the second night and tracklets from the second night are searched for within a radius set
-by the orbital curvature (which dominates over astrometric errors). With appropriate use of
-kd-tree and similar algorithms for fast searches, only a small fraction (of the order a percent)
+by the orbital curvature (which dominates over LSST's expected astrometric errors). With appropriate use of
+kd-trees and similar algorithms for fast searches, only a small fraction (of the order a percent)
 of tracklets from the second night need to be examined in detail. The cutoff radius varies
-from $\sim$1 arcmin for the case of two consecutive nights to $\sim$1 deg. for 15-day separation
+from $\sim$1 arcmin for the case of two consecutive nights to $\sim$1 deg. for a 15-day separation
 (as discussed in detail further below). In addition, the velocity of second tracklet is required
 to be consistent with the velocity implied by the positions of the two tracklets. After
 this step, there are about 10$^{10}$ tracklet pairs for further processing (for $N_w=30$
@@ -194,8 +194,8 @@ positions and velocities of the two tracklets, and this parabolic motion is exte
 night to search for matching third tracklet. This step results in up to 10$^{11}$ candidate
 tracks.
 
-Using positions of the three tracklets, parabolic motion (for each coordinate) is fit
-in the third step. Velocities implied by this motion fit are compared to velocities for
+Using the positions of the three tracklets, parabolic motion (for each coordinate) is fit
+in the third step. The velocities implied by this motion are compared to the velocities for
 the first and third tracklet. This filtering step reduces the number of candidate tracks
 by a factor of about 10$^{5}$ and brings the number of false candidate tracks to
 the same range as the number of true tracks close to the Ecliptic. These three matching
@@ -226,7 +226,7 @@ combinations increases by about an order of magnitude when $N_w$ is doubled from
 It is important to point out that in steady-state processing a single night is added to the
 window from the previous night, and the first night is dropped. Therefore, only the {\it new}
 3-night combinations, where the third night is the last night in the search window, need
-be considered in steady-state processing (and the ramp up is easy because of gradually
+be considered in steady-state processing (and the ramp up is easy because of the gradually
 increasing search window size). It is straightforward to show that the number of such
 3-night combinations is
 \begin{equation}
@@ -485,12 +485,12 @@ This significant reduction in the number of candidate false tracks, due to filte
 of the first and third tracklets, brings it to the range 10$^{4}$ - 10$^{6}$, which is smaller or at
 most about the same as the number of true candidate tracks (on the Ecliptic). 
 
-False tracks can also arise from matching true tracklets (correct matches of 
-asteroid-asteroid tracklets) from different asteroids. As these are true asteroid tracklets,
-their velocity distribution is decidedly not random. 
--- take density of true tracklets, calculate likelihood that a true (but not matching) tracklet will
-be in the right spot (size of match is above) .. gives approximate # of false tracks composed of true tracklets.
-
+False tracks can also arise from incorrect matches of true (asteroid-asteroid) tracklets 
+from different asteroids and these do not have a random distribution
+of velocities. We discuss the impact of this below, when evaluating the results 
+of numerical (instead of analytical) scaling evaluations, however the increase in
+number of false tracks is small, as the density of false detections is much larger than
+the density of asteroids.
 
 With this final
 reduction, the IOD step can be attempted with no more than about 10$^6$ candidate tracks per
