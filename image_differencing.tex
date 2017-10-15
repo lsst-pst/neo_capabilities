@@ -3,15 +3,15 @@
 LSST will detect motion and flux variability by differencing each incoming image
 against a deep template (built by combining multiple images of the same region).
 Sources in difference images, called \DIASources, will be detected at a signal-to-noise
-ratio (SNR) threshold of $\nu=5$ (for more details, please see Appendix A). Up to about 1,000 deg$^{-2}$
+ratio (SNR) threshold of $\nu=5$. Up to about 1,000 deg$^{-2}$
 astrophysical, real, detections (e.g. variable stars) are expected in LSST image differencing, including
 up to about 500 deg$^{-2}$ asteroids on the Ecliptic. In addition to real detections,
-there are false detections due to both imaging or processing artifacts, and an
-irreducible background of false detections caused simply by statistical noise
+there are false detections due to imaging or processing artifacts and 
+false detections caused simply by statistical noise
 fluctuations in the background. In a typical LSST difference image, the expected
-density of false positives due to background fluctuations is about 60 deg$^{-2}$
+density of false detections due to background fluctuations is about 60 deg$^{-2}$
 (see below for details)---much lower than the expected rate of astrophysical
-detections.
+detections (see \S\ref{sec:kaiser} below). 
 
 However, historically surveys have reported detection rates in image differencing that are much
 higher, depending on the survey; see \cite{denneau13}; \cite{kessler15}; \cite{goldstein15}.
@@ -20,8 +20,10 @@ For example, Pan-STARRS1 (PS1) reported a transient detection rate as high as 8,
 {\it chocolate chip cookies, frisbee, piano, arrowhead, UFO}), see Fig.~17 in \cite{denneau13}.
 They reported that ``Many of the false detections are easily explained as internal reflections,
 ghosts, or other well-understood image artifacts, ...''. As discussed in \S\ref{sec:tracklets},
-such a high false positive rate is at the limit of what could be handled even
+such a high false detection rate is at the limit of what could be handled even
 with the substantial computing power planned for LSST.
+
+XXX - swap "false positive" to "false detection" and cut/clarify text
 
 Fortunately, Pan-STARRS1 was only a first-generation experiment and, over the past decade,
 subsequent surveys have learned tremendously from the PS1 experience. There are surveys
@@ -33,8 +35,8 @@ differencing pipelines (e.g., PTFIDE for the Palomar Transient Factory and the Z
 Facility) and various machine-learning classifiers for filtering false positives. For example,
 \cite{goldstein15} used a Random Forest classifier with the Dark Energy Survey data
 and cleaned their sample of transient detections from a raw false:true detection
-rate ratio of 13:1 to a filtered rate of 1:3. This significant improvement is
-mainly due to morphologically much simpler false positives; for example, compare
+rate ratio of 13:1 to a filtered rate of 1:3. The resulting false positives are
+morphologically much simpler; for example, compare
 Fig.~1 in \cite{goldstein15} to Fig.~17 in \cite{denneau13}.
 
 Here we summarize an analysis of image differencing performance based on DECam
@@ -42,7 +44,7 @@ data and difference images produced and processed using prototype LSST
 software \citep{DMTN-006}. This analysis demonstrates that the false
 positive rate anticipated for LSST (without using any machine-learning classifiers for
 filtering false positives) is significantly below the threshold for
-successful deployment of MOPS, as will be discussed in Section~\ref{sec:mops}.
+successful deployment of MOPS, as will be discussed in \S\ref{sec:mops}.
 
 
 
@@ -57,14 +59,11 @@ differential chromatic refraction due to the Earth's atmosphere. Nevertheless, i
 this work we conservatively assume that the pipeline used for LSST will have the
 same performance as the current code.
 
-Before presenting the results of this analysis, we summarize the expected behavior
-of false positives due to background fluctuations.
-
 
 \subsection{False Detections due to Background Fluctuations \label{sec:kaiser}}
 
-Due to background fluctuations around the mean, it is possible to get false
-detections even at a high SNR threshold. The number of
+Some false detections are expected simply due to background fluctuations, even
+at a high SNR threshhold. The number of
 such detections, as a function of the threshold SNR, the number of pixels and
 seeing, can be computed using the statistics of Gaussian random fields.
 For an image with a Gaussian background noise, convolved with a Gaussian point

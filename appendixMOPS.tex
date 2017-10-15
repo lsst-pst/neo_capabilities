@@ -12,13 +12,13 @@ the square of the false positives density, but other scalings are unclear,
 especially the behavior of false candidate tracks.
 
 We first derive the simpler false tracklet rates, and then use these results to
-discuss false candidate track rates.
+discuss false candidate track rates. 
 
 
 \subsection{Expected False Tracklet Rates \label{sec:tracklets} }
 
-Given a detection in the first difference image,  another difference image, obtained at a different epoch,
-is searched for a matching detection to form a tracklet. For orientation,
+Given a detection in the first difference image, another difference image, obtained at a different epoch,
+is searched for a matching detection to form a tracklet,  {\it e.g.} \citet{denneau13, kubica07}. For orientation,
 the sky density of asteroids down to LSST $5\sigma$ faint flux limit ($r \sim 24.5$) is of the order
 $\rho_{ast} \sim 100$ deg$^{-2}$. The predicted highest asteroid sky density for $r<24.5$,
 on the Ecliptic, is up to about five times larger (with an uncertainty of about a factor of 2,
@@ -32,8 +32,8 @@ it could be a few times higher if the majority of visits were obtained along the
 
 The number of false detections due to (Gaussian) background fluctuations is
 about $\rho_{bkgd} = 60$ deg$^{-2}$, assuming typical LSST seeing (0.8 arcsec)
-and SNR$>$5. For a given seeing and SNR threshold, the rate of false positives can never be
-lower than this estimate. This false positive rate decreases with the square of the seeing, and
+and SNR$>$5. For a given seeing and SNR threshold, the rate of false detections can never be
+lower than this estimate. This false detection rate decreases with the square of the seeing, and
 strongly depends on SNR: the rate increases/decreases by as much as a factor of about ten
 when SNR threshold is changed to 4.5 and 5.5, respectively (see \S\ref{sec:imDiff}).
 
@@ -48,7 +48,7 @@ and it also includes true astrophysical transients that are not associated with 
 times lower, though we will proceed with the most conservative estimate above.
 
 The sky density of detections in difference images, $\rho_{det}$, is given by
-the sum of contributions from true asteroids and false positives, $\rho_{det} = \rho_{ast} + \rho_{FP}
+the sum of contributions from true asteroids and false detections, $\rho_{det} = \rho_{ast} + \rho_{FP}
 = 500$ deg$^{-2}$. When searching for a matching detection in another difference image, there are
 two distinct types of behavior. Correct matches of detections of the same asteroids into tracklets follow the behavior
 expected for correlated samples: as long as the object's angular displacement between the two epochs
@@ -74,7 +74,7 @@ further below).
 \includegraphics[width=0.95\textwidth]{figures/TrackSlide2}
 \vskip -2.2in
 \caption{An illustration of positional matching of detections to form tracklets.
-Detections come in two flavors: asteroids (A, circles) and false positives (FP, triangles).
+Detections come in two flavors: asteroids (A, circles) and false detections (FP, triangles).
 The figure shows the search for a matching detection in epoch 2 for each detection
 in epoch 1, with a maximum search radius $\delta_{max}$. Note that there are six
 possibilities: matches A-A, A-FP, FP-A, FP-FP, and orphaned A and FP.
@@ -176,7 +176,7 @@ from the search window. Given 10$^6$ tracklets per night, there are of the order
 While this number of candidate tracks is obviously prohibitively large to test for consistency
 with heliocentric Keplerian motion, it can be sufficiently reduced (to about the same number
 as the number of true tracks along the Ecliptic) using pre-filtering steps based on tracklet motion
-vectors, as follows.
+vectors, summarized below and following similar methods as described in \citet{denneau13, kubica07}. 
 
 In the first step, the motion vector of a tracklet from the first night is linearly extrapolated
 to the second night and tracklets from the second night are searched for within a radius set
@@ -202,7 +202,7 @@ the same range as the number of true tracks close to the Ecliptic. These three m
 and pre-filtering steps bring the number of candidate tracks to a level that
 can be easily handled by the IOD filtering step.
 
-We now proceed with a more detailed description of  three pre-filtering steps
+We now proceed with a more detailed description of three pre-filtering steps
 for candidate tracks.
 
 \subsubsection{The Number of 3-night Combinations in the Search Window}
@@ -260,10 +260,10 @@ where $\Delta k$, in days, is the elapsed time between the mean tracklet epoch a
 (for example, the number of nights between the first and the second tracklet in a candidate track).
 For illustration, when $\Delta k = 7$ days, $\sigma_x = 50$ arcsec, which is roughly the same
 as the typical detection separation in a tracklet, and comparable to typical distance between
-two tracklets.  However, it turns out that positional discrepancies due to linear extrapolation of
-orbital motion for NEOs are an order of magnitude larger than the astrometric measurement errors
+two tracklets.  However, it turns out that the positional discrepancies due to a simple linear extrapolation of
+motion for NEOs are an order of magnitude larger than the astrometric measurement errors
 even in case of two consecutive nights ($\sim$1 arcmin vs. 7 arcsec, respectively). We proceed with
-a quantitative analysis of required matching radius using simulated orbits for main-belt asteroids
+a quantitative analysis of the required matching radius using simulated orbits for main-belt asteroids
 and NEOs.
 
 
@@ -280,11 +280,11 @@ chance of being matched. As an example of a ``poor man's'' rapid search, conside
 fact that tracklets from each night are already ``self-organized'' into about 500 visits,
 which correspond to a field of view with a diameter of 3.5 deg. It is easy to show that with
 an upper limit on possible motion of 5 deg, only 19 visits from the second night need to be
-searched for matching  tracklets. This significant reduction of a factor of $\sim$25 in
+searched for matching tracklets. This significant reduction of a factor of $\sim$25 in
 the number of candidate matching tracklets can be further boosted by applying more
 sophisticated tree algorithms.
 
-Using for illustration ecliptic longitude $\lambda$, the predicted search position for the
+Using ecliptic longitude $\lambda$ for illustrative purposes, the predicted search position for the
 second tracklet is
 \begin{equation}
 \label{eq:lambdaPred}
@@ -300,7 +300,7 @@ and  $r_\beta^{max}$ along the Ecliptic longitude and latitude, is given by
 \label{eq:Nmdk}
      N_{match}(\Delta k) = \pi \, r_\lambda^{max} \, r_\beta^{max}  \, \rho_{tracklet} \left({1 \, {\rm day} \over T_{revisit}}\right)
 \end{equation}
-where division by $T_{revisit}$ reflects the fact that each field is revisited on average only
+where the division by $T_{revisit}$ reflects the fact that each field is revisited on average only
 every $T_{revisit}$ days (statistically speaking; the number of matches is zero for all but one
 night out of $T_{revisit}$ nights).
 
@@ -311,9 +311,9 @@ samples described in \S\ref{sec:MAFdetails}.
 
 Analysis of simulated samples shows that an adequate acceleration limit\footnote{See also
 Figure 16 in \citet{LDM-156}.} is $a^{max}=0.02$ deg day$^{-2}$: essentially
-all main-belt asteroids and more than 95\% of NEOs satisfy this criterion. If acceleration
+all main-belt asteroids and more than 95\% of NEOs satisfy this criterion. If this acceleration
 were constant during an interval of $\Delta k$ days, the maximum positional discrepancy
-would be proportional to $\Delta k^2$. Numerical analysis of simulated orbital motions
+would be proportional to $\Delta k^2$. Numerical analysis of the simulated orbital motions
 suggests that an approximately constant selection completeness (as a function of $\Delta k$)
 is attained for
 \begin{equation}
@@ -334,13 +334,13 @@ For example,  the expected number of matches for $\Delta k$=7 days is $\sim$224
 (a 19 arcmin by 93 arcmin matching ellipse), and rises to $\sim$6,000 for
 $\Delta k$=21 days.
 
-Given the two matched tracklets, we approximate the motion as a parabola
+Given the two matched tracklets, we can then approximate the motion as a parabola
 \begin{equation}
 \label{eq:parabola}
           \lambda(t) = \frac{1}{2}a^\lambda \, t^2 + v^\lambda \, t + \lambda_1,
 \end{equation}
 where $t = mjd - mjd_1$ (and analogously for latitude $\beta$).  Using the tracklet
-positions and the motion vector of the first tracklet, acceleration can be directly
+positions and the motion vector of the first tracklet, the acceleration can be directly
 estimated as
 \begin{equation}
  \label{eq:accPred}
@@ -451,30 +451,31 @@ in the text.
 
 \subsubsection{Using Tracklet Motion Vectors to Prune Candidate Tracks}
 
-The positional matching described above didn't use strong constraints on tracklet velocities
-for the first and third tracklets. Since false tracklets have random velocities, velocity filtering
-can further reduce the number of false tracks.
+The positional matching described above didn't use strong constraints on the tracklet velocities
+for the first and third tracklets. Since false tracklets (anything other than a true 
+asteroid-asteroid pair of detections) have random velocities, 
+velocity filtering can further reduce the number of false tracks.
 With three candidate tracklets, a parabolic motion (see eq.~\ref{eq:parabola}) can be fit {\it without}
-using tracklet velocities. This fit predicts velocity of each tracklet from the first derivative of
+using tracklet velocities. This fit predicts the velocity of each tracklet from the first derivative of
 the fit, which can then be compared to each measured velocity. Figure~\ref{fig:TrackSlide1}
-illustrates a situation where, e.g., $v_3$ is inconsistent with velocity predicted using such
+illustrates a situation where, e.g., $v_3$ is inconsistent with the velocity predicted using such
 parabolic fit.
 
-The consistency tolerances are driven by orbital curvature and acceleration, rather than
-by velocity measurement errors (velocities are measured with a precision of about 0.001
-deg day$^{-1}$, see eq.~\ref{eq:sigv}). Analysis of simulated samples described in
+The consistency tolerances are driven by the orbital curvature and acceleration, rather than
+by the velocity measurement errors (velocities are measured with a precision of about 0.001
+deg day$^{-1}$, see eq.~\ref{eq:sigv}). Analysis of the simulated samples described in
 \S\ref{sec:MAFdetails} shows that velocity tolerances of $\delta v_\lambda^{max}$=0.12 deg day$^{-1}$
-for longitudinal component and $\delta v_\beta^{max}$=0.03 deg day$^{-1}$ for latitudinal component
+for the longitudinal component and $\delta v_\beta^{max}$=0.03 deg day$^{-1}$ for the latitudinal component
 reject most false tracklets with only a few percent effect (per single discovery attempt) on overall
 sample completeness.
 
-The probability that a random false-tracklet velocity will be consistent with some true
+The probability that a random false tracklet velocity will be consistent with a given expected
 velocity is approximately (assuming a uniform distribution of false tracklet velocities)
 \begin{equation}
         p_v =  { \delta v_\beta^{max} \, \delta v_\lambda^{max} \over  v_{max}^2 }
 \end{equation}
 With $v_{max} = 1$ deg day$^{-1}$, $p_v = 0.0036$. In reality, this probability is a bit smaller because
-the false-tracklet velocity distribution is not uniform (it is biased towards the velocity cutoff).
+the false tracklet velocity distribution is not uniform (it is biased towards the velocity cutoff).
 Finally, the probability that all three tracklets have velocities consistent with those
 implied by their positions is $p_v^2 \sim 10^{-5}$ (not $p_v^3$ because $v_2$ was already
 subjected to a fairly stringent cut, see eq.~\ref{eq:v2cut}; a more stringent cut here
@@ -482,7 +483,16 @@ would provide a reduction by about a factor of five, which we ignore)
 
 This significant reduction in the number of candidate false tracks, due to filtering velocities
 of the first and third tracklets, brings it to the range 10$^{4}$ - 10$^{6}$, which is smaller or at
-most about the same as the number of true candidate tracks (on the Ecliptic). With this final
+most about the same as the number of true candidate tracks (on the Ecliptic). 
+
+False tracks can also arise from matching true tracklets (correct matches of 
+asteroid-asteroid tracklets) from different asteroids. As these are true asteroid tracklets,
+their velocity distribution is decidedly not random. 
+-- take density of true tracklets, calculate likelihood that a true (but not matching) tracklet will
+be in the right spot (size of match is above) .. gives approximate # of false tracks composed of true tracklets.
+
+
+With this final
 reduction, the IOD step can be attempted with no more than about 10$^6$ candidate tracks per
 search window.
 
