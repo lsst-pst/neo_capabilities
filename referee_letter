@@ -2,21 +2,19 @@ Comments from the editors and reviewers:
 
 Reviewer 1
 
-This is a nicely written paper that is easy to read.  It is
-informative and represents what appears to be a thorough study of the
-performance of the LSST with respect to discovering PHOs and NEOs.
-
-
-
-On the other hand, the authors themselves state that "after accounting
-for different choices of simulation parameters, we conclude the GMS
-results are fully consistent (within 1-2%) with the results previously
-published by the LSST team, as well as with the results discussed
-here".  If the new results are consistent with earlier published
-results from the LSST team and with other independent analyses then
-what is new about this work?
-
---
+> This is a nicely written paper that is easy to read.  It is
+> informative and represents what appears to be a thorough study of the
+> performance of the LSST with respect to discovering PHOs and NEOs.
+> 
+> 
+> 
+> On the other hand, the authors themselves state that "after accounting
+> for different choices of simulation parameters, we conclude the GMS
+> results are fully consistent (within 1-2%) with the results previously
+> published by the LSST team, as well as with the results discussed
+> here".  If the new results are consistent with earlier published
+> results from the LSST team and with other independent analyses then
+> what is new about this work?
 
 The new aspects of this work are (a) an empirical, data and software
 driven, test of the false detection rate expected from the LSST
@@ -28,26 +26,22 @@ changes to the LSST baseline cadence (d) evaluation of a set of
 realistic simulations of alternative LSST cadences These aspects have
 been re-emphasized in the introduction and abstract.
 
---
- 
-There are many minor typos and grammatical issues throughout the
-manuscript that are not annoying enough to distract the reader but
-could be fixed by a careful proofread.
-
-
-
-Some of the software design and strategies described in Appendices A
-and B have been presented in other papers.  While the authors do
-present some new material I think it is difficult to justify the
-current presentation.  Also, the appendices are not as well referenced
-as the main body, and this might lead the reader into thinking that
-some of the material is new instead of being a perturbation, summary,
-or description of known techniques.  The new aspect that I can’t
-recall ever being formally written in a paper is the combinatorial
-mathematics of tracklet and track formation which was interesting and
-useful.
-
----
+> There are many minor typos and grammatical issues throughout the
+> manuscript that are not annoying enough to distract the reader but
+> could be fixed by a careful proofread.
+> 
+> 
+> 
+> Some of the software design and strategies described in Appendices A
+> and B have been presented in other papers.  While the authors do
+> present some new material I think it is difficult to justify the
+> current presentation.  Also, the appendices are not as well referenced
+> as the main body, and this might lead the reader into thinking that
+> some of the material is new instead of being a perturbation, summary,
+> or description of known techniques.  The new aspect that I can’t
+> recall ever being formally written in a paper is the combinatorial
+> mathematics of tracklet and track formation which was interesting and
+> useful.
 
 We agree that Appendix A is not necessary and has been removed. It has
 been replaced by a simple reference to the DPDD, which is a more appropriate
@@ -59,39 +53,34 @@ extremely relevant to hypothetical performance of MOPS. It is rather lengthy
 and technical for the main text, and we would prefer to leave it in an appendix.
 We have edited for clarity and brevity where appropriate.
 
----
+> Detailed comments:
+> 
+> 
+> 
+> p.2 NASA’s NEO webpage has been replaced by their CNEOS page
 
-
-Detailed comments:
-
-
-
-p.2 NASA’s NEO webpage has been replaced by their CNEOS page
-
---
 Updated.
---
 
-p.3 Pan-STARRS should be Pan-STARRS1
+> 
+> p.3 Pan-STARRS should be Pan-STARRS1
+>
 
---
 This has been corrected throughout the text as appropriate.
---
 
-p.5 why “current baseline design”?  Isn’t it the actual design that is
-being implemented?
+>
+> p.5 why “current baseline design”?  Isn’t it the actual design that is
+> being implemented?
+> 
 
----
 Agreed. Text modified accordingly.
---
 
-p.7 the statement that “objects trailed by more than 2 PSF widths
-(corresponding to motion faster than about 1 deg/day) will be easily
-detectable as trailed” is unsupported.  Finding trails on images is
-computationally expensive and this paper does not demonstrate how LSST
-will accomplish trail finding.
 
---
+> p.7 the statement that “objects trailed by more than 2 PSF widths
+> (corresponding to motion faster than about 1 deg/day) will be easily
+> detectable as trailed” is unsupported.  Finding trails on images is
+> computationally expensive and this paper does not demonstrate how LSST
+> will accomplish trail finding.
+
 We do not plan to perform unconstrained trail-finding on the image; we
 only plan to fit trailed source models to sources already discovered
 by PSF-matching (i.e., above the 5-sigma threshold when convolved with
@@ -99,162 +88,152 @@ the PSF). With this constraint, the trail fitting becomes
 computationally feasible and is accounted for in the LSST
 computational budget for alert production.
 The text is reworded to make this clearer.
---
 
-Fig 1 Would be helpful to the reader to label the horizontal axes with
-(incorrect/correct SNR).  Would also be helpful to discuss the left
-panel before the right one.  Or swap the two panels.
+> Fig 1 Would be helpful to the reader to label the horizontal axes with
+> (incorrect/correct SNR).  Would also be helpful to discuss the left
+> panel before the right one.  Or swap the two panels.
+> 
+> 
+> 
+> p.13 Section 3.3.
+> 
+> 
+> 
+> Given the importance of testing the LSST pipeline why were images not
+> acquired with DECam that did achieve the same depth as LSST?  Are
+> these images representative of the entire sky?  Some discussion of
+> these issues should be included.
+> 
+> 
+> 
+> XXX
+>  
+> Fig 3.  Define the dotted lines in the top panels.  I assume they are
+> the lines corresponding to 1+/-0.05 au but was at first confused that
+> there were no objects outside the lines.
+> 
+> 
+> 
+> XXX
+>  
+> Section 5.1.3 It is strange to reference Juric et al. (2002) for the H
+> magnitude calculation when 1) the relationship was originally
+> published much earlier and 2) it is not difficult to derive from first
+> principals.
 
-
-
-p.13 Section 3.3.
-
-
-
-Given the importance of testing the LSST pipeline why were images not
-acquired with DECam that did achieve the same depth as LSST?  Are
-these images representative of the entire sky?  Some discussion of
-these issues should be included.
-
-
-
-XXX
- 
-Fig 3.  Define the dotted lines in the top panels.  I assume they are
-the lines corresponding to 1+/-0.05 au but was at first confused that
-there were no objects outside the lines.
-
-
-
-XXX
- 
-Section 5.1.3 It is strange to reference Juric et al. (2002) for the H
-magnitude calculation when 1) the relationship was originally
-published much earlier and 2) it is not difficult to derive from first
-principals.
-
---
 Agreed. Removed the reference.
---
 
-Section 5.2.1 I could imagine that the text in items 1 through 5 could
-be converted into a table with columns like: proposal, filters,
-visits, dec/RA range, etc.  It could make it much easier to visualize
-the differences between the proposals.  It would be a nice complement
-to Fig 6 and perhaps more compact.  Modified surveys in section 5.2.2
-could also be included.
-
-
-
-5.2.2 Seems like an obvious optimization for the ultimate LSST NEO
-survey to use a wide-band filter but this was not considered.  Is
-there a reason?  This could be discussed in the text.
-
-
-
-Section 6 Conclusions
-
-
-
-The strength of the points at the bottom of page 41 are too strong and
-in one case inconsistent with the sentence immediately before the 3
-points.  I address each of them here:
-
-
-
-1) I think the authors do a good job discussing the DECam data and
-analysis but this statement neglects the fact that the DECam data does
-not go to the same depth as LSST and they have not argued that the
-DECam field pointings are representative of the LSST pointings.
-
-
-
-2) The authors never demonstrated that they could handle 10^8
-tracklets per search window.  They use a much reduced data set to test
-their MOPS and extrapolate to the full data set.
-
-
-
-3) The sentence before these 3 points states that “the following three
-conditions *will* be met” but this point states that “Assuming that
-IOD can be executed in about 0.1 sec per track”.  I see a
-contradiction stating that something *will* be met while then
-*assuming* that something will happen.  While the authors do cite a
-personal communication that IOD can be achieved in less time they have
-not demonstrated that it has been tested under realistic LSST
-operational circumstances.
-
-
-----
+> Section 5.2.1 I could imagine that the text in items 1 through 5 could
+> be converted into a table with columns like: proposal, filters,
+> visits, dec/RA range, etc.  It could make it much easier to visualize
+> the differences between the proposals.  It would be a nice complement
+> to Fig 6 and perhaps more compact.  Modified surveys in section 5.2.2
+> could also be included.
+> 
+> 
+> 
+> 5.2.2 Seems like an obvious optimization for the ultimate LSST NEO
+> survey to use a wide-band filter but this was not considered.  Is
+> there a reason?  This could be discussed in the text.
+> 
+> 
+> 
+> Section 6 Conclusions
+> 
+> 
+> 
+> The strength of the points at the bottom of page 41 are too strong and
+> in one case inconsistent with the sentence immediately before the 3
+> points.  I address each of them here:
+> 
+> 
+> 
+> 1) I think the authors do a good job discussing the DECam data and
+> analysis but this statement neglects the fact that the DECam data does
+> not go to the same depth as LSST and they have not argued that the
+> DECam field pointings are representative of the LSST pointings.
+> 
+> 
+> 
+> 2) The authors never demonstrated that they could handle 10^8
+> tracklets per search window.  They use a much reduced data set to test
+> their MOPS and extrapolate to the full data set.
+> 
+> 
+> 
+> 3) The sentence before these 3 points states that “the following three
+> conditions *will* be met” but this point states that “Assuming that
+> IOD can be executed in about 0.1 sec per track”.  I see a
+> contradiction stating that something *will* be met while then
+> *assuming* that something will happen.  While the authors do cite a
+> personal communication that IOD can be achieved in less time they have
+> not demonstrated that it has been tested under realistic LSST
+> operational circumstances.
+> 
 
 
 
-----
+> Appendix A
+> 
+> 
+> 
+> This is a fine, quick introduction to LSST’s solar system object
+> processing system.  But many of the ideas and strategies already exist
+> at other surveys and have been described elsewhere.  The authors
+> should provide references wherever possible.
+> 
+> 
+> 
+> Appendix A footnote 13
+> 
+> The main document uses the term “template” to refer to what this
+> footnote calls an “average”.  The authors should ensure that the
+> terminology is consistent between the main document and the
+> appendices.  Indeed, section A.1 again uses the term template.
+> 
+> 
+> 
+> footnote 19 last sentence
+> 
+> This is an interesting statement.  While LSST’s cadence will probably
+> discover and catalog most objects with V less than about 23? within a
+> couple years, the cataloging rate for fainter objects (that dominate
+> the statistics) might not fall as fast as LSST plans.
+> 
+> 
+> 
+> footnote 25 reads strangely
+> 
+> I suggest simply “A gravitational keyhole is a region of space through
+> which an asteroid must pass in order that the asteroid will collide
+> with the Earth in the future”
+> 
+> 
+> 
+> footnote 33
+> 
+> If the images are differenced against a template why is there any
+> minimum rate of motion listed here?
+> 
 
-Appendix A
-
-
-
-This is a fine, quick introduction to LSST’s solar system object
-processing system.  But many of the ideas and strategies already exist
-at other surveys and have been described elsewhere.  The authors
-should provide references wherever possible.
-
-
-
-Appendix A footnote 13
-
-The main document uses the term “template” to refer to what this
-footnote calls an “average”.  The authors should ensure that the
-terminology is consistent between the main document and the
-appendices.  Indeed, section A.1 again uses the term template.
-
-
-
-footnote 19 last sentence
-
-This is an interesting statement.  While LSST’s cadence will probably
-discover and catalog most objects with V less than about 23? within a
-couple years, the cataloging rate for fainter objects (that dominate
-the statistics) might not fall as fast as LSST plans.
-
-
-
-footnote 25 reads strangely
-
-I suggest simply “A gravitational keyhole is a region of space through
-which an asteroid must pass in order that the asteroid will collide
-with the Earth in the future”
-
-
-
-footnote 33
-
-If the images are differenced against a template why is there any
-minimum rate of motion listed here?
-
-
----
 Appendix A has been removed, at the suggestion of the editor and the
 two reviewers. The information is available in other locations, such as
 the LSST Data Products Definition Document, which is referenced in the paper.
 These footnotes were also removed.
----
 
 
+> 
+> Appendix B
+> 
+> 
+> 
+> The derivation of the scaling relations for tracklet and track
+> formation is interesting, useful, and, to my knowledge, as yet
+> unpublished.  But many of the underlying strategies of linking
+> tracklets and tracks are known and published.  A naive reader might be
+> led to believe otherwise so it would be good to clarify the situation
+> for the reader and cite appropriate references.
 
-Appendix B
-
-
-
-The derivation of the scaling relations for tracklet and track
-formation is interesting, useful, and, to my knowledge, as yet
-unpublished.  But many of the underlying strategies of linking
-tracklets and tracks are known and published.  A naive reader might be
-led to believe otherwise so it would be good to clarify the situation
-for the reader and cite appropriate references.
-
----
 References have been added to PSMOPS and to the original Kubica papers.
 The steps of the linking method described here are actually a bit different
 than those in PSMOPS/Kubica, where first and third tracklets are linked in one step
@@ -265,22 +244,20 @@ tracklet, and then more precise cuts and requirements on the velocities of the f
 and third tracklets are placed last. In practice, this is to some level an implementation
 difference, although the second formalism makes it easier to determine the scaling with
 false tracklet rate.
----
 
-Section B.2.4
+> Section B.2.4
+> 
+> It is somewhat difficult to follow all the possible combinations of
+> false tracklets but I am concerned about the assumption just before
+> eq. B23 that assumes “a uniform distribution of false tracklet
+> velocities”.  Is this assuming that the false tracklets are composed
+> of false detections?  Is this the correct assumption?  It seems that
+> when linking real asteroids there is going to be a strong skew towards
+> the real asteroid tracklets having motion vectors that will roughly
+> match the expected velocity.  Perhaps the argument is that most false
+> tracklets are composed of false detections so some clarification for
+> the reader would be helpful here.
 
-It is somewhat difficult to follow all the possible combinations of
-false tracklets but I am concerned about the assumption just before
-eq. B23 that assumes “a uniform distribution of false tracklet
-velocities”.  Is this assuming that the false tracklets are composed
-of false detections?  Is this the correct assumption?  It seems that
-when linking real asteroids there is going to be a strong skew towards
-the real asteroid tracklets having motion vectors that will roughly
-match the expected velocity.  Perhaps the argument is that most false
-tracklets are composed of false detections so some clarification for
-the reader would be helpful here.
-
----
 This section of the text is dealing with the analytic scaling approximation;
 as a result, it assumes (as stated in an earlier section) that \eta (the ratio
 of the density of asteroids / false detections) is zero. Essentially, 
@@ -290,66 +267,62 @@ refer to the scaling of the false track rate that is the result of a numerical
 simulation where this assumption was not included; the results are not
 significantly different. A clarification of this has been added to the text.
 
-----
-
-Reviewer 2
-
-
-Review Icarus 2017 96 The Large Synoptic Survey Telescope as a
-Near-Earth Object Discovery Machine Jones et. al.
-
-I would recommend this paper for publication with after some
-modifications
-
-This paper is en extensive and thorough look at the expected
-performance of the LSST survey in regards to the Near-Earth Object
-Discovery. It describes in detail the methods used and includes an
-extensive set of arguments for why the selected cadence is a workable
-scheme.  The use of DECam data is a nice addition that helps support
-and bracket the number of false positives expected in the LSST
-survey. I still think and encourage the author to also extend the LSST
-prototyping (through additional DECam data) by observing a significant
-set of fields in the baseline LSST cadence and run this data through
-all of the expected data systems (including IOD) to show that the
-selected cadence can indeed discover new objects. This work is of
-course beyond the scope of this paper, but highlights the missing part
-of the work presented in this paper. While the paper adequately argues
-the case that current software might be able to handle the load of
-generating tracklets and tracks, the paper somewhat buries the
-assumption that IOD will provide an efficient filter in removing false
-positive tracks (see note below for more detail on this).
-
-The second part of the paper discusses the results of the simulation
-of the baseline survey cadence, minion_1016, and three “NEO-enhanced”
-survey options. A thorough discussion of the results and the different
-effects that influences the end results is very nice, however there
-are some inconsistencies that I would suggest cleaning up. For
-example, the slope in Schunova-Lilly et al. (2017) is 0.33+\-0.01, not
-the 0.3 cited in this paper. While the effect on the completeness is
-minor on the few percentage level as mentioned in bullet 9 on page 38,
-it seems like an unnecessary choice of a shallower slope that does
-lead to a small improvement. This rounding (which is larger than the
-error bar) could lead to readers to draw the perception that the
-authors are stacking the deck in the LSST favor, when I don’t think
-what was intended and also really does not significantly change
-conclusions of the paper.
-
-The other main concern with this section is the results of the current
-surveys performance over the next 17 years. The result of 55%
-completeness for the PHAs at the start of the LSST survey is
-significantly higher (~12%) than the results of Grav et al. (2016). On
-page 37, a value of V_max1 = 20.0 is derived, which is significantly
-shallower than the estimated V~21 that Catalina and Pan-STARRS 1 have
-been reaching on a regular basis before 2015. This results leads me to
-believe that the criteria of solar elongation >60 degrees is
-significantly driving the exceptionally high completeness in PHAs in
-the out-years. I suspect that if a more realistic value of solar
-elongation >90-110 degrees were used, V_max1 would yield a more
-realistic value near V~21 and the resulting completeness of PHAs at
-the start and end of the LSST survey as a result of the current
-surveys would yield lower and more realistic values.
-
----
+> Reviewer 2
+> 
+> 
+> Review Icarus 2017 96 The Large Synoptic Survey Telescope as a
+> Near-Earth Object Discovery Machine Jones et. al.
+> 
+> I would recommend this paper for publication with after some
+> modifications
+> 
+> This paper is en extensive and thorough look at the expected
+> performance of the LSST survey in regards to the Near-Earth Object
+> Discovery. It describes in detail the methods used and includes an
+> extensive set of arguments for why the selected cadence is a workable
+> scheme.  The use of DECam data is a nice addition that helps support
+> and bracket the number of false positives expected in the LSST
+> survey. I still think and encourage the author to also extend the LSST
+> prototyping (through additional DECam data) by observing a significant
+> set of fields in the baseline LSST cadence and run this data through
+> all of the expected data systems (including IOD) to show that the
+> selected cadence can indeed discover new objects. This work is of
+> course beyond the scope of this paper, but highlights the missing part
+> of the work presented in this paper. While the paper adequately argues
+> the case that current software might be able to handle the load of
+> generating tracklets and tracks, the paper somewhat buries the
+> assumption that IOD will provide an efficient filter in removing false
+> positive tracks (see note below for more detail on this).
+> 
+> The second part of the paper discusses the results of the simulation
+> of the baseline survey cadence, minion_1016, and three “NEO-enhanced”
+> survey options. A thorough discussion of the results and the different
+> effects that influences the end results is very nice, however there
+> are some inconsistencies that I would suggest cleaning up. For
+> example, the slope in Schunova-Lilly et al. (2017) is 0.33+\-0.01, not
+> the 0.3 cited in this paper. While the effect on the completeness is
+> minor on the few percentage level as mentioned in bullet 9 on page 38,
+> it seems like an unnecessary choice of a shallower slope that does
+> lead to a small improvement. This rounding (which is larger than the
+> error bar) could lead to readers to draw the perception that the
+> authors are stacking the deck in the LSST favor, when I don’t think
+> what was intended and also really does not significantly change
+> conclusions of the paper.
+> 
+> The other main concern with this section is the results of the current
+> surveys performance over the next 17 years. The result of 55%
+> completeness for the PHAs at the start of the LSST survey is
+> significantly higher (~12%) than the results of Grav et al. (2016). On
+> page 37, a value of V_max1 = 20.0 is derived, which is significantly
+> shallower than the estimated V~21 that Catalina and Pan-STARRS 1 have
+> been reaching on a regular basis before 2015. This results leads me to
+> believe that the criteria of solar elongation >60 degrees is
+> significantly driving the exceptionally high completeness in PHAs in
+> the out-years. I suspect that if a more realistic value of solar
+> elongation >90-110 degrees were used, V_max1 would yield a more
+> realistic value near V~21 and the resulting completeness of PHAs at
+> the start and end of the LSST survey as a result of the current
+> surveys would yield lower and more realistic values.
 
 The question of the completeness arising from other surveys is complicated.
 The Grav et al result of 43% completeness at the start of the LSST survey is
@@ -422,20 +395,17 @@ The completeness arising from other surveys from 2022-2032 varies, with our esti
 being lower than Veres & Chesley (61% in 2032) but slightly higher than what seems to be
 calculated by Grav et al (~52%). 
 
----
+> My other main concern with the paper is the inclusion of appendix A
+> and B. I simply think Appendix A is not significantly material to the
+> paper and can easily be removed without impacting it. While Appendix B
+> has some material that helps support the understanding of the paper I
+> still maintain the opinion that the functions that it refers to in the
+> text could be moved from Appendix B into the text itself with some
+> supporting text, making it possible to get rid of most of this
+> appendix. However, if the authors feel strongly that appendix B is an
+> important part of the paper, I would not use this appendix as a strong
+> enough reason to not have the paper accepted.
 
-My other main concern with the paper is the inclusion of appendix A
-and B. I simply think Appendix A is not significantly material to the
-paper and can easily be removed without impacting it. While Appendix B
-has some material that helps support the understanding of the paper I
-still maintain the opinion that the functions that it refers to in the
-text could be moved from Appendix B into the text itself with some
-supporting text, making it possible to get rid of most of this
-appendix. However, if the authors feel strongly that appendix B is an
-important part of the paper, I would not use this appendix as a strong
-enough reason to not have the paper accepted.
-
-----
 We agree that Appendix A is not necessary and has been removed. It has
 been replaced by a simple reference to the DPDD, which is a more appropriate
 place for this information.
@@ -446,113 +416,102 @@ extremely relevant to hypothetical performance of MOPS. It is rather lengthy
 and technical for the main text, and we would prefer to leave it in an appendix.
 We have edited for clarity and brevity where appropriate.
 
-----
 
+> I have several specific comments/suggestions:
+> 
+> Page 2, introduction: I would also suggest including the results of
+> Grav et al (2016) in the introduction when talking about other LSST
+> survey simulations (page 3). There is also the work of Veres and
+> Chesley, although I am not able to find out if that has been published
+> anywhere yet.
+> 
+> Page 2, line 11: There are other estimates of the number of NEOs/PHAs
+> with H < 22 (or D > 140m) in literatures, which should be referenced
+> for completeness (for example Mainzer et al (2012), Granvik et
+> al. (2016) and Schunova-Lilly et al. 2017).
+> 
+> Page 2, 2nd paragraph. A minor quibble, but the LSST is not “such a
+> system” as the conclusion of the paper is that a 12 year survey would
+> yield 85% completeness (which does not account for the difference
+> between H<22 and D>140m), which is still short of the congressional
+> mandate. I would suggest using language to the effect that LSST gets
+> close to the mandate, rather than referring to it as satisfying it.
+> 
+> Page 5, sec 2.1: Here the typical 5sigma depth for point sources is
+> given as r~24.5, while it in section 2.2.1 is quoted as r~24.16 for
+> the current baseline simulated survey. Is there a reason why this
+> paragraph uses a deeper value?
 
-I have several specific comments/suggestions:
-
-Page 2, introduction: I would also suggest including the results of
-Grav et al (2016) in the introduction when talking about other LSST
-survey simulations (page 3). There is also the work of Veres and
-Chesley, although I am not able to find out if that has been published
-anywhere yet.
-
-Page 2, line 11: There are other estimates of the number of NEOs/PHAs
-with H < 22 (or D > 140m) in literatures, which should be referenced
-for completeness (for example Mainzer et al (2012), Granvik et
-al. (2016) and Schunova-Lilly et al. 2017).
-
-Page 2, 2nd paragraph. A minor quibble, but the LSST is not “such a
-system” as the conclusion of the paper is that a 12 year survey would
-yield 85% completeness (which does not account for the difference
-between H<22 and D>140m), which is still short of the congressional
-mandate. I would suggest using language to the effect that LSST gets
-close to the mandate, rather than referring to it as satisfying it.
-
-Page 5, sec 2.1: Here the typical 5sigma depth for point sources is
-given as r~24.5, while it in section 2.2.1 is quoted as r~24.16 for
-the current baseline simulated survey. Is there a reason why this
-paragraph uses a deeper value?
-
---
 This has been corrected in the page 5/section 2.1 paragraph to the
 more appropriate dark-sky, zenith fiducial value of r=24.38. The
 median r~24.16 value includes airmass and other observational effects
 that are modified by observing cadence. These values have been
 evolving as we understand the LSST system better and prototypes of
 various components are available and measured.
---- 
 
-Page 8: sec 2.4, bullet 3: This is a very key point and I feel that
-this obstacle/assumption is being dismissed somewhat easily. I would
-suggest moving footnote 8 into the text of bullet point 3 (rather than
-being “hidden” as a foot note) , pointing out that this assumption has
-not yet been tested and remains the subject of future work. I would
-also caution that this form of IOD filtering has not to the knowledge
-of this referee been used successfully in any historical or currently
-running survey, and I think this should be stated as a caveat in this
-section (if I am wrong on this assumption, the authors should provide
-a reference supporting their view that this is an effective way to
-remove false tracks).
+> Page 8: sec 2.4, bullet 3: This is a very key point and I feel that
+> this obstacle/assumption is being dismissed somewhat easily. I would
+> suggest moving footnote 8 into the text of bullet point 3 (rather than
+> being “hidden” as a foot note) , pointing out that this assumption has
+> not yet been tested and remains the subject of future work. I would
+> also caution that this form of IOD filtering has not to the knowledge
+> of this referee been used successfully in any historical or currently
+> running survey, and I think this should be stated as a caveat in this
+> section (if I am wrong on this assumption, the authors should provide
+> a reference supporting their view that this is an effective way to
+> remove false tracks).
 
 Noted and the footnote has been moved into the text.  XXXX
 
 
-Page 16: section 3.3.3: I am not convinced by this section that 4
-visits of 60 CCDs each constitutes a large enough sample to be a true
-representation of spatially correlated transients. It would be
-beneficial to have a discussion on why these 4 visits representative
-of the average conditions of the LSST survey and wether the average of
-8 sources per combination of images varied significantly between sets.
+> Page 16: section 3.3.3: I am not convinced by this section that 4
+> visits of 60 CCDs each constitutes a large enough sample to be a true
+> representation of spatially correlated transients. It would be
+> beneficial to have a discussion on why these 4 visits representative
+> of the average conditions of the LSST survey and wether the average of
+> 8 sources per combination of images varied significantly between sets.
+> 
+> Page 21, section 5.1.3: I am assuming that phase-curve effects were
+> modeled when determining the flux of the object, but it is not
+> mentioned in this section.
 
-Page 21, section 5.1.3: I am assuming that phase-curve effects were
-modeled when determining the flux of the object, but it is not
-mentioned in this section.
-
----
 They were included, and this fact has been clarified (including what
 function was used to calculate the observed magnitudes).
----
 
-Page 22, section 5.1.1 and page 28, section 5.1.6: The value given in
-Schunova-Lilly is alpha=0.33+/-0.01, which is actually 10% different
-than the value given in this section. A back of the envelope
-calculation shows that changing to slope to a somewhat shallower slope
-by 10% does affect the cumulative performance on the ~2% level, which
-while not significantly enough to change the main conclusions of this
-paper seems like an unnecessary change to the Schunova-Lilly
-result. Also, since the paper is using the slope of Schunova-Lilly et
-al. (2017), this work should be mentioned and cited in the
-introduction together with or instead of Harris & D’Abramo (2015)
-which as noted in a previous comment is the only paper referenced in
-the introduction, but then never mentioned or used subsequently.
+> Page 22, section 5.1.1 and page 28, section 5.1.6: The value given in
+> Schunova-Lilly is alpha=0.33+/-0.01, which is actually 10% different
+> than the value given in this section. A back of the envelope
+> calculation shows that changing to slope to a somewhat shallower slope
+> by 10% does affect the cumulative performance on the ~2% level, which
+> while not significantly enough to change the main conclusions of this
+> paper seems like an unnecessary change to the Schunova-Lilly
+> result. Also, since the paper is using the slope of Schunova-Lilly et
+> al. (2017), this work should be mentioned and cited in the
+> introduction together with or instead of Harris & D’Abramo (2015)
+> which as noted in a previous comment is the only paper referenced in
+> the introduction, but then never mentioned or used subsequently.
+> 
+> 
+> 
+> Page 37: A completeness of 55% for PHAs with H < 22 in 2022 is more
+> than 10% higher than the estimate given by Grav et al (2016) given on
+> page 31. There is no discussion on this difference, which I suspect is
+> due to using solar elongation > 60 degrees as a detection criteria in
+> this paper. Current surveys rarely observe below 90 degree solar
+> elongation and cover limited are below ~110 degrees solar
+> elongation. Some argument supporting the choice of solar elongation
+> cut-off should be included, and also some discussion of why this
+> paper’s estimate is 10% higher than that of Grav et al. (2016).
 
-
-
-Page 37: A completeness of 55% for PHAs with H < 22 in 2022 is more
-than 10% higher than the estimate given by Grav et al (2016) given on
-page 31. There is no discussion on this difference, which I suspect is
-due to using solar elongation > 60 degrees as a detection criteria in
-this paper. Current surveys rarely observe below 90 degree solar
-elongation and cover limited are below ~110 degrees solar
-elongation. Some argument supporting the choice of solar elongation
-cut-off should be included, and also some discussion of why this
-paper’s estimate is 10% higher than that of Grav et al. (2016).
-
----
 This has been addressed in the major comments above.
----
 
-
-Page 37: It is not clear from the text if the 85% completeness for
-PHAs is for the LSST baseline, extended by two years, or if it
-includes any of the other enhancement surveys mentioned in this
-section (it is clarified later in the conclusion chapter, but should
-perhaps be made clearer here.
-
-Page 38, bullet 3: This topic is also covered in detail in Wright et
-al. (2016), which looks at the impact of the NEOWISE albedo
-distribution on the H < 22 and D > 140m issue.
-
-
-
+> Page 37: It is not clear from the text if the 85% completeness for
+> PHAs is for the LSST baseline, extended by two years, or if it
+> includes any of the other enhancement surveys mentioned in this
+> section (it is clarified later in the conclusion chapter, but should
+> perhaps be made clearer here.
+> 
+> Page 38, bullet 3: This topic is also covered in detail in Wright et
+> al. (2016), which looks at the impact of the NEOWISE albedo
+> distribution on the H < 22 and D > 140m issue.
+> 
