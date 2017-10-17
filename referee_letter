@@ -185,10 +185,11 @@ not demonstrated that it has been tested under realistic LSST
 operational circumstances.
 
 
+----
 
 
 
-
+----
 
 Appendix A
 
@@ -237,6 +238,7 @@ minimum rate of motion listed here?
 Appendix A has been removed, at the suggestion of the editor and the
 two reviewers. The information is available in other locations, such as
 the LSST Data Products Definition Document, which is referenced in the paper.
+These footnotes were also removed.
 ---
 
 
@@ -279,11 +281,15 @@ tracklets are composed of false detections so some clarification for
 the reader would be helpful here.
 
 ---
-False tracklets would be anything that is not a true asteroid-asteroid
-match; the false tracklets, particularly among the tracklets which coincide
-with the expected positions along the motion vectors of the track, significantly
-outnumber the true tracklets.
-A discussion of this has been added to the text. XXX
+This section of the text is dealing with the analytic scaling approximation;
+as a result, it assumes (as stated in an earlier section) that \eta (the ratio
+of the density of asteroids / false detections) is zero. Essentially, 
+this means that 'false tracklets' here just include false detection-false 
+detection links. However, in the section immediately after this one, we
+refer to the scaling of the false track rate that is the result of a numerical
+simulation where this assumption was not included; the results are not
+significantly different. A clarification of this has been added to the text.
+
 ----
 
 Reviewer 2
@@ -550,19 +556,3 @@ distribution on the H < 22 and D > 140m issue.
 
 
 
-
-
-
- Spatial correlations are indeed a serious risk for linking moving objects.
-< With LSST, correlations from detector-based artifacts will be minimized due to
-< rotational and translational dithers. This leaves spatial correlations arising
-< from subtraction defects around real sources (stars) as the primary contaminant.
-< Subtraction artifacts around bright stars are minimized by masking the star and
-< the area around the star. This section was intended to provide a check that this
-< process could be successful; finding a negligible number of correlated sources
-< (even in only four visits, of a field with a typical stellar density)
-< indicates that this is possible for a typical field. Our software is still under
-< development, and other scenarios may lead to more failure modes, but this test
-< suggests that for typical fields in typical conditions, spatially correlated
-< sources are not a problem.
-< We will clarify the text to reflect this. XXX
