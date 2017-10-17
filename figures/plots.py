@@ -1,10 +1,11 @@
+from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
 
 figformat = 'pdf'
 
-def make_orbit_plot(orbitFile='pha20141031.des'):
+def make_orbit_plot(orbitFile, metadata):
     from lsst.sims.movingObjects import Orbits
     o = Orbits()
     o.readOrbits(orbitFile)
@@ -22,13 +23,14 @@ def make_orbit_plot(orbitFile='pha20141031.des'):
     e = Q/a - 1
     plt.plot(a, e, 'k:')
     plt.ylabel(r'Eccentricity')
-    if orbitFile.startswith('pha'):
+    if metadata.lower() == 'pha':
         plt.title('PHA orbital distribution', fontsize='larger')
     else:
         plt.title('NEO orbital distribution', fontsize='larger')
     plt.subplot(2, 1, 2, sharex=ax1)
     plt.plot(o.orbits['a'], o.orbits['inc'], 'o', markersize=4, alpha=0.7)
     plt.xlim(0, 5)
+    plt.ylim(0, 90)
     plt.xlabel(r'Semi-major Axis (AU)')
     plt.ylabel(r'Inclination ($^\circ$)')
     plt.savefig('%s_orbits.' % orbitFile.rstrip('.des') + figformat, format=figformat)
@@ -72,22 +74,22 @@ def make_fov_plot(calcFill=False):
         # Calculate fill factor
         area_degsq = 9.6
         innerradius = 1.75
-        print 'inner radius matching area_degsq for circle', innerradius
+        print('inner radius matching area_degsq for circle', innerradius)
         sep = np.degrees(sims_utils.haversine(x, y, xcen, ycen))
-        print 'max distance from center used for chip calculation', sep.max()
+        print('max distance from center used for chip calculation', sep.max())
         incircle = np.where(sep < innerradius)[0]
         onchip = np.where(vis[incircle] == 1)[0]
         fillfactor = len(vis[onchip]) / float(len(vis[incircle]))
-        print 'fill factor', fillfactor
+        print('fill factor', fillfactor)
         innerfillfactor = fillfactor
         outerradius = 2.06
-        print 'outer radius', outerradius
+        print('outer radius', outerradius)
         sep = np.degrees(sims_utils.haversine(x, y, xcen, ycen))
-        print 'max distance from center used for chip calculation', sep.max()
+        print('max distance from center used for chip calculation', sep.max())
         incircle = np.where(sep < outerradius)[0]
         onchip = np.where(vis[incircle] == 1)[0]
         fillfactor = len(vis[onchip]) / float(len(vis[incircle]))
-        print 'fill factor', fillfactor
+        print('fill factor', fillfactor)
     else:
         innerradius = 1.75
         outerradius = 2.06
@@ -133,8 +135,8 @@ def make_fov_plot(calcFill=False):
 if __name__ == '__main__':
     # Plot orbital elements.
     #make_orbit_plot('pha20141031.des')
-    make_orbit_plot('phas_2k.des')
-    make_orbit_plot('neos_2k.des')
+    make_orbit_plot('../data/orbits/pha_5k', 'PHA')
+    make_orbit_plot('../data/orbits/neo_5k', 'NEO')
 
     # Make fov plot.
     #make_fov_plot()
