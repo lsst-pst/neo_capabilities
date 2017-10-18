@@ -120,9 +120,10 @@ LSST will use two methods to detect moving objects in difference images:
   than 2 PSF widths (corresponding to motion faster than about 1
   deg/day) will be easily identifiable as trailed. LSST will detect sources in 
   difference images using standard point-source detection techniques; the actual
-  PSFs of these sources will then be measured, including fitting a trailed source model.   
-  Two trailed detections within 20--60 minutes in a single night will be
-  sufficient to identify an object as an NEO candidate,
+  PSFs of these sources will then be measured, including fitting a trailed
+  point source model (see Footnote 41. in \citep[LSST Data Products Definition Document,][]{LSE-163}).
+  Two detections, both recognized as trailed, and within 20--60 minutes in a single night
+  will be sufficient to identify an object as an NEO candidate,
 \item Inter-night linking of pairs of detections from the same night: the Moving Object 
 Processing Software (MOPS) will recover objects moving too slow to be measurably elongated in a single exposure.
 \end{enumerate}
