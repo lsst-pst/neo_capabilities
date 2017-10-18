@@ -6,6 +6,11 @@ Reviewer 1
 > informative and represents what appears to be a thorough study of the
 > performance of the LSST with respect to discovering PHOs and NEOs.
 > 
+
+We'd like to thank the referee for thoughtful and insightful comments.  We
+did our best to use them to strenghten the manuscript and improve it in key
+areas. Below is the summary of the revisions we did.
+
 > 
 > 
 > On the other hand, the authors themselves state that "after accounting
@@ -45,7 +50,9 @@ re-emphasized in the introduction, abstract, and subsequent discussions.
 > could be fixed by a careful proofread.
 > 
 
-Agreed. We've proof-read the manuscript to reduce these to the minimum.
+Agreed! We've proof-read the manuscript to reduce these to the minimum.
+
+TODO: Proofread the manuscript.
  
 > 
 > Some of the software design and strategies described in Appendices A
@@ -58,7 +65,6 @@ Agreed. We've proof-read the manuscript to reduce these to the minimum.
 > recall ever being formally written in a paper is the combinatorial
 > mathematics of tracklet and track formation which was interesting and
 > useful.
-
 
 We've reconsidered the need for Appendix A and agree that the paper can do
 without it; it's been removed.  We've replaced it by a simple reference to
@@ -95,7 +101,6 @@ This has been corrected throughout the text as appropriate.
 
 Agreed. Text modified accordingly.
 
-
 > p.7 the statement that “objects trailed by more than 2 PSF widths
 > (corresponding to motion faster than about 1 deg/day) will be easily
 > detectable as trailed” is unsupported.  Finding trails on images is
@@ -105,14 +110,14 @@ Agreed. Text modified accordingly.
 This is a very good point -- the way we've phrased this sentence conveys the
 wrong impression of whan we're doing.
 
-We do not plan to perform unconstrained trail-finding on the
-image; we only plan to fit trailed source models to sources already
-discovered by PSF-matching (i.e., above the 5-sigma threshold when convolved
-with the PSF).  With this constraint, the trail fitting becomes
-computationally feasible and inexpensive relative to all other
-source characterization measurements the LSST will perform.
+We do not plan to perform unconstrained trail-finding on the image; we only
+plan to fit trailed source models to sources already discovered by
+PSF-matching (i.e., above the 5-sigma threshold when convolved with the
+PSF).  Once an object is detected (and its footprint localized), the trail
+fitting becomes computationally feasible and inexpensive relative to all
+other source characterization measurements the LSST will perform.
 
-The text is reworded to make this clearer.
+The text has been reworded to make this clearer.
 
 > Fig 1 Would be helpful to the reader to label the horizontal axes with
 > (incorrect/correct SNR).  Would also be helpful to discuss the left
@@ -153,6 +158,8 @@ the HSC-Survey data release (e.g., Bosch et al.  2017, Aihara et al.
 2017), which includes a range of exposure times. We've added more
 discussion of the depth scaling and the various expected effects.
 
+TODO: Check the depth scaling discussion
+
 >  
 > Fig 3.  Define the dotted lines in the top panels.  I assume they are
 > the lines corresponding to 1+/-0.05 au but was at first confused that
@@ -181,6 +188,8 @@ struggled with converting it to a table in a useful way. What we've done
 instead was to keep the text, and add a summary table with key properties
 like filters, visits, etc.
 
+TODO: Check the new table
+
 > 
 > 
 > 5.2.2 Seems like an obvious optimization for the ultimate LSST NEO
@@ -192,8 +201,8 @@ We haven't discussed this option as producing an additional wide-band
 filter is not possible at this point in the LSST program (given the
 budget, but primarily schedule, constraints).
 
-Also, since the LSST does not have an atmospheric dispersion corrector, it's
-not obvious that a wide-band filter is feasible or would be an improvement.
+Also, since the LSST does not have an atmospheric dispersion corrector, It
+is not clear whether wide-band filter would be feasible or an improvement.
 
 > 
 > 
@@ -215,13 +224,17 @@ not obvious that a wide-band filter is feasible or would be an improvement.
 > 
 
 We've updated the text to include a discussion of scaling to LSST depths. 
-We've also increased the number of DECam fields we looked at, to make the
-sample more representative of LSST high latitude data.
+We've also increased the number of DECam fields we looked at to make the
+sample more representative of LSST "wide-fast-deep" data. This enlarged
+dataset spans Galactic latitudes from b=28 to b=58, and longitudes between
+315 < l < 350, making it representative of typical LSST survey area.
 
-While we didn't perform tests with imaging data in the Galactic plane, those
-already don't figure in the total discovery count as we don't take pairs of
-observations in the Galactic plane (and expect no asteroids to be found
-there).
+As we didn't have the data, we didn't perform tests with imaging data in the
+Galactic plane.  Note, however, that those already don't figure in the total
+discovery count as the LSST doesn't take pairs of observations in the
+Galactic plane (and therefore no tracklets are formed).
+
+TODO: Argue in the text that DECam pointings are more representative of LSST WFD data.
 
 > 
 > 2) The authors never demonstrated that they could handle 10^8
@@ -238,7 +251,9 @@ rates.
 
 For the analysis of the NEO completeness in Section 5, we used a reduced
 data set (just the NEOs and PHAs), This may have contributed to some of the
-confusion. We've reworded the texts to try to remove some of the confusion.
+confusion.
+
+We've reworded the texts somewhat, to try to remove some of the confusion.
 
 > 
 > 
@@ -252,10 +267,25 @@ confusion. We've reworded the texts to try to remove some of the confusion.
 > operational circumstances.
 > 
 
-TODO: actually do the benchmark
+We've since measured the performance of IOD using an implementation found in
+the Find_Orb package.  Find_Orb is a C++ package that implements simple
+initial orbit determination (the "gauss()" function) as well as the
+computation of differential orbit corrections.  The code is generally
+optimized for versatility rather than speed; further improvements are likely
+if a consorted optimization effort is undertaken.
 
-We've since measured the performance of IOD, and it fits comfortably
-into our computing budget.
+For benchmarking purposes, we used this code to fit an orbit to a track with
+six observations (a pair each night), spanning a 16-day arc, on a single 3.1
+GHz core.  We find that the IOD using the Gauss takes 0.3ms to compute, very
+comfortably within our 100ms budget.  We also tested running the full
+differential orbit determination (which we don't believe we will need for
+filtering), and find it took 24ms,
+
+These numbers fit comfortably into our computing budget, and are consistent
+with experiences of Veres & Chesley.
+
+TODO: store benchmark results into the git repo
+TODO: modify the paper text to list these results
 
 > Appendix A
 > 
@@ -384,17 +414,20 @@ specific issues raised are in the text below:
 > positive tracks (see note below for more detail on this).
 > 
 
-The IOD/OD assumption, while not tested by us directly in this paper, has now
-been validated and published by Veres & Chesley (2017). In their
-simulations, under condition analogous to ours, they obtain 96% percent of
-correct linkages. They also add that such that number is likely to rise to
->99% for MBAs with modest and already identified potential improvements and
-longer simulations (some of the mislinkages within the NEO populations are
-due to misidentified MBA-MBA links get "cleaned up" in the course of the
-survey).
+The assumption of sufficiency of IOD/OD for filtering, while not tested by
+us directly in this paper, has now been validated and published by Veres &
+Chesley (2017).  In their simulations, under condition analogous to ours,
+they obtain 96% percent of correct linkages by using orbit determination as the filter.
+
+They also add that such that number is likely to rise to >99% for MBAs with
+modest (and already understood) potential improvements and longer simulations
+(some of the mislinkages within the NEO populations are due to misidentified
+MBA-MBA links get "cleaned up" in the course of the survey).
 
 Now that Veres & Chesley paper is published, we've referred to their
 findings in our text.
+
+TODO: Make sure we refer to Veres & Chesley in the text for IOD/OD.
 
 > The second part of the paper discusses the results of the simulation
 > of the baseline survey cadence, minion_1016, and three “NEO-enhanced”
@@ -414,21 +447,22 @@ findings in our text.
 
 This has now been corrected -- we thank the reviewer for catching this!
 
-In addition to this change, and in response to the other reviewer's
+In addition to this change, and in response to second reviewer's
 comments, we've also updated the sky brightness model to a version that more
 faithfully describes twilight/sunrise observations, as well as improved
-the model of yield of existing surveys (see below). Together with those
-changes, our results for completeness have changed by +5% (mostly due to
-better modeling of the sky in the twilight/sunrise). The paper has been
-updated to reflect this.
+the model of yield of existing surveys (see below).
+
+With all those changes, our results for completeness have changed by +5%
+(mostly due to better modeling of the sky in the twilight/sunrise).  The
+paper has been updated to reflect this.
 
 > The other main concern with this section is the results of the current
 > surveys performance over the next 17 years. The result of 55%
 > completeness for the PHAs at the start of the LSST survey is
 > significantly higher (~12%) than the results of Grav et al. (2016).
 
-The Grav et al.  result of 43% completeness at the start of the LSST survey
-is for the NEO population (Section 3.1, 3rd paragraph).  When we look at the
+We understand the Grav et al. result of 43% completeness to be for
+the NEO population (Section 3.1, 3rd paragraph, in their paper). When we look at the
 NEO population we find a very similar value (40%).  That number is also
 consistent with Veres & Chesley ("High-fidelity Simulations of the
 Near-Earth Object Search Performance of the Large Synoptic Survey
@@ -437,12 +471,16 @@ LSST start.
 
 Grav et al.  never explicitly mention their result for the PHA population,
 but we can read it off of Figure 7, and the referee is correct it's about
-~43% as well (so, the same as NEOs).  We do not understand this aspect of
-Grav's paper.  Intuitively, as the PHA population is brighter (in terms of
-observed peak magnitudes) than the NEO population, we would expect higher
-discovery rates for PHAs relative to NEOs.  This is something we see when we
-simulate the LSST alone.  Veres & Chesley find the same as well in their
-simulations. We're not sure why the Grav result is discrepant.
+~43% as well (the same or very similar as the NEOs).  We do not understand
+well this aspect of Grav's paper.  Intuitively, as the PHA population is
+brighter (in terms of observed peak magnitudes) than the NEO population, we
+would expect higher discovery rates for PHAs relative to NEOs.  This is
+something we see when we simulate the LSST alone and Veres & Chesley find
+the same as well in their simulations.  We unfortunately do not have enough
+information to reproduce and understand why Grav et al.  result is
+different.
+
+TODO: Make sure the above is correct -- do V&C find the same discrepancy in their paper?
 
 > On
 > page 37, a value of V_max1 = 20.0 is derived, which is significantly
@@ -478,6 +516,7 @@ being made about the evolution of other surveys over a ~17 year period, it's
 probably difficult to derive a consensus estimate much more accurate than
 this.
 
+TODO: This needs to be added to the text of the paper.
 
 > My other main concern with the paper is the inclusion of appendix A
 > and B. I simply think Appendix A is not significantly material to the
@@ -558,7 +597,11 @@ brightness model.
 > a reference supporting their view that this is an effective way to
 > remove false tracks).
 
-Noted and the footnote has been moved into the text.  XXXX
+Noted and the footnote has been moved into the text. We've also added
+references to Veres & Chesley (2017), who discuss an end-to-end simulation
+that includes IOD.
+
+FIXME: Add reference to Veres & Chesley
 
 > Page 16: section 3.3.3: I am not convinced by this section that 4
 > visits of 60 CCDs each constitutes a large enough sample to be a true
@@ -568,7 +611,19 @@ Noted and the footnote has been moved into the text.  XXXX
 > 8 sources per combination of images varied significantly between sets.
 > 
 
+This is a valid concern that we've investigated further.
 
+To do so, we've additionally processed a significantly larger superset (540
+visit, vs 15 visits originally) of the Allen et al.  data.  This enlarged
+dataset spans Galactic latitudes from b=28 to b=58, and longitudes between
+315 < l < 350, making it representative of typical LSST survey area.
+
+With this larger dataset, we've obtained the same negative result about
+correlated false positives. Also, the recovered false positive rates were
+typically lower (by ~30%) than what we've found with the smaller data set. 
+We now discuss and note this in the text.
+
+TODO: Update the paper to include l/b limits for the larger dataset
 
 > Page 21, section 5.1.3: I am assuming that phase-curve effects were
 > modeled when determining the flux of the object, but it is not
@@ -591,6 +646,7 @@ function was used to calculate the observed magnitudes).
 > the introduction, but then never mentioned or used subsequently.
 > 
 
+This has now been corrected -- we thank the reviewer for catching this!
 
 > 
 > Page 37: A completeness of 55% for PHAs with H < 22 in 2022 is more
@@ -612,9 +668,11 @@ This has been addressed in the major comments above.
 > perhaps be made clearer here.
 > 
 
-
+XXXX
 
 > Page 38, bullet 3: This topic is also covered in detail in Wright et
 > al. (2016), which looks at the impact of the NEOWISE albedo
 > distribution on the H < 22 and D > 140m issue.
 > 
+
+XXXX
