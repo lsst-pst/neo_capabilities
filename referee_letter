@@ -155,10 +155,13 @@ While we would've preferred to have a deeper dataset, we believe we
 understand the scaling of LSST pipeline performance with exposure time
 rather well. For example, the same pipeline has been used to deliver
 the HSC-Survey data release (e.g., Bosch et al.  2017, Aihara et al. 
-2017), which includes a range of exposure times. We've added more
-discussion of the depth scaling and the various expected effects.
+2017), which includes a range of exposure times.
 
-TODO: Check the depth scaling discussion
+We've added more discussion of the depth scaling and the various expected
+effects (in Section 3.3.2).  We also try to err on the side of making
+conservative estimates wherever possible; the goal is to show that even
+under conservative assumptions, the existing MOPS prototype will be able
+to successfully link the observations.
 
 >  
 > Fig 3.  Define the dotted lines in the top panels.  I assume they are
