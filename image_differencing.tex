@@ -168,12 +168,9 @@ in the first half of 2013. The data for a given field consist of 40-second expos
 by about five minutes. Due to the difference in telescope aperture, these images
 are about 1 mag shallower than the 30 second visits by LSST. We used data for
 five different fields, each with between three and five visits for a total of 15
-``science'' visits plus 5 template visits. While this section will present
-statistics based on this subset of the survey's data, during the course of this
-work a much larger superset of 540 visits from the same survey was also processed and
-produced false detection rates broadly consistent with this initial data (on
-average the 540 visits have fewer false detections by about 30\% than the small
-subset.)
+``science'' visits plus 5 template visits.
+
+While this section presents statistics based on this subset of the Allen et al. data, we've subsequently verified the findings using a much larger superset of 540 visits from the same survey. This enlarged set was roughly bounded by $28^\circ < b < 58^\circ$ and $315^\circ < l < 350^\circ$ (Galactic coordinates), covering a range of object densities better representative of the LSST's "Wide-Fast-Deep" (WFD) survey (except for the depth, which we discuss in \S\ref{sec:imDiffScale}). Using this set, we find false detection rates broadly consistent with the data presented, with the additionally processed visits having fewer false detections by about 30\% (on average).
 
 From the NOAO archive we obtained images that had already had instrumental
 signature removal applied by the DECam Community Pipeline. Each image was
@@ -243,7 +240,7 @@ that the sample might be dominated by true astrophysical transients and
 asteroids; nevertheless, we adopt the above conservative upper limit of 75\%.
 
 
-\subsubsection{Scaling DECam Results to LSST Performance}
+\subsubsection{Scaling DECam Results to LSST Performance \label{sec:imDiffScale}}
 
 The LSST false detection rate due to background fluctuations will be about twice
 as large as for DECam because of smaller pixels and better seeing. The scaling

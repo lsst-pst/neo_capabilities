@@ -234,8 +234,6 @@ Galactic plane.  Note, however, that those already don't figure in the total
 discovery count as the LSST doesn't take pairs of observations in the
 Galactic plane (and therefore no tracklets are formed).
 
-TODO: Argue in the text that DECam pointings are more representative of LSST WFD data.
-
 > 
 > 2) The authors never demonstrated that they could handle 10^8
 > tracklets per search window.  They use a much reduced data set to test
