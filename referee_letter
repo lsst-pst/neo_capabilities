@@ -620,8 +620,6 @@ correlated false positives. Also, the recovered false positive rates were
 typically lower (by ~30%) than what we've found with the smaller data set. 
 We now discuss and note this in the text.
 
-TODO: Update the paper to include l/b limits for the larger dataset
-
 > Page 21, section 5.1.3: I am assuming that phase-curve effects were
 > modeled when determining the flux of the object, but it is not
 > mentioned in this section.
