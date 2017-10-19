@@ -596,9 +596,7 @@ various components are available and measured.
 
 Noted and the footnote has been moved into the text. We've also added
 references to Veres & Chesley (2017), who discuss an end-to-end simulation
-that includes IOD.
-
-FIXME: Add reference to Veres & Chesley
+that includes IOD and demonstrate it is an effective filter.
 
 > Page 16: section 3.3.3: I am not convinced by this section that 4
 > visits of 60 CCDs each constitutes a large enough sample to be a true
