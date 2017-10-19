@@ -271,22 +271,21 @@ We've reworded the texts somewhat, to try to remove some of the confusion.
 We've since measured the performance of IOD using an implementation found in
 the Find_Orb package.  Find_Orb is a C++ package that implements simple
 initial orbit determination (the "gauss()" function) as well as the
-computation of differential orbit corrections.  The code is generally
-optimized for versatility rather than speed; further improvements are likely
-if a consorted optimization effort is undertaken.
+computation of differential improvements using Herget's method.  The code is
+generally optimized for versatility rather than speed; further improvements
+are likely if a consorted optimization effort is undertaken.
 
 For benchmarking purposes, we used this code to fit an orbit to a track with
 six observations (a pair each night), spanning a 16-day arc, on a single 3.1
-GHz core.  We find that the IOD using the Gauss takes 0.3ms to compute, very
-comfortably within our 100ms budget.  We also tested running the full
-differential orbit determination (which we don't believe we will need for
-filtering), and find it took 24ms,
+GHz core.  We find that the IOD using the Gauss takes 0.3ms to compute, a
+negligible fraction of our 100ms computational budget. Running an afterburner
+using Herget's method to obtain further differential improvements takes 26ms,
+still comfortably within our computational budget.
 
-These numbers fit comfortably into our computing budget, and are consistent
-with experiences of Veres & Chesley.
+These numbers leave a significant margin if further improvements are needed,
+and are consistent with experiences of the JPL NEO group.
 
 TODO: store benchmark results into the git repo
-TODO: modify the paper text to list these results
 
 > Appendix A
 > 

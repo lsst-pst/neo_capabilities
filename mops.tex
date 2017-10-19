@@ -125,18 +125,31 @@ candidate tracks should not exceed an hour, assuming sufficient parallelization 
 
 The IOD step can also be handled with anticipated resources and is trivially parallelizable. The number 
 of available IOD computations for a compute system with $N_{core}$ cores and allocated runtime $T_{runtime}$ 
-can be estimated as
+can be expressed as
 \begin{equation}
   N_{IOD} = 3.6\times10^8 \left({ 0.1\,{\rm sec} \over T_{IOD}}\right) \,
                                          \left({ T_{runtime}  \over 10\,{\rm hr} }\right) \,
                                          \left({ N_{core}  \over 1000}\right).
 \end{equation}
-where $T_{IOD}$ is the time it takes to perform one IOD computation on a single core. Estimates
-of the upper range of $T_{IOD}$ are of the order 50 ms (S. Chesley, priv. comm.), considerably below the fiducial
-value of 100 ms adopted here. Tests of IOD with 
-Find_Orb\footnote{\url{https://www.projectpluto.com/find_orb.htm}} using observations similar to
-those from our short-arc MOPS tracks required about 0.3 ms to complete.
-Given that the expected number of candidate tracks to filter using
-IOD is well below $10^7$, it should be possible to accomplish the IOD step in well under an hour.
+where $T_{IOD}$ is the time it takes to perform one IOD computation on a single core. 
+
+To get a handle on a realistic estimate of $T_{IOD}$, we benchmark an implementation provided
+by the \FindOrb code 
+by Bill Gray\footnote{\FindOrb source code can be found at \url{https://github.com/Bill-Gray/find_orb/}}.
+\FindOrb is an open source orbit determination software written in C++.
+It implements several IOD methods (Gauss, Herget, and Vaisala),
+whose precision are representative of other analogous packages in the field (e.g. OpenOrb).
+
+For benchmarking purposes, we used \FindOrb to fit an orbit of an 
+$a = 2.46, e = 0.57$ asteroid given six observations (a pair each night) 
+spanning a 16-day arc. The measurement is performed on a single 3.1 GHz core. 
+We find that the IOD using the Gauss method takes only 0.3ms to compute, a negligible fraction of 
+our 100ms computational budget. Running an afterburner using Herget's method
+to obtain further differential improvements takes 26ms, still comfortably 
+within our computational budget.
+
+These numbers leave a significant margin relative to the fiducial value of 100ms adopted here.
+They are consistent with anecdotal estimates of JPL's NEO group (not more than 50ms; S. Chesley, priv. comm.). Given that the expected number of candidate tracks to filter using
+IOD is well below $10^7$, it should therefore be possible to accomplish the IOD step in well under an hour.
 Alternatively, it is plausible that a 100-core machine might be sufficient for LSST moving object
 processing (assuming no engineering safety margin).
