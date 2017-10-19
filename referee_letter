@@ -21,7 +21,9 @@ areas. Below is the summary of the revisions we did.
 > results from the LSST team and with other independent analyses then
 > what is new about this work?
 
-The new aspects of this work are:
+We agree with the referee that the way we've originally phrased our abstract
+and conclusions the key results of the work did not stand out sufficiently.
+These original aspects include:
 
  (a) an empirical, data, and software driven measurement of the false 
      detection rate arising from the LSST image differencing software.
@@ -41,9 +43,8 @@ The new aspects of this work are:
      to the Solar System community during the for whitepapers on LSST
      survey strategy, expected for 2018.
 
-We agree with the referee that the way we've originally phrased our abstract
-and conclusions these aspects don't stand out sufficiently.  We've
-re-emphasized in the introduction, abstract, and subsequent discussions.
+We've re-emphasized these in the introduction, abstract, and subsequent
+discussions.
 
 > There are many minor typos and grammatical issues throughout the
 > manuscript that are not annoying enough to distract the reader but
@@ -661,11 +662,11 @@ This has been addressed in the major comments above.
 > perhaps be made clearer here.
 > 
 
-XXXX
+TODO: Respond to this
 
 > Page 38, bullet 3: This topic is also covered in detail in Wright et
 > al. (2016), which looks at the impact of the NEOWISE albedo
 > distribution on the H < 22 and D > 140m issue.
 > 
 
-XXXX
+TODO: Respond to this
