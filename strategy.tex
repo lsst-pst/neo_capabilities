@@ -130,7 +130,7 @@ LSST will use two methods to detect moving objects in difference images:
 Processing Software (MOPS) will recover objects moving too slow to be measurably elongated in a single exposure.
 \end{enumerate}
 
-We note that sources detected in difference images (\DIASources in LSST parlance, see Appendix~\ref{sec:AppA})
+We note that sources detected in difference images \citep[\DIASources in LSST parlance, see]{LSE-163}
 will also include false detections, colloquially known as {\it false positives}.
 In addition to false detections due to instrumental artifacts and software glitches,
 in this context they will also include detections of true astrophysical transients
@@ -164,9 +164,7 @@ The LSST strategy for linking detections into orbits assumes the following main 
          step. A detailed discussion of the IOD step, 
          including an analysis of the accuracy of fitted orbital parameters,  will be presented in 
          a future publication; however an independent JPL study by \citet{VeresChesley2017mops} 
-          confirms that orbit determination is indeed a reliable filter. Their work finds that after IOD/OD, 
-          MOPS was be 96\% efficient in identifying correct linkages, which could rise to $>99$\% 
-          for main belt asteroids with some modest (and understood) potential improvements.
+          confirms that orbit determination is indeed a reliable filter. This is further discussed in \S\ref{sec:mopsVeresChesleyComparison}.
 \end{enumerate}
 
 False positives, be it false detections, false tracklets or false tracks, will not be

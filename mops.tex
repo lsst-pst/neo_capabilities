@@ -137,7 +137,7 @@ To get a handle on a realistic estimate of $T_{IOD}$, we benchmark an implementa
 by the \FindOrb code 
 by Bill Gray\footnote{\FindOrb source code can be found at \url{https://github.com/Bill-Gray/find_orb/}}.
 \FindOrb is an open source orbit determination software written in C++.
-It implements several IOD methods (Gauss, Herget, and Vaisala),
+It implements several IOD methods (Gauss, Herget, and V\"{a}is\"{a}l\"{a}),
 whose precision are representative of other analogous packages in the field (e.g. OpenOrb).
 
 For benchmarking purposes, we used \FindOrb to fit an orbit of an 
@@ -153,3 +153,18 @@ They are consistent with anecdotal estimates of JPL's NEO group (not more than 5
 IOD is well below $10^7$, it should therefore be possible to accomplish the IOD step in well under an hour.
 Alternatively, it is plausible that a 100-core machine might be sufficient for LSST moving object
 processing (assuming no engineering safety margin).
+
+\subsection{Comparison to \cite{VeresChesley2017mops}\label{sec:mopsVeresChesleyComparison}}
+
+In parallel to the work presented here, \cite{VeresChesley2017mops} have conducted a coordinated but independent evaluation of the linking capabilities using the PanSTARRS-PS1 variant of MOPS \citep{denneau13}. They perform linking on a three month long simulated LSST dataset and achieve:
+
+\begin{itemize}
+	\item 93.6\% NEO linking efficiency for $H < 22$,
+	\item 96\% correct linkages in the derived NEO catalog, with
+	\item the large majority of false linkages stemming from main belt confusion (that would not arise given a longer simulation), and
+	\item less than 0.1\% of orbits due to false detections.
+\end{itemize}
+
+These findings are fully consistent with the results obtained here using the LSST implementation of MOPS. They confirm that the method linking method underlying both implementation is valid and robust. Furthermore, they empirically confirm a key assumption that we have made -- that the IOD is sufficient for filtering of admissible tracks.
+
+Combined with our empirical measurement of the performance of LSST image differencing pipelines (in \S\ref{sec:imDiff}) and the LSST implementation of MOPS, the two studies provide strong evidence that LSST's approach to asteroid discovery is valid.
