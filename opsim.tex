@@ -45,8 +45,14 @@ surveys, and the corresponding PHA completeness estimates.
 
 We use random samples from the synthetic solar system model (S3M) presented in \cite{Grav2011} in order to model completeness for NEOs and PHAs. We have chosen a sample of 5000 NEOs from the \cite{Grav2011} NEO population, which is based on the \cite{Bottke2002} model. We chose a separate sample of 5000 PHAs from the same model, by choosing NEOs with a MOID $\le 0.05$~AU. The PHA population is useful for evaluating PHA completeness directly; the NEO population is useful for comparison to other survey evaluations. A plot of the $a$, $e$, $i$ distributions for these PHAs and NEOs is shown in Figure~\ref{fig:PHA_orbits}.
 
-With this small set of orbits, we then assume that the $H$ magnitude distribution is independent of the orbital distribution. For most small body populations, including the PHA population larger than 140~m in diameter, this is approximately true. Assuming an independent distribution, each orbit can be ``cloned'' from the fiducial $H$ magnitude to a range of values covering the interesting sizes for analysis; this allows the analysis to use a large number of objects at each $H$ value, without requiring extensive resources to generate ephemerides for a much larger set of orbits. We use the small population of 5000 NEOs or PHAs and clone them to a range of $H$ magnitudes between $H$=11 and $H$=28 using $dN/dH = 10^{\alpha\, H}$, with $\alpha=0.33$ \citep{2017Icar..284..114S}. We have verified with a larger simulated set of NEOs that reducing the population 
-to 5000 NEOs does not significantly alter the completeness calculation.
+With this small set of orbits, we then assume that the $H$ magnitude distribution is independent of the orbital distribution.
+ For most small body populations, including the PHA population larger than 140~m in diameter, this is approximately true. 
+ Assuming an independent distribution, each orbit can be ``cloned'' from the fiducial $H$ magnitude to a range of values 
+ covering the interesting sizes for analysis; this allows the analysis to use a large number of objects at each $H$ value, without 
+ requiring extensive resources to generate ephemerides for a much larger set of orbits. We use the small population of 
+ 5000 NEOs or PHAs and clone them to a range of $H$ magnitudes between $H$=14 and $H$=28, with bins of 0.2 in $H$,
+ using $dN/dH = 10^{\alpha\, H}$, with $\alpha=0.33$ \citep{2017Icar..284..114S}. We have verified with a larger simulated set 
+ of NEOs that reducing the population to 5000 NEOs does not significantly alter the completeness calculation.
 
 Using the details of the input population, MAF generates the expected observations of each object using the pointing history
 from a specific OpSim simulated survey. Ephemerides are generated using OpenOrb \citep{OpenOrb2009} for a closely spaced grid of times (typically every 2 hours), and then interpolated to the exact times of each OpSim pointing.
@@ -152,10 +158,7 @@ time span within a single night, followed by a given number of additional nights
 of visits in the same time span) falling within a specified time window. The basic criteria is a pair of visits in each
 night occurring within 60 minutes, repeated for 3 nights within a 15 day time window. However, we also evaluate
 the effect of varying the discovery criteria to require triplets or quads of visits within a single night, and increase
-the length of the search window from 15 to 30 days. An independent study  assessed the linking performance of these 
-criteria and concluded that they result in complete and accurate linking, including rejection of false links using orbit determination 
-(Vere\v{s}, P. \& Chesley, S. 2017, submitted to Astronomical Journal).
-
+the length of the search window from 15 to 30 days. 
 
 \subsubsection{Completeness Estimation}
 
@@ -277,7 +280,7 @@ Simulation  & $N_w$=15 & $N_w$=30 & $N_w$=30 & $N_w$=15 & $N_w$=30 & $N_w$=30 & 
 LSST baseline & 70.0 & 72.1 & 72.1 & --- & --- & --- & ---  \\
 Extra ecliptic visits & 71.0 & 73.2 & 73.2 & 75.0 & 77.1 & 77.0 & 79.5 \\
 Longer ecliptic visits & 71.3 & 74.6 & 74.6  &  75.3 & 78.4 & 78.2 & 81.3 \\
-NEO-focused cadence & 72.7 & 75.6 & 75.6 & 76.5 & 79.0 & 79.2 & 81.6 \\
+NEO-focused cadence & 72.7 & 75.4 & 75.6 & 76.5 & 79.0 & 79.2 & 81.6 \\
 \enddata
 \end{deluxetable}
 
@@ -338,27 +341,34 @@ discovery system, including LSST, the final completeness achieved by the entire 
 
 Evaluating the impact of existing and future resources in addition to LSST requires a model of how 
 specific NEOs and PHAs are discovered by other resources, in order to remove these objects
-from the list of objects discovered by LSST. We model the discovery of NEOs and PHAs 
+from the list of objects discovered by LSST and properly account for overlap. 
 
- the current (2016)
-completeness for NEOs with $H<22$ is estimated to be about 25\% \citep{GMS2016}. According to the JPL NEO discovery page\footnote{See http://neo.jpl.nasa.gov/stats/}, one can conservatively estimate that
-discovery of 140m NEOs started in earnest in 2000.
+We simulate the discoveries contributed by these previous, current and future resources 
+with a model similar to \citet{VeresChesley2017neo}: 
+after generating ephemerides for the same populations of 5000 NEOs and PHAs daily from 2000--2034 
+(the end of the extended LSST surveys), we clone the objects over the same range of $H$ as 
+used in the discovery metrics above. Each clone is considered potentially discovered if, while it is at
+a solar elongation greater than 100 degrees, it becomes brighter a given apparent magnitude threshhold: 
+this threshhold is $V=20$ from 2000-2005 (corresponding to the LINEAR era), $V=21$ from 2005-2015 
+(representing Catalina and PanSTARRS1), $V=22$ from 2015 to the start of LSST in 2022, and then
+$V=22.2$ after 2022.  In each of these periods, it is possible that even if the objects are bright enough, 
+they would not be discovered simply due to sky coverage constraints of the telescopes; to account for 
+this we add an efficiency factor that accounts for how likely any given detection on a given night is to be achieved. 
+This factor is held constant until 2022, and then increased (together with the increase in magnitude 
+limit) to account for future improvements in NEO survey resources. We tune the efficiency factor to match
+the rate of discoveries reported on the JPL NEO discovery page\footnote{See https://cneos.jpl.nasa.gov/stats/totals.html}.
 
-We use a simplified model to estimate the contribution of known objects discovered both prior
-and during LSST survey. Since we do not know the
-survey pointing history for all the previous surveys, we generate an approximate simulation of them by adopting
-a simple solar elongation cut and a multi time-step cut on Johnson $V$ magnitude combined with an observing efficiency. 
+With this model, at the start of LSST, we expect the known NEO population with $H<22$ to be 40\% complete
+and the PHA population with $H<22$ to be 51\% complete. Our NEO estimate is in general agreement with estimates
+from \citet{VeresChesley2017neo} and \citet{GSM} who predict 42\% and 43\% completeness for NEOs, respectively.
+In 2032, at the nominal end of LSST, we estimate a 56\% completeness for NEOs without LSST; \citet{VeresChesley2017neo}
+predicts a slightly higher value of 61\% while we estimate \citet{GSM} predicts a slightly lower value of about 52\%. 
+Given the uncertainty in the assumptions being made about the evolution of other surveys over a 17 year time period,
+this range seems acceptable.
 
-XXX
+Combining these discoveries with discoveries expected from the LSST system (simulated as described in the previous
+section), we find XXX
 
-we simulate them by adopting a simple solar elongation cut and a two-step Johnson $V$ magnitude threshold: $V_{max1}$ before 2015 and $V_{max2}$ after 2015, when several more sensitive surveys such as Pan-STARRS1 started reporting NEO discoveries. We set the solar elongation cut to be $60^\circ$, roughly matching most telescope pointing capabilities, and assume $V_{max2}$ (the limiting magnitude after 2015) to be 22.0, corresponding to the limiting magnitude expected from current state of the art surveys such as Pan-STARRS1. We integrate orbits for our synthetic NEO model
-population from 2000 to 2032 and consider an object discovered if its peak $V$ magnitude is brighter than $V_{max1}$ (before 2015) or $V_{max2}$ (after 2015) while its solar elongation is greater than $60^\circ$.  To determine $V_{max1}$, we vary this threshold until the completeness
-for NEOs with $H<22$ in 2016 is $\sim$25\%, obtaining $V_{max1}$=20.0. This also
-produces a completeness of 95\% for NEOs with $H<18$ in 2015, i.e. for canonical objects larger than 1 km.
-With these conditions, we expect a 44\% completeness for NEOs
-and 55\% completeness for PHAs with $H<22$ in 2022 at the start of the LSST survey. To determine the total impact of other surveys on LSST completeness, we continue discovering objects with $V_{max}=22.0$ throughout
-the LSST survey; all objects discovered by these other surveys are added to the post-LSST sample, providing
-a boost to the final completeness of 8-11\% for NEOs and 11-15\% for PHAs.
 
 Our results are summarized in Figure~\ref{fig:knownObj} and Table~\ref{tab:completeness2}.
 For a 12-year survey, we predict a completeness of 87\% for PHAs, when known objects are taken into account.

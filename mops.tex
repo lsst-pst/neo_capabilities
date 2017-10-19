@@ -15,7 +15,7 @@ night to produce {\it tracklets}, and {\it linkTracklets} links tracklets from a
 corrections). Candidate tracks produced by MOPS are then filtered using initial orbital determination (IOD) step,
 which is executed using a stand-alone code (e.g. OrbFit, \citealt{milani08}; OpenOrb, \citealt{OpenOrb2009}).
 
-Given empirically estimated false positive rates expected for LSST, discussed in the preceeding section,
+Given the empirically estimated false positive rates expected for LSST, discussed in the preceeding section,
 in this section we show that MOPS performance is already adequate - MOPS requires significantly less
 computing capacity than planned for other LSST data processing needs. In addition to reporting the results of
 numerical experiments with MOPS, we also analyze them using analytic and semi-analytic results for the
@@ -46,9 +46,9 @@ optimized, artificially reducing the yield. As we now understand the algorithmic
 (see Appendix~\ref{sec:appMOPS}), it is clear that these unoptimized filters have no major impact on the
 simulation results and derived conclusions.
 
-As expected, the addition of false positive detections increases the number of tracklets and tracks,
+As expected, the addition of false detections increases the number of tracklets and tracks,
 the runtime, and the memory usage. For the 4:1 false:true detection rate ratio, compared to case with
-no false positive detections, the number of tracklets increases by about
+no false detections, the number of tracklets increases by about
 a factor of 10, the number of tracks by about 50\%, and runtime increases by about a factor of 3.
 For the 4:1 false:true detection rate ratio, the runtime with 16 CPUs is 33 hours, with maximum memory
 usage of about 80 GB.
@@ -63,7 +63,7 @@ usage of about 80 GB.
 %\includegraphics[width=0.49\textwidth]{figures/tracks}
 \includegraphics[width=0.95\textwidth]{figures/track_stats}
 \caption{A summary of MOPS tests for the dependence of the number of tracklets (left)
-and tracks (right) on the false positive detection rate. As the rate of false positive detections
+and tracks (right) on the false detection rate. As the rate of false detections
 increases from none to four times the asteroid detection rate, the number of tracklets
 increases by about an order of magnitude. At the same time, the number of candidate
 tracks increases by only about 50\%.
@@ -75,13 +75,13 @@ tracks increases by only about 50\%.
 
 \subsection{Understanding MOPS Performance}
 
-The rather slow increase of the number of tracks with false positive detection rate (only 50\% increase
+The rather slow increase of the number of tracks with false positive detection rate (a 50\% increase
 although the number of tracklets increased by a factor of 10) is somewhat unexpected. We have
 developed analytic and semi-analytic analysis to better understand the scaling of the number of
-tracklets and tracks with false positive detection rate and other relevant parameters. Details of this
+tracklets and tracks with false detection rate and other relevant parameters. Details of this
 analysis are provided in Appendix~\ref{sec:appMOPS}. Here we briefly discuss the main results.
 
-The increase of the number of tracklets with false positive detection rate,
+The increase of the number of tracklets with the false detection rate,
 $\rho_{FP}$, shown in left panel in Figure~\ref{fig:MOPStests}, is well
 described by eq.~\ref{eq:NttFalse}. In particular, the number of tracklets
 approximately increases proportionally to $(C_1 + C_2\rho_{FP}^2)$, where $C_1$
@@ -89,8 +89,8 @@ and $C_2$ do not depend on $\rho_{FP}$. As both the full analytic result and the
 simulations show, false tracklets quickly outnumber true tracklets even at low
 false detection rates, resulting in the observed $\rho_{FP}^2$ behavior.
 
-While the number of tracklets is dominated by the false positive detections, in
-baseline LSST cadence and nominal noise assumptions under which the MOPS
+While the number of tracklets is dominated by the false detections, in the
+baseline LSST cadence and the nominal noise assumptions under which the MOPS
 simulations were run ($\rho_{FP} \leq 500\,\rm{deg}^{-2}$), the number of
 tracks is not dominated by spurious detections---instead it is dominated by true
 tracks and mislinkages between true objects. This is due to the fundamental
@@ -132,8 +132,11 @@ can be estimated as
                                          \left({ N_{core}  \over 1000}\right).
 \end{equation}
 where $T_{IOD}$ is the time it takes to perform one IOD computation on a single core. Estimates
-of $T_{IOD}$ are of the order 50 mas (S. Chesley, priv. comm.), considerably below the fiducial
-value of 100 mas adopted here. Given that the expected number of candidate tracks to filter using
+of the upper range of $T_{IOD}$ are of the order 50 ms (S. Chesley, priv. comm.), considerably below the fiducial
+value of 100 ms adopted here. Tests of IOD with 
+Find_Orb\footnote{\url{https://www.projectpluto.com/find_orb.htm}} using observations similar to
+those from our short-arc MOPS tracks required about 0.3 ms to complete.
+Given that the expected number of candidate tracks to filter using
 IOD is well below $10^7$, it should be possible to accomplish the IOD step in well under an hour.
 Alternatively, it is plausible that a 100-core machine might be sufficient for LSST moving object
 processing (assuming no engineering safety margin).

@@ -163,6 +163,7 @@ conservative estimates wherever possible; the goal is to show that even
 under conservative assumptions, the existing MOPS prototype will be able
 to successfully link the observations.
 
+
 >  
 > Fig 3.  Define the dotted lines in the top panels.  I assume they are
 > the lines corresponding to 1+/-0.05 au but was at first confused that
@@ -191,7 +192,6 @@ struggled with converting it to a table in a useful way. What we've done
 instead was to keep the text, and add a summary table with key properties
 like filters, visits, etc.
 
-TODO: Check the new table
 
 > 
 > 
@@ -377,11 +377,13 @@ it somewhat easier to determine the scaling with false tracklet rate.
 This section of the text is dealing with the analytic scaling approximation;
 as a result, it assumes (we state that in an earlier section) that \eta (the ratio
 of the density of asteroids / false detections) is zero. Essentially, 
-this means that 'false tracklets' here just include false detection-false 
-detection links. However, in the section immediately after this one, we
-refer to the scaling of the false track rate that is the result of a numerical
-simulation where this assumption was not included; the results are not
-significantly different. A clarification of this has been added to the text.
+this means that 'false tracklets' here include a false detection (asteroid-false detection
+or false-detection-false-detection links). In the section immediately following,
+we compare this scaling to the scaling a false trak rate that is the result of
+a numerical simulation (where this assumption is not included, so false tracks can
+include asteroid-asteroid mislinkages) and find the results are not significantly different.
+This is indeed somewhat confusing; a clarification has been added to the text.
+
 
 > Reviewer 2
 > 
@@ -427,8 +429,6 @@ MBA-MBA links get "cleaned up" in the course of the survey).
 
 Now that Veres & Chesley paper is published, we've referred to their
 findings in our text.
-
-TODO: Make sure we refer to Veres & Chesley in the text for IOD/OD.
 
 > The second part of the paper discusses the results of the simulation
 > of the baseline survey cadence, minion_1016, and three “NEO-enhanced”
@@ -481,8 +481,6 @@ the same as well in their simulations.  We unfortunately do not have enough
 information to reproduce and understand why Grav et al.  result is
 different.
 
-TODO: Make sure the above is correct -- do V&C find the same discrepancy in their paper?
-
 > On
 > page 37, a value of V_max1 = 20.0 is derived, which is significantly
 > shallower than the estimated V~21 that Catalina and Pan-STARRS 1 have
@@ -516,8 +514,6 @@ calculated by Grav et al (~52%).  Given the uncertainties of assumptions
 being made about the evolution of other surveys over a ~17 year period, it's
 probably difficult to derive a consensus estimate much more accurate than
 this.
-
-TODO: This needs to be added to the text of the paper.
 
 > My other main concern with the paper is the inclusion of appendix A
 > and B. I simply think Appendix A is not significantly material to the

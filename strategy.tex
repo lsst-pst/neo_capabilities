@@ -90,8 +90,10 @@ million visits collected over 10 years, with 85\% of the observing time spent on
 main survey and the rest on various specialized programs. The median number of visits
 {\it per night} is 816, with 3,026 observing nights. The median airmass is 1.23 (the
 minimum attainable altitude for the LSST telescope is 20 deg.). In the $r$ band, the median
-seeing (FWHM) is 0.81 arcsec, and the median $5\sigma$ depth for point sources is 24.16XXX
-(using the best current estimate of the fiducial $5\sigma$ depth at airmass of one, $m_5(r)$=24.38).
+seeing (FWHM) is 0.81 arcsec, and the median $5\sigma$ depth for point sources is 24.05
+(using the best current estimate of the sky background and system throughputs and accounting
+for the distribution of observing conditions in the baseline survey; dark-sky, zenith observations
+match the fiducial $5\sigma$ depth of $m_5(r)$=24.38).
 
 There are a few known problems with this simulation, including twilight sky brightness
 estimates that are too bright, the moon avoidance that is not as aggressive as it could be,
@@ -130,10 +132,10 @@ Processing Software (MOPS) will recover objects moving too slow to be measurably
 
 We note that sources detected in difference images (\DIASources in LSST parlance, see Appendix~\ref{sec:AppA})
 will also include false detections, colloquially known as {\it false positives}.
-In addition to false positives due to instrumental artifacts and software glitches,
+In addition to false detections due to instrumental artifacts and software glitches,
 in this context they will also include detections of true astrophysical transients
 (e.g. gamma-ray burst afterglow) that will not be associated with static sources
-(e.g. stars and galaxies). Estimates of expected false positive rates are discussed
+(e.g. stars and galaxies). Estimates of expected false detection rates are discussed
 in \S\ref{sec:imDiff}.
 
 
@@ -154,22 +156,26 @@ The LSST strategy for linking detections into orbits assumes the following main 
          asteroids vs. NEOs) and chosen tunable pre-filtering parameters (generally well above 90\%).
 \item Candidate tracks are then filtered further (pruned from false tracks) by
         performing an initial orbit determination (IOD) to assess which tracks
-        correspond to Keplerian orbits. Due to the high astrometric accuracy of the observations (uncertainties of 0.15 arcsec for the faintest objects,
-         see \S\ref{sec:astromerrors}), we assume\footnote{A detailed discussion of the IOD step, 
-         including an analysis of the accuracy of fitted orbital parameters,  will be presented in 
-         a future publication; however an independent JPL study by Vere\v{s} \& Chesley 
-         (2017, submitted to Astronomical Journal) confirms that orbit determination is indeed a reliable filter.} 
+        correspond to Keplerian orbits.
+         Due to the high astrometric accuracy of the observations (uncertainties of 0.15 arcsec for the faintest objects,
+         see \S\ref{sec:astromerrors}), we assume 
          hereafter that the number of false tracks which 
          could pass IOD-based filtering is negligible, as is the incompleteness induced by this 
-         step. Indeed, the only reason for track pre-filtering in the second step is to decrease the 
-         number of candidate tracks that are processed by the more computationally expensive IOD.
+         step. A detailed discussion of the IOD step, 
+         including an analysis of the accuracy of fitted orbital parameters,  will be presented in 
+         a future publication; however an independent JPL study by \citet{VeresChesley2017mops} 
+          confirms that orbit determination is indeed a reliable filter. Their work finds that after IOD/OD, 
+          MOPS was be 96\% efficient in identifying correct linkages, which could rise to $>99$\% 
+          for main belt asteroids with some modest (and understood) potential improvements.
 \end{enumerate}
 
 False positives, be it false detections, false tracklets or false tracks, will not be
-an issue when linking detections into real objects because IOD will efficiently and reliably filter out false tracks due to high-accuracy
-astrometry and well-understood simple Keplerian model predictions. Herefore, the
-essential question is whether the number of detections, including false detections, can be linked into tracks, and whether the resulting
-number of tracks, including false tracks, passed to the final IOD step can be handled with available computing resources.
-As discussed in detail in \S\ref{sec:mops}
-and in Appendix~\ref{sec:appMOPS}, even with computing resources quite modest compared to the
-sizing of LSST data processing system, the handling of the three steps above is not an issue.
+an issue when linking detections into real objects because IOD will efficiently and reliably filter 
+out false tracks due to the high-accuracy
+astrometry and well-understood simple Keplerian model predictions. Therefore, the
+essential question is whether the number of detections, including false detections, can be 
+linked into tracks, and whether the resulting number of tracks, including false tracks, 
+passed to the final IOD step can be handled with available computing resources.
+As discussed in detail in \S\ref{sec:mops} and in Appendix~\ref{sec:appMOPS}, 
+even with computing resources quite modest compared to the
+sizing of the LSST data processing system, the handling of the three steps above is not an issue.

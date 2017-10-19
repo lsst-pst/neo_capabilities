@@ -8,46 +8,47 @@ the robustness of the LSST strategy for discovering NEOs using nightly pairs of 
 the expected cumulative completeness for PHAs with $H<22$.
 
 We argued that the observing and data processing strategies chosen by LSST are robust. The
-robust determination of false positive detection rate in difference images presented here is based
-on data obtained with DECAm and processed using prototype LSST software. Assuming the same rate,
+robust determination of the false detection rate in difference images presented here is based
+on data obtained with DECam and processed using prototype LSST software. Assuming the same rate,
 numerical tests with MOPS demonstrate that even a modest compute system will be adequate to
-process LSST data. Even if the false positive detection rate in difference images is twice as high as
+process LSST data. Even if the false detection rate in difference images is twice as high as
 reported here, it can still be handled without a change of baseline cadence, linking criteria, or
-increase of computing resources. Quantitatively, the false positive rates of up to about
+increase of computing resources. Quantitatively, the false detection rates of up to about
 1000 deg$^{-2}$ could be readily handled with an approximately 1000-core machine dedicated for
 moving object processing.
 
 There is a significant compute margin, both because LSST compute needs are driven by other more
 demanding processing, and because there are various mitigation strategies that can decrease the
-compute load. For example, minor modifications of cadence, such as a simple shortening
+compute load. For example, minor modifications of the cadence, such as a simple shortening
 of the nightly revisit time by about a factor of 3, could mitigate about a factor of two increase in
-the false positive detection rate. At the same time, several times larger false positive rates for LSST
+the false detection rate. At the same time, a several times larger false detection rates for LSST
 than measured using DECam images and prototype LSST software are rather implausible. If the
-LSST camera, or any other system component, would somehow cause such high false positive rates,
+LSST camera, or any other system component, would somehow cause such high false detection rates,
 the whole LSST mission would be jeopardized.
 
 In summary, the LSST strategy for discovering moving Solar System objects will be successful
 because the following three conditions will be met:
 \begin{enumerate}
-\item The LSST system hardware and image differencing software performance will result in false positive
+\item The LSST system hardware and image differencing software performance will result in false detection
           rates not significantly exceeding $\rho_{FP} =  400$ deg$^{-2}$, estimated here using DECam data
           and prototype LSST software.
 \item Given an anticipated 1000-core machine, MOPS will be able to easily process as many as
          10$^8$ tracklets per search window, and daily computations to produce up to about 10$^7$
          candidate tracks will be completed in about an hour.
-\item Assuming that IOD can be executed in about 0.1 sec per track, this final filtering step can
+\item Given that IOD can be executed within 0.1 sec per track, this final filtering step can
          be easily accomplished in about an hour.
 \end{enumerate}
 
 
 Our results show that the current LSST baseline survey strategy would yield a completeness for PHAs
-with $H<22$ of about 68\% (without including known objects). We discuss a number of systematic effects that must be taken into
+with $H<22$ of about 68\% (without including known objects). 
+We discuss a number of systematic effects that must be taken into
 account when comparing different simulations of the same survey, as well as simulations of different
 surveys and observing systems. The largest effect, at the level of 5\%, is due to orbital differences
 between NEO and PHA populations. We compared our results presented here, as well as our previously
-published and consistent results, to an analogous recent study by \citet[]{GMS2016}. We found that
-purported discrepancies can be fully understood as due to various systematic effects discussed in
-\S\ref{sec:syseff}. All these recent results are by and large consistent within modeling uncertainties
+published and consistent results, to an analogous recent study by \citet[]{GMS2016} and \citet{VeresChesley2017neo}. 
+We found that purported discrepancies can be fully understood as due to the various systematic effects discussed in
+\S\ref{sec:syseff}. All these recent results are consistent within the modeling uncertainties
 with even the earliest forecasts of LSST performance (e.g., the 10-year LSST baseline cadence would 
 result in 75\% completeness for PHAs with $H<22$, according to \citealt{IvezicNEO2007}). The 
 PHA completeness forecasts published in \cite{LSSToverview} are somewhat higher than reported
