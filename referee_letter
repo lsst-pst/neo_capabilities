@@ -575,12 +575,13 @@ To be more accurate, we've changed it to "LSST, ...,  approaches such a system".
 
 This has been corrected to the more appropriate dark-sky, zenith fiducial
 value of r=24.38.  The median r~24.16 value includes airmass and other
-observational effects that are modified by observing cadence.  These values
+observational effects that are modified by observing cadence, however this
+has been updated as well to reflect the new skybrightness values (in all bands
+except r band, the sky brightness gets fainter; in r band it is slightly brighter
+in the new model). These values
 have been evolving as we understand the LSST system better and prototypes of
 various components are available and measured.
 
-TODO: Check 24.16 value!! Should've changed due to the change in the
-brightness model.
 
 > Page 8: sec 2.4, bullet 3: This is a very key point and I feel that
 > this obstacle/assumption is being dismissed somewhat easily. I would
