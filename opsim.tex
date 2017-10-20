@@ -482,46 +482,28 @@ have also evaluated the NEO completeness that could be achieved with LSST. GMS r
 completeness for NEOs of 62\%, while VC reported a cumulative completeness of 61.6\%, which can be compared
 with our estimate of 66.7\%. There are three main differences why these results differ:
 \begin{enumerate}
-\item GMS used a different definition of the the completeness limit: instead of $H\le22$ they used $D>140$m 
-directly, by modeling the albedo distribution combined with a size distribution. This can lead to a variation in completeness
-on the order of 5\% \citep{2016AJ....152...79W, GSM2016}. 
-\item GMS used an older realization of the LSST baseline survey. They used {\it enigma\_1189}, which had limiting 
-magnitudes based on an older version of the skybrightness model, as well as older versions of the system throughputs 
-and delivered seeing. The limiting magnitudes in this simulated survey are 
+\item The definition of the completeness limit: $H\le22$ or $D>140$m. By using an albedo distribution combined 
+with a size distribution, GMS directly model the population larger than 140m rather than those with $H\le22$. 
+Using $D>140$m can lead to a decrease in completeness on the order of 5\% \citep{2016AJ....152...79W, GSM2016}.  
+\item The realization of the LSST baseline survey, including the sky brightness model, system sensitivity model, and
+delivered seeing distribution.  GMS used an older realization of the LSST baseline survey, {\it enigma\_1189}, which
+had limiting magnitudes that were on average fainter by a few tenths of a magnitude than they are in 
+{\it minion\_1016}, a more recent baseline survey with updated values for the system throughput and seeing.
+VC used {\it minion\_1016}, while in this work we used an updated version of {\it minion_1016} (and other surveys) 
+which included an updated version of the skybrightness model.\footnote{We had previous estimates of PHA and NEO
+completeness, which were included in \citet{VeresChesley2017neo}, using the same baseline run ({\it minion\_1016}),
+with the same older sky brightness, and which agreed very closely with the results from VC.}
+ With the new sky brightness model, in most bandpasses
+there is a slight (0.1-0.2 magnitude) increase in the limiting magnitude, with a slight decrease (0.1 magitudes) in $r$ band; 
+however, the new model implements a much more realistic twilight model, which increases the median limiting 
+magnitude in $z$ band by 0.5 magnitudes ($z$ typically being used near twilight). These changes in the 
+survey limiting magnitudes lead to scatter in the expected values for completeness; {\it enigma\_1189} should lead
+to completeness levels about 2\% higher than the original {\it minion\_1016}, while simulations with 
+the reprocessed {\it minion\_1016}  would have completeness levels between 2 and 4\% higher than the original {\it minion\_1016}.
+\item Different realizations of the input populations. The major difference here is between NEO and PHA populations,
+which leads to about 5\% difference in completeness. However, small differences in the source of the input population
+can also lead to differences on the level of a few percent\citep{VeresChesley2017neo}. 
 
-XXX
-
-%the Grav, Mainzer \& Spahr (2016) Study \label{sec:GMS}}
-
-\citet*[][hereafter GMS]{GMS2016}
-reported a cumulative completeness level for NEOs of 62\%
-somewhat different NEO completeness levels than published by the LSST team
-in 2007 and 2014. Given the above discussion of various systematic effects, it is easy to understand
-the reported differences. There are three main reasons why the GMS results differ:
-\begin{enumerate}
-\item GMS used a different definition of the the completeness limit: instead of 
-          the commonly used $H<22$ criterion, they used an albedo-dependent value 
-          of $H$ limit which attempts to directly model the $D>140$ m size limit.
-\item GMS used a different realization of the LSST baseline survey.
-\item GMS used a different realization of the PHA population.
-\end{enumerate}
-
-The first of these effects is the dominant one.  Defining the completeness limit in terms of the diameter, $D>140$~m, leads 
-to a drop in completeness of about 5\% according to GMS, due to albedo variations in PHAs which are not included in 
-our work ({\it i.e.} GMS would calculate a completeness of about 5\% less for NEOs and PHAs).
-Different versions of the simulated survey include advances in our understanding of the system throughput and delivered
- seeing. For example, between {\it enigma\_1189} (the baseline simulated survey used in GMS) and the new baseline
-  {\it minion\_1016} used here, the limiting magnitudes are on average a couple tenths of a magnitude fainter in 
-  {\it enigma\_1189} due to changes in the system throughput and delivered seeing and simulated sky brightness.
-  As a result, the completeness values are about 2\% larger for {\it enigma\_1189} than for {\it minion\_1016}.
-These two surveys are statistically the same otherwise.
-For the NEO population, both GMS and this work used samples from the \cite{Grav2011} model and calculate 
-similar results for completeness (after adjusting for the other two effects).
-
-Another recent work, \citet{VeresChesley2017neo} reported a cumulative completeness level for NEOs of 61.6\%
-($H<22$) using 
-
-In summary, the GMS calculation of 62\% completeness for PHAs (12-day window and $D>140$m) corresponds
-reasonably to our 65.6\% completeness (see Table 2) for PHAs with $H<22$ (15-day window).  Therefore, after accounting
-for different choices of simulation parameters, we conclude the GMS results are consistent (within 1-2 \%)
+Therefore, after accounting for different choices of simulation parameters, 
+we conclude the GMS and VC results are consistent (within 1-2 \%)
 with the results previously published by the LSST team, as well as with the results on completeness discussed here.

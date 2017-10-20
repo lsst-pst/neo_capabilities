@@ -1,5 +1,11 @@
 Comments from the editors and reviewers:
 
+TODO: add discussion of change in completeness (~5% increase) from 
+previous version of paper... why? new sky brightness model, new m5 values
+(but these are actually only about 0.1 mag fainter in g/i, .1 mag brigther in r,
+but .5 mag fainter in z band (did most of the new completeness come from Z and twilight??)
+
+
 Reviewer 1
 
 > This is a nicely written paper that is easy to read.  It is
