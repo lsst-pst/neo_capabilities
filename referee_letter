@@ -1,10 +1,5 @@
 Comments from the editors and reviewers:
 
-TODO: add discussion of change in completeness (~5% increase) from 
-previous version of paper... why? new sky brightness model, new m5 values
-(but these are actually only about 0.1 mag fainter in g/i, .1 mag brigther in r,
-but .5 mag fainter in z band (did most of the new completeness come from Z and twilight??)
-
 
 Reviewer 1
 
@@ -21,7 +16,7 @@ areas. Below is the summary of the revisions we did.
 > 
 > On the other hand, the authors themselves state that "after accounting
 > for different choices of simulation parameters, we conclude the GMS
-> results are fully consistent (within 1-2%) with the results previously
+> results are fully consistent (within 1-2\%) with the results previously
 > published by the LSST team, as well as with the results discussed
 > here".  If the new results are consistent with earlier published
 > results from the LSST team and with other independent analyses then
@@ -58,8 +53,6 @@ discussions.
 > 
 
 Agreed! We've proof-read the manuscript to reduce these to the minimum.
-
-TODO: Proofread the manuscript.
  
 > 
 > Some of the software design and strategies described in Appendices A
@@ -85,7 +78,7 @@ skipped by a reader focused on understanding the end-to-end discovery performanc
 of LSST, we'd still prefer to leave it in as an appendix.
 
 We have edited it for clarity and brevity where appropriate, and attempted
-to reference it better [*** HAVE WE?***] from the main body of the article.
+to reference it better from the main body of the article.
 
 > Detailed comments:
 > 
@@ -115,7 +108,7 @@ Agreed. Text modified accordingly.
 > will accomplish trail finding.
 
 This is a very good point -- the way we've phrased this sentence conveys the
-wrong impression of whan we're doing.
+wrong impression of what we're doing.
 
 We do not plan to perform unconstrained trail-finding on the image; we only
 plan to fit trailed source models to sources already discovered by
@@ -155,7 +148,7 @@ going to LSST single-visit depths.
 To further investigate and mitigate some of these concerns, we've additionally
 processed a *much* larger superset (540 visit, vs 15 visits originally) of
 the Allen et al.  data.  The recovered false positive rates were
-typically _lower_ (by ~30%) than what we've found with the smaller
+typically _lower_ (by ~30\%) than what we've found with the smaller
 data set. We now discuss and note this in the text.
 
 While we would've preferred to have a deeper dataset, we believe we
@@ -292,7 +285,6 @@ still comfortably within our computational budget.
 These numbers leave a significant margin if further improvements are needed,
 and are consistent with experiences of the JPL NEO group.
 
-TODO: store benchmark results into the git repo
 
 > Appendix A
 > 
@@ -426,9 +418,9 @@ specific issues raised are in the text below:
 The assumption of sufficiency of IOD/OD for filtering, while not tested by
 us directly in this paper, has now been validated and published by Veres &
 Chesley (2017).  In their simulations, under condition analogous to ours,
-they obtain 96% percent of correct linkages by using orbit determination as the filter.
+they obtain 96\% percent of correct linkages by using orbit determination as the filter.
 
-They also add that such that number is likely to rise to >99% for MBAs with
+They also add that such that number is likely to rise to >99\% for MBAs with
 modest (and already understood) potential improvements and longer simulations
 (some of the mislinkages within the NEO populations are due to misidentified
 MBA-MBA links get "cleaned up" in the course of the survey).
@@ -459,26 +451,26 @@ comments, we've also updated the sky brightness model to a version that more
 faithfully describes twilight/sunrise observations, as well as improved
 the model of yield of existing surveys (see below).
 
-With all those changes, our results for completeness have changed by +5%
+With all those changes, our results for completeness have changed by +5\%
 (mostly due to better modeling of the sky in the twilight/sunrise).  The
 paper has been updated to reflect this.
 
 > The other main concern with this section is the results of the current
-> surveys performance over the next 17 years. The result of 55%
+> surveys performance over the next 17 years. The result of 55\%
 > completeness for the PHAs at the start of the LSST survey is
-> significantly higher (~12%) than the results of Grav et al. (2016).
+> significantly higher (~12\%) than the results of Grav et al. (2016).
 
-We understand the Grav et al. result of 43% completeness to be for
+We understand the Grav et al. result of 43\% completeness to be for
 the NEO population (Section 3.1, 3rd paragraph, in their paper). When we look at the
-NEO population we find a very similar value (40%).  That number is also
+NEO population we find a very similar value (40\%).  That number is also
 consistent with Veres & Chesley ("High-fidelity Simulations of the
 Near-Earth Object Search Performance of the Large Synoptic Survey
-Telescope", AJ 2017), who estimate 42% of NEOs will have been discovered at
+Telescope", AJ 2017), who estimate 42\% of NEOs will have been discovered at
 LSST start.
 
 Grav et al.  never explicitly mention their result for the PHA population,
 but we can read it off of Figure 7, and the referee is correct it's about
-~43% as well (the same or very similar as the NEOs).  We do not understand
+~43\% as well (the same or very similar as the NEOs).  We do not understand
 well this aspect of Grav's paper.  Intuitively, as the PHA population is
 brighter (in terms of observed peak magnitudes) than the NEO population, we
 would expect higher discovery rates for PHAs relative to NEOs.  This is
@@ -504,19 +496,19 @@ this further and added more clarification and updates to the text.
 
 We have now switched to a model very similar to what's in Veres & Chesley
 (2017), using deeper limiting magnitudes for the major NEO surveys, and the
-solar elongation cut of 100 degres.  The adopted limiting magnitudes now
+solar elongation cut of 100 degrees.  The adopted limiting magnitudes now
 correspond to V~20.0 until 2005 (roughly corresponding to LINEAR and
 contemporaries), V~21.0 until 2015 (Catalina and PS1), V~22.0 from there
-until the start of LSST (corresponing to enhanced PS1). After 2022, we 
+until the start of LSST (corresponding to enhanced PS1). After 2022, we 
 assume V~22.2, but also adjustment the factor characterizing the surveyed
 sky area (from 0.05 to 0.1) to account for further continuous improvements
 to other surveys. This model is matched to the existing data (2000-2017).
 
-This updated model for completeness now predicts 42% NEO completeness at the
-start of LSST (same as we've had before), and goes to 56% NEO completeness
+This updated model for completeness now predicts 42\% NEO completeness at the
+start of LSST (same as we've had before), and goes to 59\% NEO completeness
 in 2032 (assuming no LSST).  That makes our estimate somewhat lower than
-Veres & Chesley (61% in 2032) but slightly higher than what seems to be
-calculated by Grav et al (~52%).  Given the uncertainties of assumptions
+Veres & Chesley (61\% in 2032) but slightly higher than what seems to be
+calculated by Grav et al (~52\%).  Given the uncertainties of assumptions
 being made about the evolution of other surveys over a ~17 year period, it's
 probably difficult to derive a consensus estimate much more accurate than
 this.
@@ -566,7 +558,7 @@ Added.
 
 > Page 2, 2nd paragraph. A minor quibble, but the LSST is not “such a
 > system” as the conclusion of the paper is that a 12 year survey would
-> yield 85% completeness (which does not account for the difference
+> yield 85\% completeness (which does not account for the difference
 > between H<22 and D>140m), which is still short of the congressional
 > mandate. I would suggest using language to the effect that LSST gets
 > close to the mandate, rather than referring to it as satisfying it.
@@ -580,14 +572,9 @@ To be more accurate, we've changed it to "LSST, ...,  approaches such a system".
 > paragraph uses a deeper value?
 
 This has been corrected to the more appropriate dark-sky, zenith fiducial
-value of r=24.38.  The median r~24.16 value includes airmass and other
-observational effects that are modified by observing cadence, however this
-has been updated as well to reflect the new skybrightness values (in all bands
-except r band, the sky brightness gets fainter; in r band it is slightly brighter
-in the new model). These values
-have been evolving as we understand the LSST system better and prototypes of
-various components are available and measured.
-
+value of r=24.38 using the newest throughput information.  
+The median r~24.16 value includes airmass and other
+observational effects that are modified by observing cadence. 
 
 > Page 8: sec 2.4, bullet 3: This is a very key point and I feel that
 > this obstacle/assumption is being dismissed somewhat easily. I would
@@ -622,7 +609,7 @@ dataset spans Galactic latitudes from b=28 to b=58, and longitudes between
 
 With this larger dataset, we've obtained the same negative result about
 correlated false positives. Also, the recovered false positive rates were
-typically lower (by ~30%) than what we've found with the smaller data set. 
+typically lower (by ~30\%) than what we've found with the smaller data set. 
 We now discuss and note this in the text.
 
 > Page 21, section 5.1.3: I am assuming that phase-curve effects were
@@ -633,10 +620,10 @@ They were included, and this fact has been clarified (including what
 function was used to calculate the observed magnitudes).
 
 > Page 22, section 5.1.1 and page 28, section 5.1.6: The value given in
-> Schunova-Lilly is alpha=0.33+/-0.01, which is actually 10% different
+> Schunova-Lilly is alpha=0.33+/-0.01, which is actually 10\% different
 > than the value given in this section. A back of the envelope
 > calculation shows that changing to slope to a somewhat shallower slope
-> by 10% does affect the cumulative performance on the ~2% level, which
+> by 10\% does affect the cumulative performance on the ~2\% level, which
 > while not significantly enough to change the main conclusions of this
 > paper seems like an unnecessary change to the Schunova-Lilly
 > result. Also, since the paper is using the slope of Schunova-Lilly et
@@ -649,19 +636,19 @@ function was used to calculate the observed magnitudes).
 This has now been corrected -- we thank the reviewer for catching this!
 
 > 
-> Page 37: A completeness of 55% for PHAs with H < 22 in 2022 is more
-> than 10% higher than the estimate given by Grav et al (2016) given on
+> Page 37: A completeness of 55\% for PHAs with H < 22 in 2022 is more
+> than 10\% higher than the estimate given by Grav et al (2016) given on
 > page 31. There is no discussion on this difference, which I suspect is
 > due to using solar elongation > 60 degrees as a detection criteria in
 > this paper. Current surveys rarely observe below 90 degree solar
 > elongation and cover limited are below ~110 degrees solar
 > elongation. Some argument supporting the choice of solar elongation
 > cut-off should be included, and also some discussion of why this
-> paper’s estimate is 10% higher than that of Grav et al. (2016).
+> paper’s estimate is 10\% higher than that of Grav et al. (2016).
 
 This has been addressed in the major comments above.
 
-> Page 37: It is not clear from the text if the 85% completeness for
+> Page 37: It is not clear from the text if the 85\% completeness for
 > PHAs is for the LSST baseline, extended by two years, or if it
 > includes any of the other enhancement surveys mentioned in this
 > section (it is clarified later in the conclusion chapter, but should
