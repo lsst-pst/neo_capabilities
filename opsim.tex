@@ -362,9 +362,9 @@ the rate of discoveries reported on the JPL NEO discovery page\footnote{See http
 
 With this model, at the start of LSST, we estimate the known NEO population with $H<22$ to be 43\% complete
 and the PHA population with $H<22$ to be 54\% complete. Our NEO estimate is in good agreement with estimates
-from \citet{VeresChesley2017neo} and \citet{GSM} who predict 42\% and 43\% completeness for NEOs, respectively.
+from \citet{VeresChesley2017neo} and \citet{GMS2016} who predict 42\% and 43\% completeness for NEOs, respectively.
 In 2032, at the nominal end of LSST, we estimate a 59\% completeness for NEOs without LSST; \citet{VeresChesley2017neo}
-predicts a slightly higher value of 61\% while we estimate \citet{GSM} predicts a slightly lower value of about 52\%. 
+predicts a slightly higher value of 61\% while we estimate \citet{GMS2016} predicts a slightly lower value of about 52\%. 
 Given the uncertainty in the assumptions being made about the evolution of other surveys over a 17 year time period,
 this range seems acceptable.
 
@@ -455,21 +455,24 @@ We proceed with an example of a comparison of different simulations.
 
 Two recent works, \citet*[][hereafter GMS]{GMS2016} and \citet*[][hereafter VC]{VeresChesley2017neo}, 
 have also evaluated the NEO completeness that could be achieved with a baseline LSST survey.
-GMS reported a cumulative completeness for NEOs of 62\%, while VC reported a cumulative completeness of 61.6\%, 
-for a baseline survey with $N_w$ = 15 days. This can be compared with our estimate of 61\%. 
+GMS reported a cumulative completeness for NEOs of 63\%, 62\% for PHAs,
+while VC reported a cumulative completeness of 61.6\%  for NEOs and 64.9\% for PHAs, 
+for a baseline survey with $N_w$ = 15 days. This can be compared with our estimates of 61\% for NEO completeness
+and 66\% for PHA completeness.
 There are three main reasons why these results differ:
 \begin{enumerate}
 \item The definition of the completeness limit: $H\le22$ or $D>140$m. By using an albedo distribution combined 
 with a size distribution, GMS directly model the population larger than 140m rather than those with $H\le22$. 
-Using $D>140$m can lead to a decrease in completeness on the order of 5\% \citep{2016AJ....152...79W, GSM2016}.  
+Using $H\le22$ can lead to a increase in completeness on the order of 5\% \citep{2016AJ....152...79W, GMS2016}.
 \item The realization of the LSST baseline survey, including the sky brightness model, system sensitivity model, and
 delivered seeing distribution.  GMS used an older realization of the LSST baseline survey, {\it enigma\_1189}, which
 had limiting magnitudes that were on average fainter by a few tenths of a magnitude than they are in 
 {\it minion\_1016}, a more recent baseline survey with updated values for the system throughput and seeing. 
-The decrease in limiting magnitudes in {\it minion\_1016} lead to a decrease in completeness of about 2\%.}
+The decrease in limiting magnitudes in {\it minion\_1016} leads to a decrease in completeness of about 2\% compared
+with GMS results.
 \item Different realizations of the input populations. The major difference here is between NEO and PHA populations,
-which leads to about 5\% difference in completeness. However, small differences in the source of the input population
-can also lead to differences on the level of a few percent\citep{VeresChesley2017neo}. 
+which leads to about 5\% difference in completeness in our results and the results from \citet{VeresChesley2017neo}.
+However, small differences in the source of the input population can also lead to differences on the level of a few percent\citep{VeresChesley2017neo}. 
 \end{enumerate}
 
 Therefore, after accounting for different choices of simulation parameters, 
