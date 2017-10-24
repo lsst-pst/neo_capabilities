@@ -13,7 +13,7 @@ density of false detections due to background fluctuations is about 60 deg$^{-2}
 (see below for details)---much lower than the expected rate of astrophysical
 detections (see \S\ref{sec:kaiser} below). 
 
-However, historically surveys have reported detection rates in image differencing that are much
+Historically, surveys have reported detection rates in image differencing that are much
 higher, depending on the survey; see \cite{denneau13}; \cite{kessler15}; \cite{goldstein15}.
 For example, Pan-STARRS1 (PS1) reported a transient detection rate as high as 8,200 deg$^{-2}$
 \citep{denneau13}. For a ``menagerie'' of PS1 artifacts (with memorable names such as
@@ -23,12 +23,12 @@ ghosts, or other well-understood image artifacts, ...''. As discussed in \S\ref{
 such a high false detection rate is at the limit of what could be handled even
 with the substantial computing power planned for LSST.
 
-Fortunately, Pan-STARRS1 was only a first-generation experiment and, over the past decade,
-subsequent surveys have learned tremendously from the PS1 experience. There are surveys
+Over the past decade,
+the second-generation surveys have learned tremendously from the PS1 experience. There are surveys
 running today, such as Dark Energy Survey, which have largely solved the key problems that
 PS1 has encountered. Major improvements to hardware include CCDs with significantly fewer
-artifacts (e.g. DECam, see below; LSST) and optical systems designed to minimize ghosting
-and internal reflections (e.g. LSST). Improvements to the software include advanced image
+artifacts (e.g. DECam, see below, and LSST) and optical systems designed to minimize ghosting
+and internal reflections (e.g. in LSST). Improvements to the software include advanced image
 differencing pipelines (e.g., PTFIDE for the Palomar Transient Factory and the Zwicky Transient
 Facility) and various machine-learning classifiers for filtering false detections. For example,
 \cite{goldstein15} used a Random Forest classifier with the Dark Energy Survey data
@@ -48,13 +48,13 @@ successful deployment of MOPS, as will be discussed in \S\ref{sec:mops}.
 
 \subsection{LSST Image Differencing Pipeline and Data Processing}
 
-The LSST prototype image differencing and analysis code largely derives from the
-HOTPANTS package \citep{becker15}, and was used for surveys such as SuperMACHO
+The LSST prototype image differencing and analysis code derives from the
+algorithms employed in the HOTPANTS package \citep{becker15}, and was used for surveys such as SuperMACHO
 \citep{becker05} and ESSENCE \citep{miknaitis07}. While this software is
 functional as-is, it is expected that the ultimate LSST pipeline will include
 improved methods for handling observations at high airmass and the effects of
-differential chromatic refraction due to the Earth's atmosphere. Nevertheless, in
-this work we conservatively assume that the pipeline used for LSST will have the
+differential chromatic refraction due to the Earth's atmosphere. In
+this work, we conservatively assume that the pipeline used for LSST will have the
 same performance as the current code.
 
 
@@ -73,7 +73,7 @@ N(>\nu)  = \frac{n_{row}*n_{col}}{2^{5/2} \, \pi^{3/2} \, \sigma_g^2} \, \nu \, 
 \end{equation}
 where $n_{row}$ and $n_{col}$ are the number of pixel rows and columns in the image.
 This expression was verified empirically by LSST data management team using
-image simulations\footnote{See \url{https://github.com/lsst/W13report}}.
+raytraced image simulations\footnote{See \url{https://github.com/lsst/W13report}}.
 For 4k by 4k LSST sensors the pixel size is 0.2 arcsec, and for a nominal seeing
 of 0.85 arcsec and $\nu=5$, $N(>\nu) = 59$ deg$^{-2}$.
 
@@ -134,7 +134,7 @@ that recognizes and rejects all \DIASources with $\nu < 5$. This mitigation step
 will be unnecessary once the image covariance tracking is properly implemented
 in the LSST stack. Alternative solutions such as image ``decorrelation''
 \citep{DMTN-021}, or the \citet{zackay} image differencing algorithm, would also
-alleviate the covariance problem, and tests of these methods in the LSST pipeline are ongoing.
+alleviate the covariance problem. Tests of these methods in the LSST pipeline are ongoing.
 
 
 \begin{figure}
@@ -166,11 +166,11 @@ rates: DECam includes 62 mosaicked deep-depletion CCDs, with a total pixel count
 The data we use here are a subset of a DECam NEO survey (PI: L. Allen, NOAO) conducted
 in the first half of 2013. The data for a given field consist of 40-second exposures separated
 by about five minutes. Due to the difference in telescope aperture, these images
-are about 1 mag shallower than the 30 second visits by LSST. We used data for
-five different fields, each with between three and five visits for a total of 15
-``science'' visits plus 5 template visits.
+are about 1 mag shallower than the 30 second visits by LSST.
 
-While this section presents statistics based on this subset of the Allen et al. data, we've subsequently verified the findings using a much larger superset of 540 visits from the same survey. This enlarged set was roughly bounded by $28^\circ < b < 58^\circ$ and $315^\circ < l < 350^\circ$ (Galactic coordinates), covering a range of object densities better representative of the LSST's "Wide-Fast-Deep" (WFD) survey (except for the depth, which we discuss in \S\ref{sec:imDiffScale}). Using this set, we find false detection rates broadly consistent with the data presented, with the additionally processed visits having fewer false detections by about 30\% (on average).
+Throughout this section, we used data for
+five different fields, each with between three and five visits for a total of 15
+``science'' visits plus 5 template visits. We've subsequently verified the findings using a much larger superset of 540 visits from the same survey. The enlarged set was bounded by $28^\circ < b < 58^\circ$ and $315^\circ < l < 350^\circ$ (Galactic coordinates), covering a range of object densities better representative of the LSST's "Wide-Fast-Deep" (WFD) survey (except for the depth, which we discuss in \S\ref{sec:imDiffScale}). Using this set, we find false detection rates broadly consistent with those from the smaller subset: the additionally processed visits actually have {\em fewer} false detections by about 30\% (on average).
 
 From the NOAO archive we obtained images that had already had instrumental
 signature removal applied by the DECam Community Pipeline. Each image was
@@ -327,7 +327,7 @@ We do not see any such correlated detections after inspecting approximately
 We also investigated whether \DIASources from multiple visits are correlated
 in pixel coordinates, which might arise from uncorrected detector anomalies.
 We analyzed a 4-visit subset of the 15 science visits used in the rest of this
-work, and for each \DIASource computed the distance in pixels to any neighboring
+section, and for each \DIASource computed the distance in pixels to any neighboring
 \DIASources, even if they appeared on different visits or different fields
 (similar to the 2-point correlation function). From this we identified  24
 \DIASources that were located within two pixels of another \DIASource. We did

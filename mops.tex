@@ -28,7 +28,7 @@ rates of false tracklets and false tracks.
 
 As a part of the Final Design Review preparations, the LSST team has developed an enhanced prototype
 implementation of MOPS and analyzed its behavior. Here we summarize the main results of that work;
-a detailed report is publicly available \citep{LDM-156}.
+a detailed internal technical note has been made public in \cite{LDM-156}.
 
 Simulated \DIASources were based on a Solar System model by \citet{Grav2011}.
 The model includes about 11 million objects; about 9 million are main-belt asteroids. Observations span
@@ -76,7 +76,7 @@ tracks increases by only about 50\%.
 \subsection{Understanding MOPS Performance}
 
 The rather slow increase of the number of tracks with false positive detection rate (a 50\% increase
-although the number of tracklets increased by a factor of 10) is somewhat unexpected. We have
+although the number of tracklets increased by a factor of 10) may seem surprising. We have
 developed analytic and semi-analytic analysis to better understand the scaling of the number of
 tracklets and tracks with false detection rate and other relevant parameters. Details of this
 analysis are provided in Appendix~\ref{sec:appMOPS}. Here we briefly discuss the main results.
@@ -119,8 +119,7 @@ times the number of true tracks.
 
 Given the modest computing resources used in MOPS tests described above, the runtime and memory
 usage results bode well for LSST processing. Assuming a 1000-core machine dedicated to LSST moving
-object processing (corresponding to about 1\% of the anticipated total LSST compute power at the
-National Center for Supercomputing Applications), MOPS runtime for producing
+object processing (corresponding to about 1\% of the anticipated total LSST compute power), MOPS runtime for producing
 candidate tracks should not exceed an hour, assuming sufficient parallelization can be achieved.
 
 The IOD step can also be handled with anticipated resources and is trivially parallelizable. The number 
@@ -134,17 +133,16 @@ can be expressed as
 where $T_{IOD}$ is the time it takes to perform one IOD computation on a single core. 
 
 To get a handle on a realistic estimate of $T_{IOD}$, we benchmark an implementation provided
-by the \FindOrb code 
-by Bill Gray\footnote{\FindOrb source code can be found at \url{https://github.com/Bill-Gray/find_orb/}}.
+by the \FindOrb code\footnote{\FindOrb source code can be found at \url{https://github.com/Bill-Gray/find_orb/}} by Bill Gray.
 \FindOrb is an open source orbit determination software written in C++.
 It implements several IOD methods (Gauss, Herget, and V\"{a}is\"{a}l\"{a}),
-whose precision are representative of other analogous packages in the field (e.g. OpenOrb).
+whose precision are representative of other analogous packages in the field.
 
 For benchmarking purposes, we used \FindOrb to fit an orbit of an 
 $a = 2.46, e = 0.57$ asteroid given six observations (a pair each night) 
 spanning a 16-day arc. The measurement is performed on a single 3.1 GHz core. 
 We find that the IOD using the Gauss method takes only 0.3ms to compute, a negligible fraction of 
-our 100ms computational budget. Running an afterburner using Herget's method
+our 100ms computational budget. Running an afterburner with Herget's method
 to obtain further differential improvements takes 26ms, still comfortably 
 within our computational budget.
 
@@ -165,6 +163,6 @@ In parallel to the work presented here, \cite{VeresChesley2017mops} have conduct
 	\item less than 0.1\% of orbits due to false detections.
 \end{itemize}
 
-These findings are fully consistent with the results obtained here using the LSST implementation of MOPS. They confirm that the method linking method underlying both implementation is valid and robust. Furthermore, they empirically confirm a key assumption that we have made -- that the IOD is sufficient for filtering of admissible tracks.
+\cite{VeresChesley2017mops} findings are fully consistent with the results obtained here using the LSST implementation of MOPS. They show that the linking method underlying both implementations is valid and robust. Furthermore, they confirm that IOD is a sufficient filter for admissible tracks.
 
-Combined with our empirical measurement of the performance of LSST image differencing pipelines (in \S\ref{sec:imDiff}) and the LSST implementation of MOPS, the two studies provide strong evidence that LSST's approach to asteroid discovery is valid.
+Adding our empirical measurement of the performance of LSST image differencing pipelines and the performance of LSST MOPS, the two studies demonstrate that LSST's approach to asteroid discovery is on firm footing.

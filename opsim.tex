@@ -68,7 +68,7 @@ from a specific OpSim simulated survey. Ephemerides are generated using OpenOrb 
 
 \subsubsection{Survey Cadence Modeling}
 
-The LSST Operations Simulation \citep[OpSim,][]{delgado14} is a python software package that generates a realistic pointing history, with the time, filter, location, astronomical conditions, weather conditions, and predicted point-source $5\sigma$ limiting magnitude, for each LSST visit
+The LSST Operations Simulation \citep[OpSim,][]{delgado14} is a Python software package that generates a realistic pointing history, with the time, filter, location, astronomical conditions, weather conditions, and predicted point-source $5\sigma$ limiting magnitude, for each LSST visit
 over the lifetime of the survey. This pointing history is generated using weather data (cloudiness and seeing) from the Cerro Pach\'{o}n site and a high-fidelity model of the telescope itself (including slew and settle time and dome movement, for example), combined with a parameterized set of observing proposals that determine how the scheduling algorithm attempts to gather observations. By configuring OpSim with different parameters for the observing proposals, we can generate a series of simulated surveys which prioritize different science goals. The LSST baseline survey and its modifications designed to enhance the PHA completeness are described in detail
 in \S\ref{sec:surveys} below.
 

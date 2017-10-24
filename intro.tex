@@ -17,9 +17,11 @@ discovery progress, see NASA's CNEO webpage\footnote{\url{https://cneos.jpl.nasa
 The completeness level set by the Congressional mandate could be accomplished with a 10-meter-class
 ground-based optical telescope, equipped with a multi-gigapixel camera and a sophisticated and robust data
 processing system \citep[see NASA-commissioned reports by ][]{stokes03,shapiro10}. 
-The Large Synoptic Survey Telescope\footnote{www.lsst.org} (LSST), currently being
+The Large Synoptic Survey Telescope\footnote{http://lsst.org} (LSST), currently being
 constructed, approaches such a system. A concise LSST system description, discussion of science drivers, and other
-information, are available in \cite{LSSToverview}. The LSST baseline strategy for discovering Solar System
+information, are available in \cite{LSSToverview}.
+
+The LSST baseline strategy for discovering Solar System
 objects is predicated on two observations of the same field per night, spaced by a few tens of minutes, and
 a revisit of the same field with another pair of observations within a few days. The main reason for two
 observations per night is to help association of observations of the same object from different nights,
@@ -30,8 +32,7 @@ detections of individual objects are ``scrambled''. However, with two detections
 vector can be estimated. The motion vector makes the linking problem much easier because
 positions from one night can be approximately extrapolated to future (or past) nights. The predicted
 position's uncertainty is typically of the order of several arcminutes, rather than a degree, which effectively
-``de-scrambles'' detections from different nights (for a detailed discussion of this algorithm, see
-Appendix~\ref{sec:appMOPS}).
+``de-scrambles'' detections from different nights (for a detailed discussion of this algorithm, see \citealt{kubica07} as well as Appendix~\ref{sec:appMOPS} for a theoretical derivation of expected scalings).
 
 Early simulations of LSST performance presented by \cite{IvezicNEO2007} showed that the 10-year baseline
 cadence would result in 75\% completeness for PHAs greater than 140 m (more  precisely, for PHAs with
@@ -44,7 +45,7 @@ LSST yields have been revisited by \citet{GMS2016} (predicted PHA completeness o
 %% - the LSST baseline cadence provides orbits for 82% of PHAs larger than 140 meters after 10 years of operations
 %% - 84% completeness with minor changes to the cadence (5% of time for NEO-optimized observations)
 %% - 90% completeness with major changes to the cadence (15% of time for NEO-optimized observations and 12 years)
-The latest LSST simulation results, presented here, yielded a completeness of $\sim$66\% for
+The latest LSST simulation results, presented in Section~\ref{sec:opsim}, yielded a completeness of $\sim$66\% for
 PHAs with $H<22$, using the current 10-year baseline survey. The differences in reported completeness
 between these studies are attributable to differences in the simulated NEO populations and other modeling
 details (such as an improved understanding of the hardware and updated cadence and sky brightness models).
@@ -56,15 +57,14 @@ to the same object, and to estimate its orbital parameters (the same criterion h
 studies\footnote{See \url{http://neo.jpl.nasa.gov/neo/report2007.html}}).
 This so-called linking of individual detections into plausible orbital tracks
 will be performed using a special-purpose code referred to as the Moving Object
-Processing System (MOPS). MOPS and its algorithms are significantly more
-advanced than anything previously fielded for this purpose \citep{denneau13}. 
+Processing System (MOPS).
 
-The described LSST strategy for discovering moving objects has been questioned (e.g., \citealt{GMS2016}) on
+The capability and effectiveness of LSST for discovering moving objects has been questioned (e.g., \citealt{GMS2016}) on
 two grounds:
 \begin{itemize}
 \item A large number of false detections due to problems with image differencing software may
 make linking problem prohibitively hard for MOPS. In particular, this objection is motivated by the experience
-from extant surveys, such as Pan-STARRS1 and the Catalina Sky Survey.
+from extant surveys, such as Pan-STARRS1 \citep{denneau13} or the Catalina Sky Survey \citep{2003DPS....35.3604L}.
 \item Modifications of LSST baseline cadence, including image depth, sky coverage and cadence,
 required to reach 90\% completeness level, have not yet been explicitly demonstrated using detailed
 operations simulations, and made available to the community.
@@ -83,11 +83,11 @@ The main analysis components presented here include:
           models, to forecast discovery rates.
 \end{enumerate}
 
-We demonstrate that i) MOPS can cope with the anticipated false detection rates
-in LSST difference images, and that ii) the NEO discovery performance of the LSST baseline cadence
-can be appreciably boosted by adequate modifications of the observing strategy.
 In \S2 we provide a brief overview of LSST and its strategy for discovering moving Solar
-System objects. We discuss the performance of prototype LSST image differencing pipeline
+System objects. We measure the performance of prototype LSST image differencing pipeline
 in \S3, and MOPS performance in \S4. Modifications of the baseline cadence designed to
-boost NEO/PHA completeness are described in \S5, and our results are summarized and
-discussed in \S6.
+boost NEO/PHA completeness are examined in \S5.
+
+We conclude that i) LSST implementation of MOPS can cope with the anticipated false detection rates
+in LSST difference images, and that ii) the NEO discovery performance of the LSST baseline cadence
+can be appreciably boosted by adequate modifications of the observing strategy. These findings are summarized and discussed in \S6.
