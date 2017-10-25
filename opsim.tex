@@ -409,9 +409,7 @@ This simulation is the `extra ecliptic visits'  run, with LSST in operation for 
 
 As indicated by the above discussion, a number of systematic effects must be taken into account when
 comparing different simulations of the same survey, as well as simulations of different surveys and observing
-systems. It is unlikely that a meaningful quantitative comparison can be pushed beyond a level of a few percent
-in completeness (in practice, the completeness of a given operating survey is best estimated using the object
-re-discovery rate). Based on our analysis, the leading systematic effects in simulated completeness estimates are:
+systems. Based on our analysis, the leading systematic effects in simulated completeness estimates are:
 \begin{enumerate}
 \item Population choice - an NEO vs. PHA difference. The completeness is about $\sim$5\% higher for PHAs than for NEOs; for example,
 the cumulative completeness for minion\_1016 is 65.6\% for PHAs and 60.7\% for NEOs with 15 day MOPS windows.
@@ -445,7 +443,7 @@ the cumulative completeness for minion\_1016 is 65.6\% for PHAs and 60.7\% for N
           boost the final PHA completeness after a 10-year LSST baseline survey by 14\%.
 \end{enumerate}
 
-We proceed with an example of a comparison of different simulations.
+Given all these, it is unlikely that a meaningful quantitative comparison of different studies (or even the accuracy of a performance estimate within a single study) can be expected beyond a level of a few percent. The exact magnitude of that uncertainty is difficult to estimate as the various effects don't add up coherently (and aren't equally likely). Given most of the enumerated uncertainties are on the order of 3-5\%, taking $\sim 5\%$ as a notional ``error bar'' is likely to be reasonable. In practice, the completeness of a given operating survey is best estimated using the object re-discovery rate.
 
 \subsection{Comparison with other works  \label{sec:other}}
 
@@ -453,9 +451,10 @@ Two recent works, \citet*[][hereafter GMS]{GMS2016} and \citet*[][hereafter VC]{
 have also evaluated the NEO completeness that could be achieved with a baseline LSST survey.
 GMS reported a cumulative completeness for NEOs of 63\%, 62\% for PHAs,
 while VC reported a cumulative completeness of 61.6\%  for NEOs and 64.9\% for PHAs, 
-for a baseline survey with $N_w$ = 15 days. This can be compared with our estimates of 61\% for NEO completeness
+for a baseline survey with $N_w$ = 15 days. These can be compared with our estimates of 61\% for NEO completeness
 and 66\% for PHA completeness.
-There are three main reasons why these results differ:
+
+All these results are in consistent, given the understood systematic differences discussed in \S\ref{sec:syseff}. We identify three main reasons that contribute to the (small) differences:
 \begin{enumerate}
 \item The definition of the completeness limit: $H\le22$ or $D>140$m. By using an albedo distribution combined 
 with a size distribution, GMS directly model the population larger than 140m rather than those with $H\le22$. 
@@ -467,10 +466,9 @@ had limiting magnitudes that were on average fainter by a few tenths of a magnit
 The decrease in limiting magnitudes in {\it minion\_1016} leads to a decrease in completeness of about 2\% compared
 with GMS results.
 \item Different realizations of the input populations. The major difference here is between NEO and PHA populations,
-which leads to about 5\% difference in completeness in our results and the results from \citet{VeresChesley2017neo}.
+which leads to the difference in completeness in our results and the results from \citet{VeresChesley2017neo}.
 However, small differences in the source of the input population can also lead to differences on the level of a few percent\citep{VeresChesley2017neo}. 
 \end{enumerate}
 
-Therefore, after accounting for different choices of simulation parameters, 
-we conclude the GMS and VC results are consistent (within 1-2 \%)
-with the results previously published by the LSST team, as well as with the results on completeness discussed here.
+Therefore, after accounting for different choices of simulation parameters 
+we conclude the GMS and VC results for baseline NEO discovery efficiency are in excellent mutual agreement (within 1-2 \%), as well as in agreement with the analysis presented in this paper.
