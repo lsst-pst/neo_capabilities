@@ -2,7 +2,7 @@
 
 \section{Discussion and Conclusions\label{sec:discussion}}
 
-We have examined and quantified here the ability of LSST to contribute to the census of NEO and PHA populations and the fulfillment of the Congressional George E. Brown, Jr. mandate, as well as examined options for further improvement of LSST's NEO and PHA yields relative to the baseline cadence.
+We have tested and quantified the ability of LSST to contribute to the census of NEO and PHA populations, as well as options for further improvement of LSST's NEO and PHA yields relative to the baseline cadence.
 
 We expect that the LSST strategy for discovering moving Solar System objects will be successful because the following three conditions are likely to be met:
 \begin{enumerate}
@@ -11,8 +11,8 @@ We expect that the LSST strategy for discovering moving Solar System objects wil
 	processed using prototype LSST software.
 	\item Given an anticipated 1000-core machine, LSST MOPS will be able to easily process as many as
 	10$^8$ tracklets per search window, and daily computations to produce up to about 10$^7$
-	candidate tracks will be completed in about an hour.
-	\item With the IOD computational budget of 0.1 sec per track -- comfortably above the benchmarked value of $<26$ms -- the final track filtering step can
+	candidate tracks will be completed in about an hour. We demonstrate this by running an LSST MOPS prototype on a representative simulated dataset. It has been independently confirmed by \cite{VeresChesley2017mops}, using PanSTARRS-PS1 MOPS.
+	\item With the IOD computational budget of 0.1 sec per track -- comfortably above the value of $<26$ms we measure here -- the final track filtering step can
 	be easily accomplished in about an hour.
 \end{enumerate}
 
@@ -22,7 +22,7 @@ Assuming this rate, numerical tests with LSST MOPS prototypes and representative
 process LSST data. Even if the realized false detection rate is twice as high as
 the (already conservative) estimate reported here, it can still be handled without a change of baseline cadence, linking criteria, or
 increase in computing resources. Quantitatively, the false detection rates of up to about
-1000 deg$^{-2}$ can be readily handled with an approximately 1000-core cluster dedicated to moving object processing (equating, in 2022, to $\sim 36$ CPUs, or $\sim 18$ nodes).
+1000 deg$^{-2}$ can be readily handled with an approximately 1000-core cluster dedicated to moving object processing (equating, in 2022, to $\sim 36$ CPUs, or $\sim 18$ compute nodes).
 
 
 %Significant further compute margin exists, both because the overall LSST compute needs are driven by other more
@@ -34,12 +34,11 @@ increase in computing resources. Quantitatively, the false detection rates of up
 %LSST camera, or any other system component, would somehow cause such high false detection rates,
 %the whole LSST mission would be jeopardized.
 
-Having established that the LSST will successfully identify moving objects, we've examined the expected discovery yields for the PHA and NEO populations. Our results show that the current LSST baseline survey strategy would yield a completeness for PHAs
-with $H<22$ of about 66\% (without including objects discovered by prior and contemporaneous surveys). We compared our results presented here to an analogous recent study by \citet[]{GMS2016} and \citet{VeresChesley2017neo}, and find them consistent within the modeling uncertainties. The original
+Having established that the LSST will successfully identify moving objects, we've examined the expected discovery yields for the PHA and NEO populations. Our results show that the current LSST baseline survey strategy would yield a completeness for PHAs with $H<22$ of about 66\%, and NEOs with $H<22$ of about 61\% (without including objects discovered by prior and contemporaneous surveys). We compared our results presented here to an analogous recent study by \citet[]{GMS2016} and \citet{VeresChesley2017neo}, and find them consistent within the modeling uncertainties. The original
 PHA completeness forecasts published in \cite{LSSToverview} are somewhat higher than reported here, primarily due to using different PHA populations. 
 
 Finally, we examine and quantify the efficiency of a number of possible extensions to the LSST baseline survey that could raise the
-completeness for PHAs with $H<22$ beyond 80\%. We find that the ``extra spur ecliptic visits over 12 years'' survey
-(astro\_lsst\_01\_1016) with a 30-day MOPS linking window could boost the overall PHA completeness to 86\% (including objects discovered by contemporaneous surveys). With this cadence, 
-the main LSST survey (``deep-wide-fast'') receives as many visits after 12 years as it would receive after 10 years of the
-baseline cadence (minion\_1016). This makes it particularly attractive as, assuming resources were identified to extend the survey by two years, the number of remaining undiscovered PHAs could be essentially {\em halved} relative to the existing baseline, without seriously disadvantaging other LSST science cases.
+completeness for PHAs with $H<22$ beyond 80\%. We find that the ``extra ecliptic visits'' strategy (astro\_lsst\_01\_1016), executed over 10 years and with a 30-day MOPS linking window could boost the overall PHA completeness to 84\% (including objects discovered by contemporaneous surveys). The downside to this option is that the remaining LSST science cases would receive $\sim 20$\% less observing time, likely rendering it unacceptable to the broader LSST community.
+
+However, if the survey is extended to 12 years and utilizes this strategy the main LSST proposal (``deep-wide-fast'') receives as many visits after 12 years as it would receive after 10 years of the
+baseline cadence (minion\_1016). Additionally, the PHA completeness rises further, to 86\%. This makes this strategy particularly attractive as, assuming resources were identified to extend the survey by two years, the fraction of discovered PHAs would approach $\sim 90$\% without seriously disadvantaging other LSST science cases.
