@@ -22,7 +22,7 @@ Assuming this rate, numerical tests with LSST MOPS prototypes and representative
 process LSST data. Even if the realized false detection rate is twice as high as
 the (already conservative) estimate reported here, it can still be handled without a change of baseline cadence, linking criteria, or
 increase in computing resources. Quantitatively, the false detection rates of up to about
-1000 deg$^{-2}$ can be readily handled with an approximately 1000-core cluster dedicated to moving object processing (equating, in 2022, to $\sim 36$ CPUs, or $\sim 18$ compute nodes).
+1000 deg$^{-2}$ can be readily handled with an approximately 1000-core cluster dedicated to moving object processing\footnote{Based on LSST's technology estimates and the data center sizing model, this equates to just $36$ CPUs, or $18$ compute nodes, in late 2022 at the beginning of the survey.}.
 
 
 %Significant further compute margin exists, both because the overall LSST compute needs are driven by other more
@@ -34,8 +34,8 @@ increase in computing resources. Quantitatively, the false detection rates of up
 %LSST camera, or any other system component, would somehow cause such high false detection rates,
 %the whole LSST mission would be jeopardized.
 
-Having established that the LSST will successfully identify moving objects, we've examined the expected discovery yields for the PHA and NEO populations. Our results show that the current LSST baseline survey strategy would yield a completeness for PHAs with $H<22$ of about 66\%, and NEOs with $H<22$ of about 61\% (without including objects discovered by prior and contemporaneous surveys). We compared our results presented here to an analogous recent study by \citet[]{GMS2016} and \citet{VeresChesley2017neo}, and find them consistent within the modeling uncertainties. The original
-PHA completeness forecasts published in \cite{LSSToverview} are somewhat higher than reported here, primarily due to using different PHA populations. 
+Having established that the LSST will successfully identify moving objects, we've examined the expected discovery yields for the PHA and NEO populations. Our results show that the current LSST baseline survey strategy would yield a completeness for PHAs with $H<22$ of about 66\%, and NEOs with $H<22$ of about 61\% (without including objects discovered by prior and contemporaneous surveys). We compared our results presented here to two analogous recent studies by \citet[]{GMS2016} and \citet{VeresChesley2017neo}, and find them consistent within the modeling uncertainties. The original
+PHA completeness forecasts published in \cite{IvezicNEO2007} are higher than reported here (75\% vs 66\%), primarily due to using different PHA populations and a 30-day search window.
 
 Finally, we examine and quantify the efficiency of a number of possible extensions to the LSST baseline survey that could raise the
 completeness for PHAs with $H<22$ beyond 80\%. We find that the ``extra ecliptic visits'' strategy (astro\_lsst\_01\_1016), executed over 10 years and with a 30-day MOPS linking window could boost the overall PHA completeness to 84\% (including objects discovered by contemporaneous surveys). The downside to this option is that the remaining LSST science cases would receive $\sim 20$\% less observing time, likely rendering it unacceptable to the broader LSST community.
