@@ -27,25 +27,28 @@ and conclusions the key results of the work did not stand out sufficiently.
 These original aspects include:
 
  (a) an empirical, data, and software driven measurement of the false 
-     detection rate arising from the LSST image differencing software.
+     detection rate arising from the LSST image differencing software,
+     and a demonstration that LSST MOPS is already capable of handling
+     the measured level of false positives.
  (b) a derivation of the scalings of the MOPS linking algorithm as
      a function of the false detection rate. To our knowledge, this
      type of scaling analysis has not been previously published. 
      It explains the severity of the issues encountered by PanSTARRS
      (Denneau et al. 2013).
  (c) the evaluation of PHA completeness using the most up-to-date
-     design (or as-built) data for the LSST system. The resubmitted
-     manuscript includes the new sky brighness map (e.g., relative to
-     the work by Veres \& Chesley).
+     design (or as-built) data for the LSST system. 
  (d) evaluation of a set of realistic simulations of alternative LSST
      cadences, quantifying opportunities for enhancements to the
      LSST's ability to discover NEOs if the cadence or software are
-     changed. This information will be particularly useful
-     to the Solar System community during the for whitepapers on LSST
-     survey strategy, expected for 2018.
+     changed. In particular, we find one set of enhancements that
+     we beleve does not impact other LSST science areas, yet enhances
+     NEO and PHA discovery yields. This information will be particularly
+     useful to the Solar System community and funding agencies, during 
+     the for whitepapers on LSST survey strategy, expected for 2018.
 
-We've re-emphasized these in the introduction, abstract, and subsequent
-discussions.
+We've now rewritten the abstract to emphasize these points, and
+sharpened the introduction and the subsequent discussion to better
+stress these points.
 
 > There are many minor typos and grammatical issues throughout the
 > manuscript that are not annoying enough to distract the reader but
@@ -254,7 +257,7 @@ For the analysis of the NEO completeness in Section 5, we used a reduced
 data set (just the NEOs and PHAs), This may have contributed to some of the
 confusion.
 
-We've reworded the texts somewhat, to try to remove some of the confusion.
+We've reworded the text to try to remove some of the confusion.
 
 > 
 > 
@@ -283,7 +286,8 @@ using Herget's method to obtain further differential improvements takes 26ms,
 still comfortably within our computational budget.
 
 These numbers leave a significant margin if further improvements are needed,
-and are consistent with experiences of the JPL NEO group.
+and are consistent with experiences of the JPL NEO group that we've referred
+to originally.
 
 
 > Appendix A
@@ -380,8 +384,8 @@ or false-detection-false-detection links). In the section immediately following,
 we compare this scaling to the scaling a false trak rate that is the result of
 a numerical simulation (where this assumption is not included, so false tracks can
 include asteroid-asteroid mislinkages) and find the results are not significantly different.
-This is indeed somewhat confusing; a clarification has been added to the text.
 
+This is indeed somewhat confusing; a clarification has been added to the text.
 
 > Reviewer 2
 > 
@@ -393,8 +397,9 @@ This is indeed somewhat confusing; a clarification has been added to the text.
 > modifications
 > 
 
-We'd like to thank the referee for thoughtful comments. Our responses to
-specific issues raised are in the text below:
+We'd like to thank the referee for very thoughtful and actionable comments.  We
+did our best to use them to strenghten the manuscript and improve it in key
+areas. Our responses to specific issues raised are in the text below.
 
 > This paper is en extensive and thorough look at the expected
 > performance of the LSST survey in regards to the Near-Earth Object
@@ -418,7 +423,8 @@ specific issues raised are in the text below:
 The assumption of sufficiency of IOD/OD for filtering, while not tested by
 us directly in this paper, has now been validated and published by Veres &
 Chesley (2017).  In their simulations, under condition analogous to ours,
-they obtain 96\% percent of correct linkages by using orbit determination as the filter.
+they obtain 96\% percent of correct linkages by using orbit determination
+as the filter.
 
 They also add that such that number is likely to rise to >99\% for MBAs with
 modest (and already understood) potential improvements and longer simulations
@@ -446,14 +452,9 @@ findings in our text.
 
 This has now been corrected -- we thank the reviewer for catching this!
 
-In addition to this change, and in response to second reviewer's
-comments, we've also updated the sky brightness model to a version that more
-faithfully describes twilight/sunrise observations, as well as improved
-the model of yield of existing surveys (see below).
-
-With all those changes, our results for completeness have changed by +5\%
-(mostly due to better modeling of the sky in the twilight/sunrise).  The
-paper has been updated to reflect this.
+In addition to this change, and in response to second reviewer's comments,
+we've also improved the model of expected discovery yield of existing
+surveys (see below).
 
 > The other main concern with this section is the results of the current
 > surveys performance over the next 17 years. The result of 55\%
@@ -474,10 +475,11 @@ but we can read it off of Figure 7, and the referee is correct it's about
 well this aspect of Grav's paper.  Intuitively, as the PHA population is
 brighter (in terms of observed peak magnitudes) than the NEO population, we
 would expect higher discovery rates for PHAs relative to NEOs.  This is
-something we see when we simulate the LSST alone and Veres & Chesley find
-the same as well in their simulations.  We unfortunately do not have enough
-information to reproduce and understand why Grav et al.  result is
-different.
+something we see when we simulate the LSST alone and Veres & Chesley (2017)
+find the same as well in their simulations.  We unfortunately do not have
+enough information to reproduce and understand why Grav et al.  result is
+different. It's possible it has to do with the different definitons of the
+populations (H<22 vs D>140m), but it's difficult to tell.
 
 > On
 > page 37, a value of V_max1 = 20.0 is derived, which is significantly
@@ -511,7 +513,7 @@ Veres & Chesley (61\% in 2032) but slightly higher than what seems to be
 calculated by Grav et al (~52\%).  Given the uncertainties of assumptions
 being made about the evolution of other surveys over a ~17 year period, it's
 probably difficult to derive a consensus estimate much more accurate than
-this.
+this level.
 
 > My other main concern with the paper is the inclusion of appendix A
 > and B. I simply think Appendix A is not significantly material to the
@@ -588,8 +590,8 @@ observational effects that are modified by observing cadence.
 > a reference supporting their view that this is an effective way to
 > remove false tracks).
 
-Noted and the footnote has been moved into the text. We've also added
-references to Veres & Chesley (2017), who discuss an end-to-end simulation
+Noted, and the footnote has been moved into the text. We've also added
+references to Veres & Chesley (2017) who discuss an end-to-end simulation
 that includes IOD and demonstrate it is an effective filter.
 
 > Page 16: section 3.3.3: I am not convinced by this section that 4
@@ -610,13 +612,14 @@ dataset spans Galactic latitudes from b=28 to b=58, and longitudes between
 With this larger dataset, we've obtained the same negative result about
 correlated false positives. Also, the recovered false positive rates were
 typically lower (by ~30\%) than what we've found with the smaller data set. 
+
 We now discuss and note this in the text.
 
 > Page 21, section 5.1.3: I am assuming that phase-curve effects were
 > modeled when determining the flux of the object, but it is not
 > mentioned in this section.
 
-They were included, and this fact has been clarified (including what
+They were included, and this fact has now been clarified (including what
 function was used to calculate the observed magnitudes).
 
 > Page 22, section 5.1.1 and page 28, section 5.1.6: The value given in
