@@ -361,16 +361,26 @@ the historical rate of discoveries reported on the JPL NEO discovery page\footno
 With this model, at the start of LSST, we estimate the known NEO population with $H<22$ to be 43\% complete
 and the PHA population with $H<22$ to be 54\% complete. Our NEO estimate is in good agreement with those
 from \citet{VeresChesley2017neo} and \citet{GMS2016} who predict 42\% and 43\% completeness for NEOs, respectively.
-In 2032, at the nominal end of LSST, we estimate a 59\% completeness for NEOs without LSST; \citet{VeresChesley2017neo}
+In 2032, at the nominal end of LSST, our model predicts 72\% completeness for PHAs and 59\% completeness for NEOs, all without LSST. For NEOs, \citet{VeresChesley2017neo}
 predicts a slightly higher value of 61\% while \citet{GMS2016} predicts a lower value of about 52\%. 
 Given the uncertainty in the assumptions being made about the evolution of other surveys over a 17 year time period, this variance is understandable.
+
+Combining these discoveries with those in the baseline cadence gives us the expectation for our knowledge of the the post-LSST completeness of PHAs and NEOs. We find:
+\begin{equation}
+C_{\rm PHA, baseline + system}(H\le22) = 81\%
+\end{equation}
+and
+\begin{equation}
+C_{\rm NEO, baseline + system}(H\le22) = 70\%
+\end{equation}.
+In other words, the Earth-approaching asteroids discovered by the LSST will add $\sim 10$ percentage points to what the system would have discovered (given our model assumptions).
 
 Combining these discoveries with those from the ``extra ecliptic visits'' strategy under a 30-day MOPS linking window, we find that including the LSST into the NEO discovery system boosts overall completeness to 84\% over a 10-yr period, and 86\% if the survey is extended to 12 years. These results are summarized in Figure~\ref{fig:knownObj} and Table~\ref{tab:completeness2}.
 
 
 \begin{deluxetable}{lcccc}
 \tablecaption{The cumulative completeness (in \%) for NEOs and PHAs with $H\le22$ for
-LSST baseline survey strategy extended to a 12-year survey (with some extra visits along the
+LSST baseline survey strategy extended to a 12-year survey (with additional visits along the
 Ecliptic, corresponding to the second row in Table~\ref{tab:completeness}). The length of track
 linking window ($N_w$) is set to 30 days, and the detection threshold is set to SNR$=5$.
 \label{tab:completeness2}}
