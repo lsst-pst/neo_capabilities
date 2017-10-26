@@ -345,7 +345,7 @@ discovered by other resources during the LSST lifetime. When those contributions
 
 We estimate the discoveries contributed by these previous, current, and future resources 
 using a model similar to \citet{VeresChesley2017neo}: 
-after generating ephemerides for similar populations of NEOs and PHAs as above daily from 2000--2034 
+after generating ephemerides for the same populations of NEOs and PHAs as above, daily from 2000--2034 
 (the end of the extended LSST surveys), we clone the objects over the same range of $H$ as 
 used in the discovery metrics above. Each clone is considered potentially discovered if, while it is at
 a solar elongation greater than 100 degrees, it becomes brighter a given apparent magnitude threshhold: 
@@ -365,33 +365,34 @@ In 2032, at the nominal end of LSST, our model predicts 72\% completeness for PH
 predicts a slightly higher value of 61\% while \citet{GMS2016} predicts a lower value of about 52\%. 
 Given the uncertainty in the assumptions being made about the evolution of other surveys over a 17 year time period, this variance is understandable.
 
-Combining these discoveries with those in the baseline cadence gives us the expectation for our knowledge of the the post-LSST completeness of PHAs and NEOs. We find:
+Combining these discoveries with those in the baseline cadence ({\it minion\_1016} with 15 day windows) 
+gives us the expectation for our knowledge of the the post-LSST completeness of PHAs and NEOs. We find:
 \begin{equation}
 C_{\rm PHA, baseline + system}(H\le22) = 81\%
 \end{equation}
 and
 \begin{equation}
-C_{\rm NEO, baseline + system}(H\le22) = 70\%
+C_{\rm NEO, baseline + system}(H\le22) = 73\%
 \end{equation}.
 In other words, the Earth-approaching asteroids discovered by the LSST will add $\sim 10$ percentage points to what the system would have discovered (given our model assumptions).
 
-Combining these discoveries with those from the ``extra ecliptic visits'' strategy under a 30-day MOPS linking window, we find that including the LSST into the NEO discovery system boosts overall completeness to 84\% over a 10-yr period, and 86\% if the survey is extended to 12 years. These results are summarized in Figure~\ref{fig:knownObj} and Table~\ref{tab:completeness2}.
+Combining these discoveries with those from the ``extra ecliptic visits'' strategy under a 30-day MOPS linking window, we find that including the LSST into the NEO discovery system boosts overall PHA completeness to 84\% over a 10-yr period, and 86\% if the survey is extended to 12 years. These results are summarized in Figure~\ref{fig:knownObj} and Table~\ref{tab:completeness2}.
 
 
 \begin{deluxetable}{lcccc}
 \tablecaption{The cumulative completeness (in \%) for NEOs and PHAs with $H\le22$ for
-LSST baseline survey strategy extended to a 12-year survey (with additional visits along the
-Ecliptic, corresponding to the second row in Table~\ref{tab:completeness}). The length of track
-linking window ($N_w$) is set to 30 days, and the detection threshold is set to SNR$=5$.
+the 10 year LSST baseline survey strategy, with a linking window ($N_w$) of 15 days,
+compared with an extended 12-year survey with additional visits along the
+Ecliptic using 30 day linking windows.
 \label{tab:completeness2}}
 \tablehead{
-& \multicolumn{2}{c}{10 year survey}  &  \multicolumn{2}{c}{12 year survey}  \\
+& \multicolumn{2}{c}{10 year baseline, $N_w$=15}  &  \multicolumn{2}{c}{12 year `extra ecliptic visits', $N_w$=30}  \\
 \cmidrule(r){2-3} \cmidrule(r){4-5}
 Population  & only LSST & w/ known &  only LSST & w/ known
 }
 \startdata
-    NEO & 66 & 75 & 69 & 77 \\
-    PHA & 70 & 84 & 74 & 86 \\
+    NEO & 61 & 73 & 69 & 77 \\
+    PHA & 66 & 81 & 74 & 86 \\
 \enddata
 \end{deluxetable}
 
@@ -399,15 +400,16 @@ Population  & only LSST & w/ known &  only LSST & w/ known
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=0.99\textwidth]{figures/astro_lsst_01_1016_completeness.pdf}
+\includegraphics[width=0.99\textwidth]{figures/neo_pha_completeness_3in15_minion_1016.pdf} \\
+\includegraphics[width=0.99\textwidth]{figures/neo_pha_completeness_3in30_astro_lsst_01_1016.pdf}
 \vskip -0.2in
 \caption{The cumulative completeness for NEOs (left) and PHAs (right) with $H\le22$, as a function of
 time, when known objects (gray solid lines) are taken (black solid lines) and not taken (dotted lines)
 into  account (see also Table~\ref{tab:completeness2}). Discovery with existing and future resources 
 is accounted for with a model that attempts to match expected limited magnitudes in each time period
 and an efficiency factor that is tuned to match the rate of discoveries as reported by JPL (dashed line). 
-LSST discoveries are modeled with a criteria of 3 nights of pairs of observations, within a 30 night window. 
-This simulation is the `extra ecliptic visits'  run, with LSST in operation for 12 years.
+The top panel includes LSST discoveries from the 10 year baseline survey, with a 15 night window.
+The bottom panel includes LSST discoveries from the 12 year 	`extra ecliptic visits' survey with a 30 night window.
 \label{fig:knownObj}}
 \end{figure}
 
