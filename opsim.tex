@@ -50,9 +50,9 @@ With this small set of orbits, we then assume that the $H$ magnitude distributio
  Assuming an independent distribution, each orbit can be ``cloned'' from the fiducial $H$ magnitude to a range of values 
  covering the interesting sizes for analysis; this allows the analysis to use a large number of objects at each $H$ value, without 
  requiring extensive resources to generate ephemerides for a much larger set of orbits. We use the small population of 
- 5000 NEOs or PHAs and clone them to a range of $H$ magnitudes between $H$=14 and $H$=28, with bins of 0.2 in $H$,
+ 2000 NEOs or PHAs and clone them to a range of $H$ magnitudes between $H$=14 and $H$=28, with bins of 0.2 in $H$,
  using $dN/dH = 10^{\alpha\, H}$, with $\alpha=0.33$ \citep{2017Icar..284..114S}. We have verified with a larger simulated set 
- of NEOs that reducing the population to 5000 NEOs does not significantly alter the completeness calculation.
+ of NEOs that reducing the population to 2000 NEOs does not significantly alter the completeness calculation.
 
 Using the details of the input population, MAF generates the expected observations of each object using the pointing history
 from a specific OpSim simulated survey. Ephemerides are generated using OpenOrb \citep{OpenOrb2009} for a closely spaced grid of times (typically every 2 hours), and then interpolated to the exact times of each OpSim pointing.
@@ -347,10 +347,7 @@ We estimate the discoveries contributed by these previous, current, and future r
 using a model similar to \citet{VeresChesley2017neo}: 
 after generating ephemerides for similar populations of NEOs and PHAs as above daily from 2000--2034 
 (the end of the extended LSST surveys), we clone the objects over the same range of $H$ as 
-used in the discovery metrics above. Here we use 5000 objects each in NEOs and PHAs, to avoid
-exhausting the sampling of the input populations over the 34 years of discovery, and recalculate 
-discovery metrics for LSST with this larger population as well (without finding any significant changes). 
-Each clone is considered potentially discovered if, while it is at
+used in the discovery metrics above. Each clone is considered potentially discovered if, while it is at
 a solar elongation greater than 100 degrees, it becomes brighter a given apparent magnitude threshhold: 
 this threshhold is $V=20$ from 2000-2005 (corresponding to the LINEAR era), $V=21$ from 2005-2015 
 (representing Catalina and PanSTARRS1), $V=22$ from 2015 to the start of LSST in 2022, and then
