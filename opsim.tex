@@ -409,9 +409,9 @@ Population  & No LSST &  Only LSST & LSST + others &  No LSST  & Only LSST & LSS
 time, when known objects (gray solid lines) are taken (black solid lines) and not taken (dotted lines)
 into  account (see also Table~\ref{tab:completeness2}). Discovery with existing and future resources 
 is accounted for with a model that attempts to match expected limited magnitudes in each time period
-and an efficiency factor that is tuned to match the rate of discoveries as reported by JPL (dashed line). 
-The top panel includes LSST discoveries from the 10 year baseline survey, with a 15 night window.
-The bottom panel includes LSST discoveries from the 12 year 	`extra ecliptic visits' survey with a 30 night window.
+and an efficiency factor that is tuned to match the rate of discoveries as reported by JPL (dashed line; see text for details). 
+The top panel shows discoveries assuming the baseline LSST survey (10 year duration, with a 15 night tracklet linking window).
+The bottom panel shows discoveries that could be achieved with the 12 year `extra ecliptic visits' LSST survey and a 30 night tracklet linking window.
 \label{fig:knownObj}}
 \end{figure}
 
@@ -428,21 +428,21 @@ systems. Below we list the leading systematic effects in simulated completeness 
              vs. the Granvik, in prep., model). Varying populations contribute completeness uncertainty of about a few percent, based
              on simulations by \citet{VeresChesley2017neo}.
 \item Different sample definitions: $H<22$ vs. $D>140$m; as shown by  \citet{2016AJ....152...79W} and \citealt{GMS2016},
-          completeness increases by $\sim$5\% when an $H$-based criterion is used instead of $D>140$m.
+          completeness increases by $\sim$5 percentage points (p.p.) when an $H$-based criterion is used instead of $D>140$m.
 \item Variations of the ``discovery window'' (e.g., 3 nights with pairs of visits over $N_w$ nights: increasing
-        $N_w$ from 15 to 30 increases completeness by about 3-5\%, while decreasing $N_w$ from 15 to 12 decreases 
-        completeness by about 1-2\% depending on the details of the survey cadence).
+        $N_w$ from 15 to 30 increases completeness by about 3-5 p.p., while decreasing $N_w$ from 15 to 12 decreases 
+        completeness by about 1-2 p.p. depending on the details of the survey cadence).
 \item Uncertainties when predicting effective image depth (system throughput, background noise due to sky brightness, 
           variation of the detection efficiency with the signal-to-noise ratio, treatment of trailing losses). As a rule of thumb, for a survey that has a 
-          completeness above 60\%, each additional {\it 0.1 magnitude of depth for a given survey cadence increases the 
-          completeness by another 1\%}.
+          completeness above 60\%, each additional 0.1 magnitude of depth for a given survey cadence increases the 
+          completeness by another 1 p.p.
 \item Uncertainties when predicting asteroid's apparent flux (albedo distribution, phase effects, photometric variability
           due to non-spherical shapes, color distributions); assuming an uncertainty of 0.2 mag in the effective
-          limiting magnitude, the corresponding  systematic uncertainty in completeness is about 2\%.
+          limiting magnitude, the corresponding  systematic uncertainty in completeness is about 2 p.p.
 \item Variations of the nominal detection threshold. If the detection threshold is changed from the
-          signal-to-noise ratio of 5 or greater to 4 or greater, the completeness is boosted by $\sim$3\%;
+          signal-to-noise ratio of 5 or greater to 4 or greater, the completeness is boosted by $\sim$3~p.p.;
           the difference between the optimal detection using trailed profile and point-spread-function
-          detection, which is negligible for LSST baseline exposure time of 30 seconds, would be worth $\sim$1.5\%
+          detection, which is negligible for LSST baseline exposure time of 30 seconds, would be worth $\sim$1.5~p.p.
           in completeness for visits with a doubled exposure time.
 \item Sensitivity to details in sky coverage and cadence (e.g. nightly pairs of visits vs. quads of visits).
           Requiring quads instead of pairs of visits decreases completeness by 30\% using the baseline cadence;
@@ -451,10 +451,10 @@ systems. Below we list the leading systematic effects in simulated completeness 
           corresponds to a systematic uncertainty in completeness of about 2\%.
 \item The impact of known objects. As discussed in \S\ref{sec:known}, we estimate that 54\% of PHAs with $H<22$ would be discovered
           by current survey assets by the start of LSST survey in 2022 (currently $\sim$36\%), and they would
-          boost the final PHA completeness after a 10-year LSST baseline survey by 14\%. But different models and assumptions on the future development of the NEO system make this number uncertain to at least $\sim 3-5$\%.
+          boost the final PHA completeness after a 10-year LSST baseline survey by 14~p.p. But different models and assumptions on the future development of the NEO system make this number uncertain to at least $\sim 3-5$~p.p.
 \end{enumerate}
 
-Given all these, it is unlikely that a meaningful quantitative comparison of different studies can be expected beyond a level of a few percent. The same is true of the accuracy of an estimate vs. actual realized performance. The exact magnitude of that uncertainty is difficult to estimate as the various effects don't add up coherently, aren't equally likely, with some being poorly constrained. Effects 1, 3, 4, 7,  and 8 are a matter of definition/input. Adding all other effects in quadrature yields a notional ``error bar'' of ∼5\%, which we adopt here.
+Given all these, it is unlikely that a meaningful quantitative comparison of different studies can be expected beyond a level of a few percent. The same is true of the accuracy of an estimate vs. actual realized performance. The exact magnitude of that uncertainty is difficult to estimate as the various effects don't add up coherently, aren't equally likely, with some being poorly constrained. Effects 1, 3, 4, 7, and 8 are a matter of definition/input. Adding all other effects in quadrature yields a notional ``error bar'' of $\sim 5$ percentage points, which we adopt here.
 
 \subsection{Comparison to Other Works  \label{sec:other}}
 
