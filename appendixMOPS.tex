@@ -1,4 +1,4 @@
-\section{The Impact of False Positives on MOPS Performance \label{sec:appMOPS}}
+\section{The Impact of False Detections on MOPS Performance \label{sec:appMOPS}}
 
 
 We seek to develop an analytic understanding for the behavior of the MOPS results.
@@ -6,9 +6,9 @@ In particular, we want to be able to predict the numbers of tracklets and
 candidate tracks for a given input number of true and false detections. In addition, we seek
 to understand how these numbers scale with the search window width,
 velocity cutoff when forming tracklets, the temporal separation of two
-detections in a tracklet, and the density of false positives. For example, available
+detections in a tracklet, and the density of false detections. For example, available
 MOPS experiments indicate that the number of tracklets increases with
-the square of the false positives density, but other scalings are unclear,
+the square of the false detection density, but other scalings are unclear,
 especially the behavior of false candidate tracks.
 
 We first derive the simpler false tracklet rates, and then use these results to
@@ -40,11 +40,11 @@ when SNR threshold is changed to 4.5 and 5.5, respectively (see \S\ref{sec:imDif
 Analysis of DECam images reduced using prototype LSST software, described in \S\ref{sec:imDiff},
 shows a higher rate of detections in difference images, and a fraction of those detections
 cannot be readily associated with true moving objects. This analysis implies a conservative
-upper limit for the false positive rate of about $\rho_{FP} =  400$ deg$^{-2}$. This value
+upper limit for the false detection rate of about $\rho_{FP} =  400$ deg$^{-2}$. This value
 is conservative because analyzed DECam fields are close to the Ecliptic, with a significant but
 not well known contribution from real asteroids (due to very faint flux levels, $r \sim 24$),
 and it also includes true astrophysical transients that are not associated with static objects
-(stars and galaxies). It is quite possible that the false positive rate might be several
+(stars and galaxies). It is quite possible that the false detection rate might be several
 times lower, though we will proceed with the most conservative estimate above.
 
 The sky density of detections in difference images, $\rho_{det}$, is given by
@@ -525,7 +525,7 @@ depend on $v_{max}$).
 Without the limiting $\rho_{ast}=0$  approximation, eq.~\ref{eq:NttFalse} implies a shallower scaling
 of the number of false candidate tracks, $N^{falsetracks}$ with $\rho_{FP}$.
 We have determined numerically that the scaling of the number
-of false candidate tracks per search window with the density of false positives in difference
+of false candidate tracks per search window with the density of false detections in difference
 images, as well as other relevant parameters, is well described by
 \begin{equation}
 \label{eq:falsetracks}
@@ -547,7 +547,7 @@ the ratio of false to real (asteroid) detections in difference images, but rathe
 
 The scaling result given by eq.~\ref{eq:falsetracks} may prove useful when optimizing cadence
 and search strategy, as well as for sizing the required computational resources. For example,
-for the rate of 8,200 deg$^{-2}$ false positives from Pan-STARRS1, one would expect a factor
+for the rate of 8,200 deg$^{-2}$ false detections from Pan-STARRS1, one would expect a factor
 of $7\times10^4$ more false candidate tracks that discussed above (that is, about $10^{11}$).
 Even with $N_w$=15 days, the predicted number of false candidate tracks remains of the
 order 10$^9$.

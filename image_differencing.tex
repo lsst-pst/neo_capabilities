@@ -41,7 +41,7 @@ Here we summarize an analysis of image differencing performance based on DECam
 data and difference images produced and processed using prototype LSST
 software \citep{DMTN-006}. This analysis demonstrates that the false
 detection rate anticipated for LSST (without using any machine-learning classifiers for
-filtering false positives) is significantly below the threshold for
+filtering false detections) is significantly below the threshold for
 successful deployment of MOPS, as will be discussed in \S\ref{sec:mops}.
 
 
@@ -108,7 +108,7 @@ The magnitude of this effect can be large---using only the per-pixel variance
 measurements can result in underestimating the true noise on PSF-size scales by
 20\% or more. A detection threshold of $\nu=5$ thus actually corresponds to
 $\nu=4$, and it is easy to see using eq.~\ref{eq-theory} that this error results
-in an increase in the number of false positives by a factor of $\sim$70!
+in an increase in the number of false detections by a factor of $\sim$70!
 
 A histogram of the number of sources detected in difference images, as a function
 of SNR computed using forced photometry measurements, is shown in the right panel
@@ -196,7 +196,7 @@ transients in this dataset.
 %at the positions of detected \DIASources) on individual single-epoch input images
 %using the current versions of LSST pipelines \citep{juric15}.
 
-\subsubsection{The Transient and False Positive Rates in DECam Images}
+\subsubsection{The Transient and False Detection Rates in DECam Images}
 
 Using the $>5\sigma$ cut based on SNR estimated using forced photometry,
 the average number of positive \DIASources is $\sim 1000$ deg$^{-2}$,
@@ -243,7 +243,7 @@ asteroids; nevertheless, we adopt the above conservative upper limit of 75\%.
 \subsubsection{Scaling DECam Results to LSST Performance \label{sec:imDiffScale}}
 
 The LSST false detection rate due to background fluctuations will be about twice
-as large as for DECam because of smaller pixels and better seeing. The scaling
+as large as for DECam because of LSST's smaller pixels and better seeing. The scaling
 with pixel size and seeing for ``unexplained'' false detections is not obvious
 because their cause is unknown. For example, if they are a pixel-induced effect,
 their rate should be scaled up by the square of the ratio of angular pixel sizes, or
@@ -253,20 +253,20 @@ mixture of false detections from these two types of scalings, in addition to a
 significant number of true detections, we cannot derive a precise scaling for the 
 false detection rate. Instead, we adopt a {\it conservative} option by assuming
 that {\it all of our detections are false} and behave like pixel-induced effects, 
-which scales up the DECam rate for ``unexplained'' false positives to 396 deg$^{-2}$. 
+which scales up the DECam rate for ``unexplained'' false detections to 396 deg$^{-2}$. 
 In addition, there will be 60 deg$^{-2}$ false detections due to background fluctuations 
 (eq.~\ref{eq-theory}, referenced to the median seeing of 0.85 arcsec).
 
-The total false positive rate of $\sim450$ deg$^{-2}$ anticipated for LSST is thus
+The total false detection rate of $\sim450$ deg$^{-2}$ anticipated for LSST is thus
 comparable to the rate of astrophysical transients. Again, this estimate of the false
-positive rate is conservative and it would not be very surprising if it turns out
+detection rate is conservative and it would not be very surprising if it turns out
 to be much smaller.
 
-In addition to uncertainties mentioned above, it is hard to precisely account for 
+In addition to the uncertainties mentioned above, it is hard to precisely account for 
 the fact that LSST images will be about one magnitude deeper than the analyzed DECam 
 images. The contribution to false detections from background fluctuations 
 (60 deg$^{-2}$) should not be changed because it depends on SNR, not the
-specific magnitude limit. If all remaining
+specific magnitude limit. If all the remaining
 false detections are due to pixel-induced effects, they are also dependent on SNR 
 (i.e. counts) and not on magnitude. In this scenario, the number of false detections
 would not vary even though LSST images would be deeper. If instead all remaining 
