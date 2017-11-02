@@ -32,6 +32,7 @@
 \newcommand{\VOEvents}{\code{VOEvents}\xspace}
 \newcommand{\transSNR}{5\xspace}
 
+\newcommand{\FindOrb}{\code{Find\_{}Orb}\xspace}
 
 \begin{document}
 \title{The Large Synoptic Survey Telescope as a Near-Earth Object Discovery Machine}
@@ -54,23 +55,16 @@ Avenue, Tucson, AZ 85719, USA}
 \altaffiltext{3}{University of Arizona, Steward Observatory, 933 North Cherry
 Avenue, Tucson, AZ 85721, USA}
 \altaffiltext{4}{Cook Astronomical Consulting, 220 Duxbury CT, San Ramon, CA 94583, USA}
-\altaffiltext{5}{Johns Hopkins University, Applied Physics Laboratory, 11100 Johns Hopkins Rd, Laurel, MD 20723, USA}
+\altaffiltext{5}{Work performed at the Large Synoptic Survey Telescope, 950 North Cherry Avenue, Tucson, AZ 85719, USA; 
+Jonathan is now affiliated with Johns Hopkins University, Applied Physics Laboratory, 11100 Johns Hopkins Rd, Laurel, MD 20723, USA}
 \altaffiltext{6}{Large Synoptic Survey Telescope, 950 North Cherry Avenue, Tucson, AZ 85719, USA}
 
 \begin{abstract}
-We investigate the capabilities of LSST to discover Near-Earth Objects (NEOs), fast-moving objects
-which are challenging to track and link, and discuss the expected yield of NEO discoveries
-resulting from variations on the survey strategy. The typical LSST cadence uses pairs of observations
-over a series of nights to discover NEOs; we test this data processing strategy by empirically determining
-an expected false positive detection rate using DECam data and prototype LSST software. We validated
-that this expected rate is tractable with the Moving Object Processing Software (MOPS). Using a high-fidelity 
-simulated survey pointing history, we evaluate the performance of the LSST baseline survey strategy for 
-Potentially Hazardous Asteroids (PHAs) and find an expected completeness of 68\% for PHAs with $H<22$ 
-from LSST alone. We also generate variations on the baseline survey strategy to evaluate potential methods 
-to increase the PHA completeness. For example, extending the LSST survey by two additional years and 
-including previously known objects increases the completeness for PHAs to 85\%. Additional substantial
-investments in LSST software development and compute resources could provide a further boost of a
-few percent. 
+Using the most recent prototypes, design, and as-built system information, we test and quantify the capability of the Large Synoptic Survey Telescope (LSST) to discover Potentially Hazardous Asteroids (PHAs) and Near-Earth Objects (NEOs).
+We empirically estimate an expected upper limit to the false detection rate in LSST image differencing, using measurements on DECam data and prototype LSST software and find it to be about $450$~deg$^{-2}$. We show that this rate is already tractable with current prototype of the LSST Moving Object Processing System (MOPS) by processing a 30-day simulation consistent with measured false detection rates.
+We proceed to evaluate the performance of the LSST baseline survey strategy for  PHAs and NEOs using a high-fidelity simulated survey pointing history. 
+We find that LSST alone, using its baseline survey strategy, will detect 66\% of the PHA and 61\% of the NEO population objects brighter than $H=22$, with the uncertainty in the estimate of $\pm5$ percentage points. By generating and examining variations on the baseline survey strategy, we show it is possible to further improve the discovery yields.
+In particular, we find that extending the LSST survey by two additional years and doubling the MOPS search window increases the completeness for PHAs to 86\% (including those discovered by contemporaneous surveys) without jeopardizing other LSST science goals (77\% for NEOs). This equates to reducing the undiscovered population of PHAs by additional 26\% (15\% for NEOs), relative to the baseline survey.
 \end{abstract}
 
 \keywords{Near-Earth objects --- Image processing -- Asteroids}
@@ -93,10 +87,9 @@ Foundation through Cooperative Agreement 1258333 managed by the Association of
 Universities for Research in Astronomy (AURA), and the Department of Energy
 under Contract No. DE-AC02-76SF00515 with the SLAC National Accelerator
 Laboratory. Additional LSST funding comes from private donations, grants to
-universities, and in-kind support from LSSTC Institutional Members.
+universities, and in-kind support from LSSTC Institutional Members. MJ and CTS wish to acknowledge the support of the Washington Research Foundation Data Science Term Chair fund, and the University of Washington Provost’s Initiative in Data-Intensive Discovery.
 
 \appendix
-\include{appendix1}
 \include{appendixMOPS}
 
 \bibliography{neo_capabilities}
