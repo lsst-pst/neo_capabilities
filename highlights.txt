@@ -1,0 +1,5 @@
+* We evaluate the end-to-end capability of LSST to discover Near Earth Objects.
+* We find a reasonable expectation of <450 false detections/deg^2 from difference imaging.
+* We demonstrate the capabilities of the LSST Moving Object Processing System.
+* We find LSST alone could detect 66% of PHAs with H<22 in the baseline configuration.
+* Including other surveys and enhancing LSST operations, PHA completeness rises to 86%.
